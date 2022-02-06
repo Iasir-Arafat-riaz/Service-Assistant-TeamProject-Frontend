@@ -22,6 +22,16 @@ const Navigation = () => {
     const [openModal, setOpenModal] = React.useState(false);
     const [state, setState] = React.useState(false);
     // const { user, handaleLogOut } = useAuth();
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset
+            if (scroll > 100) {
+                document.getElementById('navbar').classList.add('scroll-nav');
+            } else {
+                document.getElementById('navbar').classList.remove('scroll-nav');
+            }
+        })
+    }, [])
 
     // setSearchValue("Hello world")
     const handleOpenUserMenu = (event) => {
@@ -176,7 +186,7 @@ const Navigation = () => {
 
     return (
         <Container>
-            <AppBar className={navbar} position="fixed" sx={{ paddingX: 3, paddingY: 1, background: 'none', boxShadow: 0 }}>
+            <AppBar id="navbar" className={navbar} position="fixed" style={{ boxShadow: 'none' }} sx={{ paddingX: 3, paddingY: 1, background: 'none' }}>
                 {/* <Container maxWidth="xl"> */}
                 <IconButton
                     sx={{ mr: 40, zIndex: 999999 }}

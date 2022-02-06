@@ -16,8 +16,8 @@ const Header = () => {
         slidesToScroll: 1
     };
     return (
-        <header>
-            <Slider {...settings} >
+        <header style={{ zIndex: '-9999' }}>
+            <Slider {...settings} style={{ zIndex: '-9999' }}>
 
                 <article type="button">
                     <img type="button" src={banner1} alt="" />
@@ -27,7 +27,7 @@ const Header = () => {
                     <img type="button" src={banner2} alt="" />
                 </article>
 
-                <article>
+                <article >
                     <img type="button" src={banner3} alt="" />
                 </article>
 

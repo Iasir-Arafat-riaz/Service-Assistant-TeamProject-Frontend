@@ -14,9 +14,9 @@ const Contact = () => {
     };
 
     return (
-        <Container sx={{ mt: 10, mb: 10 }}>
-            <Paper elevation={5} >
-                <Grid container spacing={2}>
+        <Container sx={{ mt: -25, mb: 10 }} style={{ zIndex: '+9999' }}>
+            <Paper elevation={5} style={{ zIndex: '+9999' }}>
+                <Grid container spacing={2} style={{ zIndex: '+9999' }}>
 
                     <Grid item xs={4} sx={{ borderRight: '1px solid #E8E8E8', display: 'flex', justifyContent: 'center' }}>
 

@@ -1,3 +1,12 @@
+/* navbar scroll */
+.scroll-nav{
+    background-color: white !important;
+    transition: 0.5s;
+    box-shadow:0 0rem 1rem rgb(56, 55, 55) !important;
+
+}
+
+/* search popup */
 #search {
     position: fixed;
     top: 0px;
