@@ -45,7 +45,7 @@ const Contact = () => {
                             placeholder="Message"
                             style={{ width: '88%', borderColor: "rgb(196 196 196)" }}
                         />
-                        <Button sx={{ backgroundColor: '#49BD82', width: '90%', mt: 2, mb: 3, color: '#fff' }} variant="contained">Contained</Button>
+                        <Button sx={{ backgroundColor: '#49BD82', width: '90%', mt: 2, mb: 3, color: '#fff', letterSpacing: 4 }} variant="contained">SEND</Button>
                     </Grid>
 
                     <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center' }} >
