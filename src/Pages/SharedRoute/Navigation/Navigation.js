@@ -189,7 +189,7 @@ const Navigation = () => {
             <AppBar id="navbar" className={navbar} position="fixed" style={{ boxShadow: 'none' }} sx={{ paddingX: 3, paddingY: 1, background: 'none' }}>
                 {/* <Container maxWidth="xl"> */}
                 <IconButton
-                    sx={{ mr: 40, zIndex: 999999 }}
+                    sx={{ mr: 40, zIndex: 999999, color: "#FF5E14" }}
                     onClick={() => setState(true)}
                     size="large"
                     edge="start"

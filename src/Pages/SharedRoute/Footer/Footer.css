@@ -4,7 +4,7 @@
     font-size: 20px;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .footer-social-icon a {
     color: #fff;
@@ -27,3 +27,61 @@
   .google-bg{
     background: #DD4B39;
   }
+
+  .useful-links a{
+    display: block;
+    text-decoration: none;
+    margin-bottom: 10px;
+font-weight: 500;
+color: #7E7E7E;
+  }
+
+  
+.subscribe-form {
+  position: relative;
+  overflow: hidden;
+}
+.subscribe-form input {
+  width: 100%;
+  padding: 14px 28px;
+  background: #2E2E2E;
+  border: 1px solid #2E2E2E;
+  color: #fff;
+}
+.subscribe-form button {
+    position: absolute;
+    right: 0;
+    background: #ff5e14;
+    padding: 13px 20px;
+    border: 1px solid #ff5e14;
+    top: 0;
+}
+.subscribe-form button i {
+  color: #fff;
+  font-size: 22px;
+  transform: rotate(-6deg);
+}
+
+
+.footer-widget-heading h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  position: relative;
+}
+.footer-widget-heading h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  height: 2px;
+  width: 50px;
+  background: #ff5e14;
+}
+
+@media (max-width:600px) {
+  footer{
+    padding: 50px 0px !important;
+  }
+}
