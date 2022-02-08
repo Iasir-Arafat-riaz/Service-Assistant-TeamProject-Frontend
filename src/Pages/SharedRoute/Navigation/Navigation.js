@@ -55,7 +55,7 @@ const Navigation = () => {
         borderRadius: "50px",
         padding: "8px",
         marginRight: '20px',
-        backgroundColor: "#1D2029",
+        backgroundColor: "#FF5E14",
         color: "whiteSmoke"
     };
     // link of navbar

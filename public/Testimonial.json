@@ -4,20 +4,62 @@
         "image": "https://i.postimg.cc/52kGfx65/Ellipse-90.png",
         "profession": "Softare Engineer",
         "rating": 5,
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam vitae ratione ex quaerat voluptate deserunt quam non repellendus voluptatem cupiditate similique tempore veritatis atque quia, facere asperiores eveniet repellat? Dignissimos ipsum, voluptatibus accusantium iure quo quasi culpa nobis quas perspiciatis quisquam vero ipsa nam, at harum natus id, non cum sequi praesentium reiciendis recusandae. At ratione optio nemo dicta aspernatur."
+        "description": "I feel like an idiot for not using Tailwind CSS until now."
     },
     {
         "name": "Mahim Rahman",
         "image": "https://i.postimg.cc/mrv5F83t/Ellipse-91.png",
         "profession": "Lead Engineer",
         "rating": 5,
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam vitae ratione ex quaerat voluptate deserunt quam non repellendus voluptatem cupiditate similique tempore veritatis atque quia, facere asperiores eveniet repellat? Dignissimos ipsum, voluptatibus accusantium iure quo quasi culpa nobis quas perspiciatis quisquam vero ipsa nam, at harum natus id, non cum sequi praesentium reiciendis recusandae. At ratione optio nemo dicta aspernatur."
+        "description": "Have been working with CSS for over ten years and Tailwind just makes my life easier. It is still CSS and you use flex, grid, etc. but just quicker to write and maintain."
     },
     {
         "name": "Fahim Ahmed",
         "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
         "profession": "Sr. Web Developer",
         "rating": 5,
-        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam vitae ratione ex quaerat voluptate deserunt quam non repellendus voluptatem cupiditate similique tempore veritatis atque quia, facere asperiores eveniet repellat? Dignissimos ipsum, voluptatibus accusantium iure quo quasi culpa nobis quas perspiciatis quisquam vero ipsa nam, at harum natus id, non cum sequi praesentium reiciendis recusandae. At ratione optio nemo dicta aspernatur."
+        "description": "Skip to the end. Use @tailwindcss."
+    },
+    {
+        "name": "Rahim Rahman",
+        "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
+        "profession": "Sr. Web Developer",
+        "rating": 5,
+        "description": "If I had to recommend a way of getting into programming today, it would be HTML + CSS with Tailwind CSS."
+    },
+    {
+        "name": "Samir Ahmed",
+        "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
+        "profession": "Sr. Web Developer",
+        "rating": 5,
+        "description": "I’ve been writing CSS for over 20 years, and up until 2017, the way I wrote it changed frequently. It’s not a coincidence Tailwind was released the same year. It might look wrong, but spend time with it and you’ll realize semantic CSS was a 20 year mistake."
+    },
+    {
+        "name": "Sabbir Rahman",
+        "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
+        "profession": "Sr. Web Developer",
+        "rating": 5,
+        "description": "I was bad at front-end until I discovered Tailwind CSS. I have learnt a lot more about design and CSS itself after I started working with Tailwind. Creating web pages is 5x faster now."
+    },
+    {
+        "name": "Sabbir Rahman",
+        "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
+        "profession": "Sr. Web Developer",
+        "rating": 5,
+        "description": "I have no design skills and with Tailwind I can actually make good looking websites with ease and it's everything I ever wanted in a CSS framework."
+    },
+    {
+        "name": "Sabbir Rahman",
+        "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
+        "profession": "Sr. Web Developer",
+        "rating": 5,
+        "description": "Tailwind makes writing code feel like I’m using a design tool."
+    },
+    {
+        "name": "Sabbir Rahman",
+        "image": "https://i.postimg.cc/vmgKBpVJ/Ellipse-92.png",
+        "profession": "Sr. Web Developer",
+        "rating": 5,
+        "description": "I don't use it but if I would use something I'd use Tailwind!"
     }
 ]
