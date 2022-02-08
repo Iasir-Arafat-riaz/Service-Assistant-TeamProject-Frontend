@@ -39,12 +39,14 @@ const Contact = () => {
 
                         <TextField sx={{ width: '90%', mb: 2 }} id="outlined-basic" label="Name" variant="outlined" />
                         <TextField sx={{ width: '90%', mb: 2 }} id="outlined-basic" label="Email" variant="outlined" />
-                        <TextareaAutosize
+
+                        <TextField sx={{ width: '90%' }} id="outlined-basic" label="Message" variant="outlined" />
+                        {/* <TextareaAutosize
                             aria-label="minimum height"
                             minRows={5}
                             placeholder="Message"
                             style={{ width: '88%', borderColor: "rgb(196 196 196)" }}
-                        />
+                        /> */}
                         <Button sx={{ backgroundColor: '#FF5E14', width: '90%', mt: 2, mb: 3, color: '#fff', letterSpacing: 4 }} variant="contained">SEND</Button>
                     </Grid>
 

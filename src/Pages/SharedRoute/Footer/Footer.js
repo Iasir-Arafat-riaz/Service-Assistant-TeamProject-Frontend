@@ -12,7 +12,7 @@ const Footer = () => {
 
                     <Grid item xs={6} md={4}>
 
-                        <Typography variant="h5" sx={{ fontWight: 'bold', color: "orange" }}>
+                        <Typography variant="h5" sx={{ fontWight: 'bold', color: "#ff5e14" }}>
                             SERvicew A2z
                         </Typography>
 
