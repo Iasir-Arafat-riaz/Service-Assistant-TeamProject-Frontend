@@ -12,12 +12,14 @@ const Header = () => {
         dots: false,
         infinite: true,
         speed: 500,
+        autoplay: true,
+        autoplaySpeed: 4000,
         slidesToShow: 1,
         slidesToScroll: 1
     };
     return (
-        <header style={{ zIndex: '-9999' }}>
-            <Slider {...settings} style={{ zIndex: '-9999' }}>
+        <header >
+            <Slider {...settings} style={{ zIndex: '-1' }}>
 
                 <article type="button">
                     <img type="button" src={banner1} alt="" />
