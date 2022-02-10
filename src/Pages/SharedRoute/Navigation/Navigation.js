@@ -20,13 +20,12 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import { GrLogout } from "react-icons/gr";
 import { useTheme } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsBicycle } from "react-icons/bs";
+import logo from '../../images/web-logo.png';
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 
@@ -70,7 +69,7 @@ const Navigation = () => {
     borderRadius: "50px",
     padding: "8px",
     marginRight: "20px",
-    backgroundColor: "#1D2029",
+    backgroundColor: "#FF5E14",
     color: "whiteSmoke",
   };
   // link of navbar
@@ -143,7 +142,7 @@ const Navigation = () => {
     navLogo: {
       [theme.breakpoints.down("md")]: {
         position: "absolute",
-        bottom: "70px",
+        bottom: "50px",
       },
     },
   });
@@ -231,15 +230,15 @@ const Navigation = () => {
           sx={{ display: "flex", justifyContent: "space-between", ml: 2 }}
         >
           <Box>
-            <Typography
+            {/* <Typography
               variant="h6"
               noWrap
               sx={{ color: "black", fontWight: "bold" }}
               className={navLogo}
               component="div"
-            >
-              Service a2z
-            </Typography>
+            > */}
+            <img className={navLogo} src={logo} width="120" alt="" />
+            {/* </Typography> */}
           </Box>
           {/* className='nav-items' */}
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
@@ -345,7 +344,11 @@ const Navigation = () => {
               </Menu>
             )}
           </Box>
+
+
         </Toolbar>
+
+
       </AppBar>
       <React.Fragment>
         <Drawer open={state} onClose={() => setState(false)}>
@@ -372,7 +375,7 @@ const Navigation = () => {
           </form>
         </Box>
       </Box>
-    </Container>
+    </Container >
   );
 };
 export default Navigation;
