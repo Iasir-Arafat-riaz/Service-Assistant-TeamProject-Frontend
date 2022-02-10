@@ -1,4 +1,4 @@
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -50,6 +50,7 @@ const Testimonials = () => {
     return (
         <Container sx={{ mb: 20 }}>
 
+            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Testimonials</Typography>
             {/* testimonials  */}
 
             <Grid container spacing={2} sx={{ mb: 0, pb: 0 }}>

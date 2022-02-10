@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import {
   Divider,
   Drawer,
@@ -10,23 +10,17 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Menu,
-  Avatar,
-  Button,
-  Tooltip,
-  MenuItem,
-  Container,
+  Menu, Avatar, Button, Tooltip, MenuItem, Container,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import { GrLogout } from "react-icons/gr";
 import { useTheme } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsBicycle } from "react-icons/bs";
+import logo from '../../images/web-logo.png';
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 import {useNavigate} from "react-router-dom"
@@ -35,10 +29,9 @@ const Navigation = () => {
     const navigate=useNavigate()
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
-  // const { user, handaleLogOut } = useAuth();
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
@@ -76,7 +69,7 @@ const handleRouteChange=()=>{
     borderRadius: "50px",
     padding: "8px",
     marginRight: "20px",
-    backgroundColor: "#1D2029",
+    backgroundColor: "#FF5E14",
     color: "whiteSmoke",
   };
   // link of navbar
@@ -87,16 +80,6 @@ const handleRouteChange=()=>{
     marginRight: "15px",
     letterSpacing: "3px",
     fontSize: "15px",
-  };
-  // dispacth(searchName(text))
-  // drawer open
-  const handleDrawerOpen = () => {
-    setOpenDrawer(true);
-  };
-
-  // set search value on redux
-  const dispatchSearchValue = (e) => {
-    // dispatch(searchName(e.target.value));
   };
 
   // search popup
@@ -149,7 +132,7 @@ const handleRouteChange=()=>{
     navLogo: {
       [theme.breakpoints.down("md")]: {
         position: "absolute",
-        bottom: "70px",
+        bottom: "50px",
       },
     },
   });
@@ -217,7 +200,6 @@ const handleRouteChange=()=>{
         style={{ boxShadow: "none" }}
         sx={{ paddingX: 3, paddingY: 1, background: "none" }}
       >
-        {/* <Container maxWidth="xl"> */}
         <IconButton
           sx={{ mr: 40, zIndex: 999999, color: "#FF5E14" }}
           onClick={() => setState(true)}
@@ -226,7 +208,6 @@ const handleRouteChange=()=>{
           color="inherit"
           aria-label="menu"
           style={{ zIndex: "99" }}
-          // sx={{ mr: 0, color: "#F73E7B" }}
           className={navIcon}
         >
           <MenuIcon />
@@ -237,17 +218,10 @@ const handleRouteChange=()=>{
           sx={{ display: "flex", justifyContent: "space-between", ml: 2 }}
         >
           <Box>
-            <Typography
-              variant="h6"
-              noWrap
-              sx={{ color: "black", fontWight: "bold" }}
-              className={navLogo}
-              component="div"
-            >
-              Service a2z
-            </Typography>
+
+            <img className={navLogo} src={logo} width="120" alt="weblogo" />
           </Box>
-          {/* className='nav-items' */}
+
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
             <Button variant="text">
               <NavLink style={navLink} to="/Home">
@@ -262,7 +236,6 @@ const handleRouteChange=()=>{
               </NavLink>
             </Button>
 
-            {/* <Button variant="text"> <NavLink style={navLink} to="/dashboard ">DASHBOARD</NavLink></Button> */}
 
             <Button variant="text">
               {" "}
@@ -351,7 +324,11 @@ const handleRouteChange=()=>{
               </Menu>
             )}
           </Box>
+
+
         </Toolbar>
+
+
       </AppBar>
       <React.Fragment>
         <Drawer open={state} onClose={() => setState(false)}>
@@ -370,7 +347,6 @@ const handleRouteChange=()=>{
         <Box className="overlay-content">
           <form id="search" onSubmit={handaleSubmitForm}>
             <input
-              onChange={dispatchSearchValue}
               type="search"
               placeholder="Search.."
               name="search"
@@ -378,7 +354,7 @@ const handleRouteChange=()=>{
           </form>
         </Box>
       </Box>
-    </Container>
+    </Container >
   );
 };
 export default Navigation;
