@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import {
   Divider,
   Drawer,
@@ -10,12 +10,7 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Menu,
-  Avatar,
-  Button,
-  Tooltip,
-  MenuItem,
-  Container,
+  Menu, Avatar, Button, Tooltip, MenuItem, Container,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -32,10 +27,9 @@ import "./Navigation.css";
 const Navigation = () => {
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [openDrawer, setOpenDrawer] = React.useState(false);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
-  // const { user, handaleLogOut } = useAuth();
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
@@ -80,16 +74,6 @@ const Navigation = () => {
     marginRight: "15px",
     letterSpacing: "3px",
     fontSize: "15px",
-  };
-  // dispacth(searchName(text))
-  // drawer open
-  const handleDrawerOpen = () => {
-    setOpenDrawer(true);
-  };
-
-  // set search value on redux
-  const dispatchSearchValue = (e) => {
-    // dispatch(searchName(e.target.value));
   };
 
   // search popup
@@ -210,7 +194,6 @@ const Navigation = () => {
         style={{ boxShadow: "none" }}
         sx={{ paddingX: 3, paddingY: 1, background: "none" }}
       >
-        {/* <Container maxWidth="xl"> */}
         <IconButton
           sx={{ mr: 40, zIndex: 999999, color: "#FF5E14" }}
           onClick={() => setState(true)}
@@ -219,7 +202,6 @@ const Navigation = () => {
           color="inherit"
           aria-label="menu"
           style={{ zIndex: "99" }}
-          // sx={{ mr: 0, color: "#F73E7B" }}
           className={navIcon}
         >
           <MenuIcon />
@@ -230,17 +212,10 @@ const Navigation = () => {
           sx={{ display: "flex", justifyContent: "space-between", ml: 2 }}
         >
           <Box>
-            {/* <Typography
-              variant="h6"
-              noWrap
-              sx={{ color: "black", fontWight: "bold" }}
-              className={navLogo}
-              component="div"
-            > */}
-            <img className={navLogo} src={logo} width="120" alt="" />
-            {/* </Typography> */}
+
+            <img className={navLogo} src={logo} width="120" alt="weblogo" />
           </Box>
-          {/* className='nav-items' */}
+
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
             <Button variant="text">
               <NavLink style={navLink} to="/Home">
@@ -255,7 +230,6 @@ const Navigation = () => {
               </NavLink>
             </Button>
 
-            {/* <Button variant="text"> <NavLink style={navLink} to="/dashboard ">DASHBOARD</NavLink></Button> */}
 
             <Button variant="text">
               {" "}
@@ -367,7 +341,6 @@ const Navigation = () => {
         <Box className="overlay-content">
           <form id="search" onSubmit={handaleSubmitForm}>
             <input
-              onChange={dispatchSearchValue}
               type="search"
               placeholder="Search.."
               name="search"
