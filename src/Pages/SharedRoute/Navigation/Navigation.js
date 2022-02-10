@@ -29,8 +29,10 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BsBicycle } from "react-icons/bs";
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
+import {useNavigate} from "react-router-dom"
 
 const Navigation = () => {
+    const navigate=useNavigate()
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openDrawer, setOpenDrawer] = React.useState(false);
@@ -53,10 +55,14 @@ const Navigation = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+const handleRouteChange=()=>{
+    navigate("/Login")
+}
+
   const user = {
-    email: "Mahfujur@gmail.com",
-    displayName: "Mahfujur Rahman",
-    photoURL: "",
+    // email: "Mahfujur@gmail.com",
+    // displayName: "Mahfujur Rahman",
+    // photoURL: "",
   };
 
   const handleCloseUserMenu = () => {
@@ -284,7 +290,7 @@ const Navigation = () => {
             </Tooltip>
 
             {!user.email && (
-              <Button variant="text">
+              <Button onClick={handleRouteChange} variant="text">
                 <Tooltip arrow title="My account">
                   <ManageAccountsIcon
                     onClick={() => setOpenModal(true)}
