@@ -13,11 +13,11 @@ const HomeServices = () => {
     const settings = {
         dots: false,
         infinite: true,
-        speed: 500,
+        speed: 2000,
         slidesToShow: 3,
         slidesToScroll: 3,
         autoplay: true,
-        autoplaySpeed: 2500,
+        autoplaySpeed: 2000,
         responsive: [
             {
                 breakpoint: 1024,

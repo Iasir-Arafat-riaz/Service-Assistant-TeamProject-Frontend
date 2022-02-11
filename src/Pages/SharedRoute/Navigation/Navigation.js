@@ -259,7 +259,7 @@ const Navigation = () => {
             {!user.email && (
               <Button variant="text">
                 <Tooltip arrow title="My account">
-                  <ManageAccountsIcon
+                  <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
                     onClick={() => setOpenModal(true)}
                     style={navButton}
                   />
