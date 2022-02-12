@@ -1,6 +1,6 @@
 import { Container, Grid, Typography, Box } from '@mui/material';
 import React from 'react';
-import logo from '../../images/logo.png';
+import logo from '../../images/footer-logo.png';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
@@ -12,11 +12,9 @@ const Footer = () => {
 
                     <Grid item xs={6} md={4}>
 
-                        <Typography variant="h5" sx={{ fontWight: 'bold', color: "#ff5e14" }}>
-                            SERvicew A2z
-                        </Typography>
+                        <img width="120" style={{ marginTop: 3 }} src={logo} alt="" />
 
-                        <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 4 }}>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing elit,Lorem ipsum dolor sit amet.</Typography>
+                        <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 2 }}>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing elit,Lorem ipsum dolor sit amet.</Typography>
 
                         <Box class="footer-social-icon">
                             <span>Follow us</span>
