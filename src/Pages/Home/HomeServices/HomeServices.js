@@ -3,14 +3,23 @@ import { Container, Typography } from '@mui/material';
 import axios from 'axios';
 import HomeService from './HomeService';
 import Slider from 'react-slick';
+import { Box } from '@mui/system';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
 const HomeServices = () => {
 
     const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/services?fbclid=IwAR2PzgLNP3sRD7R7Iww81DDyDNKtutUIHJbSQIVPwzj4G5jQVDoan3aZf5E').then(res => setServices(res.data))
+        axios.get('https://fierce-meadow-12011.herokuapp.com/services?fbclid=IwAR2PzgLNP3sRD7R7Iww81DDyDNKtutUIHJbSQIVPwzj4G5jQVDoan3aZf5E').then(res => {
+            setLoading(false);
+            setServices(res.data);
+        })
     }, []);
 
-    const settings = {
+    const slickSlider = {
         dots: false,
         infinite: true,
         speed: 2000,
@@ -46,19 +55,32 @@ const HomeServices = () => {
         ]
     };
 
+
     return (
         <Container sx={{ mb: 8 }}>
 
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>For Your Home</Typography>
 
-            <Slider {...settings}>
-                {
-                    services.map(service => <HomeService
-                        key={service._id}
-                        service={service}
-                    />)
-                }
-            </Slider>
+            {
+                loading ?
+                    <Box sx={{ display: 'flex', gap: 5 }}>
+
+                        {[...new Array(3)].map(() => <Stack spacing={1} >
+                            <Skeleton variant="rectangular" width={300} sx={{ borderRadius: 2 }} height={200} />
+                        </Stack>
+                        )}
+
+                    </Box>
+                    :
+                    <Slider {...slickSlider}>
+                        {
+                            services.map(service => <HomeService
+                                key={service._id}
+                                service={service}
+                            />)
+                        }
+                    </Slider>
+            }
 
         </Container>
     );

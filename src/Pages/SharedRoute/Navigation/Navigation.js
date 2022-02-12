@@ -186,7 +186,7 @@ const Navigation = () => {
   );
 
   return (
-    <Container>
+    <Container id="back-to-top-anchor">
       <AppBar
         id="navbar"
         className={navbar}

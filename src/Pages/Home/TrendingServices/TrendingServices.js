@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography } from '@mui/material';
+import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import axios from 'axios';
 import Slider from 'react-slick';
 import TrendingService from './TrendingService';
@@ -7,8 +7,13 @@ import TrendingService from './TrendingService';
 const TrendingServices = () => {
 
     const [services, setServices] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/services?fbclid=IwAR2PzgLNP3sRD7R7Iww81DDyDNKtutUIHJbSQIVPwzj4G5jQVDoan3aZf5E').then(res => setServices(res.data))
+        axios.get('https://fierce-meadow-12011.herokuapp.com/services?fbclid=IwAR2PzgLNP3sRD7R7Iww81DDyDNKtutUIHJbSQIVPwzj4G5jQVDoan3aZf5E').then(res => {
+            setLoading(false);
+            setServices(res.data);
+        })
     }, []);
 
     const settings = {
@@ -52,14 +57,25 @@ const TrendingServices = () => {
 
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Trending</Typography>
 
-            <Slider {...settings}>
-                {
-                    services.map(service => <TrendingService
-                        key={service._id}
-                        service={service}
-                    />)
-                }
-            </Slider>
+
+            {
+                loading ?
+                    <Box sx={{ display: 'flex', gap: 5 }}>
+
+                        {[...new Array(3)].map(() => <Stack spacing={1} >
+                            <Skeleton variant="rectangular" width={300} sx={{ borderRadius: 2 }} height={200} />
+                        </Stack>
+                        )}
+
+                    </Box>
+                    : <Slider {...settings}>
+                        {
+                            services.map(service => <TrendingService
+                                key={service._id}
+                                service={service}
+                            />)
+                        }
+                    </Slider>}
 
         </Container>
     );
