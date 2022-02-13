@@ -192,7 +192,7 @@ const handleRouteChange=()=>{
   );
 
   return (
-    <Container>
+    <Container id="back-to-top-anchor">
       <AppBar
         id="navbar"
         className={navbar}
@@ -265,7 +265,7 @@ const handleRouteChange=()=>{
             {!user.email && (
               <Button onClick={handleRouteChange} variant="text">
                 <Tooltip arrow title="My account">
-                  <ManageAccountsIcon
+                  <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
                     onClick={() => setOpenModal(true)}
                     style={navButton}
                   />

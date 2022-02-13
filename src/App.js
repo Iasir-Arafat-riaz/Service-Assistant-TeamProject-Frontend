@@ -6,8 +6,9 @@ import Error from "./Pages/Eroor/Error";
 import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
-import { useEffect } from 'react'
-import io from 'socket.io-client'
+import { useEffect } from 'react';
+import io from 'socket.io-client';
+
 
 // made a socket with server
 const socket = io('http://localhost:5000');
