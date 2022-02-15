@@ -48,7 +48,7 @@ const Navigation = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-const handleRouteChange=()=>{
+const handleUserLogin=()=>{
     navigate("/Login")
 }
 
@@ -263,7 +263,7 @@ const handleRouteChange=()=>{
             </Tooltip>
 
             {!user.email && (
-              <Button onClick={handleRouteChange} variant="text">
+              <Button  variant="text" onClick={handleUserLogin}>
                 <Tooltip arrow title="My account">
                   <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
                     onClick={() => setOpenModal(true)}
@@ -280,6 +280,7 @@ const handleRouteChange=()=>{
                 </IconButton>
               </Tooltip>
             )}
+           
             {user.email && (
               <Menu
                 id="menu-appbar"

@@ -8,6 +8,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import { useEffect } from 'react';
 import io from 'socket.io-client';
+import UserLogin from "./Pages/Login/UserLogin/UserLogin";
 
 
 // made a socket with server
@@ -32,6 +33,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/SERVICES" element={<Services />} />
         <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Login" element={<UserLogin/>}/>
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="*" element={<Error />} />
 
