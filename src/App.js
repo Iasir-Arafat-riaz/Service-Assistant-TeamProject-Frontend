@@ -6,10 +6,11 @@ import Error from "./Pages/Eroor/Error";
 import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
-import { useEffect } from 'react';
-import io from 'socket.io-client';
-import UserLogin from "./Pages/Login/UserLogin/UserLogin";
-
+import { useEffect } from 'react'
+import io from 'socket.io-client'
+import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
+import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
+import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -32,8 +33,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/SERVICES" element={<Services />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Login" element={<UserLogin/>}/>
+        <Route path="/Dashboard" element={<Dashboard />} >
+          <Route path="/Dashboard" element={<Overview />} />
+          <Route path="/Dashboard/overview" element={<Overview />} />
+          <Route path="/Dashboard/manageAllOrders" element={<ManageAllOrders />} />
+          <Route path="/Dashboard/makeAdmin" element={<MakeAdmin />} />
+        </Route>
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="*" element={<Error />} />
 
