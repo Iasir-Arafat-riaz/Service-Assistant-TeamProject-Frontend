@@ -14,8 +14,8 @@ const MyOrdersTable = () => {
     }
 
     const rows = [
-        createData('Frozen yoghurt', "Sabbir Rahman", "AC Repair Services", 24, 'approve'),
-        createData('Ice cream sandwich', "Rana Torafder", 'Appliance Repair', 37, 'pending'),
+        createData('Frozen yoghurt', "Sabbir", "AC Repair Services", 24, 'approve'),
+        createData('Ice cream sandwich', "Rana", 'Appliance Repair', 37, 'pending'),
         createData('Eclair', 'Ovi Ahamed', 'Painting & Renovation', 24, 'approve'),
         createData('Rana', 'Mehedi', 'Beauty & Salon', 24, 'pending'),
         createData('Ice cream sandwich', "Sakib", 'AC Repair Services', 37, 'pending'),
