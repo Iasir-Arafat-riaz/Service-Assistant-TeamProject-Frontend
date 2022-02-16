@@ -11,6 +11,7 @@ import io from 'socket.io-client'
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
+import MyOrder from "./Pages/Dashboard/DashboardPages/MyOrder/MyOrder";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -37,6 +38,7 @@ function App() {
           <Route path="/Dashboard/overview" element={<Overview />} />
           <Route path="/Dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/Dashboard/makeAdmin" element={<MakeAdmin />} />
+          <Route path="/Dashboard/myorders" element={<MyOrder />} />
         </Route>
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="*" element={<Error />} />

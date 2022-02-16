@@ -105,6 +105,12 @@ const Dashboard = (props) => {
                             </ListItemIcon>
                             <ListItemText primary={'Add Admin'} />
                         </ListItem>
+                        <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/myorders`} button >
+                            <ListItemIcon>
+                                <ShoppingCartIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'MyOrders'} />
+                        </ListItem>
                     </Box>
                 }
                 <ListItem button  >
