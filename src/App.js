@@ -12,6 +12,7 @@ import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
 import MyOrder from "./Pages/Dashboard/DashboardPages/MyOrder/MyOrder";
+import UserLogin from "./Pages/Login/UserLogin/UserLogin";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/SERVICES" element={<Services />} />
+        <Route path="/Login" element={<UserLogin />} />
         <Route path="/Dashboard" element={<Dashboard />} >
           <Route path="/Dashboard" element={<Overview />} />
           <Route path="/Dashboard/overview" element={<Overview />} />

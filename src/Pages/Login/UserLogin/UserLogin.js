@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Navigation from "../../SharedRoute/Navigation/Navigation";
 import "./UserLogin.css";
 
 const UserLogin = () => {
@@ -36,7 +37,8 @@ signupBtn.addEventListener('click', (e) => {
 
   return (
     <div>
-    <div class="form-structor">
+		 <Navigation />
+    <div class="form-structor" style={{"marginTop":"150px"}}>
 	<div class="signup">
 		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
 		<div class="form-holder">
