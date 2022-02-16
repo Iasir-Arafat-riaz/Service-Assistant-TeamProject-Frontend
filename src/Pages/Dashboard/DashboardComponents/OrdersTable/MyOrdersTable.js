@@ -19,7 +19,7 @@ const MyOrdersTable = () => {
         createData('Eclair', 'Ovi Ahamed', 'Painting & Renovation', 24, 'approve'),
         createData('Rana', 'Mehedi', 'Beauty & Salon', 24, 'pending'),
         createData('Ice cream sandwich', "Sakib", 'AC Repair Services', 37, 'pending'),
-        createData('Rana', 'Mehedi', 'Painting & Renovation', 24, 'pending'),
+        createData('Rana', 'Mehedi', 'Painting & Renovation', 24, 'approve'),
     ];
     return (
         < >
