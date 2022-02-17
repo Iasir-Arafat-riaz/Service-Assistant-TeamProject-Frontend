@@ -7,11 +7,12 @@ import { VscCallOutgoing } from 'react-icons/vsc';
 
 const Contact = () => {
 
-    const user = {
-        email: 'Mahfujur@gmail.com',
-        displayName: 'Mahfujur Rahman',
-        photoURL: "https://i.postimg.cc/KcM0RyNJ/272908864-489382916075907-5012692667561281148-n.jpg"
-    };
+    const handleSendEmail = async () => {
+
+
+
+
+    }
 
     return (
         <Container sx={{ mt: -25, mb: 10 }} style={{ zIndex: '+9999' }}>
@@ -42,7 +43,7 @@ const Contact = () => {
 
                         <TextField sx={{ width: '90%' }} id="outlined-basic" label="Message" variant="outlined" />
 
-                        <Button sx={{ backgroundColor: '#FF5E14', width: '90%', mt: 2, mb: 3, color: '#fff', letterSpacing: 4 }} variant="contained">SEND</Button>
+                        <Button onClick={handleSendEmail} sx={{ backgroundColor: '#FF5E14', width: '90%', mt: 2, mb: 3, color: '#fff', letterSpacing: 4 }} variant="contained">SEND</Button>
 
                     </Grid>
 

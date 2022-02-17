@@ -36,6 +36,10 @@ font-weight: 500;
 color: #7E7E7E;
   }
 
+  .useful-links a:hover, a{
+    color: #ff5e14 ;
+  }
+
   
 .subscribe-form {
   position: relative;

@@ -15,6 +15,7 @@ import MyOrder from "./Pages/Dashboard/DashboardPages/MyOrder/MyOrder";
 import UserLogin from "./Pages/Login/UserLogin/UserLogin";
 import Addproduct from "./Pages/Dashboard/DashboardPages/Addproduct/Addproduct";
 import Manageproducts from "./Pages/Dashboard/DashboardPages/Manageproducts/Manageproducts";
+import SingleService from "./Pages/SingleService/SingleService/SingleService";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -23,12 +24,12 @@ const socket = io('http://localhost:5000');
 function App() {
 
   // connecting the server 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log('connection done!')
-      socket.send("Hello!");
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     console.log('connection done!')
+  //     socket.send("Hello!");
+  //   });
+  // }, []);
 
   return (
     <BrowserRouter>
@@ -47,6 +48,7 @@ function App() {
           <Route path="/Dashboard/manageproducts" element={<Manageproducts/>} />
         </Route>
         <Route path="/Contact" element={<ContactUs />} />
+        <Route path="/service-details/:serviceId" element={<SingleService />} />
         <Route path="*" element={<Error />} />
 
       </Routes>
