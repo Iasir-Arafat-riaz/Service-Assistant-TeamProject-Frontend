@@ -1,5 +1,7 @@
 import React from 'react';
+import Chatbot from '../../Chatbot/Chatbot';
 import Footer from '../../SharedRoute/Footer/Footer';
+import Navigation from '../../SharedRoute/Navigation/Navigation';
 import Header from '../Header/Header';
 import HomeServices from '../HomeServices/HomeServices';
 import RecentlyViews from '../RecentlyViews/RecentlyViews';
@@ -9,11 +11,13 @@ import TrendingServices from '../TrendingServices/TrendingServices';
 const Home = () => {
     return (
         <>
+         <Navigation />
             <Header />
             <RecentlyViews />
             <HomeServices />
             <TrendingServices />
             <Testimonials />
+            <Chatbot></Chatbot>
             <Footer />
         </>
     );

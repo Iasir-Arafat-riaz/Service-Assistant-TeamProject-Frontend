@@ -23,8 +23,10 @@ import { AiOutlineHome } from "react-icons/ai";
 import logo from '../../images/web-logo.png';
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
+import {useNavigate} from "react-router-dom"
 
 const Navigation = () => {
+    const navigate=useNavigate()
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
@@ -46,10 +48,14 @@ const Navigation = () => {
     setAnchorElUser(event.currentTarget);
   };
 
+const handleUserLogin=()=>{
+    navigate("/Login")
+}
+
   const user = {
-    email: "Mahfujur@gmail.com",
-    displayName: "Mahfujur Rahman",
-    photoURL: "",
+    // email: "Mahfujur@gmail.com",
+    // displayName: "Mahfujur Rahman",
+    // photoURL: "",
   };
 
   const handleCloseUserMenu = () => {
@@ -257,7 +263,7 @@ const Navigation = () => {
             </Tooltip>
 
             {!user.email && (
-              <Button variant="text">
+              <Button  variant="text" onClick={handleUserLogin}>
                 <Tooltip arrow title="My account">
                   <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
                     onClick={() => setOpenModal(true)}
@@ -274,6 +280,7 @@ const Navigation = () => {
                 </IconButton>
               </Tooltip>
             )}
+           
             {user.email && (
               <Menu
                 id="menu-appbar"
