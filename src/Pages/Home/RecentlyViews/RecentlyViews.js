@@ -24,7 +24,12 @@ const RecentlyViews = () => {
 
         <Container sx={{ mb: 8 }}>
 
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Recently View</Typography>
+            {
+                loading ?
+                    <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
+                    :
+                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Recently View</Typography>
+            }
 
             {loading
                 ?
