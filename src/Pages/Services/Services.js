@@ -13,6 +13,7 @@ import { makeStyles } from "@mui/styles";
 import { loadServiceCategory } from "../../redux/Reducers/reducersSagar/servicesSlice";
 import ServiceCard from "./Component/ServiceCard";
 import { Link } from "react-router-dom";
+import Loading from "../../Component/Loading";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -61,12 +62,8 @@ const Services = () => {
 
   if (serviceIsLoading) {
     return <h1 style={{ marginTop: "100px" }}>Loading....</h1>;
+    // return <Loading />;
   }
-
-  let menuItem;
-  // if (allServices.length > 0){
-  //   menuItem = allServices.map(ite )
-  // }
 
   return (
     <div style={{ marginTop: "80px" }}>
