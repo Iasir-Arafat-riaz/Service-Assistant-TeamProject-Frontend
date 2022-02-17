@@ -1,4 +1,5 @@
 import React from 'react';
+import Chatbot from '../../Chatbot/Chatbot';
 import Footer from '../../SharedRoute/Footer/Footer';
 import Navigation from '../../SharedRoute/Navigation/Navigation';
 import Header from '../Header/Header';
@@ -16,6 +17,7 @@ const Home = () => {
             <HomeServices />
             <TrendingServices />
             <Testimonials />
+            <Chatbot></Chatbot>
             <Footer />
         </>
     );
