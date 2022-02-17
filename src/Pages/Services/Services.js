@@ -82,7 +82,7 @@ const Services = () => {
                   paper: classes.drawerPaper,
                 }}
               >
-                <List classes={classes.listBottomPadding}>
+                <List className={classes.listBottomPadding}>
                   {allServices.map((item) => {
                     const ID = item.Category.split(" ").join("").toLowerCase();
                     return (
