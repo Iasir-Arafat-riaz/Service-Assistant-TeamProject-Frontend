@@ -55,7 +55,12 @@ const TrendingServices = () => {
     return (
         <Container sx={{ mb: 8 }}>
 
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Trending</Typography>
+            {
+                loading ?
+                    <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
+                    :
+                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Trending</Typography>
+            }
 
 
             {
@@ -78,10 +83,6 @@ const TrendingServices = () => {
                     </Slider>
 
             }
-            <Button className=" slick-prev" data-role="none" variant="contained">
-
-                PRec
-            </Button>
 
         </Container>
     );
