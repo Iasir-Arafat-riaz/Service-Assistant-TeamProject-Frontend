@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
+.userLogin{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .form-structor {
   background-color: #222;
@@ -36,7 +42,7 @@
   -webkit-transform: translate(-50%, 0%);
   -webkit-transition: all 0.3s ease;
 }
-.form-structor .signup.slide-up .form-holder, .form-structor .signup.slide-up .submit-btn {
+.form-structor .signup.slide-up .form-holder, .form-structor .signup.slide-up .submit-btn,.google-btn {
   opacity: 0;
   visibility: hidden;
 }
@@ -88,7 +94,7 @@
 .form-structor .signup .form-holder .input::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
 }
-.form-structor .signup .submit-btn {
+.form-structor .signup .submit-btn ,.google-btn{
   background-color: rgba(0, 0, 0, 0.4);
   color: rgba(255, 255, 255, 0.7);
   border: 0;
@@ -107,6 +113,10 @@
 .form-structor .signup .submit-btn:hover {
   transition: all 0.3s ease;
   background-color: rgba(0, 0, 0, 0.8);
+}
+.google-btn:hover {
+  transition: all 0.3s ease;
+  background-color: rgba(3, 34, 85, 0.8);
 }
 .form-structor .login {
   position: absolute;

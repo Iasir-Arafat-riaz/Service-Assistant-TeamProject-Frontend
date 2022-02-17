@@ -13,6 +13,8 @@ import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
 import MyOrder from "./Pages/Dashboard/DashboardPages/MyOrder/MyOrder";
 import UserLogin from "./Pages/Login/UserLogin/UserLogin";
+import Addproduct from "./Pages/Dashboard/DashboardPages/Addproduct/Addproduct";
+import Manageproducts from "./Pages/Dashboard/DashboardPages/Manageproducts/Manageproducts";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -41,6 +43,8 @@ function App() {
           <Route path="/Dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/Dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/Dashboard/myorders" element={<MyOrder />} />
+          <Route path="/Dashboard/Addproduct" element={<Addproduct/>} />
+          <Route path="/Dashboard/manageproducts" element={<Manageproducts/>} />
         </Route>
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="*" element={<Error />} />
