@@ -8,6 +8,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 import { useEffect } from 'react';
 import io from 'socket.io-client';
+import SingleService from "./Pages/SingleService/SingleService/SingleService";
 
 
 // made a socket with server
@@ -17,12 +18,12 @@ const socket = io('http://localhost:5000');
 function App() {
 
   // connecting the server 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log('connection done!')
-      socket.send("Hello!");
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on("connect", () => {
+  //     console.log('connection done!')
+  //     socket.send("Hello!");
+  //   });
+  // }, []);
 
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
         <Route path="/SERVICES" element={<Services />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Contact" element={<ContactUs />} />
+        <Route path="/service-details/:serviceId" element={<SingleService />} />
         <Route path="*" element={<Error />} />
 
       </Routes>

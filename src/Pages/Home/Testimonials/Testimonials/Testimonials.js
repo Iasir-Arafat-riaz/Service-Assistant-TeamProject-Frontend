@@ -1,15 +1,9 @@
-import { Button, Container, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, Container, Grid, Typography, Box } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './Style.css';
-import "swiper/components/navigation/navigation.min.css";
-import "swiper/components/pagination/pagination.min.css";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper/core";
-import { Swiper, SwiperSlide } from "swiper/react";
 // import "swiper/swiper.min.css";
 import Testimonial from "../Testimonial/Testimonial";
-SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 const Testimonials = () => {
 
@@ -17,12 +11,14 @@ const Testimonials = () => {
     const [reviewQuantity, setReviewQuantity] = useState(0);
     const [next, setNext] = useState(5);
     const postsPerPage = 6;
+    const [loading, setLoading] = useState(true);
 
     const fetchProducts = (start, end) => {
-        axios.get("/Testimonial.json")
+        axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
             .then((res) => {
                 setTestimonialData(res.data.slice(start, end))
-                setReviewQuantity(res.data.length)
+                setReviewQuantity(res.data.length);
+                setLoading(false);
             });
     }
     useEffect(() => {
@@ -35,7 +31,7 @@ const Testimonials = () => {
         setNext(next + postsPerPage)
         document.getElementById('overlay').classList.remove('overl');
     };
-    const reloadREviews = () => {
+    const reloadReviews = () => {
         fetchProducts(0, postsPerPage);
         document.getElementById('overlay').classList.add('overl');
     };
@@ -51,7 +47,9 @@ const Testimonials = () => {
         <Container sx={{ mb: 20 }}>
 
             <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Testimonials</Typography>
+
             {/* testimonials  */}
+
 
             <Grid container spacing={2} sx={{ mb: 0, pb: 0 }}>
 
@@ -71,7 +69,7 @@ const Testimonials = () => {
 
                 </Box> : <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
                     <Button
-                        onClick={reloadREviews}
+                        onClick={reloadReviews}
                         sx={buttonStyle}
                         variant="contained">
                         Okay, I get the point

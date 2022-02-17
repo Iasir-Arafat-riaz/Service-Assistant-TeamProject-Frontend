@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
+import { Box, Button, Container, Skeleton, Stack, Typography } from '@mui/material';
 import axios from 'axios';
 import Slider from 'react-slick';
 import TrendingService from './TrendingService';
@@ -10,7 +10,7 @@ const TrendingServices = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/services?fbclid=IwAR2PzgLNP3sRD7R7Iww81DDyDNKtutUIHJbSQIVPwzj4G5jQVDoan3aZf5E').then(res => {
+        axios.get('https://fierce-meadow-12011.herokuapp.com/services').then(res => {
             setLoading(false);
             setServices(res.data);
         })
@@ -20,9 +20,9 @@ const TrendingServices = () => {
         dots: false,
         infinite: true,
         speed: 2000,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 3,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 2000,
         responsive: [
             {
@@ -62,8 +62,8 @@ const TrendingServices = () => {
                 loading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
-                        {[...new Array(3)].map(() => <Stack spacing={1} >
-                            <Skeleton variant="rectangular" width={300} sx={{ borderRadius: 2 }} height={200} />
+                        {[...new Array(4)].map(() => <Stack spacing={1} >
+                            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2 }} height={185} />
                         </Stack>
                         )}
 
@@ -75,7 +75,13 @@ const TrendingServices = () => {
                                 service={service}
                             />)
                         }
-                    </Slider>}
+                    </Slider>
+
+            }
+            <Button className=" slick-prev" data-role="none" variant="contained">
+
+                PRec
+            </Button>
 
         </Container>
     );
