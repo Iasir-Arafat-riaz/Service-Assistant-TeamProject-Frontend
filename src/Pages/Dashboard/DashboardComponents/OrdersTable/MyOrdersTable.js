@@ -14,12 +14,12 @@ const MyOrdersTable = () => {
     }
 
     const rows = [
-        createData('Frozen yoghurt', "Sabbir", "AC Repair Services", 24, 'approve'),
-        createData('Ice cream sandwich', "Rana", 'Appliance Repair', 37, 'pending'),
-        createData('Eclair', 'Ovi Ahamed', 'Painting & Renovation', 24, 'approve'),
-        createData('Rana', 'Mehedi', 'Beauty & Salon', 24, 'pending'),
-        createData('Ice cream sandwich', "Sakib", 'AC Repair Services', 37, 'pending'),
-        createData('Rana', 'Mehedi', 'Painting & Renovation', 24, 'approve'),
+        createData('1 - 1.5 Ton', "Sabbir", "AC Repair Services", 1500, 'approve'),
+        createData('Microwave Oven Servicing', "Rana", 'Appliance Repair', 950, 'pending'),
+        createData('Basic Checkup', 'Ovi Ahamed', 'Painting & Renovation', 1200, 'approve'),
+        createData('Microwave Oven Servicing', 'Mehedi', 'Beauty & Salon', 2200, 'pending'),
+        createData('1Ton Partial - R22', "Sakib", 'AC Repair Services', 1700, 'pending'),
+        createData('Basic Checkup', 'Mehedi', 'Painting & Renovation', 5000, 'approve'),
     ];
     return (
         < >
@@ -28,9 +28,9 @@ const MyOrdersTable = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>Service Name</TableCell>
-                            <TableCell>Provider</TableCell>
-                            <TableCell>Category</TableCell>
                             <TableCell>Image</TableCell>
+                            <TableCell>Category</TableCell>
+                            <TableCell>Price</TableCell>
                             <TableCell>Status</TableCell>
                         </TableRow>
                     </TableHead>
