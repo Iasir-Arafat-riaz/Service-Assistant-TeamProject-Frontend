@@ -80,8 +80,8 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
                         <Grid item xs={12} md={12} lg={5} sx={{ background: "#F4F5F8" }}>
 
-                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                <img src="https://i.ibb.co/yPxy136/Screenshot-11.png" alt="cartImagw" />
+                            <Box sx={{ display: 'grid', justifyContent: 'center', height: '87%', alignItems: 'center' }}>
+                                <img width="200" src="https://i.ibb.co/Wzz3N8R/Screenshot-15.png" alt="cartImagw" />
                             </Box>
                             <Button variant='contained' sx={{ letterSpacing: 2, width: '100%', p: 1, background: "#FFE7DC", boxShadow: 0, borderRadius: 0 }}>PROCEED TO CHECKOUT</Button>
 
