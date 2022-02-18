@@ -254,7 +254,7 @@ const handleUserLogin=()=>{
               </NavLink>
             </Button>
           </Box>
-
+          
           <Box className={navItemContainer}>
             {/* search button */}
             <Tooltip arrow title="Search...">
@@ -266,7 +266,9 @@ const handleUserLogin=()=>{
             </Tooltip>
 
             {!user.email && (
+                
               <Button  variant="text" onClick={handleUserLogin}>
+                
                 <Tooltip arrow title="My account">
                   <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
                     onClick={() => setOpenModal(true)}
