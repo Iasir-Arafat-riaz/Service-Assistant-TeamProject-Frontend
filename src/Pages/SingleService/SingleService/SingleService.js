@@ -2,11 +2,11 @@ import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../SingleService.css';
-import { Link, useParams } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import SingleServiceHeader from '../SingleServiceHeader/SingleServiceHeader';
 import ServiceDetails from '../ServiceDetails/ServiceDetails';
 import Loading from '../../SharedRoute/Loader/Loading';
+import Navigation from '../../SharedRoute/Navigation/Navigation';
 
 const SingleService = () => {
 
@@ -41,6 +41,7 @@ const SingleService = () => {
                 loading ? <Loading />
                     :
                     <Box>
+                        <Navigation />
                         <SingleServiceHeader matchService={matchService} />
                         <ServiceDetails question1={question1}
                             question2={question2}
