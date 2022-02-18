@@ -48,7 +48,7 @@ function App() {
           <Route path="/Dashboard/manageproducts" element={<Manageproducts/>} />
         </Route>
         <Route path="/Contact" element={<ContactUs />} />
-        <Route path="/service-details/:serviceId" element={<SingleService />} />
+        <Route path="Home/service-details/:serviceId" element={<SingleService />} />
         <Route path="*" element={<Error />} />
 
       </Routes>

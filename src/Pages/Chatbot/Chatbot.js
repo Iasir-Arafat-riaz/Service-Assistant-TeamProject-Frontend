@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Launcher } from 'popup-chat-react'
+import "./Chatbot.css"
 // import monsterImgUrl from '../../images/banner-1.jpg'
 
 function Chatbot() {
@@ -63,14 +64,14 @@ function Chatbot() {
     }
 
     return (
-        <div>
+        <div >
 
 
 
             <Launcher
                 agentProfile={{
-                    teamName: 'popup-chat-react',
-                    imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+                    teamName: 'Service A2Z',
+                    imageUrl: 'https://i.ibb.co/s5CQTKg/a-z.png'
                 }}
                 onMessageWasSent={onMessageWasSent}
                 onFilesSelected={onFilesSelected}
@@ -80,11 +81,11 @@ function Chatbot() {
                 isOpen={state.isOpen}
                 showEmoji
                 fileUpload={state.fileUpload}
-                pinMessage={{
-                    imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
-                    title: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-                    text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
-                }}
+                // pinMessage={{
+                //     imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
+                //     title: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+                //     text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+                // }}
                 placeholder='placeholder'
             />
 

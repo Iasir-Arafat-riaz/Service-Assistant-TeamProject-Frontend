@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import SingleServiceHeader from '../SingleServiceHeader/SingleServiceHeader';
 import ServiceDetails from '../ServiceDetails/ServiceDetails';
+import Navigation from '../../SharedRoute/Navigation/Navigation';
 
 const SingleService = () => {
 
@@ -36,6 +37,7 @@ const SingleService = () => {
 
     return (
         <>
+        <Navigation/>
             {
                 loading ? <Box>
                     loading
