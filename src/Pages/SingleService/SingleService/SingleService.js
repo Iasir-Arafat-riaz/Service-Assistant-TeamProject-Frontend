@@ -6,6 +6,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import SingleServiceHeader from '../SingleServiceHeader/SingleServiceHeader';
 import ServiceDetails from '../ServiceDetails/ServiceDetails';
+import Loading from '../../SharedRoute/Loader/Loading';
 
 const SingleService = () => {
 
@@ -23,8 +24,8 @@ const SingleService = () => {
     }, []);
 
     if (loading) {
-        return 'Loading....'
-    }
+        return <Loading />
+    };
 
 
 
@@ -37,9 +38,7 @@ const SingleService = () => {
     return (
         <>
             {
-                loading ? <Box>
-                    loading
-                </Box>
+                loading ? <Loading />
                     :
                     <Box>
                         <SingleServiceHeader matchService={matchService} />

@@ -1,8 +1,12 @@
+import { Box, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import Navigation from "../../SharedRoute/Navigation/Navigation";
 import "./UserLogin.css";
 
 const UserLogin = () => {
+	const googleSignIN=()=>{
+		console.log("googleSignIN Button Clicked");
+	}
 
 useEffect(()=>{
   console.clear();
@@ -36,9 +40,11 @@ signupBtn.addEventListener('click', (e) => {
 },[])
 
   return (
-    <div>
+    <Box>
 		 <Navigation />
-    <div class="form-structor" style={{"marginTop":"150px"}}>
+    <Box className="userLogin">
+		<Box>
+		<div class="form-structor" style={{"marginTop":"150px"}}>
 	<div class="signup">
 		<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
 		<div class="form-holder">
@@ -47,6 +53,7 @@ signupBtn.addEventListener('click', (e) => {
 			<input type="password" class="input" placeholder="Password" />
 		</div>
 		<button class="submit-btn">Sign up</button>
+		<Typography variant="h5" ><button class="google-btn" onClick={googleSignIN}>Google Login</button></Typography>
 	</div>
 	<div class="login slide-up">
 		<div class="center">
@@ -56,10 +63,13 @@ signupBtn.addEventListener('click', (e) => {
 				<input type="password" class="input" placeholder="Password" />
 			</div>
 			<button class="submit-btn">Log in</button>
+			<Typography variant="h5" ><button class="google-btn">Google Login</button></Typography>
 		</div>
 	</div>
 </div>
-    </div>
+		</Box>
+	</Box>
+    </Box>
   );
 };
 

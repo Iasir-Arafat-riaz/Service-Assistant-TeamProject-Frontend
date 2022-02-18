@@ -31,6 +31,9 @@ const Navigation = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
+  const goHome =()=>{
+    navigate("/Home")
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -219,7 +222,7 @@ const handleUserLogin=()=>{
         >
           <Box>
 
-            <img className={navLogo} src={logo} width="120" alt="weblogo" />
+            <img onClick={goHome} className={navLogo} src={logo} width="120" alt="weblogo" />
           </Box>
 
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
