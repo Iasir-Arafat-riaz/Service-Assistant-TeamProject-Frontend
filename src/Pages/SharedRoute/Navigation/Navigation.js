@@ -23,15 +23,15 @@ import { AiOutlineHome } from "react-icons/ai";
 import logo from '../../images/web-logo.png';
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Navigation = () => {
-    const navigate=useNavigate()
+  const navigate = useNavigate()
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
-  const goHome =()=>{
+  const goHome = () => {
     navigate("/Home")
   }
 
@@ -51,9 +51,9 @@ const Navigation = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-const handleUserLogin=()=>{
+  const handleUserLogin = () => {
     navigate("/Login")
-}
+  }
 
   const user = {
     // email: "Mahfujur@gmail.com",
@@ -255,7 +255,7 @@ const handleUserLogin=()=>{
             </Button>
           </Box>
 
-          <Box className={navItemContainer}>
+          <Box sx={{ display: 'flex', alignItems: 'center' }} className={navItemContainer}>
             {/* search button */}
             <Tooltip arrow title="Search...">
               <SearchIcon
@@ -266,14 +266,15 @@ const handleUserLogin=()=>{
             </Tooltip>
 
             {!user.email && (
-              <Button  variant="text" onClick={handleUserLogin}>
-                <Tooltip arrow title="My account">
-                  <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
-                    onClick={() => setOpenModal(true)}
-                    style={navButton}
-                  />
-                </Tooltip>
-              </Button>
+              <Tooltip arrow title="My account">
+                <ManageAccountsIcon
+                  onClick={() => {
+                    handleUserLogin();
+                    setOpenModal(true)
+                  }}
+                  style={navButton}
+                />
+              </Tooltip>
             )}
 
             {user.email && (
@@ -283,7 +284,7 @@ const handleUserLogin=()=>{
                 </IconButton>
               </Tooltip>
             )}
-           
+
             {user.email && (
               <Menu
                 id="menu-appbar"
