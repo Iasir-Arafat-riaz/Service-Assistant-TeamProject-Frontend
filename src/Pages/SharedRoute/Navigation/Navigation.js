@@ -32,7 +32,7 @@ const Navigation = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
   const goHome =()=>{
-    navigate("/Home")
+    navigate("/home")
   }
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Navigation = () => {
   };
 
 const handleUserLogin=()=>{
-    navigate("/Login")
+    navigate("/login")
 }
 
   const user = {
@@ -227,14 +227,14 @@ const handleUserLogin=()=>{
 
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
             <Button variant="text">
-              <NavLink style={navLink} to="/Home">
+              <NavLink style={navLink} to="/home">
                 HOME
               </NavLink>
             </Button>
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/SERVICES">
+              <NavLink style={navLink} to="/services">
                 SERVICES
               </NavLink>
             </Button>
@@ -242,14 +242,14 @@ const handleUserLogin=()=>{
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/Dashboard">
+              <NavLink style={navLink} to="/dashboard">
                 DASHBOARD
               </NavLink>
             </Button>
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/Contact">
+              <NavLink style={navLink} to="/contact">
                 CONTACT US
               </NavLink>
             </Button>
