@@ -13,15 +13,17 @@ const MakeAdmin = () => {
         <>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <Stack direction='column' elevation={2} >
-                            <TextField type='email' sx={{ mb: 3 }} {...register("email")} label="Enter email" variant="standard" />
-                            <Button type='submit' variant='contained'>Make Admin</Button>
-                        </Stack>
-                    </form>
+                    <Paper elevation={3} sx={{ p: 2 }}>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <Stack direction='column' elevation={2} >
+                                <TextField type='email' sx={{ mb: 3 }} {...register("email")} label="Enter email" variant="standard" />
+                                <Button type='submit' variant='contained'>Make Admin</Button>
+                            </Stack>
+                        </form>
+                    </Paper>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <h2>Some Admin info</h2>
+                    {/* <h2>Some Admin info</h2> */}
                 </Grid>
             </Grid>
 
