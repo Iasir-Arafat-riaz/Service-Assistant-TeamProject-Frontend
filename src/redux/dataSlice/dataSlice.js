@@ -11,6 +11,9 @@ const initialState = {
     isAdmin: false,
     allServices: [],
     serviceIsLoading: false,
+    cartItems: [],
+    cartTotalQuantity: 0,
+    cartTotalAmount: 0
 }
 
 // async task
@@ -68,6 +71,19 @@ export const dataSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
+        addToCart(state, action) {
+            //We need item id for find index effectively. Need modify API
+            const itemIndex = state.cartItems.findIndex((item) => item.Price === action.payload.Price);
+
+            if (itemIndex >= 0) {
+                state.cartItems[itemIndex].cartQuantity += 1;
+            }
+            else {
+                const tempService = { ...action.payload, cartQuantity: 1 }
+                // state.cartItems.push(action.payload)
+                state.cartItems.push(tempService)
+            }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -99,6 +115,6 @@ export const dataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, setLoading, } = dataSlice.actions
+export const { login, logout, setLoading, addToCart } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
