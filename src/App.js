@@ -19,8 +19,6 @@ import SingleService from "./Pages/SingleService/SingleService/SingleService";
 
 // made a socket with server
 const socket = io('https://fierce-meadow-12011.herokuapp.com/');
-
-
 function App() {
 
   // connecting the server 
