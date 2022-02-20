@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Grid } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../../redux/Reducers/cartSlice';
+import { addToCart } from '../../../../redux/dataSlice/dataSlice';
 
 
 const style = {
