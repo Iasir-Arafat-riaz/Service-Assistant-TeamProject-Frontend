@@ -4,10 +4,8 @@ import logo from '../../images/logo.png';
 import React, { useEffect } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { VscCallOutgoing } from 'react-icons/vsc';
-import './Contac.css';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import '../../../styles/dark.css';
 
 const Contact = () => {
 
@@ -23,24 +21,11 @@ const Contact = () => {
     };
 
 
-
-
-
-
-
-
-    const handleAddDarkMode = () => {
-        const element = document.body;
-        element.classList.toggle("dark");
-    };
-
-
     return (
         <Container sx={{ mt: -25, mb: 10 }} style={{ zIndex: '+9999' }}>
             <Paper elevation={5} style={{ zIndex: '+9999' }}>
 
 
-                <Button onClick={handleAddDarkMode} variant='contained'>Dark mode</Button>
 
                 <Grid container spacing={2} style={{ zIndex: '+9999' }}>
 
