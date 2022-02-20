@@ -8950,11 +8950,6 @@
   dependencies:
     "picomatch" "^2.2.1"
 
-"readux@^1.0.0":
-  "integrity" "sha1-GMc3B1cVrGJ05twBlopSobaTzuo="
-  "resolved" "https://registry.npmjs.org/readux/-/readux-1.0.0.tgz"
-  "version" "1.0.0"
-
 "recharts-scale@^0.4.4":
   "integrity" "sha512-kivNFO+0OcUNu7jQquLXAxz1FIwZj8nrj+YkOKc5694NbjCvcT6aSZiIzNzd2Kul4o4rTto8QVR9lMNtxD4G1w=="
   "resolved" "https://registry.npmjs.org/recharts-scale/-/recharts-scale-0.4.5.tgz"

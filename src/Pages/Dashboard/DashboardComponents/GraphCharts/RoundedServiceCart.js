@@ -3,10 +3,10 @@ import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, R
 import { Box, Container, Stack, Grid, Paper, Typography, IconButton } from '@mui/material';
 
 const data01 = [
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 500 },
-    { name: 'Group D', value: 200 },
-    { name: 'Group r', value: 400 },
+    { name: 'Order Approve', value: 300 },
+    { name: 'Order pending', value: 500 },
+    { name: 'Service Request', value: 234 },
+    { name: 'Available Service', value: 400 },
 ];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const RoundedServiceCart = () => {

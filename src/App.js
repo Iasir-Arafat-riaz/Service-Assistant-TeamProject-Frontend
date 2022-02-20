@@ -16,6 +16,7 @@ import UserLogin from "./Pages/Login/UserLogin/UserLogin";
 import Addproduct from "./Pages/Dashboard/DashboardPages/Addproduct/Addproduct";
 import Manageproducts from "./Pages/Dashboard/DashboardPages/Manageproducts/Manageproducts";
 import SingleService from "./Pages/SingleService/SingleService/SingleService";
+
 import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddTestimonial";
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
@@ -23,7 +24,13 @@ import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/Serv
 
 
 // made a socket with server
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
+
+
+// made a socket with server
+const socket = io('https://fierce-meadow-12011.herokuapp.com/');
+
+
 
 // connecting the server
 // useEffect(() => {
@@ -52,6 +59,7 @@ const App = () => {
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
+
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
@@ -72,6 +80,9 @@ const App = () => {
           <Route path="/dashboard/servicerequest" element={<ServiceRequest />} />
           <Route path="/dashboard/addproduct" element={<Addproduct/>} />
           <Route path="/dashboard/manageproducts" element={<Manageproducts/>} />
+
+          
+
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route

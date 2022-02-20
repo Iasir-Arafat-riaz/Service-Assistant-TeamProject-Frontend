@@ -5,45 +5,45 @@ import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, R
 
 const data = [
     {
-        "name": "Page A",
+        "name": "1",
         "uv": 4000,
-        "pv": 2400,
+        "income": 2400,
         "amt": 2400
     },
     {
-        "name": "Page B",
+        "name": "2",
         "uv": 3000,
-        "pv": 1398,
+        "income": 1398,
         "amt": 2210
     },
     {
-        "name": "Page C",
+        "name": "3",
         "uv": 2000,
-        "pv": 9800,
+        "income": 9800,
         "amt": 2290
     },
     {
-        "name": "Page D",
+        "name": "4",
         "uv": 2780,
-        "pv": 3908,
+        "income": 3908,
         "amt": 2000
     },
     {
-        "name": "Page E",
+        "name": "5",
         "uv": 1890,
-        "pv": 4800,
+        "income": 4800,
         "amt": 2181
     },
     {
-        "name": "Page F",
+        "name": "6",
         "uv": 2390,
-        "pv": 3800,
+        "income": 3800,
         "amt": 2500
     },
     {
-        "name": "Page G",
+        "name": "7",
         "uv": 3490,
-        "pv": 4300,
+        "income": 4300,
         "amt": 2100
     }
 ]
@@ -63,8 +63,8 @@ const RecentMomentChart = () => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip content={<div>dfdfdfdfd</div>} />
-                    <Area type="monotone" dataKey="pv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="income" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
                 </AreaChart>
             </ResponsiveContainer>
         </Paper>
