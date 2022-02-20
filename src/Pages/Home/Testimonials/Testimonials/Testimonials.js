@@ -54,9 +54,8 @@ const Testimonials = () => {
             <Grid container spacing={2} sx={{ mb: 0, pb: 0 }}>
 
                 {
-                    testimonialData.map((testiominal) => (
-                        <Testimonial testiominal={testiominal} />
-                    ))
+                    testimonialData.map((testiominal) => testiominal.status == 'approved' ? <Testimonial testiominal={testiominal} />
+                        : <span></span>)
                 }
 
                 {testimonialData.length !== reviewQuantity ? <Box sx={buttonBox}>

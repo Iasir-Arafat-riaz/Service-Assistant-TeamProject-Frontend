@@ -11,6 +11,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PaymentIcon from "@mui/icons-material/Payment";
@@ -28,8 +30,8 @@ const Dashboard = (props) => {
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const goHome=()=>{
-      navigate("/Home")
+  const goHome = () => {
+    navigate("/Home")
   }
 
   const handleDrawerToggle = () => {
@@ -159,6 +161,41 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"MyOrders"} />
             </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/addtestimonial`}
+              button
+            >
+              <ListItemIcon>
+                <ReviewsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Testimonial"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/pendingtestimonial`}
+              button
+            >
+              <ListItemIcon>
+                <AutorenewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Pending Testimonial"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+
+              to={`/Dashboard/managetestimonials`}
+              button
+            >
+              <ListItemIcon>
+                <ManageSearchIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Manage Testimonial"} />
+            </ListItem>
+
           </Box>
         }
         <ListItem button>

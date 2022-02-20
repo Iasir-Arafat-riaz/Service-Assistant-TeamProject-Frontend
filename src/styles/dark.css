@@ -1,0 +1,49 @@
+.dark {
+  background-color: #021122;
+  color: #e6e6e6 !important;
+}
+
+.dark footer {
+  border-top: 2px solid #19416b;
+  background-color: #021122 !important;
+}
+
+.dark footer a {
+  color: #B2BAC2;
+}
+
+.dark footer a:hover {
+  color: #3399FF;
+}
+
+.dark footer h3 {
+  color: #ffff;
+}
+
+.dark footer p {
+  color: #B2BAC2;
+}
+
+.dark footer .facebook-bg, .dark footer .twitter-bg, .dark footer .google-bg {
+  background: #132F4C !important;
+  color: #e6e6e6;
+}
+
+.dark footer h3::before {
+  background-color: #ffff;
+}
+
+.dark footer input {
+  background: #0A1929;
+  border: 1px solid #0A1929;
+}
+
+.dark footer button {
+  background: #132F4C;
+  border: 1px solid #132F4C;
+}
+
+.dark .slick-prev, .slick-next {
+  display: none !important;
+}
+/*# sourceMappingURL=dark.css.map */

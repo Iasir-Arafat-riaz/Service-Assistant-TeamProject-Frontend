@@ -16,6 +16,9 @@ import UserLogin from "./Pages/Login/UserLogin/UserLogin";
 import Addproduct from "./Pages/Dashboard/DashboardPages/Addproduct/Addproduct";
 import Manageproducts from "./Pages/Dashboard/DashboardPages/Manageproducts/Manageproducts";
 import SingleService from "./Pages/SingleService/SingleService/SingleService";
+import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddTestimonial";
+import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
+import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -46,6 +49,9 @@ const App = () => {
           <Route path="/Dashboard/myorders" element={<MyOrder />} />
           <Route path="/Dashboard/Addproduct" element={<Addproduct />} />
           <Route path="/Dashboard/manageproducts" element={<Manageproducts />} />
+          <Route path="/Dashboard/addtestimonial" element={<AddTestimonial />} />
+          <Route path="/Dashboard/pendingtestimonial" element={<PendingTestimonial />} />
+          <Route path="/Dashboard/managetestimonials" element={<ManageTestimonials />} />
         </Route>
         <Route path="/Contact" element={<ContactUs />} />
         <Route path="Home/service-details/:serviceId" element={<SingleService />} />
