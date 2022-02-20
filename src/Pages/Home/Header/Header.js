@@ -5,9 +5,12 @@ import banner1 from '../../images/banner-1.jpg';
 import banner2 from '../../images/banner-2.jpg';
 import banner3 from '../../images/banner-3.jpg';
 import Slider from 'react-slick';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ScrollTop from '../../SharedRoute/ScrollTop/ScrollTop';
 import Contact from '../Contact/Contact';
 
-const Header = () => {
+const Header = (props) => {
     const settings = {
         dots: false,
         infinite: true,
@@ -35,6 +38,12 @@ const Header = () => {
 
             </Slider>
             <Contact />
+
+            <ScrollTop {...props}>
+                <Fab color="secondary" size="small" aria-label="scroll back to top">
+                    <KeyboardArrowUpIcon />
+                </Fab>
+            </ScrollTop>
         </header>
     );
 };

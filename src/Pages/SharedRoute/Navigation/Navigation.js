@@ -31,6 +31,9 @@ const Navigation = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
+  const goHome =()=>{
+    navigate("/home")
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -48,8 +51,8 @@ const Navigation = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-const handleRouteChange=()=>{
-    navigate("/Login")
+const handleUserLogin=()=>{
+    navigate("/login")
 }
 
   const user = {
@@ -192,7 +195,7 @@ const handleRouteChange=()=>{
   );
 
   return (
-    <Container>
+    <Container id="back-to-top-anchor">
       <AppBar
         id="navbar"
         className={navbar}
@@ -219,19 +222,19 @@ const handleRouteChange=()=>{
         >
           <Box>
 
-            <img className={navLogo} src={logo} width="120" alt="weblogo" />
+            <img onClick={goHome} className={navLogo} src={logo} width="120" alt="weblogo" />
           </Box>
 
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
             <Button variant="text">
-              <NavLink style={navLink} to="/Home">
+              <NavLink style={navLink} to="/home">
                 HOME
               </NavLink>
             </Button>
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/SERVICES">
+              <NavLink style={navLink} to="/services">
                 SERVICES
               </NavLink>
             </Button>
@@ -239,19 +242,19 @@ const handleRouteChange=()=>{
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/Dashboard">
+              <NavLink style={navLink} to="/dashboard">
                 DASHBOARD
               </NavLink>
             </Button>
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/Contact">
+              <NavLink style={navLink} to="/contact">
                 CONTACT US
               </NavLink>
             </Button>
           </Box>
-
+          
           <Box className={navItemContainer}>
             {/* search button */}
             <Tooltip arrow title="Search...">
@@ -263,9 +266,11 @@ const handleRouteChange=()=>{
             </Tooltip>
 
             {!user.email && (
-              <Button onClick={handleRouteChange} variant="text">
+                
+              <Button  variant="text" onClick={handleUserLogin}>
+                
                 <Tooltip arrow title="My account">
-                  <ManageAccountsIcon
+                  <ManageAccountsIcon sx={{ p: 0, mb: 4 }}
                     onClick={() => setOpenModal(true)}
                     style={navButton}
                   />
@@ -280,6 +285,7 @@ const handleRouteChange=()=>{
                 </IconButton>
               </Tooltip>
             )}
+           
             {user.email && (
               <Menu
                 id="menu-appbar"
