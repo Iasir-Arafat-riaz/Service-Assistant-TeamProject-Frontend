@@ -62,7 +62,7 @@ const Dashboard = (props) => {
         </NavLink>
         <NavLink
           style={{ textDecoration: "none", color: "gray" }}
-          to="/SERVICES"
+          to="/services"
         >
           <Button color="inherit">SERVICES</Button>
         </NavLink>
@@ -96,7 +96,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/overview`}
+              to={`/dashboard/overview`}
               button
             >
               <ListItemIcon>
@@ -107,7 +107,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/manageAllOrders`}
+              to={`/dashboard/manageAllOrders`}
               button
             >
               <ListItemIcon>
@@ -119,7 +119,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/manageproducts`}
+              to={`/dashboard/manageproducts`}
               button
             >
               <ListItemIcon>
@@ -130,7 +130,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/addproduct`}
+              to={`/dashboard/addproduct`}
               button
             >
               <ListItemIcon>
@@ -141,7 +141,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/makeAdmin`}
+              to={`/dashboard/makeAdmin`}
               button
             >
               <ListItemIcon>
@@ -152,7 +152,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/myorders`}
+              to={`/dashboard/myorders`}
               button
             >
               <ListItemIcon>
@@ -164,7 +164,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/servicerequest`}
+              to={`/dashboard/servicerequest`}
               button
             >
               <ListItemIcon>
@@ -216,7 +216,7 @@ const Dashboard = (props) => {
             </NavLink>
             <NavLink
               style={{ textDecoration: "none", color: "gray" }}
-              to="/SERVICES"
+              to="/services"
             >
               <Button color="inherit">SERVICES</Button>
             </NavLink>
