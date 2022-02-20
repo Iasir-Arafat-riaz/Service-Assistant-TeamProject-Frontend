@@ -12,7 +12,7 @@ const Footer = () => {
 
                     <Grid item xs={6} md={4}>
 
-                        <img width="120" style={{ marginTop: 3 }} src={logo} alt="" />
+                        <img width="120" style={{ marginTop: 3 }} src={logo} alt="logo" />
 
                         <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 2 }}>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing elit,Lorem ipsum dolor sit amet.</Typography>
 

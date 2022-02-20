@@ -90,9 +90,11 @@ const Services = () => {
                     const ID = item.Category.split(" ").join("").toLowerCase();
                     return (
                       <ListItem key={item._id}>
-                        <ListItemButton>
-                          <ListItemText>
+                        <ListItemButton >
+                          <ListItemText
+                          >
                             <HashLink
+
                               smooth
                               to={`/SERVICES/#${ID}`}
                               className={classes.linkClass}

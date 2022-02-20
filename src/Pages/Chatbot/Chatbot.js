@@ -81,11 +81,6 @@ function Chatbot() {
                 isOpen={state.isOpen}
                 showEmoji
                 fileUpload={state.fileUpload}
-                // pinMessage={{
-                //     imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png',
-                //     title: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-                //     text: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
-                // }}
                 placeholder='placeholder'
             />
 

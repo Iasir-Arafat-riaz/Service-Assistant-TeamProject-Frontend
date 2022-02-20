@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Skeleton, Typography } from '@mui/material';
 import axios from 'axios';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box } from '@mui/system';
@@ -31,20 +31,28 @@ const AllServicesList = () => {
     return (
 
         <>
-
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                    <Typography sx={{ fontSize: 22, fontWeight: 'bold' }}>Our all services</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    {services.map(service => <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Typography sx={categoryList}>
-                            {service.Category}
-                        </Typography>
-                        <ArrowForwardIosIcon sx={categoryList} />
-                    </Box>)}
-                </AccordionDetails>
-            </Accordion>
+            {
+                loading ?
+                    <Box>
+                        {
+                            [...new Array(6)].map(() => <Skeleton sx={{ height: 70, mb: 3 }} animation="wave" />)
+                        }
+                    </Box>
+                    :
+                    <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+                        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                            <Typography sx={{ fontSize: 22, fontWeight: 'bold' }}>Our all services</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            {services.map(service => <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Typography sx={categoryList}>
+                                    {service.Category}
+                                </Typography>
+                                <ArrowForwardIosIcon sx={categoryList} />
+                            </Box>)}
+                        </AccordionDetails>
+                    </Accordion>
+            }
         </>
     );
 };
