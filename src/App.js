@@ -19,6 +19,8 @@ import SingleService from "./Pages/SingleService/SingleService/SingleService";
 import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddTestimonial";
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
+import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
+
 
 // made a socket with server
 const socket = io("http://localhost:5000");
@@ -67,6 +69,9 @@ const App = () => {
             path="/dashboard/managetestimonials"
             element={<ManageTestimonials />}
           />
+          <Route path="/dashboard/servicerequest" element={<ServiceRequest />} />
+          <Route path="/dashboard/addproduct" element={<Addproduct/>} />
+          <Route path="/dashboard/manageproducts" element={<Manageproducts/>} />
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route
