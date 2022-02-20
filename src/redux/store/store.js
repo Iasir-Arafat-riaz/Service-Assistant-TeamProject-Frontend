@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import serviceCategorySlice from "../Reducers/reducersSagar/servicesSlice";
+import dataSlice from "../dataSlice/dataSlice";
 
 const store = configureStore({
   reducer: {
-    serviceCategoryState: serviceCategorySlice,
+    data: dataSlice,
   },
 });
 

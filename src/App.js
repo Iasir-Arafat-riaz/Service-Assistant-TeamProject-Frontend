@@ -18,7 +18,7 @@ import Manageproducts from "./Pages/Dashboard/DashboardPages/Manageproducts/Mana
 import SingleService from "./Pages/SingleService/SingleService/SingleService";
 
 // made a socket with server
-const socket = io('http://localhost:5000');
+const socket = io('https://fierce-meadow-12011.herokuapp.com/');
 
 
 function App() {
@@ -35,20 +35,20 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/SERVICES" element={<Services />} />
-        <Route path="/Login" element={<UserLogin />} />
-        <Route path="/Dashboard" element={<Dashboard />} >
-          <Route path="/Dashboard" element={<Overview />} />
-          <Route path="/Dashboard/overview" element={<Overview />} />
-          <Route path="/Dashboard/manageAllOrders" element={<ManageAllOrders />} />
-          <Route path="/Dashboard/makeAdmin" element={<MakeAdmin />} />
-          <Route path="/Dashboard/myorders" element={<MyOrder />} />
-          <Route path="/Dashboard/Addproduct" element={<Addproduct/>} />
-          <Route path="/Dashboard/manageproducts" element={<Manageproducts/>} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/dashboard" element={<Dashboard />} >
+          <Route path="/dashboard" element={<Overview />} />
+          <Route path="/dashboard/overview" element={<Overview />} />
+          <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
+          <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
+          <Route path="/dashboard/myorders" element={<MyOrder />} />
+          <Route path="/dashboard/addproduct" element={<Addproduct />} />
+          <Route path="/dashboard/manageproducts" element={<Manageproducts />} />
         </Route>
-        <Route path="/Contact" element={<ContactUs />} />
-        <Route path="Home/service-details/:serviceId" element={<SingleService />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="home/service-details/:serviceId" element={<SingleService />} />
         <Route path="*" element={<Error />} />
 
       </Routes>

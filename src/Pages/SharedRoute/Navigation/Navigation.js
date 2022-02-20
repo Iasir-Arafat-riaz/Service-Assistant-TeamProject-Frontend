@@ -24,6 +24,9 @@ import logo from '../../images/web-logo.png';
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux";
+import { allData } from "../../../redux/dataSlice/dataSlice";
+import useFirebase from "../../../Hooks/useFirebase";
 
 const Navigation = () => {
   const navigate = useNavigate()
@@ -31,8 +34,10 @@ const Navigation = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
+  const { user } = useSelector(allData);
+  const { handleSignOut } = useFirebase();
   const goHome = () => {
-    navigate("/Home")
+    navigate("/home")
   }
 
   useEffect(() => {
@@ -44,7 +49,7 @@ const Navigation = () => {
         document.getElementById("navbar").classList.remove("scroll-nav");
       }
     });
-  }, []);
+  }, [user]);
 
   // setSearchValue("Hello world")
   const handleOpenUserMenu = (event) => {
@@ -52,14 +57,10 @@ const Navigation = () => {
   };
 
   const handleUserLogin = () => {
-    navigate("/Login")
+    navigate("/login")
   }
 
-  const user = {
-    // email: "Mahfujur@gmail.com",
-    // displayName: "Mahfujur Rahman",
-    // photoURL: "",
-  };
+
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -174,7 +175,7 @@ const Navigation = () => {
         </Link>
         <Divider sx={{ color: "#98a1bc" }} />
         <ListItem>
-          {user.email && (
+          {user?.email && (
             <ListItemText sx={{ color: "black" }}>
               <img
                 src={user?.photoURL}
@@ -189,7 +190,7 @@ const Navigation = () => {
             </ListItemText>
           )}
         </ListItem>
-        {user.email && <Divider sx={{ color: "#98a1bc" }} />}
+        {user?.email && <Divider sx={{ color: "#98a1bc" }} />}
       </List>
     </Box>
   );
@@ -227,14 +228,14 @@ const Navigation = () => {
 
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
             <Button variant="text">
-              <NavLink style={navLink} to="/Home">
+              <NavLink style={navLink} to="/home">
                 HOME
               </NavLink>
             </Button>
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/SERVICES">
+              <NavLink style={navLink} to="/services">
                 SERVICES
               </NavLink>
             </Button>
@@ -242,14 +243,14 @@ const Navigation = () => {
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/Dashboard">
+              <NavLink style={navLink} to="/dashboard">
                 DASHBOARD
               </NavLink>
             </Button>
 
             <Button variant="text">
               {" "}
-              <NavLink style={navLink} to="/Contact">
+              <NavLink style={navLink} to="/contact">
                 CONTACT US
               </NavLink>
             </Button>
@@ -265,27 +266,27 @@ const Navigation = () => {
               />
             </Tooltip>
 
-            {!user.email && (
-              <Tooltip arrow title="My account">
-                <ManageAccountsIcon
-                  onClick={() => {
-                    handleUserLogin();
-                    setOpenModal(true)
-                  }}
-                  style={navButton}
-                />
-              </Tooltip>
+            {!user?.email && (
+
+              <Button variant="text" onClick={handleUserLogin}>
+                <Tooltip arrow title="My account">
+                  <ManageAccountsIcon
+                    onClick={() => setOpenModal(true)}
+                    style={navButton}
+                  />
+                </Tooltip>
+              </Button>
             )}
 
-            {user.email && (
+            {user?.email && (
               <Tooltip arrow title="My Account">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mb: 4 }}>
+                <IconButton onClick={handleOpenUserMenu}  >
                   <Avatar alt="Remy Sharp" src={user?.photoURL} />
                 </IconButton>
               </Tooltip>
             )}
 
-            {user.email && (
+            {user?.email && (
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorElUser}
@@ -305,15 +306,15 @@ const Navigation = () => {
                 <MenuItem
                   sx={{ display: "grid", gap: 1, justifyContent: "center" }}
                 >
-                  <Typography
+                  <Box
                     sx={{ display: "flex", justifyContent: "center" }}
                   >
-                    <img
+                    <Avatar
                       style={{ borderRadius: "50%", margin: "0 auto" }}
                       src={user?.photoURL}
-                      alt=""
+                      alt="user img"
                     />
-                  </Typography>
+                  </Box>
 
                   <Typography sx={{ textAlign: "center" }}>
                     {user?.displayName}
@@ -322,6 +323,12 @@ const Navigation = () => {
                   <Typography sx={{ textAlign: "center" }}>
                     {user?.email}
                   </Typography>
+
+                </MenuItem>
+                <MenuItem
+                  sx={{ display: 'flex', justifyContent: 'center' }}
+                  onClick={handleSignOut}
+                >
                   <Typography sx={{ textAlign: "center" }}>
                     <GrLogout /> Log Out
                   </Typography>

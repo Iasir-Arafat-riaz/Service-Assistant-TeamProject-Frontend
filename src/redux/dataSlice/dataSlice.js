@@ -8,16 +8,9 @@ const initialState = {
     user: {},
     loading: true,
     postLoad: false,
-    sideBarLoad: false,
     isAdmin: false,
-    allRequestPost: [],
-    allApprovePost: [],
-    blogs: [],
-    count: 0,
-    pageCount: 0,
-    profileToggle: false,
-    cheapTopRate: [],
-    adminLastBlog: [],
+    allServices: [],
+    serviceIsLoading: false,
 }
 
 // async task
@@ -26,31 +19,42 @@ const initialState = {
 export const saveUserToDb = createAsyncThunk(
     'saveUserToDb/user',
     async (info) => {
-        const response = await axios.post(`https://serene-temple-54072.herokuapp.com/user`, info);
+        const response = await axios.post(`https://fierce-meadow-12011.herokuapp.com/users/register`, info);
         return response.data
     }
 )
 export const putUserToDb = createAsyncThunk(
     'data/putUserToDb',
     async (info) => {
-        const response = await axios.put(`https://serene-temple-54072.herokuapp.com/user`, info);
+        const response = await axios.put(`  `, info);
         return response.data
     }
 )
 export const makeAdmin = createAsyncThunk(
     'data/userAdmin',
     async (info) => {
-        const response = await axios.put(`https://serene-temple-54072.herokuapp.com/user/makeAdmin`, info);
+        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/admin/makeadmin/${info.email} `, info);
         return response.data
     }
 )
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(`https://serene-temple-54072.herokuapp.com/user/${info.email}`);
+        console.log(info);
+        const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
+
+export const loadServiceCategory = createAsyncThunk(
+    "loadServiceCategory/data",
+    async () => {
+        const response = await fetch(
+            "https://fierce-meadow-12011.herokuapp.com/services"
+        ).then((res) => res.json());
+        return response;
+    }
+);
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -64,36 +68,37 @@ export const dataSlice = createSlice({
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
-        setPostLoad: (state, action) => {
-            state.postLoad = action.payload;
-        },
-        resetBlogs: (state, action) => {
-            state.blogs = [];
-        },
-        handleProfileToggle: (state, action) => {
-            state.profileToggle = !state.profileToggle;
-        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(makeAdmin.fulfilled, (state, action) => {
 
-        extraReducers: (builder) => {
-            builder
-                .addCase(makeAdmin.fulfilled, (state, action) => {
+            })
+            .addCase(isAdmin.pending, (state, action) => {
+                state.loading = true;
+            })
+            .addCase(isAdmin.fulfilled, (state, action) => {
+                state.isAdmin = action.payload.admin
+                state.loading = false;
+            })
+            .addCase(isAdmin.rejected, (state, action) => {
+                state.loading = false;
+            })
+            .addCase(loadServiceCategory.pending, (state, action) => {
+                state.serviceIsLoading = true;
+            })
+            .addCase(loadServiceCategory.fulfilled, (state, { payload }) => {
+                state.serviceIsLoading = false;
+                state.allServices = payload;
+            })
+            .addCase(loadServiceCategory.rejected, (state, { payload }) => {
+                console.log(payload);
 
-                })
-                .addCase(isAdmin.pending, (state, action) => {
-                    state.loading = true;
-                })
-                .addCase(isAdmin.fulfilled, (state, action) => {
-                    state.isAdmin = action.payload.admin
-                    state.loading = false;
-                })
-                .addCase(isAdmin.rejected, (state, action) => {
-                    state.loading = false;
-                })
-        }
+            })
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, setLoading, handleProfileToggle, resetBlogs, setPostLoad } = dataSlice.actions
-export const selectData = (state) => state.data;
+export const { login, logout, setLoading, } = dataSlice.actions
+export const allData = (state) => state.data;
 export default dataSlice.reducer

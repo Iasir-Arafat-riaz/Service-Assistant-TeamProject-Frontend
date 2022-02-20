@@ -29,7 +29,7 @@ const Dashboard = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const goHome=()=>{
-      navigate("/Home")
+      navigate("/home")
   }
 
   const handleDrawerToggle = () => {

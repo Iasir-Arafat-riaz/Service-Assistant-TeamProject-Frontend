@@ -172,6 +172,9 @@
   visibility: visible;
   -webkit-transition: all 0.3s ease;
 }
+.form-holder{
+  display: block;
+}
 .form-structor .login .center .form-holder .input {
   border: 0;
   outline: none;
