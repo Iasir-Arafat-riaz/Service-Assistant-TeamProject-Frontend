@@ -60,8 +60,6 @@ const Navigation = () => {
     navigate("/login")
   }
 
-
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };

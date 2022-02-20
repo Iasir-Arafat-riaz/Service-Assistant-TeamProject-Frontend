@@ -26,7 +26,7 @@ export const saveUserToDb = createAsyncThunk(
 export const putUserToDb = createAsyncThunk(
     'data/putUserToDb',
     async (info) => {
-        const response = await axios.put(`  `, info);
+        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/register  `, info);
         return response.data
     }
 )
