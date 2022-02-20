@@ -16,6 +16,7 @@ import UserLogin from "./Pages/Login/UserLogin/UserLogin";
 import Addproduct from "./Pages/Dashboard/DashboardPages/Addproduct/Addproduct";
 import Manageproducts from "./Pages/Dashboard/DashboardPages/Manageproducts/Manageproducts";
 import SingleService from "./Pages/SingleService/SingleService/SingleService";
+import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
 
 // made a socket with server
 const socket = io('http://localhost:5000');
@@ -44,6 +45,7 @@ function App() {
           <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
+          <Route path="/dashboard/servicerequest" element={<ServiceRequest />} />
           <Route path="/dashboard/addproduct" element={<Addproduct/>} />
           <Route path="/dashboard/manageproducts" element={<Manageproducts/>} />
         </Route>

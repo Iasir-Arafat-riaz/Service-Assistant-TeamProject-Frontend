@@ -23,6 +23,7 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -157,7 +158,19 @@ const Dashboard = (props) => {
               <ListItemIcon>
                 <ShoppingCartIcon />
               </ListItemIcon>
-              <ListItemText primary={"MyOrders"} />
+              <ListItemText primary={"My Orders"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/Dashboard/servicerequest`}
+              button
+            >
+              <ListItemIcon>
+                <DoneAllIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Service Request"} />
             </ListItem>
           </Box>
         }
