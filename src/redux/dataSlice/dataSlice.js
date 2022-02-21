@@ -78,7 +78,7 @@ export const dataSlice = createSlice({
 
             if (itemIndex >= 0) {
                 state.cartItems[itemIndex].cartQuantity += 1;
-                toast.info("Increased Service Quantity", {
+                toast.info(`Increased ${state.cartItems[itemIndex].Name} Quantity`, {
                     position: "bottom-left"
                 })
             }
