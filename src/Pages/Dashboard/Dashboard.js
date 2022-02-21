@@ -25,13 +25,14 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const goHome = () => {
-    navigate("/Home")
+  const goHome=()=>{
+      navigate("/home")
   }
 
   const handleDrawerToggle = () => {
@@ -63,7 +64,7 @@ const Dashboard = (props) => {
         </NavLink>
         <NavLink
           style={{ textDecoration: "none", color: "gray" }}
-          to="/SERVICES"
+          to="/services"
         >
           <Button color="inherit">SERVICES</Button>
         </NavLink>
@@ -97,7 +98,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/overview`}
+              to={`/dashboard/overview`}
               button
             >
               <ListItemIcon>
@@ -108,7 +109,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/manageAllOrders`}
+              to={`/dashboard/manageAllOrders`}
               button
             >
               <ListItemIcon>
@@ -120,7 +121,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/manageproducts`}
+              to={`/dashboard/manageproducts`}
               button
             >
               <ListItemIcon>
@@ -131,7 +132,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/addproduct`}
+              to={`/dashboard/addproduct`}
               button
             >
               <ListItemIcon>
@@ -142,7 +143,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/makeAdmin`}
+              to={`/dashboard/makeAdmin`}
               button
             >
               <ListItemIcon>
@@ -153,13 +154,25 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/myorders`}
+              to={`/dashboard/myorders`}
               button
             >
               <ListItemIcon>
                 <ShoppingCartIcon />
               </ListItemIcon>
-              <ListItemText primary={"MyOrders"} />
+              <ListItemText primary={"My Orders"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/dashboard/servicerequest`}
+              button
+            >
+              <ListItemIcon>
+                <DoneAllIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Service Request"} />
             </ListItem>
 
             <ListItem
@@ -240,7 +253,7 @@ const Dashboard = (props) => {
             </NavLink>
             <NavLink
               style={{ textDecoration: "none", color: "gray" }}
-              to="/SERVICES"
+              to="/services"
             >
               <Button color="inherit">SERVICES</Button>
             </NavLink>

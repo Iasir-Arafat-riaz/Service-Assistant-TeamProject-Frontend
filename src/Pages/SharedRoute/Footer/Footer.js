@@ -46,7 +46,7 @@ const Footer = () => {
                         <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 3 }}>Don’t miss to subscribe to our new feeds, kindly fill the form below.</Typography>
                         <Box class="subscribe-form">
                             <form action="#">
-                                <input type="text" placeholder="Email Address" />
+                                <input  type="text" placeholder="Email Address" />
                                 <button><i class="fab fa-telegram-plane"></i></button>
                             </form>
                         </Box>

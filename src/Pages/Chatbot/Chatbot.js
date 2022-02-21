@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Launcher } from 'popup-chat-react'
+import "./Chatbot.css"
 // import monsterImgUrl from '../../images/banner-1.jpg'
 
 function Chatbot() {
@@ -63,14 +64,14 @@ function Chatbot() {
     }
 
     return (
-        <div>
+        <div >
 
 
 
             <Launcher
                 agentProfile={{
-                    teamName: 'popup-chat-react',
-                    imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+                    teamName: 'Service A2Z',
+                    imageUrl: 'https://i.ibb.co/s5CQTKg/a-z.png'
                 }}
                 onMessageWasSent={onMessageWasSent}
                 onFilesSelected={onFilesSelected}
@@ -80,7 +81,6 @@ function Chatbot() {
                 isOpen={state.isOpen}
                 showEmoji
                 fileUpload={state.fileUpload}
-
                 placeholder='placeholder'
             />
 

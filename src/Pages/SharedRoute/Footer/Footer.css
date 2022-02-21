@@ -44,6 +44,7 @@ color: #7E7E7E;
 .subscribe-form {
   position: relative;
   overflow: hidden;
+ 
 }
 .subscribe-form input {
   width: 100%;
@@ -64,6 +65,7 @@ color: #7E7E7E;
   color: #fff;
   font-size: 22px;
   transform: rotate(-6deg);
+  
 }
 
 

@@ -4112,9 +4112,9 @@
     "which" "^2.0.1"
 
 "crypto-js@^3.1.9-1":
-  "integrity" "sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg="
-  "resolved" "https://registry.npmjs.org/crypto-js/-/crypto-js-3.1.9-1.tgz"
-  "version" "3.1.9-1"
+  "integrity" "sha512-DIT51nX0dCfKltpRiXV+/TVZq+Qq2NgF4644+K7Ttnla7zEzqc+kjJyiB96BHNyUTBxyjzRcZYpUdZa+QAqi6Q=="
+  "resolved" "https://registry.npmjs.org/crypto-js/-/crypto-js-3.3.0.tgz"
+  "version" "3.3.0"
 
 "crypto-random-string@^2.0.0":
   "integrity" "sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA=="
@@ -8949,11 +8949,6 @@
   "version" "3.6.0"
   dependencies:
     "picomatch" "^2.2.1"
-
-"readux@^1.0.0":
-  "integrity" "sha1-GMc3B1cVrGJ05twBlopSobaTzuo="
-  "resolved" "https://registry.npmjs.org/readux/-/readux-1.0.0.tgz"
-  "version" "1.0.0"
 
 "recharts-scale@^0.4.4":
   "integrity" "sha512-kivNFO+0OcUNu7jQquLXAxz1FIwZj8nrj+YkOKc5694NbjCvcT6aSZiIzNzd2Kul4o4rTto8QVR9lMNtxD4G1w=="
