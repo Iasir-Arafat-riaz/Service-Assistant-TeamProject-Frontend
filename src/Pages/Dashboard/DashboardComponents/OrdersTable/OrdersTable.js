@@ -14,12 +14,12 @@ const OrdersTable = () => {
         return { name, calories, fat, carbs, protein };
     }
     const rows = [
-        createData('Frozen yoghurt', "Sabbir Rahman", "Shovo", 24, 'pending'),
-        createData('Ice cream sandwich', "Rana Torafder", 'Najir', 37, 'pending'),
-        createData('Eclair', 'Ovi Ahamed', 'Rabbiul', 24, 'approve'),
-        createData('Rana', 'Mehedi', 'solaiman', 24, 'pending'),
-        createData('Ice cream sandwich', "Rana Torafder", 'Najir', 37, 'pending'),
-        createData('Rana', 'Mehedi', 'solaiman', 24, 'pending'),
+        createData('AC Servicing', "Sabbir Rahman", "Shovo", 24, 'pending'),
+        createData('Appliance Repair', "Rana Torafder", 'Najir', 37, 'pending'),
+        createData('Painting & Renovation ', 'Ovi Ahamed', 'Rabbiul', 24, 'approve'),
+        createData('Shifting', 'Mehedi', 'solaiman', 24, 'pending'),
+        createData('Appliance Repair', "Rana Torafder", 'Najir', 37, 'pending'),
+        createData('AC Servicing', 'Mehedi', 'solaiman', 24, 'pending'),
     ];
     // console.log(rows)
     return (

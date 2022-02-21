@@ -11,6 +11,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PaymentIcon from "@mui/icons-material/Payment";
@@ -23,6 +25,7 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -61,7 +64,7 @@ const Dashboard = (props) => {
         </NavLink>
         <NavLink
           style={{ textDecoration: "none", color: "gray" }}
-          to="/SERVICES"
+          to="/services"
         >
           <Button color="inherit">SERVICES</Button>
         </NavLink>
@@ -95,7 +98,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/overview`}
+              to={`/dashboard/overview`}
               button
             >
               <ListItemIcon>
@@ -106,7 +109,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/manageAllOrders`}
+              to={`/dashboard/manageAllOrders`}
               button
             >
               <ListItemIcon>
@@ -118,7 +121,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/manageproducts`}
+              to={`/dashboard/manageproducts`}
               button
             >
               <ListItemIcon>
@@ -129,7 +132,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/addproduct`}
+              to={`/dashboard/addproduct`}
               button
             >
               <ListItemIcon>
@@ -140,7 +143,7 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/makeAdmin`}
+              to={`/dashboard/makeAdmin`}
               button
             >
               <ListItemIcon>
@@ -151,14 +154,61 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
-              to={`/Dashboard/myorders`}
+              to={`/dashboard/myorders`}
               button
             >
               <ListItemIcon>
                 <ShoppingCartIcon />
               </ListItemIcon>
-              <ListItemText primary={"MyOrders"} />
+              <ListItemText primary={"My Orders"} />
             </ListItem>
+
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/dashboard/servicerequest`}
+              button
+            >
+              <ListItemIcon>
+                <DoneAllIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Service Request"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/addtestimonial`}
+              button
+            >
+              <ListItemIcon>
+                <ReviewsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Testimonial"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/pendingtestimonial`}
+              button
+            >
+              <ListItemIcon>
+                <AutorenewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Pending Testimonial"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+
+              to={`/Dashboard/managetestimonials`}
+              button
+            >
+              <ListItemIcon>
+                <ManageSearchIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Manage Testimonial"} />
+            </ListItem>
+
           </Box>
         }
         <ListItem button>
@@ -203,7 +253,7 @@ const Dashboard = (props) => {
             </NavLink>
             <NavLink
               style={{ textDecoration: "none", color: "gray" }}
-              to="/SERVICES"
+              to="/services"
             >
               <Button color="inherit">SERVICES</Button>
             </NavLink>

@@ -8950,11 +8950,6 @@
   dependencies:
     "picomatch" "^2.2.1"
 
-"readux@^1.0.0":
-  "integrity" "sha1-GMc3B1cVrGJ05twBlopSobaTzuo="
-  "resolved" "https://registry.npmjs.org/readux/-/readux-1.0.0.tgz"
-  "version" "1.0.0"
-
 "recharts-scale@^0.4.4":
   "integrity" "sha512-kivNFO+0OcUNu7jQquLXAxz1FIwZj8nrj+YkOKc5694NbjCvcT6aSZiIzNzd2Kul4o4rTto8QVR9lMNtxD4G1w=="
   "resolved" "https://registry.npmjs.org/recharts-scale/-/recharts-scale-0.4.5.tgz"
@@ -9963,6 +9958,11 @@
     "csso" "^4.2.0"
     "picocolors" "^1.0.0"
     "stable" "^0.1.8"
+
+"sweetalert2@^11.4.1":
+  "integrity" "sha512-4KA4e7nUMQWH4A94tAClpdAZswEyDO3SzOPQ5P5L/2tSuTlZ+AeOXXvFnevb88Xt0W6gDbfug/u3CXcWd1SETQ=="
+  "resolved" "https://registry.npmjs.org/sweetalert2/-/sweetalert2-11.4.1.tgz"
+  "version" "11.4.1"
 
 "swiper@^6.8.4":
   "integrity" "sha512-O+buF9Q+sMA0H7luMS8R59hCaJKlpo8PXhQ6ZYu6Rn2v9OsFd4d1jmrv14QvxtQpKAvL/ZiovEeANI/uDGet7g=="

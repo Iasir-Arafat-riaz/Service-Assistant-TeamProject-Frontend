@@ -10,9 +10,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import { makeStyles } from "@mui/styles";
-import { loadServiceCategory } from "../../redux/Reducers/reducersSagar/servicesSlice";
 import ServiceCard from "./Component/ServiceCard";
 import Navigation from "../SharedRoute/Navigation/Navigation";
+import { allData, loadServiceCategory } from "../../redux/dataSlice/dataSlice";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -42,13 +42,11 @@ const useStyles = makeStyles({
 const Services = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allServices, serviceIsLoading } = useSelector(
-    (state) => state.serviceCategoryState
-  );
+  const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
 
   const drawerWidth = 240;
-
+  console.log(allServices);
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
     console.log(url);
@@ -56,7 +54,7 @@ const Services = () => {
   };
 
   useEffect(() => {
-    const service = dispatch(loadServiceCategory());
+    dispatch(loadServiceCategory());
   }, []);
 
   if (serviceIsLoading) {
