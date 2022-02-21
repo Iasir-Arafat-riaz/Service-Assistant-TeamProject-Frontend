@@ -13,7 +13,9 @@ const initialState = {
     serviceIsLoading: false,
     cartItems: [],
     cartTotalQuantity: 0,
-    cartTotalAmount: 0
+    cartTotalAmount: 0,
+    singleServiceLoading: true,
+    singleServiceDetails: []
 }
 
 // async task
@@ -58,6 +60,21 @@ export const loadServiceCategory = createAsyncThunk(
         return response;
     }
 );
+
+export const singleService = createAsyncThunk(
+    "singleService/details",
+    async () => {
+        const response = await fetch(
+            "https://fierce-meadow-12011.herokuapp.com/singleservice"
+        ).then((res) => res.json());
+        return response;
+    }
+    // async () => {
+    //     const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice");
+    //     return response.data;
+    // }
+)
+
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -109,7 +126,13 @@ export const dataSlice = createSlice({
             })
             .addCase(loadServiceCategory.rejected, (state, { payload }) => {
                 console.log(payload);
-
+            })
+            .addCase(singleService.pending, (state, action) => {
+                state.singleServiceLoading = true;
+            })
+            .addCase(singleService.fulfilled, (state, { payload }) => {
+                state.singleServiceLoading = false;
+                state.singleServiceDetails = payload;
             })
     },
 })

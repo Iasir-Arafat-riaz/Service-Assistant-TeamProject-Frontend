@@ -10,15 +10,6 @@ const ServiceOverview = ({ matchService, question1,
     question2,
     question3 }) => {
 
-    // console.log(Object.keys(matchService?.overview[0]));
-    // const question1 = Object.keys(matchService?.overview[0]);
-    // const question2 = Object.keys(matchService?.overview[1]);
-    // const question3 = Object.keys(matchService?.overview[2]);
-    // console.log(Object.values(matchService.overview[0])[0]);
-
-    // console.log(matchService.FQA[0])
-    // console.log(Object.values(matchService?.FQA[0])[0])
-
     // list item style
     const listItem = {
         fontWeight: 500,

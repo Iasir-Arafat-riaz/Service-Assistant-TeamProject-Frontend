@@ -4,31 +4,24 @@ import React, { useEffect, useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useParams } from 'react-router-dom';
 import CategoryModal from '../CategoryModal/CategoryModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { allData, singleService } from '../../../../redux/dataSlice/dataSlice';
 
 const ServiceCategory = ({ service }) => {
 
-    const [services, setServices] = useState([]);
     const { serviceId } = useParams();
-    const [loading, setLoading] = useState(true);
     const [index, setIndex] = useState(0);
     const [open, setOpen] = React.useState(false);
+    const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
+    const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
 
-
+    // open modal
     const handleOpen = index => {
         setOpen(true);
         setIndex(index);
     };
-
+    // close modal
     const handleClose = () => setOpen(false);
-
-    useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/singleservice').then(res => {
-            setServices(res.data);
-            setLoading(false);
-        })
-    }, []);
-
-    const matchService = services?.find(service => service.parentService == serviceId);
 
     // box style
     const box = {
@@ -42,7 +35,7 @@ const ServiceCategory = ({ service }) => {
 
     return (
         <>
-            {loading ?
+            {singleServiceLoading ?
                 <Box>
                     {
                         [...new Array(6)].map(() => <Skeleton sx={{ height: 70, mb: 3 }} animation="wave" />)

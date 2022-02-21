@@ -28,6 +28,7 @@ const serviceOption = {
 }
 
 const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
+
     const matchService = service?.allServices[index];
 
     const dispatch = useDispatch();
@@ -100,7 +101,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                                     </Grid>
                                 </Grid>
                             </Box>
-                            <Button variant='contained' sx={{ letterSpacing: 2, width: '100%', p: 1, background: "#fc7c41e0", boxShadow: 0, borderRadius: 0 }}>PROCEED TO CHECKOUT</Button>
+                            <Button style={{ letterSpacing: 2, width: '100%', padding: 6, background: "#fc7c41e0", borderRadius: 0, color: "#fff" }}>PROCEED TO CHECKOUT</Button>
 
                         </Grid>
 

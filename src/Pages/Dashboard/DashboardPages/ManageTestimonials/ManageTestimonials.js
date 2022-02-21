@@ -109,9 +109,9 @@ const ManageTestimonials = () => {
                                     {
                                         testimonial.status === 'approved'
                                             ?
-                                            <Button onClick={() => handleDeleteTestimonial(testimonial._id)} variant="outlined" sx={{ borderColor: "red", color: "red" }}>Delete</Button>
+                                            <Button onClick={() => handleDeleteTestimonial(testimonial._id)} style={{ border: "1px solid red", color: "red" }}>Delete</Button>
                                             :
-                                            <Button onClick={() => handleApproveTestimonil(testimonial._id)} variant="outlined" sx={{ borderColor: "green", color: "green" }}>Approve</Button>
+                                            <Button onClick={() => handleApproveTestimonil(testimonial._id)} style={{ border: "1px solid green", color: "green" }}>Approve</Button>
                                     }
                                 </TableCell>
                             </TableRow>

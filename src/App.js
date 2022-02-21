@@ -78,11 +78,8 @@ const App = () => {
             element={<ManageTestimonials />}
           />
           <Route path="/dashboard/servicerequest" element={<ServiceRequest />} />
-          <Route path="/dashboard/addproduct" element={<Addproduct/>} />
-          <Route path="/dashboard/manageproducts" element={<Manageproducts/>} />
-
-          
-
+          <Route path="/dashboard/addproduct" element={<Addproduct />} />
+          <Route path="/dashboard/manageproducts" element={<Manageproducts />} />
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route
