@@ -1,24 +1,21 @@
 import React from 'react';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import { Box, Card, CardActionArea, CardContent, Grid, Paper } from '@mui/material';
+import { Box, Card, CardActionArea, CardContent, Grid } from '@mui/material';
 import CategoryIcon from '@mui/icons-material/Category';
 import { Link } from 'react-router-dom';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 const MyOrdersTable = () => {
-    function createData(avatar, name, image, service, price, status) {
-        return { avatar, name, image, service, price, status };
+    function createData(avatar, name, image, service, price, status,category) {
+        return { avatar, name, image, service, price, status,category };
     }
 
     const columns = [
-        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/tXJ6vWL/acmasterservice.jpg", "AC Basic Service", 1500, 'Approved'),
-        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/tXJ6vWL/acmasterservice.jpg", "Appliance Service", 2700, 'Approved'),
-        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/tXJ6vWL/acmasterservice.jpg", "Home Shifting", 4500, 'Approved')
+        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/tXJ6vWL/acmasterservice.jpg", "AC Basic Service", 1500, 'Approved','AC Repair Service'),
+        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/0D8zbWF/1617776411-microwaveovenrepairservices.jpg", "Microwave Oven Repair", 2700, 'Approved','Appliance Repair'),
+        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/MgdQXhG/1617878110-salonservicesformen.jpg", "Home Shifting", 4500, 'Approved','Mens Care')
     ];
     return (
         < >
@@ -39,8 +36,8 @@ const MyOrdersTable = () => {
                                        <Box sx={{display: "flex", justifyContent: "space-between", alignItems: 'center'}}>
                                        <Typography
                                             gutterBottom
-                                            variant="h5" c
-                                            omponent="div">
+                                            variant="h6" 
+                                            component="div">
                                             {column.service}
                                         </Typography>
                                         <Typography
@@ -57,7 +54,7 @@ const MyOrdersTable = () => {
                                                 style={{ textDecoration: 'none' }}>
                                                 <Typography
                                                     sx={{ paddingLeft: 1 }}>
-                                                    AC Repair Services
+                                                    {column.category}
                                                 </Typography>
                                             </Link>
                                         </IconButton>
