@@ -1,12 +1,9 @@
-import Header from "./Pages/Home/Header/Header";
-import Navigation from "./Pages/SharedRoute/Navigation/Navigation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home/Home";
 import Error from "./Pages/Eroor/Error";
 import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
-import { useEffect } from "react";
 import io from "socket.io-client";
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
@@ -21,6 +18,8 @@ import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddT
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 // made a socket with server
@@ -43,6 +42,7 @@ const socket = io('https://fierce-meadow-12011.herokuapp.com/');
 const App = () => {
   return (
     <BrowserRouter>
+    <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
 

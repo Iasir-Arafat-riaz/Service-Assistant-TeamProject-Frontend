@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import firebaseInit from "./../../firebase/firebase.init";
 
 firebaseInit();
@@ -77,11 +78,17 @@ export const dataSlice = createSlice({
 
             if (itemIndex >= 0) {
                 state.cartItems[itemIndex].cartQuantity += 1;
+                toast.info("Increased Service Quantity", {
+                    position: "bottom-left"
+                })
             }
             else {
                 const tempService = { ...action.payload, cartQuantity: 1 }
                 // state.cartItems.push(action.payload)
                 state.cartItems.push(tempService)
+                toast.success(`${action.payload.Name} Added to Cart`, {
+                    position: "bottom-left"
+                })
             }
         },
     },
