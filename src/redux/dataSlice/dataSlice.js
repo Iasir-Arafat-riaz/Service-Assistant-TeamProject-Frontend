@@ -12,7 +12,9 @@ const initialState = {
     isAdmin: false,
     allServices: [],
     serviceIsLoading: false,
-    cartItems: [],
+    cartItems: localStorage.getItem('cartItems')
+        ? JSON.parse(localStorage.getItem('cartItems'))
+        : [],
     cartTotalQuantity: 0,
     cartTotalAmount: 0
 }
@@ -88,8 +90,10 @@ export const dataSlice = createSlice({
                 state.cartItems.push(tempService)
                 toast.success(`${action.payload.Name} Added to Cart`, {
                     position: "bottom-left"
-                })
+                });
             }
+
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
         },
     },
     extraReducers: (builder) => {
