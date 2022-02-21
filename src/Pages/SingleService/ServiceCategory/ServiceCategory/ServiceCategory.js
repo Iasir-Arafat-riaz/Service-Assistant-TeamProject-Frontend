@@ -35,7 +35,7 @@ const ServiceCategory = ({ service }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        background: 'white',
+        background: '#f8f8f8',
         mb: 3,
         borderRadius: 2
     };
@@ -49,7 +49,7 @@ const ServiceCategory = ({ service }) => {
                     }
                 </Box>
                 :
-                <Paper elevation={3} sx={{ py: 5, px: 2, background: "#ff5e1426" }}>
+                <Paper elevation={3} sx={{ py: 5, px: 2, background: "#fff" }}>
 
 
                     <Typography variant='h5' sx={{ fontWeight: "bold" }}>{service.Title}</Typography>
