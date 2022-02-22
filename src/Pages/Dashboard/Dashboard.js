@@ -26,6 +26,7 @@ import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -129,6 +130,8 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Manage Products"} />
             </ListItem>
+
+            
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
@@ -140,6 +143,22 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Add Products"} />
             </ListItem>
+            
+
+            <ListItem
+           
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/dashboard/addBanner`}
+              button
+            >
+              <ListItemIcon>
+              <AddPhotoAlternateIcon/>
+              </ListItemIcon>
+              <ListItemText primary={"Add Banner"} />
+            </ListItem>
+
+
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
