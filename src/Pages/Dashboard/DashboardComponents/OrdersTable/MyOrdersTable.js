@@ -22,9 +22,10 @@ const MyOrdersTable = () => {
     return (
         < >
             {
-                columns.map((column) =>
+                columns.map((column, index) =>
 
                     <Box
+                        key={index}
                         sx={{
                             display: 'grid',
                             gridAutoFlow: 'row',
@@ -59,49 +60,11 @@ const MyOrdersTable = () => {
                                 <IconButton aria-label="Category">
                                     <CategoryIcon /><Link to='/services' style={{ textDecoration: 'none' }}> <Typography sx={{ paddingLeft: 1 }}> AC Repair Services</Typography></Link>
                                 </IconButton>
-                                <IconButton aria-label="Payment" sx={{paddingLeft: "0px"}}>
+                                <IconButton aria-label="Payment" sx={{ paddingLeft: "0px" }}>
                                     <AttachMoneyIcon /> <Typography>{column.price} BDT</Typography>
                                 </IconButton>
 
-                                <IconButton aria-label="Delete" sx={{color:'red', paddingLeft: "0px"}}>
-                                    <DeleteIcon />
-                                </IconButton>
-
-                            </CardActions>
-                        </Paper>
-                       
-                        <Paper
-                            sx={{
-                                borderRadius: '10px',
-                                boxShadow: '0 4px 21px -12px rgba(0, 0, 0, 0.66)',
-                                backgroundColor: '#18151f23'
-                            }}>
-
-                            <CardMedia
-                                sx={{ margin: '5px 0px 10px 0px' }}
-                                component="img"
-                                height="100px"
-                                image={column.image}
-                                alt="Service Image"
-                            />
-
-                            <CardHeader
-                                avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="Avatar">
-                                    {column.avatar}
-                                </Avatar>
-                                }
-                                title={<Typography>Service: {column.service}</Typography>}
-                                sx={{ m: "-18px 0px" }}
-                            />
-                            <CardActions disableSpacing sx={{}}>
-                                <IconButton aria-label="Category">
-                                    <CategoryIcon /><Link to='/services' style={{ textDecoration: 'none' }}> <Typography sx={{ paddingLeft: 1 }}> AC Repair Services</Typography></Link>
-                                </IconButton>
-                                <IconButton aria-label="Payment" sx={{paddingLeft: "0px"}}>
-                                    <AttachMoneyIcon /> <Typography>{column.price} BDT</Typography>
-                                </IconButton>
-
-                                <IconButton aria-label="Delete" sx={{color:'red', paddingLeft: "0px"}}>
+                                <IconButton aria-label="Delete" sx={{ color: 'red', paddingLeft: "0px" }}>
                                     <DeleteIcon />
                                 </IconButton>
 
@@ -135,11 +98,49 @@ const MyOrdersTable = () => {
                                 <IconButton aria-label="Category">
                                     <CategoryIcon /><Link to='/services' style={{ textDecoration: 'none' }}> <Typography sx={{ paddingLeft: 1 }}> AC Repair Services</Typography></Link>
                                 </IconButton>
-                                <IconButton aria-label="Payment" sx={{paddingLeft: "0px"}}>
+                                <IconButton aria-label="Payment" sx={{ paddingLeft: "0px" }}>
                                     <AttachMoneyIcon /> <Typography>{column.price} BDT</Typography>
                                 </IconButton>
 
-                                <IconButton aria-label="Delete" sx={{color:'red', paddingLeft: "0px"}}>
+                                <IconButton aria-label="Delete" sx={{ color: 'red', paddingLeft: "0px" }}>
+                                    <DeleteIcon />
+                                </IconButton>
+
+                            </CardActions>
+                        </Paper>
+
+                        <Paper
+                            sx={{
+                                borderRadius: '10px',
+                                boxShadow: '0 4px 21px -12px rgba(0, 0, 0, 0.66)',
+                                backgroundColor: '#18151f23'
+                            }}>
+
+                            <CardMedia
+                                sx={{ margin: '5px 0px 10px 0px' }}
+                                component="img"
+                                height="100px"
+                                image={column.image}
+                                alt="Service Image"
+                            />
+
+                            <CardHeader
+                                avatar={<Avatar sx={{ bgcolor: red[500] }} aria-label="Avatar">
+                                    {column.avatar}
+                                </Avatar>
+                                }
+                                title={<Typography>Service: {column.service}</Typography>}
+                                sx={{ m: "-18px 0px" }}
+                            />
+                            <CardActions disableSpacing sx={{}}>
+                                <IconButton aria-label="Category">
+                                    <CategoryIcon /><Link to='/services' style={{ textDecoration: 'none' }}> <Typography sx={{ paddingLeft: 1 }}> AC Repair Services</Typography></Link>
+                                </IconButton>
+                                <IconButton aria-label="Payment" sx={{ paddingLeft: "0px" }}>
+                                    <AttachMoneyIcon /> <Typography>{column.price} BDT</Typography>
+                                </IconButton>
+
+                                <IconButton aria-label="Delete" sx={{ color: 'red', paddingLeft: "0px" }}>
                                     <DeleteIcon />
                                 </IconButton>
 

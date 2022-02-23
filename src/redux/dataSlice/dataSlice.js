@@ -15,7 +15,9 @@ const initialState = {
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
     singleServiceLoading: true,
-    singleServiceDetails: []
+    singleServiceDetails: [],
+    testimonials: [],
+    testimonialLoading: true
 }
 
 // async task
@@ -64,15 +66,17 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await fetch(
-            "https://fierce-meadow-12011.herokuapp.com/singleservice"
-        ).then((res) => res.json());
-        return response;
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+        return response.data;
     }
-    // async () => {
-    //     const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice");
-    //     return response.data;
-    // }
+);
+
+export const websiteReviews = createAsyncThunk(
+    "testimonials/data",
+    async () => {
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
+        return response.data;
+    }
 )
 
 export const dataSlice = createSlice({
@@ -133,6 +137,13 @@ export const dataSlice = createSlice({
             .addCase(singleService.fulfilled, (state, { payload }) => {
                 state.singleServiceLoading = false;
                 state.singleServiceDetails = payload;
+            })
+            .addCase(websiteReviews.pending, (state, action) => {
+                state.testimonialLoading = true;
+            })
+            .addCase(websiteReviews.fulfilled, (state, { payload }) => {
+                state.testimonials = payload;
+                state.testimonialLoading = false;
             })
     },
 })

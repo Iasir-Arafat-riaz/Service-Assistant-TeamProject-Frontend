@@ -71,7 +71,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                             </Box>
 
                             {
-                                matchService?.Key.map(service => <Box sx={serviceOption}>
+                                matchService?.Key.map(service => <Box key={service._id} sx={serviceOption}>
 
                                     <Box >
                                         <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{service?.Name}</Typography>
