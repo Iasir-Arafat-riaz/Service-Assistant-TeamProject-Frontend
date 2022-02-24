@@ -22,7 +22,7 @@ const Header = (props) => {
     };
     const [banners,setBanner]=useState([])
   useEffect(()=>{
-    fetch("http://localhost:5000/headerBanners/banners")
+    fetch("http://localhost:5000/headerBanners")
     .then(res=>res.json())
     .then(data=>setBanner(data))
   },[])

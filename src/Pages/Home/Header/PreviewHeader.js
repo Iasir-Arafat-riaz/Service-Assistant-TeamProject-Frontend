@@ -4,17 +4,18 @@ import React from "react";
 
 
 const PreviewHeader = ({ bannerInfo,banner }) => {
-  const { imageUrl, bannerText, quality } = bannerInfo;
+  const { imageUrl, bannerText, bannerNumber,id } = bannerInfo;
   
-  console.log("this is banners datas",banner)
+  // console.log("this is banners datas",banner)
+  
   
 
   if(!imageUrl){
     return (
-      <Box>
+      <Box sx={{marginTop:"40px"}}>
           
          <Typography variant="h4">
-          <b>Preview</b>
+          <b>Preview : {banner.id}</b>
         </Typography>
         <br />
         <Box
@@ -34,17 +35,17 @@ const PreviewHeader = ({ bannerInfo,banner }) => {
         </Box>
         <Typography>Banner Text : {banner.bannerText}</Typography>
           
-          <Button size="small">{banner.quality}</Button>
+          {/* <Button size="small">{banner.bannerNumber}</Button> */}
          
       </Box>
     );
   }
   else{
     return (
-      <Box>
+      <Box sx={{marginTop:"40px"}}>
           
          <Typography variant="h4">
-          <b>Preview</b>
+          <b>Preview : {id}</b>
         </Typography>
         <br />
         <Box
@@ -64,7 +65,7 @@ const PreviewHeader = ({ bannerInfo,banner }) => {
         </Box>
         <Typography>Banner Text : {bannerText}</Typography>
           
-          <Button size="small">{quality}</Button>
+          {/* <Button size="small">{bannerNumber}</Button> */}
          
       </Box>
     );

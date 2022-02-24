@@ -10,48 +10,53 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import PreviewHeader from "../../../../Home/Header/PreviewHeader";
 import "./AddBanner.css";
 
-// const banners = [
-//   {
-//     imageUrl: "https://i.ibb.co/rMwjByJ/4bhk.jpg",
-//     bannerText: "we provide professional service provider",
-//     quality: "High Quality Banner"
-//   },
-//   {
-//     imageUrl: "https://i.ibb.co/m0yF4d4/p1.png",
-//     bannerText: "Our Customer support 24/7 open",
-//     quality: "Low quality"
-//   },
-//   {
-//     imageUrl: "https://i.ibb.co/r40d6x1/packing.png",
-//     bannerText: "we provide professional service provider with special care",
-//     quality: "High Quality Banner"
-//   }
-// ];
 
-const AddBannerSection = ({banner}) => {
+const AddBannerSection = ({ banner }) => {
   const { register, handleSubmit, reset, watch } = useForm();
 
   const bannerInfo = {
     imageUrl: watch("imageUrl"),
     bannerText: watch("bannerText"),
-    quality: watch("quality"),
+    bannerNumber: watch("bannerNumber"),
   };
 
   console.log(bannerInfo);
 
   const onSubmit = (data) => {
+    data._id =banner._id
     console.log(data);
     // reset();
+    
+    fetch("http://localhost:5000/headerBanners/", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .then(datas=>{
+      if(datas.modifiedCount==1){
+        // reset()
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Your Banner has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
+
   };
 
   return (
     <Box>
       <Grid container spacing={2} alignItems="center" justifyContent="center">
         <Grid item xs={12} md={6}>
-          <PreviewHeader bannerInfo={bannerInfo} banner={banner}/>
+          <PreviewHeader bannerInfo={bannerInfo} banner={banner} />
         </Grid>
         <Grid item xs={12} md={6}>
           <Paper elevation={3} sx={{ p: 2 }}>
@@ -73,10 +78,10 @@ const AddBannerSection = ({banner}) => {
                   label="Write Banner text"
                   variant="standard"
                 />
-                <select id="formOption" {...register("quality")}>
-                  <option value="High Quality Banner">HighQuality</option>
-                  <option value="Low Quality Banner">LowQuality</option>
-                  <option value="Normal Quality Banner">Normal</option>
+                <select id="formOption" {...register("bannerNumber")}>
+                  <option value="One">Update First Banner</option>
+                  <option value="Two">Update Second Banner</option>
+                  <option value="Three">Update Third Banner</option>
                 </select>
                 <Button type="submit" variant="contained">
                   Add Banner
