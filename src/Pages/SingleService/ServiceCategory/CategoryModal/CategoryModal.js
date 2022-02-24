@@ -107,7 +107,11 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
     const handleAddToCart = (service) => {
         dispatch(addToCart(service))
     };
-
+    // handleReset
+    const handleCloseModal = () => {
+        handleClose();
+        handleReset();
+    };
 
 
 
@@ -133,7 +137,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                         </Typography>
                     </Box>
 
-                    <Button onClick={handleClose} sx={{ mt: -25, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
+                    <Button onClick={handleCloseModal} sx={{ mt: -25, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
                     <Grid container spacing={0}>
 
                         <Box sx={{ width: '100%' }}>
