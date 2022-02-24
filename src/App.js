@@ -23,6 +23,7 @@ import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
 
 
 
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
           <Route path="addBanner" element={<AddBanner />} />
+          <Route path="providerOverview" element={<ProviderOverview/>}/>
 
           <Route
             path="/dashboard/manageproducts"

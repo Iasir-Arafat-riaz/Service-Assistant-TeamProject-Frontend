@@ -107,6 +107,19 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Over view"} />
             </ListItem>
+            {/* Service Provider Overview */}
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/dashboard/providerOverview`}
+              button
+            >
+              <ListItemIcon>
+                <ManageSearchIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Provider Overview"} />
+            </ListItem>
+
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
