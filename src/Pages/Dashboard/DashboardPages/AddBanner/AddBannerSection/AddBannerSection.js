@@ -8,12 +8,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import PreviewHeader from "../../../../Home/Header/PreviewHeader";
 import "./AddBanner.css";
-
 
 const AddBannerSection = ({ banner }) => {
   const { register, handleSubmit, reset, watch } = useForm();
@@ -27,28 +27,20 @@ const AddBannerSection = ({ banner }) => {
   console.log(bannerInfo);
 
   const onSubmit = (data) => {
-    data._id =banner._id
+    data._id = banner._id;
     console.log(data);
     // reset();
-    
-    fetch("http://localhost:5000/headerBanners/", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    })
-    .then(res=>res.json())
-    .then(datas=>{
-      if(datas.modifiedCount==1){
-        // reset()
+    axios.put("http://localhost:5000/headerBanners/", data).then((response) => {
+      if (response.status == 200) {
         Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your Banner has been saved',
+          position: "center",
+          icon: "success",
+          title: "Your Banner has been saved",
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
       }
-    })
+    });
 
   };
 
