@@ -1,42 +1,21 @@
-import { Avatar, Button, Typography } from '@mui/material';
+import { Avatar, Button, Skeleton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { allData, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
 
 const ServiceProvider = ({ handleNext }) => {
-    const providers = [
-        {
-            name: 'kawsar',
-            email: 'kawsarm104@gmail.com',
-            password: 'service',
-            role: 'user',
-            createdAt: '1645690649685',
-            displayName: 'Md Kawsar',
-            photoURL: 'https://lh3.googleusercontent.com/a-/AOh14GjQhgXpkTzuLXMI9vHQXhYMRHdyE3rsopoAvzq6CQ=s96-c',
-            uid: 'HiDht97flTVPouFTWmFyjJ2x5dM2'
-        },
-        {
-            email: 'naimurrhman53@gmail.com',
-            createdAt: '1645333357723',
-            displayName: 'Naimur Rahman',
-            photoURL: 'https://lh3.googleusercontent.com/a-/AOh14GiqAW3VCdrs-R44UCqrFdrW3GsVAluTP4NUZBb-EQ=s96-c',
-            uid: 'P0XLyOGb5jS75dAe3AavyhLqigH3',
-            role: 'admin'
-        }
-    ]
-    useEffect(() => {
-        axios.get('http://localhost:5000/users/finding/ids', {
-            params: {
-                data: [
-                    "62121eb1cef8c7b4915a6923",
-                    "6211cbf6bb809e9e3edb1859"
-                ]
-            }
-        }).then(res => {
-            console.log(res.data)
-        })
-    }, [])
 
+    // const [providers, setProviders] = useState([]);
+    const dispatch = useDispatch();
+    const { providers, serviceProviderLoading } = useSelector(allData);
+
+    useEffect(() => {
+        dispatch(serviceProviders())
+    }, [dispatch])
+
+    // style
     const serviceProvider = {
         mb: 3,
         display: "flex",
@@ -61,22 +40,33 @@ const ServiceProvider = ({ handleNext }) => {
             }} >Select a service provider</Box>
 
             {
-                providers.map((provider, index) => <Box sx={[serviceProvider]}>
+                serviceProviderLoading ?
+                    <Box>
+                        {[...new Array(3)].map((ske, index) => (
+                            <Skeleton variant="rectangular" width="100%" height={60} sx={{ mb: 2 }} />
 
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <Avatar sx={{ width: 50, height: 50 }} alt="Cindy Baker" src={provider.photoURL} />
-                        <Box>
-                            <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{provider?.displayName}</Typography>
-
-                            <Typography variant='body2' sx={{ fontSize: 15 }}>{provider?.email}</Typography>
-                        </Box>
-
+                        ))}
                     </Box>
-                    <Button onClick={handleNext} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
+                    :
+                    <Box>
+                        {
+                            providers.map((provider, index) => <Box key={index} sx={[serviceProvider]}>
 
-                </Box>
-                )
-            }
+                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                    <Avatar sx={{ width: 50, height: 50 }} alt="Cindy Baker" src={provider.photoURL} />
+                                    <Box>
+                                        <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{provider?.displayName}</Typography>
+
+                                        <Typography variant='body2' sx={{ fontSize: 15 }}>{provider?.email}</Typography>
+                                    </Box>
+
+                                </Box>
+                                <Button onClick={handleNext} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
+                            </Box>
+                            )
+                        }
+                    </Box>
+            };
         </>
     );
 };

@@ -235,7 +235,8 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                                     </Grid>
                                 </Grid> */}
                             </Box>
-                            <Button onClick={handleBack} style={{ letterSpacing: 2, width: '100%', padding: 6, background: "#fc7c41e0", borderRadius: 0, color: "#fff" }}>back</Button>
+
+                            {activeStep > 0 && <Button onClick={handleBack} style={{ letterSpacing: 2, width: '100%', padding: 6, background: "#fc7c41e0", borderRadius: 0, color: "#fff" }}>back</Button>}
 
                         </Grid>
 

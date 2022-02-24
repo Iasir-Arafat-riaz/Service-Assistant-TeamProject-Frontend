@@ -1,3 +1,4 @@
+import { create } from '@mui/material/styles/createTransitions';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -18,7 +19,9 @@ const initialState = {
     singleServiceLoading: true,
     singleServiceDetails: [],
     testimonials: [],
-    testimonialLoading: true
+    testimonialLoading: true,
+    providers: [],
+    serviceProviderLoading: true
 }
 
 // async task
@@ -108,7 +111,20 @@ export const approvedTestimonial = createAsyncThunk(
     }
 );
 
-
+export const serviceProviders = createAsyncThunk(
+    "providers/service",
+    async () => {
+        const response = await axios.get('http://localhost:5000/users/finding/ids', {
+            params: {
+                data: [
+                    "62121eb1cef8c7b4915a6923",
+                    "6211cbf6bb809e9e3edb1859"
+                ]
+            }
+        })
+        return response.data;
+    }
+);
 
 export const dataSlice = createSlice({
     name: 'data',
@@ -175,6 +191,13 @@ export const dataSlice = createSlice({
             .addCase(websiteReviews.fulfilled, (state, { payload }) => {
                 state.testimonials = payload;
                 state.testimonialLoading = false;
+            })
+            .addCase(serviceProviders.pending, (state, { payload }) => {
+                state.serviceProviderLoading = true;
+            })
+            .addCase(serviceProviders.fulfilled, (state, { payload }) => {
+                state.serviceProviderLoading = false;
+                state.providers = payload;
             })
     },
 })
