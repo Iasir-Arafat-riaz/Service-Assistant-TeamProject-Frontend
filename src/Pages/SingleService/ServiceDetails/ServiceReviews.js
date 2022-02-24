@@ -18,7 +18,7 @@ const ServiceReviews = ({ service }) => {
             <Rate name="read-only" value={service.Rating} readOnly />
 
             {
-                service.Reviews.slice(start, end).map(review => <Box sx={{ display: 'flex', gap: 2, mt: 5 }}>
+                service.Reviews.slice(start, end).map((review, index) => <Box sx={{ display: 'flex', gap: 2, mt: 5 }} key={index}>
                     <Avatar>{review.user.slice(0, 1)}</Avatar>
                     <Box>
                         <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 15 }}>{review.user} Mahfujur Rahman</Typography>

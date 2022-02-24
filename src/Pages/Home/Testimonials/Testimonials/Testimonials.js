@@ -73,7 +73,7 @@ const Testimonials = () => {
 
             {
                 testimonialLoading ? <Grid container spacing={2}>
-                    {[...new Array(3)].map(() => <Grid item xs={12} md={4}>
+                    {[...new Array(3)].map((ske, index) => <Grid key={index} item xs={12} md={4}>
                         <Card sx={{ maxWidth: 300 }}>
                             <CardHeader
                                 avatar={

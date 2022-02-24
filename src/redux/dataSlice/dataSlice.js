@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import firebaseInit from "./../../firebase/firebase.init";
 
 firebaseInit();
@@ -47,7 +48,6 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        console.log(info);
         const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
@@ -78,6 +78,37 @@ export const websiteReviews = createAsyncThunk(
         return response.data;
     }
 )
+
+export const deleteTestimonial = createAsyncThunk(
+    "testimonial/delete",
+
+    async (info) => {
+        const response = await axios.delete(`http://localhost:5000/reviews/${info.id}`).then(() => {
+            Swal.fire(
+                'Deleted',
+                'This testimonial has been deleted',
+                'success'
+            )
+        })
+        return response.data;
+    }
+)
+
+export const approvedTestimonial = createAsyncThunk(
+    "approvetestimonial/approved",
+    async (info) => {
+        const response = await axios.put(`http://localhost:5000/reviews/${info.id}`).then(() => {
+            Swal.fire(
+                'Approved!',
+                'This testimonial has been approved',
+                'success'
+            )
+        })
+        return response.data;
+    }
+);
+
+
 
 export const dataSlice = createSlice({
     name: 'data',

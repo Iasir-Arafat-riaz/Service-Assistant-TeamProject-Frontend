@@ -6,26 +6,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import { Button } from '@mui/material';
 import Swal from 'sweetalert2';
 import DemoTestimonialModal from '../PendingTestimonial/DemoTestimonialModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { allData, approvedTestimonial, deleteTestimonial, websiteReviews } from '../../../../redux/dataSlice/dataSlice';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const ManageTestimonials = () => {
 
-    const [testimonials, setTestimonials] = React.useState([]);
 
     // index of reviews 
     const [index, setIndex] = React.useState(0);
@@ -37,10 +26,13 @@ const ManageTestimonials = () => {
     };
     const handleClose = () => setOpen(false);
 
-    // data load
+    const dispatach = useDispatch();
+    const { testimonials, testimonialLoading } = useSelector(allData);
+
     React.useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/reviews').then(res => setTestimonials(res.data))
-    }, [testimonials]);
+        dispatach(websiteReviews());
+    }, [dispatach]);
+
 
     // delete testimonial
     const handleDeleteTestimonial = id => {
@@ -52,15 +44,7 @@ const ManageTestimonials = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const uri = `http://localhost:5000/reviews/${id}`;
-                axios.delete(uri).then(() => {
-                    setTestimonials(testimonials)
-                    Swal.fire(
-                        'Deleted!',
-                        'This testimonial has been deleted',
-                        'success'
-                    )
-                })
+                dispatach(deleteTestimonial({ id }))
             }
         })
     };
@@ -68,13 +52,11 @@ const ManageTestimonials = () => {
 
     // handle approve testimonial
     const handleApproveTestimonil = id => {
-        axios.put(`http://localhost:5000/reviews/${id}`).then(() => {
-            Swal.fire(
-                'Approved!',
-                'This testimonial has been approved',
-                'success'
-            )
-        });
+        dispatach(approvedTestimonial({ id }))
+    };
+
+    if (testimonialLoading) {
+        return <h3>Loading...</h3>
     };
 
 

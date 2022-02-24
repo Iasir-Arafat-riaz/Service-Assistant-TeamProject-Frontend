@@ -74,7 +74,7 @@ const HomeServices = () => {
                 serviceIsLoading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
-                        {[...new Array(4)].map(() => <Stack spacing={1} >
+                        {[...new Array(4)].map((ske, index) => <Stack key={index} spacing={1} >
                             <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2 }} height={185} />
                         </Stack>
                         )}

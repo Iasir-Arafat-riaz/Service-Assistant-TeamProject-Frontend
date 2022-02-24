@@ -38,7 +38,7 @@ const ServiceCategory = ({ service }) => {
             {singleServiceLoading ?
                 <Box>
                     {
-                        [...new Array(6)].map(() => <Skeleton sx={{ height: 70, mb: 3 }} animation="wave" />)
+                        [...new Array(6)].map((ske, index) => <Skeleton key={index} sx={{ height: 70, mb: 3 }} animation="wave" />)
                     }
                 </Box>
                 :
@@ -52,7 +52,7 @@ const ServiceCategory = ({ service }) => {
                     {
                         matchService?.allServices?.map((service, index) => <Box
                             onClick={() => handleOpen(index)}
-                            sx={box} >
+                            sx={box} key={index}>
                             <img type="button" src={service.Image} width="60" alt={service.Title} />
                             <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
                             <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />

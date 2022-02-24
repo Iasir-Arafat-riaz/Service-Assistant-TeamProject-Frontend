@@ -66,28 +66,28 @@ const UserLogin = () => {
 			<Navigation />
 			<Box className="userLogin">
 				<Box>
-					<form onSubmit={handleSubmit(onSubmit)} class="form-structor" style={{ "marginTop": "150px" }}>
-						<div class="signup">
-							<h2 class="form-title" id="signup"><span>or</span>Sign up</h2>
-							<div class="form-holder">
-								<input type="text" class="input" placeholder="Name" {...register("name", { required: true })} />
-								<input type="email" class="input" placeholder="Email"
+					<form onSubmit={handleSubmit(onSubmit)} className="form-structor" style={{ "marginTop": "150px" }}>
+						<div className="signup">
+							<h2 className="form-title" id="signup"><span>or</span>Sign up</h2>
+							<div className="form-holder">
+								<input type="text" className="input" placeholder="Name" {...register("name", { required: true })} />
+								<input type="email" className="input" placeholder="Email"
 									{...register("signupEmail")} />
-								<input type="password" class="input" placeholder="Password"  {...register("signupPass", { required: true, minLength: 6 })} />
+								<input type="password" className="input" placeholder="Password"  {...register("signupPass", { required: true, minLength: 6 })} />
 							</div>
-							<button onClick={handleSignUp} class="submit-btn">Sign up</button>
-							<Typography variant="h5" ><button class="google-btn" onClick={() => googleSignIn(location, navigate)} >Google Login</button></Typography>
+							<button onClick={handleSignUp} className="submit-btn">Sign up</button>
+							<Typography variant="h5" ><button className="google-btn" onClick={() => googleSignIn(location, navigate)} >Google Login</button></Typography>
 						</div>
-						<div class="login slide-up">
-							<div class="center">
-								<h2 class="form-title" id="login"><span>or</span>Log in</h2>
-								<div class="form-holder">
-									<input type="email" class="input" placeholder="Email"
+						<div className="login slide-up">
+							<div className="center">
+								<h2 className="form-title" id="login"><span>or</span>Log in</h2>
+								<div className="form-holder">
+									<input type="email" className="input" placeholder="Email"
 										{...register("loginEmail", { required: true })} />
-									<input type="password" {...register("loginPass", { required: true })} class="input" placeholder="Password" />
+									<input type="password" {...register("loginPass", { required: true })} className="input" placeholder="Password" />
 								</div>
-								<button onClick={handleLogin} class="submit-btn">Log in</button>
-								<Typography variant="h5" ><button onClick={() => googleSignIn(location, navigate)} class="google-btn">Google Login</button></Typography>
+								<button onClick={handleLogin} className="submit-btn">Log in</button>
+								<Typography variant="h5" ><button onClick={() => googleSignIn(location, navigate)} className="google-btn">Google Login</button></Typography>
 							</div>
 						</div>
 					</form>

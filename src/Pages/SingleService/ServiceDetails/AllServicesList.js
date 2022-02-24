@@ -42,7 +42,7 @@ const AllServicesList = () => {
                 serviceIsLoading ?
                     <Box>
                         {
-                            [...new Array(6)].map(() => <Skeleton sx={{ height: 70, mb: 3 }} animation="wave" />)
+                            [...new Array(6)].map((ske, index) => <Skeleton key={index} sx={{ height: 70, mb: 3 }} animation="wave" />)
                         }
                     </Box>
                     :
@@ -51,7 +51,7 @@ const AllServicesList = () => {
                             <Typography sx={{ fontSize: 22, fontWeight: 'bold' }}>Our all services</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {allServices.map(service => <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center' }}>
+                            {allServices.map(service => <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center' }} key={service.Category}>
                                 <Typography sx={categoryList}>
                                     {service.Category}
                                 </Typography>

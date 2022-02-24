@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { FaQuoteRight } from 'react-icons/fa';
-import { Avatar } from '@mui/material';
+import { Avatar, Paper, Rating } from '@mui/material';
+import { RiDoubleQuotesL } from 'react-icons/ri';
 
 const style = {
     position: 'absolute',
@@ -15,7 +16,9 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #fff',
     boxShadow: 24,
-    p: 3,
+    p: 2,
+    display: 'flex',
+    justifyContent: 'center',
 };
 
 const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, index }) => {
@@ -31,31 +34,27 @@ const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, ind
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Testimonial demo
-                    </Typography>
-                    {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        {name}
-                    </Typography> */}
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        <FaQuoteLeft style={{ color: "#d8d8d8", marginRight: 5 }} />
-                        {testimonials[index]?.description}
-                        <FaQuoteRight style={{ color: "#d8d8d8", marginLeft: 4 }} />
-                    </Typography>
 
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 2 }}>
+                    <Paper elevation={3} sx={{ p: 3, width: 300, m: 1, borderRadius: 2 }}>
 
-                        <Avatar sx={{ width: 50, height: 50 }} alt="Travis Howard" src={testimonials[index]?.image} />
+                        <RiDoubleQuotesL style={{ display: 'block', fontSize: 22, color: "#FF5E14" }} />
 
-                        <Box>
-                            <Typography id="modal-modal-description">
-                                {testimonials[index]?.name}
-                            </Typography>
-                            <Typography id="modal-modal-description">
-                                {testimonials[index]?.profession}
-                            </Typography>
+                        <Typography variant='body' sx={{ fontWeight: 400, color: "#7E7E7E", lineHeight: 1.5 }} >
+                            {testimonials[index].description}
+                        </Typography><br />
+
+                        <Rating name="read-only" sx={{ fontSize: 17, mt: 1 }} value={testimonials[index].rating} readOnly />
+
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Avatar alt={testimonials[index].name} src={testimonials[index].image} sx={{ width: 70, height: 70, border: '2px solid #C7C7C7' }} />
                         </Box>
-                    </Box>
+
+                        <Box sx={{ display: 'grid', justifyContent: 'center', }}>
+                            <Typography variant='h6' sx={{ fontSize: 18, fontWeight: 'bold' }}>{testimonials[index].name}</Typography>
+                            <Typography sx={{ color: "#64748B", fontSize: 14 }} variant='body2'>{testimonials[index].profession}</Typography>
+                        </Box>
+
+                    </Paper>
 
                 </Box>
             </Modal>
