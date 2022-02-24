@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
+import axios from 'axios'
 import {
   Divider,
   Drawer,
@@ -35,14 +36,20 @@ const Navigation = () => {
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
-  const [state, setState] = React.useState(false);
+  const [state, setState] = React.useState(false);  
   const { user } = useSelector(allData);
   const { handleSignOut } = useFirebase();
   const goHome = () => {
     navigate("/home")
   }
-
+  const [notificationNumber, setNotificationNumber] = useState([])
   useEffect(() => {
+    const api = `http://localhost:5000/notification/${user?.email}`
+    axios.get(api).then((res) => {
+      console.log(res.data,"got notification");
+      setNotificationNumber(res.data)
+      
+    });
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
@@ -281,7 +288,7 @@ const Navigation = () => {
             {user?.email && (
               <>
                 <> 
-                    <Badge badgeContent={4} color="primary">
+                    <Badge badgeContent={notificationNumber.length} color="primary">
                       <NotificationsNoneIcon  className="svg_icons" color="action"></NotificationsNoneIcon >
                        
                     </Badge> 
