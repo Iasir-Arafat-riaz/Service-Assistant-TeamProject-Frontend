@@ -5,8 +5,9 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import { Box, Card, CardActionArea, CardContent, Grid } from '@mui/material';
 import CategoryIcon from '@mui/icons-material/Category';
-import { Link } from 'react-router-dom';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { Link } from 'react-router-dom';
+
 const MyOrdersTable = () => {
     function createData(avatar, name, image, service, price, status,category) {
         return { avatar, name, image, service, price, status,category };
