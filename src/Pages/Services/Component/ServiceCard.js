@@ -5,18 +5,21 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
+import { Box, Grid, IconButton } from "@mui/material";
+import CategoryIcon from '@mui/icons-material/Category';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { CardActionArea } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
-    marginBottom: "20px",
-    boxShadow: "none",
+    marginBottom: "50px",
+    boxShadow: 2,
   },
   cardHeight: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "300px",
+    minHeight: "200px",
     justifyContent: "space-between",
   },
 });
@@ -27,21 +30,25 @@ const ServiceCard = ({ Name, Img, Id }) => {
 
   const handleCardClick = (id) => {
     console.log("card clicked");
-    navigate(`/services/${id}`);
+    navigate(`/Home/service-details/${id}`);
   };
   return (
-    <Grid item xs={12} sm={6} md={4} className={classes.root}>
-      <Card className={classes.cardHeight}>
-        <CardActionArea onClick={() => handleCardClick(Id)}>
-          <CardMedia component="img" height="200px" image={Img} alt={Name} />
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
-              {Name}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </Grid>
+    <>
+    
+      <Grid item xs={12} sm={6} md={4} className={classes.root}>
+        <Card sx={{}} className={classes.cardHeight}>
+          <CardActionArea onClick={() => handleCardClick(Id)}>
+            <CardMedia component="img" height="200px" image={Img} alt={Name} />
+            <CardContent>
+              <Typography gutterBottom variant="h6" component="div">
+                {Name.slice(0-23)}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Grid>
+
+    </>
   );
 };
 
