@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import {
   Divider,
   Drawer,
-  List,
+  List, 
   ListItem,
   ListItemText,
   AppBar,
@@ -12,6 +12,8 @@ import {
   Typography,
   Menu, Avatar, Button, Tooltip, MenuItem, Container,
 } from "@mui/material";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Badge from '@mui/material/Badge';
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
@@ -277,11 +279,20 @@ const Navigation = () => {
             )}
 
             {user?.email && (
+              <>
+                <> 
+                    <Badge badgeContent={4} color="primary">
+                      <NotificationsNoneIcon  className="svg_icons" color="action"></NotificationsNoneIcon >
+                       
+                    </Badge> 
+                    </>
               <Tooltip arrow title="My Account">
                 <IconButton onClick={handleOpenUserMenu}  >
                   <Avatar alt="Remy Sharp" src={user?.photoURL} />
                 </IconButton>
+              
               </Tooltip>
+              </>
             )}
 
             {user?.email && (
@@ -301,9 +312,13 @@ const Navigation = () => {
                 onClose={handleCloseUserMenu}
               >
                 {/* menu items */}
+                         
+                  
+                    
                 <MenuItem
                   sx={{ display: "grid", gap: 1, justifyContent: "center" }}
                 >
+  
                   <Box
                     sx={{ display: "flex", justifyContent: "center" }}
                   >

@@ -96,3 +96,7 @@
   .overlay-content input::placeholder{
     color: rgb(231, 229, 229);
   }
+  /* notification icon  */
+  .svg_icons {
+    transform: scale(1.6);
+  }
