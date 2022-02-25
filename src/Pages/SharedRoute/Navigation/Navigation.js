@@ -47,7 +47,7 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    console.log(navRef.current.classList);
+    // console.log(navRef.current.classList);
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {

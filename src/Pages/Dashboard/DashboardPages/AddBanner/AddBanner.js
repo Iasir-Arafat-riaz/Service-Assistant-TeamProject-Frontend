@@ -12,7 +12,7 @@ const AddBanner = () => {
   return (
     <div>
       {
-        banners.map(banner=><AddBannerSection banner={banner}/>)}
+        banners.map(banner=><AddBannerSection key={banner._id} banner={banner}/>)}
       {/* <AddBannerSection banner={banners}/> */}
     </div>
   );
