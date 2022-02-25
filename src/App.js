@@ -29,7 +29,7 @@ import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/
 
 
 // made a socket with server
-// const socket = io("http://localhost:5000");
+// const socket = io("https://fierce-meadow-12011.herokuapp.com");
 
 // made a socket with server
 const socket = io("https://fierce-meadow-12011.herokuapp.com/");

@@ -90,7 +90,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-        const response = await axios.delete(`http://localhost:5000/reviews/${info.id}`).then(() => {
+        const response = await axios.delete(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
             Swal.fire(
                 'Deleted',
                 'This testimonial has been deleted',
@@ -104,7 +104,7 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-        const response = await axios.put(`http://localhost:5000/reviews/${info.id}`).then(() => {
+        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
             Swal.fire(
                 'Approved!',
                 'This testimonial has been approved',
@@ -118,7 +118,7 @@ export const approvedTestimonial = createAsyncThunk(
 export const serviceProviders = createAsyncThunk(
     "providers/service",
     async () => {
-        const response = await axios.get('http://localhost:5000/users/finding/ids', {
+        const response = await axios.get('https://fierce-meadow-12011.herokuapp.com/users/finding/ids', {
             params: {
                 data: [
                     "62121eb1cef8c7b4915a6923",
