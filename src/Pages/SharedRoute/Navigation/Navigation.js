@@ -14,6 +14,7 @@ import {
   Menu, Avatar, Button, Tooltip, MenuItem, Container,
 } from "@mui/material";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Popover from '@mui/material/Popover';
 import Badge from '@mui/material/Badge';
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -42,6 +43,20 @@ const Navigation = () => {
   const goHome = () => {
     navigate("/home")
   }
+  // Mui popover for notificatio 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
   const [notificationNumber, setNotificationNumber] = useState([])
   useEffect(() => {
     const api = `http://localhost:5000/notification/${user?.email}`
@@ -288,11 +303,45 @@ const Navigation = () => {
             {user?.email && (
               <>
                 <> 
+                
+                   
+                    <Button aria-describedby={id} variant="" onClick={handleClick}>
                     <Badge badgeContent={notificationNumber.length} color="primary">
                       <NotificationsNoneIcon  className="svg_icons" color="action"></NotificationsNoneIcon >
                        
                     </Badge> 
-                    </>
+      </Button>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>
+          {
+            notificationNumber.map(notificationMessage=>
+              <div className="notificationBar">
+              <div><img src={notificationMessage.image} alt="notification image" width="120px" height="60px"></img></div>
+              <div>
+                
+              {notificationMessage.message} <br>
+              </br>
+              provider name: Ac service <br>
+              </br>
+              Date: 24 january, 2022
+              </div>
+             
+            </div>
+
+            )
+              }</Typography>
+      </Popover>
+      
+       </>
               <Tooltip arrow title="My Account">
                 <IconButton onClick={handleOpenUserMenu}  >
                   <Avatar alt="Remy Sharp" src={user?.photoURL} />

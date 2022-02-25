@@ -100,3 +100,7 @@
   .svg_icons {
     transform: scale(1.6);
   }
+  .notificationBar{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr)
+  }
