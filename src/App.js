@@ -22,11 +22,16 @@ import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddT
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
+
 import axios from "axios";
 
 import useFirebase from "../src/Hooks/useFirebase";
 
+import AddServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/AddServiceRequest";
+
+
 import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
+
 
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
@@ -43,6 +48,9 @@ import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/
 // const socket = io("https://fierce-meadow-12011.herokuapp.com");
 
 // made a socket with server
+
+// made a socket with server
+
 const socket = io("https://fierce-meadow-12011.herokuapp.com/");
 
 // connecting the server
@@ -107,6 +115,13 @@ const App = () => {
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
+
+          {/* add service request from service provider */}
+          <Route
+            path="/dashboard/make-service-request"
+            element={<AddServiceRequest />}
+          ></Route>
+
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route

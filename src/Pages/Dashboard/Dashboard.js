@@ -11,8 +11,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import ReviewsIcon from '@mui/icons-material/Reviews';
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import ReviewsIcon from "@mui/icons-material/Reviews";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PaymentIcon from "@mui/icons-material/Payment";
@@ -25,6 +25,7 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
+
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
@@ -33,6 +34,9 @@ import AnchorIcon from '@mui/icons-material/Anchor';
 import { useSelector } from "react-redux";
 import { allData } from "../../redux/dataSlice/dataSlice";
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+
+
+
 
 const drawerWidth = 240;
 const Dashboard = (props) => {
@@ -194,6 +198,17 @@ const Dashboard = (props) => {
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
+              to={`/dashboard/make-service-request`}
+              button
+            >
+              <ListItemIcon>
+                <RateReviewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Make Service Request"} />
+            </ListItem>
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
               to={`/dashboard/makeAdmin`}
               button
             >
@@ -250,7 +265,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-
               to={`/Dashboard/managetestimonials`}
               button
             >
@@ -259,7 +273,6 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Manage Testimonial"} />
             </ListItem>
-
           </Box>
         }
         <ListItem button>

@@ -11,7 +11,6 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import { makeStyles } from "@mui/styles";
 import ServiceCard from "./Component/ServiceCard";
-import { Link } from "react-router-dom";
 import Navigation from "../SharedRoute/Navigation/Navigation";
 import { allData, loadServiceCategory, singleService } from "../../redux/dataSlice/dataSlice";
 
@@ -62,12 +61,8 @@ const Services = () => {
 
   if (serviceIsLoading) {
     return <h1 style={{ marginTop: "100px" }}>Loading....</h1>;
+    // return <Loading />;
   }
-
-  let menuItem;
-  // if (allServices.length > 0){
-  //   menuItem = allServices.map(ite )
-  // }
 
   return (
     <>
@@ -87,7 +82,9 @@ const Services = () => {
                 >
                   <List className={classes.listBottomPadding}>
                     {allServices.map((item) => {
-                      const ID = item.Category.split(" ").join("").toLowerCase();
+                      const ID = item.Category.split(" ")
+                        .join("")
+                        .toLowerCase();
                       return (
                         <ListItem key={item._id}>
                           <ListItemButton>

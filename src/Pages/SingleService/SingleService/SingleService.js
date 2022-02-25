@@ -2,18 +2,15 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "../SingleService.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import SingleServiceHeader from "../SingleServiceHeader/SingleServiceHeader";
 import ServiceDetails from "../ServiceDetails/ServiceDetails";
-
-import Loading from "../../SharedRoute/Loader/Loading";
-
 import Navigation from "../../SharedRoute/Navigation/Navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { singleService, allData } from '../../../redux/dataSlice/dataSlice';
+import Loading from "../../SharedRoute/Loader/Loading"
 
 const SingleService = () => {
-
   const { serviceId } = useParams();
   const dispatch = useDispatch();
   const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
@@ -41,7 +38,6 @@ const SingleService = () => {
         <Loading />
       ) : (
         <Box>
-          <Navigation />
           <SingleServiceHeader matchService={matchService} />
           <ServiceDetails
             question1={question1}
