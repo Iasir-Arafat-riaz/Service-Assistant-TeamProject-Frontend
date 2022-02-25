@@ -27,7 +27,6 @@ const HomeServices = () => {
         speed: 2000,
         slidesToShow: 4,
         slidesToScroll: 3,
-        autoplay: true,
         autoplaySpeed: 2000,
         responsive: [
             {
