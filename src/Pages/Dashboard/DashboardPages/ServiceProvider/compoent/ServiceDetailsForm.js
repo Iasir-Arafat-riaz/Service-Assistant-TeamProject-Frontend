@@ -24,7 +24,7 @@ const ServiceDetailsForm = ({
         {`Service ${pos + 1}`}
       </Typography>
       <Grid item container spacing={2}>
-        <Grid item sx={12} sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id="serviceOptionsTitle"
             label="Title"
@@ -33,7 +33,7 @@ const ServiceDetailsForm = ({
             name="serviceOptionTitle"
           />
         </Grid>
-        <Grid item sx={12} sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id="serviceOptionImage"
             label="Service Option Image"
