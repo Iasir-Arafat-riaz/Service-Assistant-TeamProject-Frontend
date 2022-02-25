@@ -17,7 +17,6 @@ const AddServiceRequest = () => {
   const [serviceDetailsInput, setServiceDetailsInput] = useState([
     { mainOption: 1, keyOption: 1 },
   ]);
-  console.log(serviceDetailsInput[0].keyOption);
 
   const handleChange = (e) => {
     console.log(e.target.name);
@@ -29,13 +28,16 @@ const AddServiceRequest = () => {
 
   const handleAddServiceField = () => {
     console.log("clicked");
+    const len = serviceDetailsInput.length;
     setServiceDetailsInput([
       ...serviceDetailsInput,
-      { mainOption: 1, keyOption: 1 },
+      { mainOption: len, keyOption: 1 },
     ]);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    console.log(serviceDetailsInput);
+  });
   return (
     <>
       <Typography variant="h4" component="div" gutterBottom>
