@@ -26,20 +26,27 @@ import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AnchorIcon from '@mui/icons-material/Anchor';
+
+import { useSelector } from "react-redux";
+import { allData } from "../../redux/dataSlice/dataSlice";
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+
 const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const goHome=()=>{
-      navigate("/home")
+  const goHome = () => {
+    navigate("/home")
   }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const { user } = useSelector(allData)
 
   const drawer = (
     <>
@@ -53,11 +60,11 @@ const Dashboard = (props) => {
       >
         <Avatar
           sx={{ width: 70, height: 70 }}
-          src="https://lh3.googleusercontent.com/a-/AOh14GiqAW3VCdrs-R44UCqrFdrW3GsVAluTP4NUZBb-EQ=s96-c"
-          alt=""
+          src={user.photoURL}
+          alt='admin img'
         />
         <Typography variant="h6" gutterBottom mt={1}>
-          Naimur Rahman
+          {user.displayName}
         </Typography>
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" } }}>
@@ -131,6 +138,17 @@ const Dashboard = (props) => {
                 <RateReviewIcon />
               </ListItemIcon>
               <ListItemText primary={"Manage all orders"} />
+            </ListItem>
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/dashboard/adminChat`}
+              button
+            >
+              <ListItemIcon>
+                <ContactSupportIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Chat with user"} />
             </ListItem>
 
             <ListItem

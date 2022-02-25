@@ -4,7 +4,11 @@ import Error from "./Pages/Eroor/Error";
 import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
+
 import io from "socket.io-client";
+
+import { useEffect } from "react";
+
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
@@ -20,13 +24,20 @@ import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimoni
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
 import axios from "axios";
 
+import useFirebase from "../src/Hooks/useFirebase";
+
+import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
+
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
 
+// made a socket with server
 
+// made a socket with server
+// const socket = io('https://fierce-meadow-12011.herokuapp.com/');
 
 // made a socket with server
 // const socket = io("https://fierce-meadow-12011.herokuapp.com");
@@ -35,25 +46,22 @@ import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/
 const socket = io("https://fierce-meadow-12011.herokuapp.com/");
 
 // connecting the server
-// useEffect(() => {
-//   socket.on("connect", () => {
-//     console.log('connection done!')
-//     socket.send("Hello!");
-//   });
-// }, []);
-
 
 const App = () => {
-
-
-
+  const {} = useFirebase();
+  // const { socket } = useSocket();
+  // useEffect(() => {
+  //   socket.on("get-message", message => {
+  //     console.log(message, 'homoe')
+  //   });
+  //   socket.emit('message', { data: 'datahome ' })
+  // }, []);
 
   return (
     <BrowserRouter>
-    <ToastContainer />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/home" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<UserLogin />} />
@@ -67,8 +75,11 @@ const App = () => {
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
+
           <Route path="addBanner" element={<AddBanner />} />
-          <Route path="providerOverview" element={<ProviderOverview/>}/>
+          <Route path="providerOverview" element={<ProviderOverview />} />
+
+          <Route path="/dashboard/adminChat" element={<AdminChat />} />
 
           <Route
             path="/dashboard/manageproducts"
@@ -87,9 +98,15 @@ const App = () => {
             path="/dashboard/managetestimonials"
             element={<ManageTestimonials />}
           />
-          <Route path="/dashboard/servicerequest" element={<ServiceRequest />} />
+          <Route
+            path="/dashboard/servicerequest"
+            element={<ServiceRequest />}
+          />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
-          <Route path="/dashboard/manageproducts" element={<Manageproducts />} />
+          <Route
+            path="/dashboard/manageproducts"
+            element={<Manageproducts />}
+          />
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route
