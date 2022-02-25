@@ -7,11 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
-import { Grid } from '@mui/material';
+import { Avatar, Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, allData } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
 import ServiceProvider from '../ServiceProvider/ServiceProvider';
+// import Payment from '../../payment/Payment/Payment';
+
+// import OrderInfo from '../OrderInfo/OrderInfo';
 
 
 const style = {
@@ -45,7 +48,7 @@ const serviceOption = {
 };
 
 
-const steps = ['Select category', 'Select a provider', 'Payment'];
+const steps = ['Select category', 'Select a provider', 'Address', 'Payment'];
 
 const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
@@ -116,9 +119,15 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
 
 
-    const { singleServiceDetails } = useSelector(allData);
+    const { cartItems } = useSelector(allData);
 
-    console.log(activeStep)
+
+    const [category, steCategory] = React.useState({});
+
+    const handleStpperNext = category => {
+        handleNext();
+        steCategory(category);
+    };
 
     return (
 
@@ -197,7 +206,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
                                     </Box>
 
-                                    <Button sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' onClick={handleNext}>NEXT</Button>
+                                    <Button sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' onClick={() => handleStpperNext(service)}>NEXT</Button>
 
                                 </Box>)
                             }
@@ -206,37 +215,72 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                             :
                             activeStep === 1 ?
                                 <Grid item xs={12} md={12} lg={7}>
-                                    <ServiceProvider handleNext={handleNext} />
+                                    <ServiceProvider category={category} handleNext={handleNext} />
                                 </Grid>
                                 :
-                                activeStep === 2
+                                activeStep === 3
                                     ?
                                     <Grid item xs={12} md={12} lg={7}>
-
+                                        {/* <Payment /> */}
                                     </Grid>
-                                    : ' '
+                                    : activeStep === 2
+                                        ?
+                                        <Grid item xs={12} md={12} lg={7}>
+                                            {/* <OrderInfo handleNext={handleNext} /> */}
+                                        </Grid>
+                                        : ''
                         }
 
 
 
                         <Grid item xs={12} md={12} lg={5} sx={{ background: "#F4F5F8" }}>
 
-                            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            {
+                                activeStep === 0 || activeStep === 1 || activeStep === 2 || activeStep === 3 ? <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-                                <img style={{ margin: '75px 0' }} src="https://i.ibb.co/gzTXmwt/Screenshot-15.png" alt="cartImagw" />
+                                    <img style={{ margin: '75px 0' }} src="https://i.ibb.co/gzTXmwt/Screenshot-15.png" alt="cartImagw" />
+
+                                </Box>
+                                    :
+                                    <Box>
+
+                                        {/* <Typography variant='h6' sx={{
+                                            p: 2,
+                                            fontSize: 16, letterSpacing: 1
+                                        }}>Selected Service category</Typography>
+
+                                        <Box sx={{ px: 2 }}>
+                                            <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold', borderBottom: '2px solid #F4F5F8' }}>{cartItems[0].Name}</Typography>
+
+                                            <Typography variant='body2' sx={{ fontSize: 15 }}>{cartItems[0]?.Price}Tk</Typography>
+                                        </Box> */}
 
 
-                                {/* <Grid container>
-                                    <Grid item md={7}>
-                                        <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>1 - 1.5 Ton</Typography>
-                                    </Grid>
-                                    <Grid item md={5}>
-                                        <Typography variant='body2' sx={{ fontSize: 15 }}>500Tk</Typography>
-                                    </Grid>
-                                </Grid> */}
-                            </Box>
+                                        {/* 
+                                        <Box>
+
+                                            <Typography variant='h6' sx={{
+                                                p: 2,
+                                                fontSize: 16, letterSpacing: 1
+                                            }}>Service provider</Typography>
+
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, borderBottom: '2px solid #F4F5F8', px: 2, pb: 2 }}>
+                                                <Avatar sx={{ width: 50, height: 50 }} alt="Cindy Baker" src={cartItems[0]?.provider.photoURL} />
+                                                <Box>
+                                                    <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{cartItems[0]?.provider?.displayName}</Typography>
+
+                                                    <Typography variant='body2' sx={{ fontSize: 15 }}>{cartItems[0]?.provider?.email}</Typography>
+                                                </Box>
+
+                                            </Box>
+                                        </Box> */}
+
+                                    </Box>
+                            }
 
                             {activeStep > 0 && <Button onClick={handleBack} style={{ letterSpacing: 2, width: '100%', padding: 6, background: "#fc7c41e0", borderRadius: 0, color: "#fff" }}>back</Button>}
+
+
 
                         </Grid>
 

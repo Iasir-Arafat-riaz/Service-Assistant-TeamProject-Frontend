@@ -3,16 +3,16 @@ import { Box } from '@mui/system';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { allData, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
+import { addToCart, allData, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
 
-const ServiceProvider = ({ handleNext }) => {
+const ServiceProvider = ({ handleNext, category }) => {
 
     // const [providers, setProviders] = useState([]);
     const dispatch = useDispatch();
-    const { providers, serviceProviderLoading } = useSelector(allData);
+    const { providers, serviceProviderLoading, user, cartItems } = useSelector(allData);
 
     useEffect(() => {
-        dispatch(serviceProviders())
+        dispatch(serviceProviders());
     }, [dispatch])
 
     // style
@@ -24,6 +24,20 @@ const ServiceProvider = ({ handleNext }) => {
         pb: 1,
         px: 2
     };
+
+
+    const selectServiceProvider = provider => {
+
+
+        dispatch(addToCart({ ...category, email: user.displayName, payment: true, provider: provider }))
+        handleNext();
+        // axios.post('http://localhost:5000/myorder', { ...category, email: user.displayName, provider: provider }).then(() => {
+        // });
+    };
+
+
+
+
 
     return (
 
@@ -43,7 +57,7 @@ const ServiceProvider = ({ handleNext }) => {
                 serviceProviderLoading ?
                     <Box>
                         {[...new Array(3)].map((ske, index) => (
-                            <Skeleton variant="rectangular" width="100%" height={60} sx={{ mb: 2 }} />
+                            <Skeleton key={index} variant="rectangular" width="100%" height={60} sx={{ mb: 2 }} />
 
                         ))}
                     </Box>
@@ -61,7 +75,7 @@ const ServiceProvider = ({ handleNext }) => {
                                     </Box>
 
                                 </Box>
-                                <Button onClick={handleNext} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
+                                <Button onClick={() => selectServiceProvider(provider)} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
                             </Box>
                             )
                         }
