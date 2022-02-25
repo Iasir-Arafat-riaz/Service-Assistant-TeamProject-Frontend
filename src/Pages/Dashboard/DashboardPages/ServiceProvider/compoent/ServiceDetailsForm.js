@@ -3,8 +3,16 @@ import { Typography, Box, TextField, Grid, Input } from "@mui/material";
 import Button from "@mui/material/Button";
 import ServiceOptionsRow from "./ServiceOptionsRow";
 
-const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
-  const optionRow = Array.from({ length: totalRow }, (v, i) => i);
+const ServiceDetailsForm = ({
+  handleAddMoreDetails,
+  totalRow,
+  pos,
+  serviceOption,
+  handleServiceOptons,
+}) => {
+  // const optionRow = Array.from({ length: totalRow }, (v, i) => i);
+  const optionRow = serviceOption.serviceDetails;
+  console.log(serviceOption);
   return (
     <Grid container spacing={2}>
       <Typography
@@ -40,7 +48,11 @@ const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
         </Grid>
       </Grid>
       {optionRow.map((item, index) => (
-        <ServiceOptionsRow key={index} />
+        <ServiceOptionsRow
+          key={index}
+          {...item}
+          handleServiceOptons={handleServiceOptons}
+        />
       ))}
       <Button
         variant="outlined"

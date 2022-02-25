@@ -1,7 +1,12 @@
 import React from "react";
 import { Typography, Box, TextField, Grid, Input } from "@mui/material";
 
-const ServiceOptionsRow = () => {
+const ServiceOptionsRow = ({
+  serviceOptionsName,
+  serviceOptionsPrice,
+  serviceOptionsQuantity,
+  handleServiceOptons,
+}) => {
   return (
     <Grid item container spacing={2}>
       <Grid item xs={6} sm={6} md={4}>
@@ -11,6 +16,7 @@ const ServiceOptionsRow = () => {
           variant="standard"
           fullWidth
           name="serviceOptionsName"
+          onChange={handleServiceOptons}
         />
       </Grid>
       <Grid item xs={6} sm={6} md={4}>
@@ -20,6 +26,7 @@ const ServiceOptionsRow = () => {
           variant="standard"
           fullWidth
           name="serviceOptionsPrice"
+          onChange={handleServiceOptons}
         />
       </Grid>
       <Grid item xs={6} sm={6} md={4}>
@@ -29,6 +36,7 @@ const ServiceOptionsRow = () => {
           variant="standard"
           fullWidth
           name="serviceOptionsQuantity"
+          onChange={handleServiceOptons}
         />
       </Grid>
 

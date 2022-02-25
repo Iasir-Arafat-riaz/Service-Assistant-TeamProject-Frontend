@@ -23,7 +23,7 @@ const AddServiceRequest = () => {
       optionId: 0,
       serviceOptionTitle: "",
       serviceOptionImage: "",
-      key: [
+      serviceDetails: [
         {
           optionKeyId: 1,
           serviceOptionsName: "",
@@ -42,6 +42,10 @@ const AddServiceRequest = () => {
     setServiceData({ ...serviceData, [e.target.name]: e.target.value });
   };
 
+  const handleServiceOptons = (e) => {
+    console.log(e.target.name, e.target.value);
+  };
+
   const handleAddMoreDetails = (index) => {
     console.log("add more details clicked", index);
     const newArrInput = serviceDetailsInput.map((item) => {
@@ -53,18 +57,18 @@ const AddServiceRequest = () => {
 
     const newServiceArr = serviceOptions.map((item) => {
       if (item.optionId === index) {
-        const len = item.key.length + 1;
+        const len = item.serviceDetails.length + 1;
         const obj = {
           optionKeyId: len,
           serviceOptionsName: "",
           serviceOptionsPrice: "",
           serviceOptionsQuantity: "",
         };
-        item.key.push(obj);
+        item.serviceDetails.push(obj);
       }
+      return item;
     });
-
-    console.log(newServiceArr);
+    setServiceOptions(newServiceArr);
     setServiceDetailsInput(newArrInput);
   };
 
@@ -78,7 +82,7 @@ const AddServiceRequest = () => {
         optionId: len2,
         serviceOptionTitle: "",
         serviceOptionImage: "",
-        key: [
+        serviceDetails: [
           {
             optionKeyId: 1,
             serviceOptionsName: "",
@@ -156,15 +160,15 @@ const AddServiceRequest = () => {
             {/* <Typography variant="subtitle1" gutterBottom component="div">
               Service Details
             </Typography> */}
-            {serviceDetailsInput.map((item, index) => {
-              console.log(item.keyOption);
-
+            {serviceOptions.map((item, index) => {
               return (
                 <ServiceDetailsForm
                   key={index}
                   handleAddMoreDetails={handleAddMoreDetails}
-                  totalRow={item.keyOption}
+                  totalRow={item.serviceDetails.length}
                   pos={index}
+                  serviceOption={item}
+                  handleServiceOptons={handleServiceOptons}
                 />
               );
             })}
