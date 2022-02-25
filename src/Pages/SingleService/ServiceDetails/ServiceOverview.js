@@ -36,14 +36,14 @@ const ServiceOverview = ({ matchService, question1,
                 <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1[0]}</Typography>
 
                 {
-                    Object.values(matchService.overview[0])[0].map(text => <ListItem>
+                    Object.values(matchService?.overview[0])[0]?.map(text => <ListItem>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
 
                 <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography>
                 {
-                    Object.values(matchService.overview[1])[0].map(text => <ListItem>
+                    Object.values(matchService?.overview[1])[0]?.map(text => <ListItem>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
@@ -51,7 +51,7 @@ const ServiceOverview = ({ matchService, question1,
                 <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography>
 
                 {
-                    Object.values(matchService.overview[2])[0].map(text => <ListItem>
+                    Object.values(matchService?.overview[2])[0]?.map(text => <ListItem>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
