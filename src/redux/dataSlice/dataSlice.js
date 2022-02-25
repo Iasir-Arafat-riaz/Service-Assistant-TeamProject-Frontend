@@ -7,9 +7,9 @@ firebaseInit();
 const initialState = {
     user: {},
     loading: true,
-    postLoad: false,
-    isAdmin: false,
+    getLoad: false,
     allServices: [],
+    allUser: [],
     serviceIsLoading: false,
     cartItems: [],
     cartTotalQuantity: 0,
@@ -34,8 +34,9 @@ export const putUserToDb = createAsyncThunk(
     }
 )
 export const makeAdmin = createAsyncThunk(
-    'data/userAdmin',
+    'data/makeAdmin',
     async (info) => {
+        console.log(info);
         const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/admin/makeadmin/${info.email} `, info);
         return response.data
     }
@@ -43,11 +44,18 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        console.log(info);
         const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
+export const getAllUser = createAsyncThunk(
+    'data/getAllUser',
+    async (info) => {
+        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/users/allusers`);
+        return response.data
+    }
+)
+
 
 export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
@@ -67,6 +75,11 @@ export const dataSlice = createSlice({
         },
         logout: (state, action) => {
             state.user = null
+        },
+        changeRole: (state, { payload }) => {
+            const email = payload.email;
+            const role = payload.role;
+            state.allUser.find(data => data.email === email)['role'] = role;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -88,13 +101,14 @@ export const dataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(makeAdmin.fulfilled, (state, action) => {
-
+                console.log('doen');
             })
             .addCase(isAdmin.pending, (state, action) => {
                 state.loading = true;
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
-                state.isAdmin = action.payload.admin
+                console.log(action.payload);
+                state.user = { ...state.user, role: action.payload.admin ? 'admin' : 'user' }
                 state.loading = false;
             })
             .addCase(isAdmin.rejected, (state, action) => {
@@ -111,10 +125,20 @@ export const dataSlice = createSlice({
                 console.log(payload);
 
             })
+            .addCase(getAllUser.pending, (state, { payload }) => {
+                state.getLoad = true;
+            })
+            .addCase(getAllUser.rejected, (state, { payload }) => {
+                state.getLoad = false;
+            })
+            .addCase(getAllUser.fulfilled, (state, { payload }) => {
+                state.allUser = payload;
+                state.getLoad = false;
+            })
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, setLoading, addToCart } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, changeRole } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
