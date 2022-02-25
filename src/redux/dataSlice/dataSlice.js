@@ -1,6 +1,9 @@
+import { create } from '@mui/material/styles/createTransitions';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import firebaseInit from "./../../firebase/firebase.init";
 
 firebaseInit();
@@ -16,7 +19,13 @@ const initialState = {
         ? JSON.parse(localStorage.getItem('cartItems'))
         : [],
     cartTotalQuantity: 0,
-    cartTotalAmount: 0
+    cartTotalAmount: 0,
+    singleServiceLoading: true,
+    singleServiceDetails: [],
+    testimonials: [],
+    testimonialLoading: true,
+    providers: [],
+    serviceProviderLoading: true
 }
 
 // async task
@@ -46,7 +55,6 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        console.log(info);
         const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
@@ -61,6 +69,67 @@ export const loadServiceCategory = createAsyncThunk(
         return response;
     }
 );
+
+export const singleService = createAsyncThunk(
+    "singleService/details",
+    async () => {
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+        return response.data;
+    }
+);
+
+export const websiteReviews = createAsyncThunk(
+    "testimonials/data",
+    async () => {
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
+        return response.data;
+    }
+)
+
+export const deleteTestimonial = createAsyncThunk(
+    "testimonial/delete",
+
+    async (info) => {
+        const response = await axios.delete(`http://localhost:5000/reviews/${info.id}`).then(() => {
+            Swal.fire(
+                'Deleted',
+                'This testimonial has been deleted',
+                'success'
+            )
+        })
+        return response.data;
+    }
+)
+
+export const approvedTestimonial = createAsyncThunk(
+    "approvetestimonial/approved",
+    async (info) => {
+        const response = await axios.put(`http://localhost:5000/reviews/${info.id}`).then(() => {
+            Swal.fire(
+                'Approved!',
+                'This testimonial has been approved',
+                'success'
+            )
+        })
+        return response.data;
+    }
+);
+
+export const serviceProviders = createAsyncThunk(
+    "providers/service",
+    async () => {
+        const response = await axios.get('http://localhost:5000/users/finding/ids', {
+            params: {
+                data: [
+                    "62121eb1cef8c7b4915a6923",
+                    "6211cbf6bb809e9e3edb1859"
+                ]
+            }
+        })
+        return response.data;
+    }
+);
+
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -120,7 +189,27 @@ export const dataSlice = createSlice({
             })
             .addCase(loadServiceCategory.rejected, (state, { payload }) => {
                 console.log(payload);
-
+            })
+            .addCase(singleService.pending, (state, action) => {
+                state.singleServiceLoading = true;
+            })
+            .addCase(singleService.fulfilled, (state, { payload }) => {
+                state.singleServiceLoading = false;
+                state.singleServiceDetails = payload;
+            })
+            .addCase(websiteReviews.pending, (state, action) => {
+                state.testimonialLoading = true;
+            })
+            .addCase(websiteReviews.fulfilled, (state, { payload }) => {
+                state.testimonials = payload;
+                state.testimonialLoading = false;
+            })
+            .addCase(serviceProviders.pending, (state, { payload }) => {
+                state.serviceProviderLoading = true;
+            })
+            .addCase(serviceProviders.fulfilled, (state, { payload }) => {
+                state.serviceProviderLoading = false;
+                state.providers = payload;
             })
     },
 })

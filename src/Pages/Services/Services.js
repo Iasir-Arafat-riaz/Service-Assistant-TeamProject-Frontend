@@ -13,7 +13,7 @@ import { makeStyles } from "@mui/styles";
 import ServiceCard from "./Component/ServiceCard";
 import { Link } from "react-router-dom";
 import Navigation from "../SharedRoute/Navigation/Navigation";
-import { allData, loadServiceCategory } from "../../redux/dataSlice/dataSlice";
+import { allData, loadServiceCategory, singleService } from "../../redux/dataSlice/dataSlice";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -45,6 +45,7 @@ const Services = () => {
   const dispatch = useDispatch();
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
+  console.log(allServices);
 
   const drawerWidth = 240;
   console.log(allServices);
@@ -56,6 +57,7 @@ const Services = () => {
 
   useEffect(() => {
     dispatch(loadServiceCategory());
+    dispatch(singleService());
   }, []);
 
   if (serviceIsLoading) {

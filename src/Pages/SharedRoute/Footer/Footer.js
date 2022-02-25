@@ -16,17 +16,17 @@ const Footer = () => {
 
                         <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 2 }}>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing elit,Lorem ipsum dolor sit amet.</Typography>
 
-                        <Box class="footer-social-icon">
+                        <Box className="footer-social-icon">
                             <span>Follow us</span>
-                            <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
-                            <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
-                            <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            <a href="#"><i className="fab fa-facebook-f facebook-bg"></i></a>
+                            <a href="#"><i className="fab fa-twitter twitter-bg"></i></a>
+                            <a href="#"><i className="fab fa-google-plus-g google-bg"></i></a>
                         </Box>
 
                     </Grid>
 
                     <Grid item xs={6} md={4} className="useful-links">
-                        <Box class="footer-widget-heading">
+                        <Box className="footer-widget-heading">
                             <Typography variant="h3">Useful Links</Typography>
                         </Box>
                         <Link to="">Home</Link>
@@ -39,15 +39,15 @@ const Footer = () => {
 
                     <Grid item xs={8} md={4}>
 
-                        <Box class="footer-widget-heading">
+                        <Box className="footer-widget-heading">
                             <Typography variant="h3">Subscribe</Typography>
                         </Box>
 
                         <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 3 }}>Don’t miss to subscribe to our new feeds, kindly fill the form below.</Typography>
-                        <Box class="subscribe-form">
+                        <Box className="subscribe-form">
                             <form action="#">
-                                <input  type="text" placeholder="Email Address" />
-                                <button><i class="fab fa-telegram-plane"></i></button>
+                                <input type="text" placeholder="Email Address" />
+                                <button><i className="fab fa-telegram-plane"></i></button>
                             </form>
                         </Box>
                     </Grid>

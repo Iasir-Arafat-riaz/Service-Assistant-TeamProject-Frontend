@@ -18,6 +18,7 @@ import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddT
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
+import axios from "axios";
 
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
@@ -41,7 +42,12 @@ const socket = io("https://fierce-meadow-12011.herokuapp.com/");
 //   });
 // }, []);
 
+
 const App = () => {
+
+
+
+
   return (
     <BrowserRouter>
     <ToastContainer />
@@ -81,15 +87,9 @@ const App = () => {
             path="/dashboard/managetestimonials"
             element={<ManageTestimonials />}
           />
-          <Route
-            path="/dashboard/servicerequest"
-            element={<ServiceRequest />}
-          />
+          <Route path="/dashboard/servicerequest" element={<ServiceRequest />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
-          <Route
-            path="/dashboard/manageproducts"
-            element={<Manageproducts />}
-          />
+          <Route path="/dashboard/manageproducts" element={<Manageproducts />} />
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route
