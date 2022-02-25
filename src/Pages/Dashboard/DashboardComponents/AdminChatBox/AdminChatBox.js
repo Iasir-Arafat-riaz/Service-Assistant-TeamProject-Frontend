@@ -27,7 +27,6 @@ const AdminChatBox = props => {
     useEffect(() => {
         console.log(id);
         socket.emit('join', { id });
-
         return () => {
             socket.emit('leave', id);
             setMessages([]);
