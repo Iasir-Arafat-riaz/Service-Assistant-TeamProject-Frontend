@@ -52,10 +52,14 @@ const Navigation = () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
         // document.getElementById("navbar").classList.add("scroll-nav");
-        navRef.current.classList.add("scroll-nav");
+        if (navRef.current) {
+          navRef.current.classList.add("scroll-nav");
+        }
       } else {
         // document.getElementById("navbar").classList.remove("scroll-nav");
-        navRef.current.classList.remove("scroll-nav");
+        if (navRef.current) {
+          navRef.current.classList.remove("scroll-nav");
+        }
       }
     });
   }, [user]);
