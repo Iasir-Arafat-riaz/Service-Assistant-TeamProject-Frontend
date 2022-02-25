@@ -21,7 +21,8 @@ const initialState = {
     testimonials: [],
     testimonialLoading: true,
     providers: [],
-    serviceProviderLoading: true
+    serviceProviderLoading: true,
+    orderInfo: {}
 }
 
 // async task
@@ -60,7 +61,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "https://fierce-meadow-12011.herokuapp.com/services"
+            "http://localhost:5000/services"
         ).then((res) => res.json());
         return response;
     }
@@ -69,7 +70,7 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+        const response = await axios.get("http://localhost:5000/singleservice")
         return response.data;
     }
 );
@@ -77,7 +78,7 @@ export const singleService = createAsyncThunk(
 export const websiteReviews = createAsyncThunk(
     "testimonials/data",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
+        const response = await axios.get("http://localhost:5000/reviews")
         return response.data;
     }
 )
@@ -152,6 +153,9 @@ export const dataSlice = createSlice({
                 state.cartItems.push(tempService)
             }
         },
+        addOrderInfo: (state, action) => {
+            state.orderInfo = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -203,6 +207,6 @@ export const dataSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { login, logout, setLoading, addToCart } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

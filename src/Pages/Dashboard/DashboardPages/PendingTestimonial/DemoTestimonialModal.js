@@ -2,8 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FaQuoteLeft } from 'react-icons/fa';
-import { FaQuoteRight } from 'react-icons/fa';
 import { Avatar, Paper, Rating } from '@mui/material';
 import { RiDoubleQuotesL } from 'react-icons/ri';
 
@@ -50,8 +48,11 @@ const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, ind
                         </Box>
 
                         <Box sx={{ display: 'grid', justifyContent: 'center', }}>
+
                             <Typography variant='h6' sx={{ fontSize: 18, fontWeight: 'bold' }}>{testimonials[index].name}</Typography>
+
                             <Typography sx={{ color: "#64748B", fontSize: 14 }} variant='body2'>{testimonials[index].profession}</Typography>
+
                         </Box>
 
                     </Paper>
