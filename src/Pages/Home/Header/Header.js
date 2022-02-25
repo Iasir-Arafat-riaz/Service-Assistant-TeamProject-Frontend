@@ -22,7 +22,7 @@ const Header = (props) => {
     };
     const [banners,setBanner]=useState([])
   useEffect(()=>{
-    fetch("http://localhost:5000/headerBanners")
+    fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
     .then(res=>res.json())
     .then(data=>setBanner(data))
   },[])

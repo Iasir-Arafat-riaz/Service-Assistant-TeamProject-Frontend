@@ -30,7 +30,7 @@ const AddBannerSection = ({ banner }) => {
     data._id = banner._id;
     console.log(data);
     // reset();
-    axios.put("http://localhost:5000/headerBanners/", data).then((response) => {
+    axios.put("https://fierce-meadow-12011.herokuapp.com/headerBanners", data).then((response) => {
       if (response.status == 200) {
         Swal.fire({
           position: "center",

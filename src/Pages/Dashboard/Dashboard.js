@@ -27,6 +27,7 @@ import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import AnchorIcon from '@mui/icons-material/Anchor';
 const drawerWidth = 240;
 const Dashboard = (props) => {
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ const Dashboard = (props) => {
               button
             >
               <ListItemIcon>
-                <ManageSearchIcon />
+                <AnchorIcon/>
               </ListItemIcon>
               <ListItemText primary={"Provider Overview"} />
             </ListItem>
