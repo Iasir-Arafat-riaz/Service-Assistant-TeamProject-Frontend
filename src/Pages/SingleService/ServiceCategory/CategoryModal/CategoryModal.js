@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, allData } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
 import ServiceProvider from '../ServiceProvider/ServiceProvider';
+import Payment from '../../payment/Payment/Payment';
+import OrderInfo from '../OrderInfo/OrderInfo';
 // import Payment from '../../payment/Payment/Payment';
 
 // import OrderInfo from '../OrderInfo/OrderInfo';
@@ -221,12 +223,12 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                                 activeStep === 3
                                     ?
                                     <Grid item xs={12} md={12} lg={7}>
-                                        {/* <Payment /> */}
+                                        <Payment />
                                     </Grid>
                                     : activeStep === 2
                                         ?
                                         <Grid item xs={12} md={12} lg={7}>
-                                            {/* <OrderInfo handleNext={handleNext} /> */}
+                                            <OrderInfo handleNext={handleNext} />
                                         </Grid>
                                         : ''
                         }
