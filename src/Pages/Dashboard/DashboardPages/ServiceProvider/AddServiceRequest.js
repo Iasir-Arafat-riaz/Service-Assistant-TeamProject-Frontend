@@ -15,7 +15,7 @@ const AddServiceRequest = () => {
   const [serviceData, setServiceData] = useState({ serviceTItle: "" });
 
   const [serviceDetailsInput, setServiceDetailsInput] = useState([
-    { mainOption: 1, keyOption: 1 },
+    { mainOption: 0, keyOption: 1 },
   ]);
 
   const handleChange = (e) => {
@@ -24,6 +24,13 @@ const AddServiceRequest = () => {
 
   const handleAddMoreDetails = (index) => {
     console.log("add more details clicked", index);
+    const newArr = serviceDetailsInput.map((item) => {
+      if (item.mainOption === index) {
+        item.keyOption = item.keyOption + 1;
+      }
+      return item;
+    });
+    setServiceDetailsInput(newArr);
   };
 
   const handleAddServiceField = () => {

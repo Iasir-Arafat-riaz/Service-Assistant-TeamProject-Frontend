@@ -5,7 +5,6 @@ import ServiceOptionsRow from "./ServiceOptionsRow";
 
 const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
   const optionRow = Array.from({ length: totalRow }, (v, i) => i);
-  console.log(optionRow);
   return (
     <Grid container spacing={2}>
       <Typography
