@@ -6,27 +6,25 @@ import { Link, useParams } from "react-router-dom";
 import SingleServiceHeader from "../SingleServiceHeader/SingleServiceHeader";
 import ServiceDetails from "../ServiceDetails/ServiceDetails";
 import Navigation from "../../SharedRoute/Navigation/Navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { singleService, allData } from '../../../redux/dataSlice/dataSlice';
+import Loading from "../../SharedRoute/Loader/Loading"
 
 const SingleService = () => {
-  const [serviceDetials, setServiceDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { serviceId } = useParams();
+  const dispatch = useDispatch();
+  const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get("https://fierce-meadow-12011.herokuapp.com/singleservice")
-      .then((res) => {
-        setServiceDetails(res.data);
-        setLoading(false);
-      });
-  }, []);
+    dispatch(singleService());
+  }, [dispatch])
 
-  if (loading) {
-    return "Loading....";
+
+  if (singleServiceLoading) {
+    return <Loading />;
   }
 
-  const matchService = serviceDetials.find(
+  const matchService = singleServiceDetails.find(
     (service) => service.parentService == serviceId
   );
   const question1 = Object.keys(matchService?.overview[0]);
@@ -36,8 +34,8 @@ const SingleService = () => {
   return (
     <>
       <Navigation />
-      {loading ? (
-        <Box>loading</Box>
+      {singleServiceLoading ? (
+        <Loading />
       ) : (
         <Box>
           <SingleServiceHeader matchService={matchService} />

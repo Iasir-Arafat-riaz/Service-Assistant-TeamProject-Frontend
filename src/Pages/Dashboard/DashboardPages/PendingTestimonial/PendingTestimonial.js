@@ -6,14 +6,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
 import { Button } from '@mui/material';
 import DemoTestimonialModal from './DemoTestimonialModal';
 import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { allData, approvedTestimonial, deleteTestimonial, websiteReviews } from '../../../../redux/dataSlice/dataSlice';
 
 const PendingTestimonial = () => {
 
-    const [pendingTestimonials, setPendingTestimonials] = React.useState([]);
+
+    const dispatach = useDispatch();
+    const { testimonials, testimonialLoading } = useSelector(allData);
+
+    React.useEffect(() => {
+        dispatach(websiteReviews());
+    }, [dispatach]);
+
 
     // index of reviews 
     const [index, setIndex] = React.useState(0);
@@ -25,10 +33,7 @@ const PendingTestimonial = () => {
     };
     const handleClose = () => setOpen(false);
 
-    // data load
-    React.useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/reviews').then(res => setPendingTestimonials(res.data))
-    }, [pendingTestimonials]);
+
 
     // delete testimonial
     const handleDeleteTestimonial = id => {
@@ -40,31 +45,20 @@ const PendingTestimonial = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const uri = `http://localhost:5000/reviews/${id}`;
-                axios.delete(uri).then(() => {
-                    setPendingTestimonials(pendingTestimonials)
-                    Swal.fire(
-                        'Deleted!',
-                        'This testimonial has been deleted',
-                        'success'
-                    )
-                })
+                dispatach(deleteTestimonial({ id }))
             }
         })
     };
 
     // handle approve testimonial
     const handleApproveTestimonil = id => {
-        axios.put(`http://localhost:5000/reviews/${id}`).then(() => {
-            setPendingTestimonials(pendingTestimonials)
-            Swal.fire(
-                'Approved!',
-                'This testimonial has been approved',
-                'success'
-            )
-        });
+        dispatach(approvedTestimonial({ id }))
     };
 
+
+    if (testimonialLoading) {
+        return <h3>Loading....</h3>
+    }
 
     return (
         <>
@@ -81,16 +75,16 @@ const PendingTestimonial = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {pendingTestimonials?.map((testiominal, index) => testiominal?.status === 'pending' && (
+                        {testimonials?.map((testiominal, index) => testiominal?.status === 'pending' && (
                             <TableRow
-                                key={testiominal._id}
+                                key={testiominal?._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {testiominal.name}
+                                    {testiominal?.name}
                                 </TableCell>
-                                <TableCell align="right">{testiominal.profession}</TableCell>
-                                <TableCell align="right">{testiominal.rating}</TableCell>
+                                <TableCell align="right">{testiominal?.profession}</TableCell>
+                                <TableCell align="right">{testiominal?.rating}</TableCell>
 
 
                                 <TableCell align="right">
@@ -113,7 +107,7 @@ const PendingTestimonial = () => {
             {/* demo testimonial modal */}
             <DemoTestimonialModal
                 index={index}
-                testimonials={pendingTestimonials}
+                testimonials={testimonials}
                 open={open}
                 handleOpen={handleOpenModal}
                 handleClose={handleClose}

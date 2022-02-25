@@ -17,6 +17,7 @@ body,html{
 ::-webkit-scrollbar {
   width: 5px;
   height: 10px;
+  
 }
 
 /* Track */
@@ -24,9 +25,17 @@ body,html{
   background: #fff; 
 }
  
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #FF5E14; 
+/* Handle */ 
+body::-webkit-scrollbar-thumb {
+  background: #bebebe; 
+  border-radius: 20px;
+}
+div::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 20px;  
+}
+div:hover::-webkit-scrollbar-thumb{
+  background: #bebebe;  
 }
 
 
@@ -34,3 +43,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

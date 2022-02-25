@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Container } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -12,7 +12,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import { makeStyles } from "@mui/styles";
 import ServiceCard from "./Component/ServiceCard";
 import Navigation from "../SharedRoute/Navigation/Navigation";
-import { allData, loadServiceCategory } from "../../redux/dataSlice/dataSlice";
+import { allData, loadServiceCategory, singleService } from "../../redux/dataSlice/dataSlice";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     boxShadow: "none",
   },
   subServices: {
-    paddingTop: "100px",
+    paddingTop: "20px",
   },
   listBottomPadding: {
     marginBottom: "20px",
@@ -44,6 +44,7 @@ const Services = () => {
   const dispatch = useDispatch();
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
+  console.log(allServices);
 
   const drawerWidth = 240;
   console.log(allServices);
@@ -55,6 +56,7 @@ const Services = () => {
 
   useEffect(() => {
     dispatch(loadServiceCategory());
+    dispatch(singleService());
   }, []);
 
   if (serviceIsLoading) {
@@ -89,7 +91,7 @@ const Services = () => {
                             <ListItemText>
                               <HashLink
                                 smooth
-                                to={`/SERVICES/#${ID}`}
+                                to={`/services/#${ID}`}
                                 className={classes.linkClass}
                               >
                                 {item.Category}
@@ -103,7 +105,7 @@ const Services = () => {
                 </Drawer>
               </Grid>
               <Grid>
-                <h1>Our All Services</h1>
+                {/* <Typography sx={{ textAlign: "center", fontWeight: 'bold' }} gutterBottom variant="h4" component="div">OUR ALL SERVICES</Typography> */}
                 <Grid>
                   {allServices.map((service) => {
                     const divID = service.Category.split(" ")
@@ -115,12 +117,15 @@ const Services = () => {
                         key={`${service._id}${service.Category}`}
                         className={classes.subServices}
                       >
+                        <Typography sx={{ pb: 2 }} variant="h4" gutterBottom component="div">{service.Category}</Typography>
+
                         <Grid
                           container
                           alignItems="stretch"
                           className={classes.gridMargin}
                           spacing={3}
                         >
+
                           {service.Services.map((item) => (
                             <ServiceCard key={item.Id} {...item} />
                           ))}

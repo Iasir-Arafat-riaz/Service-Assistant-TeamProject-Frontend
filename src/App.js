@@ -1,13 +1,14 @@
-import Header from "./Pages/Home/Header/Header";
-import Navigation from "./Pages/SharedRoute/Navigation/Navigation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home/Home/Home";
 import Error from "./Pages/Eroor/Error";
 import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
-import { useEffect } from "react";
+
 import io from "socket.io-client";
+
+import { useEffect } from "react";
+
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
@@ -21,28 +22,54 @@ import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddT
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
+
+import axios from "axios";
+
+import useFirebase from "../src/Hooks/useFirebase";
+
 import AddServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/AddServiceRequest";
 
-// made a socket with server
-// const socket = io("http://localhost:5000");
+
+import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
+
+
+import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
 
 // made a socket with server
+
+// made a socket with server
+// const socket = io('https://fierce-meadow-12011.herokuapp.com/');
+
+// made a socket with server
+// const socket = io("https://fierce-meadow-12011.herokuapp.com");
+
+// made a socket with server
+
+// made a socket with server
+
 const socket = io("https://fierce-meadow-12011.herokuapp.com/");
 
 // connecting the server
-// useEffect(() => {
-//   socket.on("connect", () => {
-//     console.log('connection done!')
-//     socket.send("Hello!");
-//   });
-// }, []);
 
 const App = () => {
+  const {} = useFirebase();
+  // const { socket } = useSocket();
+  // useEffect(() => {
+  //   socket.on("get-message", message => {
+  //     console.log(message, 'homoe')
+  //   });
+  //   socket.emit('message', { data: 'datahome ' })
+  // }, []);
+
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
-
         <Route path="/home" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<UserLogin />} />
@@ -56,6 +83,11 @@ const App = () => {
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
+
+          <Route path="addBanner" element={<AddBanner />} />
+          <Route path="providerOverview" element={<ProviderOverview />} />
+
+          <Route path="/dashboard/adminChat" element={<AdminChat />} />
 
           <Route
             path="/dashboard/manageproducts"
@@ -83,11 +115,13 @@ const App = () => {
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
+
           {/* add service request from service provider */}
           <Route
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
           ></Route>
+
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route

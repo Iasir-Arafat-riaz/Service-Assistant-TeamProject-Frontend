@@ -34,7 +34,7 @@ const RoundedServiceCart = () => {
             </ResponsiveContainer>
             {
                 data01.map((entry, i) =>
-                    <Box px={2}>
+                    <Box px={2} key={i}>
                         <Stack
                             sx={{
                                 borderTop: '1px solid #bfbfbf',
