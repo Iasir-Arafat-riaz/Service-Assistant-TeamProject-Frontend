@@ -12,30 +12,82 @@ import Box from "@mui/material/Box";
 import ServiceDetailsForm from "./compoent/ServiceDetailsForm";
 
 const AddServiceRequest = () => {
-  const [serviceData, setServiceData] = useState({ serviceTItle: "" });
+  const [serviceData, setServiceData] = useState({
+    serviceTItle: "",
+    serviceFeature: "",
+    whatIncluded: "",
+  });
+
+  const [serviceOptions, setServiceOptions] = useState([
+    {
+      optionId: 0,
+      serviceOptionTitle: "",
+      serviceOptionImage: "",
+      key: [
+        {
+          optionKeyId: 1,
+          serviceOptionsName: "",
+          serviceOptionsPrice: "",
+          serviceOptionsQuantity: "",
+        },
+      ],
+    },
+  ]);
 
   const [serviceDetailsInput, setServiceDetailsInput] = useState([
     { mainOption: 0, keyOption: 1 },
   ]);
 
   const handleChange = (e) => {
-    console.log(e.target.name);
+    setServiceData({ ...serviceData, [e.target.name]: e.target.value });
   };
 
   const handleAddMoreDetails = (index) => {
     console.log("add more details clicked", index);
-    const newArr = serviceDetailsInput.map((item) => {
+    const newArrInput = serviceDetailsInput.map((item) => {
       if (item.mainOption === index) {
         item.keyOption = item.keyOption + 1;
       }
       return item;
     });
-    setServiceDetailsInput(newArr);
+
+    const newServiceArr = serviceOptions.map((item) => {
+      if (item.optionId === index) {
+        const len = item.key.length + 1;
+        const obj = {
+          optionKeyId: len,
+          serviceOptionsName: "",
+          serviceOptionsPrice: "",
+          serviceOptionsQuantity: "",
+        };
+        item.key.push(obj);
+      }
+    });
+
+    console.log(newServiceArr);
+    setServiceDetailsInput(newArrInput);
   };
 
   const handleAddServiceField = () => {
     console.log("clicked");
     const len = serviceDetailsInput.length;
+    const len2 = serviceOptions.length;
+    setServiceOptions([
+      ...serviceOptions,
+      {
+        optionId: len2,
+        serviceOptionTitle: "",
+        serviceOptionImage: "",
+        key: [
+          {
+            optionKeyId: 1,
+            serviceOptionsName: "",
+            serviceOptionsPrice: "",
+            serviceOptionsQuantity: "",
+          },
+        ],
+      },
+    ]);
     setServiceDetailsInput([
       ...serviceDetailsInput,
       { mainOption: len, keyOption: 1 },
@@ -43,7 +95,7 @@ const AddServiceRequest = () => {
   };
 
   useEffect(() => {
-    console.log(serviceDetailsInput);
+    console.log(serviceOptions);
   });
   return (
     <>
@@ -84,6 +136,7 @@ const AddServiceRequest = () => {
               variant="standard"
               name="serviceFeature"
               fullWidth
+              onChange={handleChange}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -95,6 +148,7 @@ const AddServiceRequest = () => {
               variant="standard"
               name="whatIncluded"
               fullWidth
+              onChange={handleChange}
             />
           </Grid>
           <Divider />
