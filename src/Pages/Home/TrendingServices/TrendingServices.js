@@ -3,6 +3,7 @@ import { Box, Button, Container, Skeleton, Stack, Typography } from '@mui/materi
 import axios from 'axios';
 import Slider from 'react-slick';
 import TrendingService from './TrendingService';
+import { Link } from 'react-router-dom';
 
 const TrendingServices = () => {
 
@@ -18,7 +19,7 @@ const TrendingServices = () => {
 
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 2000,
         slidesToShow: 4,
         slidesToScroll: 3,
@@ -59,7 +60,10 @@ const TrendingServices = () => {
                 loading ?
                     <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
                     :
-                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Trending</Typography>
+                    <Box sx={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
+                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>Trending</Typography>
+                        <Link to="/services" style={{ fontSize: 17 }}>View All</Link>
+                    </Box>
             }
 
 
@@ -67,7 +71,7 @@ const TrendingServices = () => {
                 loading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
-                        {[...new Array(4)].map(() => <Stack spacing={1} >
+                        {[...new Array(4)].map((ske, index) => <Stack key={index} spacing={1} >
                             <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2 }} height={185} />
                         </Stack>
                         )}

@@ -6,19 +6,19 @@ import Slider from 'react-slick';
 import { Box } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import { Link } from 'react-router-dom';
+import { allData, singleService, loadServiceCategory } from "../../../redux/dataSlice/dataSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const HomeServices = () => {
 
-    const [services, setServices] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+    const { allServices, serviceIsLoading } = useSelector(allData);
 
-    // data loaded
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/services').then(res => {
-            setLoading(false);
-            setServices(res.data);
-        })
-    }, []);
+        dispatch(loadServiceCategory());
+    }, [dispatch]);
+
 
     // slick slider
     const slickSlider = {
@@ -27,7 +27,6 @@ const HomeServices = () => {
         speed: 2000,
         slidesToShow: 4,
         slidesToScroll: 3,
-        autoplay: true,
         autoplaySpeed: 2000,
         responsive: [
             {
@@ -62,16 +61,19 @@ const HomeServices = () => {
         <Container sx={{ mb: 8 }}>
 
             {
-                loading ?
+                serviceIsLoading ?
                     <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
                     :
-                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>For Your Home</Typography>}
+                    <Box sx={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
+                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>For Your Home</Typography>
+                        <Link to="/services" style={{ fontSize: 17 }}>View All</Link>
+                    </Box>}
 
             {
-                loading ?
+                serviceIsLoading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
-                        {[...new Array(4)].map(() => <Stack spacing={1} >
+                        {[...new Array(4)].map((ske, index) => <Stack key={index} spacing={1} >
                             <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2 }} height={185} />
                         </Stack>
                         )}
@@ -80,7 +82,7 @@ const HomeServices = () => {
                     :
                     <Slider {...slickSlider}>
                         {
-                            services.map(service => <HomeService
+                            allServices.slice(0, 8).map(service => <HomeService
                                 key={service._id}
                                 service={service}
                             />)

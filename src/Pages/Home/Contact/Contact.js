@@ -13,19 +13,16 @@ const Contact = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
 
-        axios.post('http://localhost:5000/sendEmail', data)
+        axios.post('https://fierce-meadow-12011.herokuapp.com/sendEmail', data)
             .then(function (response) {
                 console.log(response);
                 console.log(data)
             })
     };
 
-
     return (
         <Container sx={{ mt: -25, mb: 10 }} style={{ zIndex: '+9999' }}>
             <Paper elevation={5} style={{ zIndex: '+9999' }}>
-
-
 
                 <Grid container spacing={2} style={{ zIndex: '+9999' }}>
 
@@ -65,8 +62,9 @@ const Contact = () => {
                             </Box>
 
                             <Box sx={{ display: 'flex ', justifyContent: 'center' }}>
-                                <Button type='submit' sx={{ backgroundColor: '#FF5E14', width: '90%', mt: 2, mb: 3, color: '#fff', letterSpacing: 4 }} variant="contained">SEND</Button>
+                                <Button type='submit' style={{ backgroundColor: '#FF5E14', width: '90%', margin: '15px 0 25px 0', color: '#fff', letterSpacing: 4 }} >SEND</Button>
                             </Box>
+
 
                         </form>
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Divider,
   Drawer,
@@ -10,7 +10,12 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Menu, Avatar, Button, Tooltip, MenuItem, Container,
+  Menu,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  Container,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,16 +25,17 @@ import { useTheme } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
-import logo from '../../images/web-logo.png';
+import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { allData } from "../../../redux/dataSlice/dataSlice";
 import useFirebase from "../../../Hooks/useFirebase";
 
 const Navigation = () => {
-  const navigate = useNavigate()
+  const navRef = useRef(null);
+  const navigate = useNavigate();
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
@@ -37,16 +43,23 @@ const Navigation = () => {
   const { user } = useSelector(allData);
   const { handleSignOut } = useFirebase();
   const goHome = () => {
-    navigate("/home")
-  }
+    navigate("/home");
+  };
 
   useEffect(() => {
+    // console.log(navRef.current.classList);
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
-        document.getElementById("navbar").classList.add("scroll-nav");
+        // document.getElementById("navbar").classList.add("scroll-nav");
+        if (navRef.current) {
+          navRef.current.classList.add("scroll-nav");
+        }
       } else {
-        document.getElementById("navbar").classList.remove("scroll-nav");
+        // document.getElementById("navbar").classList.remove("scroll-nav");
+        if (navRef.current) {
+          navRef.current.classList.remove("scroll-nav");
+        }
       }
     });
   }, [user]);
@@ -57,8 +70,8 @@ const Navigation = () => {
   };
 
   const handleUserLogin = () => {
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -197,6 +210,7 @@ const Navigation = () => {
     <Container id="back-to-top-anchor">
       <AppBar
         id="navbar"
+        ref={navRef}
         className={navbar}
         position="fixed"
         style={{ boxShadow: "none" }}
@@ -220,8 +234,13 @@ const Navigation = () => {
           sx={{ display: "flex", justifyContent: "space-between", ml: 2 }}
         >
           <Box>
-
-            <img onClick={goHome} className={navLogo} src={logo} width="120" alt="weblogo" />
+            <img
+              onClick={goHome}
+              className={navLogo}
+              src={logo}
+              width="120"
+              alt="weblogo"
+            />
           </Box>
 
           <Box style={{ zIndex: "9999" }} className={navItemContainer}>
@@ -238,7 +257,6 @@ const Navigation = () => {
               </NavLink>
             </Button>
 
-
             <Button variant="text">
               {" "}
               <NavLink style={navLink} to="/dashboard">
@@ -254,7 +272,10 @@ const Navigation = () => {
             </Button>
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center' }} className={navItemContainer}>
+          <Box
+            sx={{ display: "flex", alignItems: "center" }}
+            className={navItemContainer}
+          >
             {/* search button */}
             <Tooltip arrow title="Search...">
               <SearchIcon
@@ -265,7 +286,6 @@ const Navigation = () => {
             </Tooltip>
 
             {!user?.email && (
-
               <Button variant="text" onClick={handleUserLogin}>
                 <Tooltip arrow title="My account">
                   <ManageAccountsIcon
@@ -278,7 +298,7 @@ const Navigation = () => {
 
             {user?.email && (
               <Tooltip arrow title="My Account">
-                <IconButton onClick={handleOpenUserMenu}  >
+                <IconButton onClick={handleOpenUserMenu}>
                   <Avatar alt="Remy Sharp" src={user?.photoURL} />
                 </IconButton>
               </Tooltip>
@@ -304,9 +324,7 @@ const Navigation = () => {
                 <MenuItem
                   sx={{ display: "grid", gap: 1, justifyContent: "center" }}
                 >
-                  <Box
-                    sx={{ display: "flex", justifyContent: "center" }}
-                  >
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Avatar
                       style={{ borderRadius: "50%", margin: "0 auto" }}
                       src={user?.photoURL}
@@ -321,10 +339,9 @@ const Navigation = () => {
                   <Typography sx={{ textAlign: "center" }}>
                     {user?.email}
                   </Typography>
-
                 </MenuItem>
                 <MenuItem
-                  sx={{ display: 'flex', justifyContent: 'center' }}
+                  sx={{ display: "flex", justifyContent: "center" }}
                   onClick={handleSignOut}
                 >
                   <Typography sx={{ textAlign: "center" }}>
@@ -334,11 +351,7 @@ const Navigation = () => {
               </Menu>
             )}
           </Box>
-
-
         </Toolbar>
-
-
       </AppBar>
       <React.Fragment>
         <Drawer open={state} onClose={() => setState(false)}>
@@ -356,15 +369,11 @@ const Navigation = () => {
         </span>
         <Box className="overlay-content">
           <form id="search" onSubmit={handaleSubmitForm}>
-            <input
-              type="search"
-              placeholder="Search.."
-              name="search"
-            />
+            <input type="search" placeholder="Search.." name="search" />
           </form>
         </Box>
       </Box>
-    </Container >
+    </Container>
   );
 };
 export default Navigation;

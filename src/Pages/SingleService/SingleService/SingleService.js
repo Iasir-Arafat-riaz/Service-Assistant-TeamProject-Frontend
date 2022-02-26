@@ -5,16 +5,17 @@ import "../SingleService.css";
 import { useParams } from "react-router-dom";
 import SingleServiceHeader from "../SingleServiceHeader/SingleServiceHeader";
 import ServiceDetails from "../ServiceDetails/ServiceDetails";
-
 import Loading from "../../SharedRoute/Loader/Loading";
-
 import Navigation from "../../SharedRoute/Navigation/Navigation";
+import { setItemInLocal } from "../../../utils/utils";
 
 const SingleService = () => {
   const [serviceDetials, setServiceDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { serviceId } = useParams();
+
+  setItemInLocal(serviceId);
 
   useEffect(() => {
     setLoading(true);

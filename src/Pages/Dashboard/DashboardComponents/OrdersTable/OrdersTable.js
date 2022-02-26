@@ -36,7 +36,7 @@ const OrdersTable = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => <OrdersTableRow row={row}></OrdersTableRow>)}
+                        {rows.map((row, index) => <OrdersTableRow key={index} row={row}></OrdersTableRow>)}
                     </TableBody>
                 </Table>
             </TableContainer>

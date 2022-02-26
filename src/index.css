@@ -17,6 +17,7 @@ body,html{
 ::-webkit-scrollbar {
   width: 5px;
   height: 10px;
+  
 }
 
 /* Track */
@@ -24,13 +25,40 @@ body,html{
   background: #fff; 
 }
  
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #FF5E14; 
+/* Handle */ 
+body::-webkit-scrollbar-thumb {
+  background: #bebebe; 
+  border-radius: 20px;
+}
+div::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 20px;  
+}
+div:hover::-webkit-scrollbar-thumb{
+  background: #bebebe;  
 }
 
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.slick-next, .slick-prev{
+padding: 2px !important;
+width: 40px !important;
+height: 40px !important;
+background-color: #F4F5F8 !important;
+border-radius: 50% !important;
+z-index: 999 !important;
+}
+
+/* .slick-prev.slick-disabled:before, .slick-next.slick-disabled:before{
+  color: red !important; */
+/* } */
+.slick-prev:before, .slick-next:before{
+color: #FF5E14 !important
+};
+
+.slick-prev.slick-disabled, .slick-next.slick-disabled{
+
 }
