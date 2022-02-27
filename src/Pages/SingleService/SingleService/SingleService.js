@@ -31,12 +31,12 @@ const SingleService = () => {
     return <Loading />;
   }
 
-  const matchService = serviceDetials.find(
+  const matchService = serviceDetials?.find(
     (service) => service.parentService == serviceId
   );
-  const question1 = Object.keys(matchService?.overview[0]);
-  const question2 = Object.keys(matchService?.overview[1]);
-  const question3 = Object.keys(matchService?.overview[2]);
+  const question1 = Object?.keys(matchService?.overview[0]);
+  const question2 = Object?.keys(matchService?.overview[1]);
+  const question3 = Object?.keys(matchService?.overview[2]);
 
   return (
     <>
