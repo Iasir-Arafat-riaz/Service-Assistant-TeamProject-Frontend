@@ -35,8 +35,8 @@ const SingleService = () => {
     (service) => service.parentService == serviceId
   );
   const question1 = Object?.keys(matchService?.overview[0]);
-  const question2 = Object?.keys(matchService?.overview[1]);
-  const question3 = Object?.keys(matchService?.overview[2]);
+  // const question2 = Object?.keys(matchService?.overview[1]);
+  // const question3 = Object?.keys(matchService?.overview[2]);
 
   return (
     <>
@@ -49,8 +49,8 @@ const SingleService = () => {
           <SingleServiceHeader matchService={matchService} />
           <ServiceDetails
             question1={question1}
-            question2={question2}
-            question3={question3}
+            // question2={question2}
+            // question3={question3}
             matchService={matchService}
           />
         </Box>
