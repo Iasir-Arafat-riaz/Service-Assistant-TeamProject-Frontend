@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Divider,
   Drawer,
@@ -16,6 +16,12 @@ import {
   Tooltip,
   MenuItem,
   Container,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  CardActionArea,
+  Card,
+  Grid,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -32,6 +38,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { allData } from "../../../redux/dataSlice/dataSlice";
 import useFirebase from "../../../Hooks/useFirebase";
+import axios from "axios";
 
 const Navigation = () => {
   const navRef = useRef(null);
@@ -42,6 +49,31 @@ const Navigation = () => {
   const [state, setState] = React.useState(false);
   const { user } = useSelector(allData);
   const { handleSignOut } = useFirebase();
+
+  const [APIData, setAPIData] = useState([])
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  useEffect(() => {
+    axios.get(`https://fierce-meadow-12011.herokuapp.com/singleservice`)
+      .then((response) => {
+        setAPIData(response.data);
+      })
+  }, [])
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue)
+    if (searchInput !== '') {
+      const filteredData = APIData.filter((item) => {
+        return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+      })
+      setFilteredResults(filteredData)
+    }
+    else {
+      setFilteredResults(APIData)
+    }
+  }
+
+
   const goHome = () => {
     navigate("/home");
   };
@@ -369,8 +401,60 @@ const Navigation = () => {
         </span>
         <Box className="overlay-content">
           <form id="search" onSubmit={handaleSubmitForm}>
-            <input type="search" placeholder="Search.." name="search" />
+            <input onChange={(e) => searchItems(e.target.value)} type="search" placeholder="Search.." name="search" />
           </form>
+
+
+          {/* <Grid container spacing={3} >
+                {searchInput.length > 1 ? (
+                    filteredResults.map((item) => {
+                        return (
+                            <Grid item md={4}>
+                                <Card sx={{ minWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="60"
+                                            image={item.Image}
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <CardHeader>{item.Title}</CardHeader>
+                                            <Typography>
+                                                {item.Title}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        )
+                    })
+                ) : (
+
+                    APIData.map((item) => {
+                        return (
+                            <Grid item md={4}>
+                                <Card sx={{ maxWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="60"
+                                            image={item.Image}
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <CardHeader>{item.Title}</CardHeader>
+                                            <Typography>
+                                                {item.Title}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        )
+                    })
+                )}
+            </Grid> */}
         </Box>
       </Box>
     </Container>
