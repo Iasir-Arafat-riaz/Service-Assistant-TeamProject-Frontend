@@ -32,20 +32,20 @@ const ServiceOverview = ({ matchService, question1,
                     </ListItem>)
                 }
 
-                <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography>
-                {
+                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography> */}
+                {/* {
                     Object.values(matchService.overview[1])[0].map((text, index) => <ListItem key={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
-                }
+                } */}
 
-                <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography>
+                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography> */}
 
-                {
+                {/* {
                     Object.values(matchService.overview[2])[0].map((text, index) => <ListItem kwy={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
-                }
+                } */}
                 <Typography variant='h4' sx={{ mt: 3, mb: 3 }}>FAQ</Typography>
 
                 {/* FQA */}
