@@ -22,16 +22,11 @@ import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddT
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
-
-import axios from "axios";
-
 import useFirebase from "../src/Hooks/useFirebase";
 
 import AddServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/AddServiceRequest";
 
-
 import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
-
 
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
@@ -121,7 +116,6 @@ const App = () => {
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
           ></Route>
-
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         <Route
