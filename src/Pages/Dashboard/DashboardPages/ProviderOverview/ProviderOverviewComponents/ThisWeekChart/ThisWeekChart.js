@@ -1,75 +1,91 @@
-
-import React from 'react';
-import { Box, Container, Stack, Grid, Paper, Typography, IconButton } from '@mui/material';
-
-import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-
-const data = [
-    {
-        "name": "1",
-        "uv": 4000,
-        "income": 2400,
-        "amt": 2400
-    },
-    {
-        "name": "2",
-        "uv": 3000,
-        "income": 1398,
-        "amt": 2210
-    },
-    {
-        "name": "3",
-        "uv": 2000,
-        "income": 9800,
-        "amt": 2290
-    },
-    {
-        "name": "4",
-        "uv": 2780,
-        "income": 3908,
-        "amt": 2000
-    },
-    {
-        "name": "5",
-        "uv": 1890,
-        "income": 4800,
-        "amt": 2181
-    },
-    {
-        "name": "6",
-        "uv": 2390,
-        "income": 3800,
-        "amt": 2500
-    },
-    {
-        "name": "7",
-        "uv": 3490,
-        "income": 4300,
-        "amt": 2100
-    }
-]
+import { Grid, Paper, Typography } from "@mui/material";
+import React, { PureComponent } from "react";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+} from "recharts";
 const ThisWeekChart = () => {
-    return (
+    const data = [
+        {
+          name: 'Sat',
+          uv: 4000,
+          pv: 2400,
+          amt: 2400,
+        },
+        {
+          name: 'Sun',
+          uv: 3000,
+          pv: 1398,
+          amt: 2210,
+        },
+        {
+          name: 'Mon',
+          uv: 2000,
+          pv: 9800,
+          amt: 2290,
+        },
+        {
+          name: 'Tue',
+          uv: 2780,
+          pv: 3908,
+          amt: 2000,
+        },
+        {
+          name: 'Wed',
+          uv: 1890,
+          pv: 4800,
+          amt: 2181,
+        },
+        {
+          name: 'Thu',
+          uv: 2390,
+          pv: 3800,
+          amt: 2500,
+        },
+        {
+          name: 'Fri',
+          uv: 3490,
+          pv: 4300,
+          amt: 2100,
+        },
+      ];
+      
+  return (
+    <div>
         <Paper elevation={3} sx={{ p: 2, }} >
-            <Typography gutterBottom variant='h6'>This Week</Typography>
-            <ResponsiveContainer width="100%" height={220}>
-                <AreaChart width={730} height={250} data={data}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-                    <defs>
-                        <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-                        </linearGradient>
-                    </defs>
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <Tooltip />
-                    <Area type="monotone" dataKey="income" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-                </AreaChart>
-            </ResponsiveContainer>
+        <Typography gutterBottom variant='h6'>Last Week income</Typography>
+        <BarChart
+          width={500}
+          height={230}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+          barSize={20}
+        >
+          <XAxis dataKey="name" scale="point" padding={{ left: 10, right: 10 }} />
+          <YAxis />
+          {/* <Tooltip /> */}
+          <Legend />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Bar dataKey="pv" fill="#8884d8" background={{ fill: '#eee' }} />
+        </BarChart>
         </Paper>
-    );
+      
+    </div>
+  );
 };
 
 export default ThisWeekChart;

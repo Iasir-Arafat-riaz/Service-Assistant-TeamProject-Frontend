@@ -9,6 +9,7 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import OrdersTable from '../../DashboardComponents/OrdersTable/OrdersTable';
 import RoundedServiceCart from '../../DashboardComponents/GraphCharts/RoundedServiceCart';
 import ThisWeekChart from './ProviderOverviewComponents/ThisWeekChart/ThisWeekChart';
+import ProviderOrderTable from './ProviderOverviewComponents/ProviderOrderTable/ProviderOrderTable';
 
 
 const ProviderOverview = () => {
@@ -26,16 +27,16 @@ const ProviderOverview = () => {
                                     display: 'flex',
                                     justifyContent: "space-between"
                                 }}>
-                                    <Typography variant='body1' >Sales</Typography>
+                                    <Typography variant='body1' >This Week Sales</Typography>
                                     <IconButton
                                         sx={{
                                             background: 'hsl(215deg 69% 90%)',
                                             color: 'hsl(215deg 70% 71%)'
                                         }}>
-                                             <DirectionsCarIcon></DirectionsCarIcon>
+                                             <AttachMoneyIcon></AttachMoneyIcon>
                                              </IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={2540} /></Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={14552} />Tk</Typography>
                                 <Typography color='red' variant='body1' component={'span'}>-3.25%</Typography>
                                 <Typography variant='body1' component={'span'}> Since last week</Typography>
                             </Paper>
@@ -46,7 +47,7 @@ const ProviderOverview = () => {
                                     display: 'flex',
                                     justifyContent: "space-between"
                                 }}>
-                                    <Typography variant='body1' >Earning</Typography>
+                                    <Typography variant='body1' >Today's Earning</Typography>
                                     <IconButton
                                         sx={{
                                             background: 'hsl(215deg 69% 90%)',
@@ -54,7 +55,7 @@ const ProviderOverview = () => {
                                         }}
                                     > <AttachMoneyIcon></AttachMoneyIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom>$<CountUp end={4130} /></Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={2548} />Tk</Typography>
                                 <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>2.8%</Typography>
                                 <Typography variant='body1' component={'span'}> Since last week</Typography>
                             </Paper>
@@ -65,7 +66,7 @@ const ProviderOverview = () => {
                                     display: 'flex',
                                     justifyContent: "space-between"
                                 }}>
-                                    <Typography variant='body1' >Service Provider</Typography>
+                                    <Typography variant='body1' >Ongoing Orders</Typography>
                                     <IconButton
                                         sx={{
                                             background: 'hsl(215deg 69% 90%)',
@@ -73,9 +74,9 @@ const ProviderOverview = () => {
                                         }}
                                     > <HomeRepairServiceIcon></HomeRepairServiceIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={347} /></Typography>
-                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>58</Typography>
-                                <Typography variant='body1' component={'span'}> Added recently</Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={12} /></Typography>
+                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>3</Typography>
+                                <Typography variant='body1' component={'span'}> Recently Added</Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -84,7 +85,7 @@ const ProviderOverview = () => {
                                     display: 'flex',
                                     justifyContent: "space-between"
                                 }}>
-                                    <Typography variant='body1' >Orders</Typography>
+                                    <Typography variant='body1' >Total Served</Typography>
                                     <IconButton
                                         sx={{
                                             background: 'hsl(215deg 69% 90%)',
@@ -92,20 +93,18 @@ const ProviderOverview = () => {
                                         }}
                                     > <LocalGroceryStoreIcon></LocalGroceryStoreIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={554} /></Typography>
-                                <Typography color='red' variant='body1' component={'span'}>-5.7%</Typography>
-                                <Typography variant='body1' component={'span'}> Since last week</Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={124} /></Typography>
+                               
+                                <Typography variant='body1' component={'span'}> LifeTime Orders</Typography>
                             </Paper>
                         </Grid>
 
                     </Grid>
                 </Grid>
                 
-                <Grid item xs={12} md={3}>
-                    <RoundedServiceCart></RoundedServiceCart>
-                </Grid>
-                <Grid item xs={12} md={9}>
-                    <OrdersTable></OrdersTable>
+                
+                <Grid item xs={12} md={12}>
+                    <ProviderOrderTable/>
                 </Grid>
 
             </Grid>
