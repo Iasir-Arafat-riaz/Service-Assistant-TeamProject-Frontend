@@ -17,11 +17,11 @@ import {
   MenuItem,
   Container,
   CardContent,
-  CardHeader,
-  CardMedia,
   CardActionArea,
   Card,
   Grid,
+  Modal,
+  TextField,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -53,6 +53,11 @@ const Navigation = () => {
   const [APIData, setAPIData] = useState([])
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     axios.get(`https://fierce-meadow-12011.herokuapp.com/singleservice`)
       .then((response) => {
@@ -73,6 +78,10 @@ const Navigation = () => {
     }
   }
 
+  const handleCardClick = (id) => {
+    console.log("card clicked");
+    navigate(`/Home/service-details/${id}`);
+  };
 
   const goHome = () => {
     navigate("/home");
@@ -131,28 +140,28 @@ const Navigation = () => {
 
   // search popup
 
-  const openSearchBox = () => {
-    document.querySelector("#myOverlay").style.display = "block";
-  };
-  const closeSearchBox = () => {
-    document.querySelector("#myOverlay").style.display = "none";
-  };
+  // const openSearchBox = () => {
+  //   document.querySelector("#myOverlay").style.display = "block";
+  // };
+  // const closeSearchBox = () => {
+  //   document.querySelector("#myOverlay").style.display = "none";
+  // };
 
   // form submit
-  const handaleSubmitForm = (e) => {
-    e.preventDefault();
-  };
+  // const handaleSubmitForm = (e) => {
+  //   e.preventDefault();
+  // };
 
   // trigger button
-  useEffect(() => {
-    let input = document.getElementById("search");
-    input.addEventListener("keyup", (event) => {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-        closeSearchBox();
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   let input = document.getElementById("search");
+  //   input.addEventListener("keyup", (event) => {
+  //     if (event.keyCode === 13) {
+  //       event.preventDefault();
+  //       closeSearchBox();
+  //     }
+  //   });
+  // }, []);
 
   // style sheets
 
@@ -309,13 +318,107 @@ const Navigation = () => {
             className={navItemContainer}
           >
             {/* search button */}
+
             <Tooltip arrow title="Search...">
               <SearchIcon
                 type="button"
-                onClick={openSearchBox}
+                onClick={handleOpen}
                 style={navButton}
               />
             </Tooltip>
+
+
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box
+                xs={12}
+                md={12}
+                sx={{
+                  top: '10%',
+                  width: "100%",
+                  bgcolor: '#F4F5F8',
+                  boxShadow: 24,
+                  p: 4,
+                  height: '200px',
+                  overflow: 'scroll'
+                }}>
+                <TextField icon='search'
+                  placeholder='Search Services...'
+                  onChange={(e) => searchItems(e.target.value)}
+                  sx={{ width: '80%', left: '5%', mb: 3 }}
+                  id="standard-search"
+                  type="search"
+                  variant="standard"
+
+                />
+                {/* <Button
+                  onClick={handleClose}
+                  sx={{
+                    mt: -4,
+                    ml: 15
+                    
+                  }}>
+                  <CloseIcon
+                    sx={{
+                      boxShadow: 3,
+                      fontSize: 26,
+                      p: 1,
+                      borderRadius: '50%',
+                      backgroundColor: 'white',
+                      color: '#FF5E14'
+                    }}
+                  />
+                </Button> */}
+
+                <Grid
+                  container
+                  spacing={3}
+
+                >
+                  {
+                    searchInput.length > 1 ? (
+                      filteredResults.map((item) => {
+                        return (
+                          <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
+                            <Card >
+                              <CardActionArea onClick={() => handleCardClick(item.parentService)}>
+                                <CardContent>
+                                  <Typography>
+                                    {item.Title}
+                                  </Typography>
+                                </CardContent>
+                              </CardActionArea>
+                            </Card>
+                          </Grid>
+                        )
+                      })
+                    ) : (
+
+                      APIData.map((item) => {
+                        return (
+                          <Grid item md={12} xs={12}>
+                            {/* <Card sx={{}}>
+                                        <CardActionArea>
+                                            <CardContent>
+                                                <Typography>
+                                                    {item.Title}
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Card> */}
+                          </Grid>
+                        )
+                      })
+                    )
+                  }
+                </Grid>
+              </Box>
+            </Modal>
+
 
             {!user?.email && (
               <Button variant="text" onClick={handleUserLogin}>
@@ -391,7 +494,8 @@ const Navigation = () => {
         </Drawer>
       </React.Fragment>
 
-      <Box id="myOverlay" className="overlay">
+
+      {/* <Box id="myOverlay" className="overlay">
         <span
           className="closebtn"
           onClick={closeSearchBox}
@@ -405,7 +509,7 @@ const Navigation = () => {
           </form>
 
 
-          {/* <Grid container spacing={3} >
+          <Grid container spacing={3} >
                 {searchInput.length > 1 ? (
                     filteredResults.map((item) => {
                         return (
@@ -454,9 +558,9 @@ const Navigation = () => {
                         )
                     })
                 )}
-            </Grid> */}
+            </Grid>
         </Box>
-      </Box>
+      </Box> */}
     </Container>
   );
 };
