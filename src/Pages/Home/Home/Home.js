@@ -18,7 +18,7 @@ const Home = () => {
         <>
             <Navigation />
             <Header />
-            <Search/>
+           
             <RecentlyViews />
             <HomeServices />
             <TrendingServices />
