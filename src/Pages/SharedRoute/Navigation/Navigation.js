@@ -17,8 +17,6 @@ import {
   MenuItem,
   Container,
   CardContent,
-  CardHeader,
-  CardMedia,
   CardActionArea,
   Card,
   Grid,
@@ -41,7 +39,6 @@ import { useSelector } from "react-redux";
 import { allData } from "../../../redux/dataSlice/dataSlice";
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
-import CloseIcon from '@mui/icons-material/Close';
 
 const Navigation = () => {
   const navRef = useRef(null);
