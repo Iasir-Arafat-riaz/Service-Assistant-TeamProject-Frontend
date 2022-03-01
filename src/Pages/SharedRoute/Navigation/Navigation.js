@@ -26,11 +26,11 @@ import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
 import logo from '../../images/web-logo.png';
 import { MdOutlineDashboard } from "react-icons/md";
-import "./Navigation.css";
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { allData } from "../../../redux/dataSlice/dataSlice";
 import useFirebase from "../../../Hooks/useFirebase";
+import "./Navigation.css";
 
 const Navigation = () => {
   const navigate = useNavigate()
@@ -324,18 +324,31 @@ const Navigation = () => {
         <Typography sx={{ p: 2 }}>
           {
             notificationNumber.map(notificationMessage=>
-              <div className="notificationBar">
-              <div><img src={notificationMessage.image} alt="notification image" width="120px" height="60px"></img></div>
-              <div>
+            //   <div className="notificationBar">
+              
+            //   <div><img src={notificationMessage.image} alt="notification image" width="120px" height="60px"></img></div>
+            //   <div>
                 
-              {notificationMessage.message} <br>
-              </br>
-              provider name: Ac service <br>
-              </br>
-              Date: 24 january, 2022
-              </div>
+            //   {notificationMessage.message} <br>
+            //   </br>
+            //   provider name: Ac service <br>
+            //   </br>
+            //   Date: 24 january, 2022
+            //   </div>
              
+            // </div>
+            <div class="notifi-box" id="box">
+            {/* <h2>Notifications <span>17</span></h2> */}
+            <div class="notifi-item">
+              <img src={notificationMessage.image} width="120px" height="60px"  alt="img"/>
+              <div class="text">
+                 <h4>Elias Abdurrahman</h4>
+                 <p>@lorem ipsum dolor sit amet</p>
+                </div> 
             </div>
+      
+      
+          </div>
 
             )
               }</Typography>
