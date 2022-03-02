@@ -14,7 +14,7 @@ export const setItemInLocal = (id) => {
   }
   const newId = parseInt(id);
   if (!exist.includes(newId)) {
-    const newIdsArray = [newId, ...exist].slice(0, 5);
+    const newIdsArray = [newId, ...exist];
     localStorage.setItem("recentView", JSON.stringify(newIdsArray));
   }
 };

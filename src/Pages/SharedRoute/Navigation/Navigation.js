@@ -266,6 +266,13 @@ const Navigation = () => {
 
             <Button variant="text">
               {" "}
+              <NavLink style={navLink} to="/dashboard/myorders">
+                My Order
+              </NavLink>
+            </Button>
+
+            <Button variant="text">
+              {" "}
               <NavLink style={navLink} to="/contact">
                 CONTACT US
               </NavLink>

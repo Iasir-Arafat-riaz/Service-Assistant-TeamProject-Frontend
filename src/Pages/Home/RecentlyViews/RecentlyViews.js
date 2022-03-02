@@ -6,8 +6,10 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { Box } from "@mui/system";
 import { initialRecent } from "../../../utils/utils";
+import Slider from "react-slick";
 
 const RecentlyViews = () => {
+
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const recentIds = initialRecent();
@@ -18,9 +20,9 @@ const RecentlyViews = () => {
       .get("https://fierce-meadow-12011.herokuapp.com/services")
       .then((res) => {
         const service = [];
-        const recentService = res.data.filter((item) => {
+        res.data.filter((item) => {
           item.Services.forEach((ele) => {
-            console.log(recentIds.includes(ele.Id));
+            // console.log(recentIds.includes(ele.Id));
             if (recentIds.includes(ele.Id)) {
               service.push(ele);
             }
@@ -32,6 +34,41 @@ const RecentlyViews = () => {
         setLoading(false);
       });
   }, []);
+
+  // slick slider
+  const slickSlider = {
+    dots: false,
+    infinite: false,
+    speed: 2000,
+    slidesToShow: 4,
+    slidesToScroll: 3,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: false,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  };
 
   return (
     <Container sx={{ mb: 8 }}>
@@ -50,24 +87,22 @@ const RecentlyViews = () => {
       )}
 
       {loading ? (
-        <Box sx={{ display: "flex", gap: 3 }}>
+        <Box sx={{ display: "flex", gap: 5 }}>
           {[...new Array(4)].map(() => (
             <Stack spacing={1}>
               <Skeleton
                 variant="rectangular"
-                width={250}
-                sx={{ borderRadius: 2 }}
-                height={185}
+                width={250} sx={{ borderRadius: 2 }} height={185}
               />
             </Stack>
           ))}
         </Box>
       ) : (
-        <Box sx={{ display: "flex", gap: 5 }}>
+        <Slider {...slickSlider}>
           {services.map((service) => (
             <RecentlyView key={service._id} {...service} />
           ))}
-        </Box>
+        </Slider>
       )}
     </Container>
   );

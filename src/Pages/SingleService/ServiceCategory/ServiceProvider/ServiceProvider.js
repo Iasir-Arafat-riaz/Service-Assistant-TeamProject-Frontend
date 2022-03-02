@@ -1,21 +1,21 @@
 import { Avatar, Button, Skeleton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, allData, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
+import { addToCart, allData, selectedServiceAndProvider, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
 
-const ServiceProvider = ({ handleNext, category }) => {
+const ServiceProvider = ({ handleNext, category, parentService, selectServiceId, selectService }) => {
 
-    // const [providers, setProviders] = useState([]);
     const dispatch = useDispatch();
-    const { providers, serviceProviderLoading, user, cartItems } = useSelector(allData);
+    const { providers, serviceProviderLoading, user } = useSelector(allData);
 
     useEffect(() => {
         dispatch(serviceProviders());
     }, [dispatch])
 
+    console.log(selectService)
     // style
+
     const serviceProvider = {
         mb: 3,
         display: "flex",
@@ -24,18 +24,13 @@ const ServiceProvider = ({ handleNext, category }) => {
         pb: 1,
         px: 2
     };
-
+    // console.log(parentService)
 
     const selectServiceProvider = provider => {
-
-
-        dispatch(addToCart({ ...category, email: user.displayName, payment: true, provider: provider }))
+        // dispatch(addToCart({ ...category, email: user.email, payment: true, provider: provider }))
+        dispatch(selectedServiceAndProvider({ ...category, email: user.email, payment: true, provider: provider, parentService: selectService, selectServiceId: selectServiceId, status: 'pending' }))
         handleNext();
-        // axios.post('http://localhost:5000/myorder', { ...category, email: user.displayName, provider: provider }).then(() => {
-        // });
     };
-
-
 
 
 

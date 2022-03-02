@@ -7,15 +7,17 @@ const HomeService = ({ service }) => {
 
     const { Category, Img } = service;
     const { Id } = service.Services[0];
+
     const navigate = useNavigate();
 
     const handleRouteChange = () => {
         navigate(`/Home/service-details/${Id}`)
     };
+    console.log(service.Services[0])
 
     return (
 
-        <Box onClick={handleRouteChange} sx={{ width: 250, p: 0, borderRadius: 3, mb: 1 }}>
+        <Box onClick={handleRouteChange} sx={{ width: 250, p: 0, borderRadius: 3, mb: 1, m: '0 auto' }}>
 
             <Paper elevation={2} sx={{ backgroundImage: `url(${Img})`, height: 185, backgroundSize: 'cover', borderRadius: 3 }}>
             </Paper>

@@ -24,43 +24,43 @@ const ServiceOverview = ({ matchService, question1,
             <Box>
                 <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4 }}>Overview of {matchService?.Title}</Typography>
 
-                <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1[0]}</Typography>
+                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1}</Typography> */}
 
                 {
-                    Object.values(matchService.overview[0])[0].map((text, index) => <ListItem key={index}>
+                    Object?.values(matchService?.overview[0])[0]?.map((text, index) => <ListItem key={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
 
-                <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography>
+                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography> */}
                 {
-                    Object.values(matchService.overview[1])[0].map((text, index) => <ListItem key={index}>
+                    Object?.values(matchService?.overview[1])[0]?.map((text, index) => <ListItem key={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
 
-                <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography>
+                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography> */}
 
                 {
-                    Object.values(matchService.overview[2])[0].map((text, index) => <ListItem kwy={index}>
+                    Object?.values(matchService?.overview[2])[0]?.map((text, index) => <ListItem kwy={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
                 <Typography variant='h4' sx={{ mt: 3, mb: 3 }}>FAQ</Typography>
 
-                {/* FQA */}
+                {/* FAQ */}
                 {
-                    matchService.FQA.map((question, index) => <Accordion sx={{ mb: 2, boxShadow: 1 }} key={index}>
+                    matchService?.FQA?.map((question, index) => <Accordion sx={{ mb: 2, boxShadow: 1 }} key={index}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon sx={{ backgroundColor: '#FD7A3E', color: '#fff', borderRadius: '50%' }} />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography sx={{ fontWeight: 'bold' }}>{Object.keys(matchService.FQA[index])}</Typography>
+                            <Typography sx={{ fontWeight: 'bold' }}>{Object?.keys(matchService?.FQA[index])}</Typography>
                         </AccordionSummary>
                         <AccordionDetails >
                             <Typography>
-                                {Object.values(matchService.FQA[index])}
+                                {Object?.values(matchService?.FQA[index])}
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

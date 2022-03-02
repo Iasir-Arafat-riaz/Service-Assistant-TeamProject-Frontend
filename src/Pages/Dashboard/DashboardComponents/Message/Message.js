@@ -5,7 +5,6 @@ import React from 'react';
 
 const Message = (props) => {
     const { author, data: { text }, time, avatar, displayName } = props.data;
-    console.log(author);
 
     return (
         <Box

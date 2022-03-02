@@ -7,16 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
-import { Avatar, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, allData } from '../../../../redux/dataSlice/dataSlice';
-import axios from 'axios';
+import { allData, saveService } from '../../../../redux/dataSlice/dataSlice';
 import ServiceProvider from '../ServiceProvider/ServiceProvider';
 import Payment from '../../payment/Payment/Payment';
 import OrderInfo from '../OrderInfo/OrderInfo';
-// import Payment from '../../payment/Payment/Payment';
+import { useNavigate } from 'react-router-dom';
 
-// import OrderInfo from '../OrderInfo/OrderInfo';
 
 
 const style = {
@@ -52,9 +50,10 @@ const serviceOption = {
 
 const steps = ['Select category', 'Select a provider', 'Address', 'Payment'];
 
-const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
+const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectService, selectServiceId }) => {
 
-
+    const { user } = useSelector(allData);
+    const navigate = useNavigate();
     // stpper function
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
@@ -110,7 +109,12 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
     const dispatch = useDispatch();
     const handleAddToCart = (service) => {
-        dispatch(addToCart(service))
+        if (user.email) {
+            dispatch(saveService({ ...service, email: user.email, parentService: selectService }));
+            // console.log({ idToken: localStorage.getItem('idToken') })
+        } else {
+            navigate('/login')
+        }
     };
     // handleReset
     const handleCloseModal = () => {
@@ -121,7 +125,6 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
 
 
-    const { cartItems } = useSelector(allData);
 
 
     const [category, steCategory] = React.useState({});
@@ -129,6 +132,14 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
     const handleStpperNext = category => {
         handleNext();
         steCategory(category);
+    };
+
+
+    // button style
+    const button = {
+        borderColor: "#FF5E14",
+        color: "#FF5E14",
+        marginRight: '15px'
     };
 
     return (
@@ -142,17 +153,18 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                 <Box sx={style}>
 
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 1 }}>
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
                             AC servicing
                         </Typography>
                     </Box>
 
-                    <Button onClick={handleCloseModal} sx={{ mt: -25, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
+                    <Button onClick={handleCloseModal} sx={{ mt: -21, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
+
                     <Grid container spacing={0}>
 
                         <Box sx={{ width: '100%' }}>
-                            <Stepper nonLinear activeStep={activeStep}>
+                            <Stepper sx={{ mb: 1 }} nonLinear activeStep={activeStep}>
                                 {steps.map((label, index) => (
                                     <Step key={index} completed={completed[index]}>
                                         <StepButton color="inherit" >
@@ -187,18 +199,18 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
                             <Box sx={box}>
 
-                                <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2 }} component="h2">
+                                <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2, letterSpacing: 1 }} component="h2">
                                     {matchService?.Title}
                                 </Typography>
 
-                                <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2 }} component="h2">
+                                <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2, letterSpacing: 1 }} component="h2">
                                     {matchService?.Key.length} Options Avilable
                                 </Typography>
 
                             </Box>
 
                             {
-                                matchService?.Key.map(service => <Box key={service.Name} sx={serviceOption}>
+                                matchService?.Key.map((service, index) => <Box key={index} sx={serviceOption}>
 
                                     <Box>
 
@@ -208,7 +220,17 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
 
                                     </Box>
 
-                                    <Button sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' onClick={() => handleStpperNext(service)}>NEXT</Button>
+                                    <Box>
+                                        <Button
+                                            onClick={() => handleAddToCart(service)}
+                                            style={button} variant='outlined'>
+                                            SAVE
+                                        </Button>
+                                        <Button style={button} variant='outlined' onClick={() => handleStpperNext(service)}
+                                        >
+                                            NEXT
+                                        </Button>
+                                    </Box>
 
                                 </Box>)
                             }
@@ -217,7 +239,12 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                             :
                             activeStep === 1 ?
                                 <Grid item xs={12} md={12} lg={7}>
-                                    <ServiceProvider category={category} handleNext={handleNext} />
+                                    <ServiceProvider
+                                        selectServiceId={selectServiceId}
+                                        selectService={selectService}
+                                        category={category}
+                                        handleNext={handleNext}
+                                    />
                                 </Grid>
                                 :
                                 activeStep === 3

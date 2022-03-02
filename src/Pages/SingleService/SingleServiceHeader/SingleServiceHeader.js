@@ -4,11 +4,10 @@ import { Box } from '@mui/system';
 import detailsBanner from '../../images/service-details-banner.png';
 import '../SingleService.css';
 import { Link } from 'react-router-dom';
-import { Grid, Paper, Typography } from '@mui/material';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 
 const SingleServiceHeader = ({ matchService }) => {
 
-    console.log(matchService.mainFeatures)
 
     return (
         <>
@@ -25,15 +24,20 @@ const SingleServiceHeader = ({ matchService }) => {
 
             </Box>
 
-            <Grid sx={{ ml: 10, mt: -24 }} item xs={12} md={3}>
-                <Paper elevation={1} sx={{ p: 2 }}>
+            <Grid sx={{ ml: 10, mt: -21 }} item xs={12} md={6} lg={3}>
+
+
+                <Paper elevation={1} sx={{ p: 2, mb: 2, borderRadius: 0 }}>
                     <Typography sx={{ fontSize: 20, mb: 1, fontWeight: 'bold' }} variant="h6">Main feature</Typography>
                     {
-                        matchService.mainFeatures.map((text, index) => (
+                        matchService?.mainFeatures.map((text, index) => (
                             <Typography sx={{ fontSize: 16, mb: 1 }} variant="h6"><li>{text}</li></Typography>
                         ))
                     }
                 </Paper>
+
+                {/* <Button variant='outlined' style={{ width: '100%', borderColor: 'white', color: 'white', borderRadius: 0 }}>SAVE</Button> */}
+
             </Grid>
 
         </>

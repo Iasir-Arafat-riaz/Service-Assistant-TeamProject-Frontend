@@ -38,6 +38,10 @@ import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
+import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
+import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/BecomeaProvider";
+import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
+import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
 // made a socket with server
 
@@ -56,7 +60,7 @@ const socket = io("https://fierce-meadow-12011.herokuapp.com/");
 // connecting the server
 
 const App = () => {
-  const {} = useFirebase();
+  const { } = useFirebase();
   // const { socket } = useSocket();
   // useEffect(() => {
   //   socket.on("get-message", message => {
@@ -111,6 +115,9 @@ const App = () => {
             element={<ServiceRequest />}
           />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
+          <Route path="/dashboard/savedservice" element={<SavedServices />} />
+          <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
+          <Route path="/dashboard/review/:id" element={<AddServiceReview />} />
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
@@ -124,6 +131,7 @@ const App = () => {
 
         </Route>
         <Route path="/contact" element={<ContactUs />} />
+        {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
           path="home/service-details/:serviceId"
           element={<SingleService />}

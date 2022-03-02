@@ -3,9 +3,9 @@ import MyOrdersTable from '../../DashboardComponents/OrdersTable/MyOrdersTable';
 
 const MyOrder = () => {
     return (
-        <div>
+        <>
             <MyOrdersTable></MyOrdersTable>
-        </div>
+        </>
     );
 };
 
