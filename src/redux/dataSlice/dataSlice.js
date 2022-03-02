@@ -25,6 +25,7 @@ const initialState = {
     testimonials: [],
     testimonialLoading: true,
     providers: [],
+    allChat: [],
     serviceProviderLoading: true,
     orderInfo: {}
 }
@@ -182,6 +183,16 @@ export const dataSlice = createSlice({
         addOrderInfo: (state, action) => {
             state.orderInfo = action.payload;
         },
+        addChat: (state, { payload }) => {
+            state.allChat = [...state.allChat, payload];
+        },
+        changeUserPosition: (state, { payload }) => {
+            console.log(payload);
+            const uid = payload?.uid;
+            const getUser = state.allUser.filter(user => user.uid === uid)[0];
+            const withoutUser = state.allUser.filter(user => user.uid !== uid);
+            state.allUser = [getUser, ...withoutUser]
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -245,6 +256,6 @@ export const dataSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo ,changeRole} = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, addChat, changeUserPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

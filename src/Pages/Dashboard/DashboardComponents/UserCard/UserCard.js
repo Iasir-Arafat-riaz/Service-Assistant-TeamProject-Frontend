@@ -35,7 +35,7 @@ const UserCard = props => {
         <Grid item xs={12} md={4}>
             <Paper component={Stack} direction='row' justifyContent='space-between' elevation={2}>
                 <Stack direction='row'>
-                    <Box>
+                    <Box  >
                         <img className='user-img' src={photoURL} alt={displayName} />
                     </Box>
                     <Box ml={2} sx={{ pb: 3 }}>

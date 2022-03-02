@@ -4,8 +4,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 
 const Message = (props) => {
-    const { author, data: { text }, time, avatar, displayName } = props.data;
-    console.log(author);
+    const { author, data: { text }, time, avatar, displayName, photoURL, email } = props.data;
 
     return (
         <Box
@@ -35,9 +34,14 @@ const Message = (props) => {
                 justifyContent: 'flex-end'
             }} className={author === 'admin' ? "flex justify-end" : 'block'}>
                 <Box sx={{ width: '50px' }}>
-                    <BigHead
-                        {...avatar}
-                    ></BigHead>
+                    {
+                        email ? <Avatar
+                            src={photoURL}
+                        ></Avatar> : <BigHead
+                            {...avatar}
+                        ></BigHead>
+                    }
+
                 </Box>
             </Box>
 

@@ -11,8 +11,8 @@ import { faker } from '@faker-js/faker';
 
 function Chatbot() {
     const { socket } = useSocket();
-    const data = useSelector(allData);
-    const [id, setId] = useState();
+    const { user, loading } = useSelector(allData);
+    const [uid, setUid] = useState();
     const [newMessagesCount, setNewMessagesCount] = useState(0);
     const [createUser, setCreateUser] = useState({});
     const [state, setState] = useState({
@@ -24,51 +24,60 @@ function Chatbot() {
     const initSocket = () => {
         const getChatId = localStorage.getItem("chatId");
         const userInfo = localStorage.getItem("user");
-
         if (!getChatId) {
+            // creating avatar name id
             const createId = uuid();
             const createAvatar = getRandomOptions();
             const randomName = faker.name.findName();
             setCreateUser({ avatar: createAvatar, displayName: randomName, });
+
+            //save item
             localStorage.setItem("chatId", JSON.stringify(createId));
             localStorage.setItem("user", JSON.stringify({ displayName: randomName, avatar: createAvatar }));
-            console.log('if', createId);
             return createId;
         }
         else {
             const initialId = JSON.parse(getChatId);
             const parseUserInfo = JSON.parse(userInfo);
             setCreateUser(parseUserInfo);
-            console.log('else', getChatId);
             return initialId;
         }
 
     }
-    // main working of socket 
+    // main working of socket  
     useEffect(() => {
-        const id = initSocket();
-        setId(id);
-    }, [])
+        if (!loading) {
+            if (!user?.email) {
+                const id = initSocket();
+                setUid(id);
+            }
+            else {
+                setUid(user?.uid);
+                setCreateUser({
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    email: user.email,
+                })
+            }
+        }
+
+    }, [user])
     useEffect(() => {
-        if (id) {
-            console.log(id, 'dfdkfljjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-            console.log({ id, ...createUser });
-            socket.emit('join', { id, ...createUser });
+        if (uid) {
+            socket.emit('join', { uid, ...createUser });
             socket.on("get-message", message => {
-                console.log(message, 'bot')
                 !state.isOpen && setNewMessagesCount(state => state + 1);
-                console.log(message);
                 sendMessage(message.data.text)
             });
+
         }
         return () => {
-            socket.emit('leave', id);
+            socket.emit('leave', uid);
         }
-    }, [id]);
+    }, [uid]);
     setTimeout(() => { },)
     function onMessageWasSent(message) {
-        socket.emit('message', { ...message, displayName: createUser.displayName, avatar: createUser.avatar, id, time: `${new Date()}` })
-
+        socket.emit('message', { ...message, ...createUser, uid, time: `${new Date()}` })
         setState(state => ({
             ...state,
             messageList: [...state.messageList, message]

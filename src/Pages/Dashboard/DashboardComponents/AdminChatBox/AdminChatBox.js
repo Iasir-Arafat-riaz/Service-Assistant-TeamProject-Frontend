@@ -1,49 +1,43 @@
 import { Box, Grid, Input, Paper, Typography, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useSocket from '../../../../Hooks/useSocket';
-import { allData } from '../../../../redux/dataSlice/dataSlice';
+import { addChat, allData } from '../../../../redux/dataSlice/dataSlice';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { useForm } from 'react-hook-form';
 import Message from '../Message/Message';
-import { adminAvatar } from '../../../../utilities/bighead';
 
 const AdminChatBox = props => {
     const { socket } = useSocket();
-    const id = props.id;
-    const data = useSelector(allData);
+    const dispatch = useDispatch();
+    const uid = props.uid;
+    const { user, allChat } = useSelector(allData);
     const [messages, setMessages] = useState([]);
     const { register, reset, handleSubmit, watch, formState: { errors } } = useForm();
     const avatar = {}
     const onSubmit = data => {
-        const mainData = { author: "admin", display: 'admin', avatar: { ...adminAvatar() }, type: "text", data, id, time: `${new Date()}` }
-        console.log(mainData);
+        const mainData = { author: "admin", display: 'admin', photoURL: 'https://i.ibb.co/bL20gPC/admin-icon-png-12.png', type: "text", data, uid, email: user.email, time: `${new Date()}`, }
+        dispatch(addChat(mainData))
         socket.emit('message', mainData)
-        setMessages(messages => [...messages, mainData])
         reset();
     }
     // main working of socket 
     useEffect(() => {
-        console.log(id);
-        socket.emit('join', { id });
+        const thisChat = allChat.filter(data => data.uid === uid)
+        setMessages(thisChat);
+        // socket.emit('join', { id });
         return () => {
-            socket.emit('leave', id);
+            // socket.emit('leave', id);
             setMessages([]);
         }
-    }, [id]);
-    useEffect(() => {
-        socket.on("get-message", message => {
-            console.log(message, 'bot')
-            setMessages(messages => [...messages, message])
-        });
-    }, [])
-    console.log(id);
+    }, [uid, allChat]);
+
     return (
         <Box>
             <Box height={"70vh"} sx={{ px: 1, overflow: 'scroll', background: '#eae7fa36' }}>
                 {
-                    id ?
+                    uid ?
                         messages.map(messageData => <Message key={messageData.time} data={messageData}></Message>) : <Stack
                             sx={{ height: '100%', }}
                             justifyContent='center'
