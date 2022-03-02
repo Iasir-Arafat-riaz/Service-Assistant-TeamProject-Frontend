@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Paper, TextareaAutosize, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import logo from '../../images/logo.png';
+import CoLogo from "../../images/web-logo.png"
 import React, { useEffect } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { VscCallOutgoing } from 'react-icons/vsc';
@@ -33,8 +34,8 @@ const Contact = () => {
                             <VscCallOutgoing style={{ fontSize: 25, color: '#FF5E14' }} />
 
                             <span>
-                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>8 800 567.890.11</Typography>
-                                <Typography variant='body2'>Mon-Fri 9am-6pm</Typography>
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>+8801622118833</Typography>
+                                <Typography variant='body2'>24/7 Customer Support</Typography>
                             </span>
 
                         </Box>
@@ -73,10 +74,11 @@ const Contact = () => {
 
                     <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} >
                         <Box sx={{ display: 'flex', alignItems: "center", gap: 1 }}>
-                            <img src={logo} alt="" />
+
                             <span>
-                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Melbourne, Australia</Typography>
-                                <Typography variant='body2'> 795 South Park Avenue</Typography>
+                            <img width={100} src={CoLogo} alt="" />
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Dhaka,Banladesh</Typography>
+                                <Typography variant='body2'> City Center, Motijheel</Typography>
                             </span>
                         </Box>
 
