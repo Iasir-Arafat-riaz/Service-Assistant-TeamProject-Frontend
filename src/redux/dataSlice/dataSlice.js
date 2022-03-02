@@ -74,7 +74,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "http://localhost:5000/services"
+            "https://fierce-meadow-12011.herokuapp.com/services"
         ).then((res) => res.json());
         return response;
     }
@@ -83,7 +83,7 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await axios.get("http://localhost:5000/singleservice")
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
         return response.data;
     }
 );
@@ -91,7 +91,7 @@ export const singleService = createAsyncThunk(
 export const websiteReviews = createAsyncThunk(
     "testimonials/data",
     async () => {
-        const response = await axios.get("http://localhost:5000/reviews")
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
         return response.data;
     }
 )

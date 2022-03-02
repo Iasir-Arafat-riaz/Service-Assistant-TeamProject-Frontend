@@ -21,7 +21,7 @@ const CheckoutForm = () => {
     const price = cartItems[0].Price;
 
     useEffect(() => {
-        fetch('http://localhost:5000/myorder/createpaymentstatus', {
+        fetch('https://fierce-meadow-12011.herokuapp.com/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -80,7 +80,7 @@ const CheckoutForm = () => {
             setSuccess("your payment is done");
             setProcessing(false);
             const data = { ...cartItems[0], orderInfo: orderInfo };
-            axios.post('http://localhost:5000/myorder', { data }).then(() => {
+            axios.post('https://fierce-meadow-12011.herokuapp.com/myorder', { data }).then(() => {
             });
         };
     };
