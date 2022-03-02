@@ -38,6 +38,7 @@ import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
+import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
 
 // made a socket with server
 
@@ -114,6 +115,10 @@ const App = () => {
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
+          />
+          <Route
+            path="/dashboard/provider/appointment"
+            element={<AppointmentRequest />}
           />
 
           {/* add service request from service provider */}
