@@ -74,9 +74,9 @@ const Contact = () => {
 
                     <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} >
                         <Box sx={{ display: 'flex', alignItems: "center", gap: 1 }}>
-
+                        <img width={100} src={logo} alt="" />
                             <span>
-                            <img width={100} src={CoLogo} alt="" />
+                            
                                 <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Dhaka,Banladesh</Typography>
                                 <Typography variant='body2'> City Center, Motijheel</Typography>
                             </span>
