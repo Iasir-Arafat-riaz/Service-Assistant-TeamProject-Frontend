@@ -33,8 +33,8 @@ const Contact = () => {
                             <VscCallOutgoing style={{ fontSize: 25, color: '#FF5E14' }} />
 
                             <span>
-                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>8 800 567.890.11</Typography>
-                                <Typography variant='body2'>Mon-Fri 9am-6pm</Typography>
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>+8801622118833</Typography>
+                                <Typography variant='body2'>24/7 Customer Support</Typography>
                             </span>
 
                         </Box>
@@ -75,8 +75,8 @@ const Contact = () => {
                         <Box sx={{ display: 'flex', alignItems: "center", gap: 1 }}>
                             <img src={logo} alt="" />
                             <span>
-                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Melbourne, Australia</Typography>
-                                <Typography variant='body2'> 795 South Park Avenue</Typography>
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Dhaka,Banladesh</Typography>
+                                <Typography variant='body2'> City Center, Motijheel</Typography>
                             </span>
                         </Box>
 
