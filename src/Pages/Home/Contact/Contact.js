@@ -1,6 +1,7 @@
 import { Button, Container, Grid, Paper, TextareaAutosize, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import logo from '../../images/logo.png';
+import CoLogo from "../../images/web-logo.png"
 import React, { useEffect } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { VscCallOutgoing } from 'react-icons/vsc';
@@ -73,8 +74,9 @@ const Contact = () => {
 
                     <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} >
                         <Box sx={{ display: 'flex', alignItems: "center", gap: 1 }}>
-                            <img src={logo} alt="" />
+
                             <span>
+                            <img width={100} src={CoLogo} alt="" />
                                 <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Dhaka,Banladesh</Typography>
                                 <Typography variant='body2'> City Center, Motijheel</Typography>
                             </span>
