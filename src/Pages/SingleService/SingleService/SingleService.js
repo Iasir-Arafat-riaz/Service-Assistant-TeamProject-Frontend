@@ -10,7 +10,7 @@ import Navigation from "../../SharedRoute/Navigation/Navigation";
 import { setItemInLocal } from "../../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, singleService } from "../../../redux/dataSlice/dataSlice";
-
+import Footer from '../../SharedRoute/Footer/Footer';
 const SingleService = () => {
   const { serviceId } = useParams();
 
@@ -55,6 +55,7 @@ const SingleService = () => {
             // question3={question3}
             matchService={matchService}
           />
+         
         </Box>
       )}
     </>

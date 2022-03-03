@@ -25,7 +25,7 @@ const ServiceOverview = ({ matchService, question1,
         <>
 
 
-            <Box>
+            <Box >
                 <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 4 }}>Overview of {matchService?.Title}</Typography>
 
                 <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1[0]}</Typography>

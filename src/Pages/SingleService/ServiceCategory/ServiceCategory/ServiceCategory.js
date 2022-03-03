@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import CategoryModal from '../CategoryModal/CategoryModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { allData, singleService } from '../../../../redux/dataSlice/dataSlice';
+import './serviceCategory.css';
 
 const ServiceCategory = ({ service }) => {
 
@@ -30,7 +31,8 @@ const ServiceCategory = ({ service }) => {
         justifyContent: 'space-between',
         background: '#f8f8f8',
         mb: 3,
-        borderRadius: 2
+        borderRadius: 2,
+        p: 2
     };
 
     return (
@@ -42,18 +44,46 @@ const ServiceCategory = ({ service }) => {
                     }
                 </Box>
                 :
-                <Paper elevation={3} sx={{ py: 5, px: 2, background: "#fff" }}>
 
-
-                    <Typography variant='h5' sx={{ fontWeight: "bold" }}>{service.Title}</Typography>
-                    <Button variant="outlined" sx={{ mb: 3, p: 1, fontSize: 17, mt: 2, border: '1px solid #FF5E14', color: "#FF5E14" }}>{service.Rating} out of 5</Button>
+                <Paper
+                    className="categoryBox"
+                    elevation={3}
+                    sx={{
+                        py: 5,
+                        px: 2,
+                        mr: 5,
+                        position: 'fixed',
+                        scrollBehavior: 'smooth',
+                        top: '30%',
+                        zIndex: 1
+                    }}>
+                    <Typography
+                        variant='h5'
+                        sx={{
+                            fontWeight: "bold",
+                            color: '#fff'
+                        }}>
+                        {service.Title}
+                    </Typography>
+                    <Button
+                        variant="outlined"
+                        sx={{
+                            mb: 3,
+                            p: 1,
+                            fontSize: 17,
+                            mt: 2,
+                            border: '1px solid #FFF',
+                            color: "#FFF"
+                        }}> 
+                        {service.Rating} out of 5
+                    </Button>
 
 
                     {
                         matchService?.allServices?.map((service, index) => <Box
                             onClick={() => handleOpen(index)}
                             sx={box} key={index}>
-                            <img type="button" src={service.Image} width="60" alt={service.Title} />
+                            {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
                             <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
                             <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />
                         </Box>)

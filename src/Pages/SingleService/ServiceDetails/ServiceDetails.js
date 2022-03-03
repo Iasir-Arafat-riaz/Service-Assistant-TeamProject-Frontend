@@ -1,6 +1,7 @@
 import { Container, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import Footer from '../../SharedRoute/Footer/Footer';
 import ServiceCategory from '../ServiceCategory/ServiceCategory/ServiceCategory';
 import AllServicesList from './AllServicesList';
 import ServiceOverview from './ServiceOverview';
@@ -9,9 +10,9 @@ const ServiceDetails = ({ matchService, question1, question2, question3 }) => {
 
     return (
 
-        <Container sx={{pt: 10}}>
+        <Container sx={{ pt: 10, pb: 10 }}>
             <Grid container spacing={6}>
-{/* 
+                {/* 
                 <Grid item xs={12} md={6} lg={3} >
                     <AllServicesList />
                 </Grid> */}
@@ -23,8 +24,9 @@ const ServiceDetails = ({ matchService, question1, question2, question3 }) => {
                 <Grid item xs={12} md={6} lg={4}>
                     <ServiceCategory service={matchService} />
                 </Grid>
-
+              
             </Grid>
+
         </Container>
     );
 };
