@@ -7,8 +7,6 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 
 import io from "socket.io-client";
 
-import { useEffect } from "react";
-
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";

@@ -8902,11 +8902,6 @@
     "raf" "^3.4.0"
     "react-transition-group" "2.9.0"
 
-"react-speech-recognition@^3.9.0":
-  "integrity" "sha512-K42atEDi6P6cIuDnqDG0guzKeLaPlxKjZebhoLbgaJAflzhikrUSQnncCDBE3KXSPk7ASfBoykz+uqp8sB8VFQ=="
-  "resolved" "https://registry.npmjs.org/react-speech-recognition/-/react-speech-recognition-3.9.0.tgz"
-  "version" "3.9.0"
-
 "react-toastify@^8.2.0":
   "integrity" "sha512-Pg2Ju7NngAamarFvLwqrFomJ57u/Ay6i6zfLurt/qPynWkAkOthu6vxfqYpJCyNhHRhR4hu7+bySSeWWJu6PAg=="
   "resolved" "https://registry.npmjs.org/react-toastify/-/react-toastify-8.2.0.tgz"

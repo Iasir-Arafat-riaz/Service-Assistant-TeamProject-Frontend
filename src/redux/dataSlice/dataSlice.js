@@ -74,7 +74,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "https://fierce-meadow-12011.herokuapp.com/services"
+            "http://localhost:5000/services"
         ).then((res) => res.json());
         return response;
     }
@@ -83,7 +83,7 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+        const response = await axios.get("http://localhost:5000/singleservice")
         return response.data;
     }
 );

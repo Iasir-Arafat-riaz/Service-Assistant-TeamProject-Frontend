@@ -20,7 +20,7 @@ const SingleService = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+      .get("http://localhost:5000/singleservice")
       .then((res) => {
         setServiceDetails(res.data);
         setLoading(false);
@@ -36,8 +36,8 @@ const SingleService = () => {
   );
   const question1 = Object?.keys(matchService?.overview[0]);
 
-  const question2 = Object?.keys(matchService?.overview[1]);
-  const question3 = Object?.keys(matchService?.overview[2]);
+  // const question2 = Object?.keys(matchService?.overview[1]);
+  // const question3 = Object?.keys(matchService?.overview[2]);
 
   // const question2 = Object?.keys(matchService?.overview[1]);
   // const question3 = Object?.keys(matchService?.overview[2]);

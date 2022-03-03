@@ -16,7 +16,11 @@ const ServiceOverview = ({ matchService, question1,
         color: "#383a3c"
     };
 
+    const [expanded, setExpanded] = React.useState(false);
 
+    const handleChange = (panel) => (event, isExpanded) => {
+        setExpanded(isExpanded ? panel : false);
+    };
     return (
         <>
 
@@ -50,20 +54,25 @@ const ServiceOverview = ({ matchService, question1,
 
                 {/* FQA */}
                 {
-                    matchService.FQA.map((question, index) => <Accordion sx={{ mb: 2, boxShadow: 1 }} key={index}>
-                        <AccordionSummary
-                            expandIcon={<ExpandMoreIcon sx={{ backgroundColor: '#FD7A3E', color: '#fff', borderRadius: '50%' }} />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <Typography sx={{ fontWeight: 'bold' }}>{Object.keys(matchService.FQA[index])}</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails >
-                            <Typography>
-                                {Object.values(matchService.FQA[index])}
-                            </Typography>
-                        </AccordionDetails>
-                    </Accordion>
+                    matchService.FQA.map((question, index) =>
+                        <Accordion
+                            expanded={expanded === index}
+                            onChange={handleChange(index)}
+                            sx={{ mb: 2, boxShadow: 1 }}
+                            key={index}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon sx={{ backgroundColor: '#FD7A3E', color: '#fff', borderRadius: '50%' }} />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                            >
+                                <Typography sx={{ fontWeight: 'bold' }}>{Object.keys(matchService.FQA[index])}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails >
+                                <Typography>
+                                    {Object.values(matchService.FQA[index])}
+                                </Typography>
+                            </AccordionDetails>
+                        </Accordion>
                     )
                 }
 
