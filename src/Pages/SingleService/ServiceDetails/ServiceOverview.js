@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion, AccordionDetails, AccordionSummary, ListItem, ListItemText, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Grid, ListItem, ListItemText, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -26,7 +26,7 @@ const ServiceOverview = ({ matchService, question1,
 
 
             <Box>
-                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4 }}>Overview of {matchService?.Title}</Typography>
+                <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 4 }}>Overview of {matchService?.Title}</Typography>
 
                 <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1[0]}</Typography>
 
@@ -58,7 +58,7 @@ const ServiceOverview = ({ matchService, question1,
                         <Accordion
                             expanded={expanded === index}
                             onChange={handleChange(index)}
-                            sx={{ mb: 2, boxShadow: 1 }}
+                            
                             key={index}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon sx={{ backgroundColor: '#FD7A3E', color: '#fff', borderRadius: '50%' }} />}
@@ -76,10 +76,25 @@ const ServiceOverview = ({ matchService, question1,
                     )
                 }
 
-
                 {/* how to order */}
                 <Typography variant="h5" sx={{ fontWeight: 'bold', mt: 5, mb: 2 }}>How to order</Typography>
                 <OrderStepper />
+
+                <Grid container>
+                    <Grid>
+                        <Typography variant="h5" sx={{ fontWeight: 'bold', mt: 5 }}>Preparations against COVID-19</Typography>
+                        <img sx={{width: '30%'}} src="https://i.ibb.co/JBDm0Sw/safety.png" alt="safety"/>
+                        <Typography variant="h5">We are well-equipped and well-prepared to protect your health and hygiene while serve you. Our preparations include-</Typography>
+                        <Typography variant="h6">
+                            <ul>
+                                <li>Checked Health condition of service specialist</li>
+                                <li>Ensuring use of masks, hand sanitisers, gloves, etc</li>
+                                <li>Disinfecting equipments before and after the work</li>
+                                <li>Maintaining social distancing</li>
+                            </ul>
+                        </Typography>
+                    </Grid>
+                </Grid>
 
                 {/* service reviews */}
                 <Typography variant="h5" sx={{ fontWeight: 600, mt: 5, mb: 4 }}>Review of {matchService?.Title}</Typography>
