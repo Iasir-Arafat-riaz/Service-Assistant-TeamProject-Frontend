@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Launcher } from 'popup-chat-react'
 import "./Chatbot.css"
 import { useSelector, useDispatch } from 'react-redux';
-import { allData, getSocket } from '../../redux/dataSlice/dataSlice';
+import { allData, getSocket, postChat } from '../../redux/dataSlice/dataSlice';
 import uuid from 'react-uuid'
 import useSocket from '../../Hooks/useSocket';
 import { getRandomOptions } from '../../utilities/bighead';
 import { faker } from '@faker-js/faker';
+import axios from 'axios';
 // import monsterImgUrl from '../../images/banner-1.jpg'
 
 function Chatbot() {
     const { socket } = useSocket();
     const { user, loading } = useSelector(allData);
+    const dispatch = useDispatch()
     const [uid, setUid] = useState();
+    const [myChats, setMyChats] = useState([]);
     const [newMessagesCount, setNewMessagesCount] = useState(0);
     const [createUser, setCreateUser] = useState({});
     const [state, setState] = useState({
@@ -20,6 +23,17 @@ function Chatbot() {
         isOpen: false,
         fileUpload: true,
     });
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/chat/${uid}`)
+            .then(res => {
+                setState(state => ({
+                    ...state,
+                    messageList: [...state.messageList, ...res.data]
+                }));
+            })
+    }, [uid])
+
     //get id and init socket 
     const initSocket = () => {
         const getChatId = localStorage.getItem("chatId");
@@ -34,6 +48,7 @@ function Chatbot() {
             //save item
             localStorage.setItem("chatId", JSON.stringify(createId));
             localStorage.setItem("user", JSON.stringify({ displayName: randomName, avatar: createAvatar }));
+
             return createId;
         }
         else {
@@ -50,6 +65,7 @@ function Chatbot() {
             if (!user?.email) {
                 const id = initSocket();
                 setUid(id);
+                console.log('id create', id);
             }
             else {
                 setUid(user?.uid);
@@ -61,10 +77,15 @@ function Chatbot() {
             }
         }
 
-    }, [user])
+    }, [user, loading])
     useEffect(() => {
+        if (!createUser.email) {
+            if (uid) {
+                socket.emit('join', { uid, ...createUser })
+            }
+        }
         if (uid) {
-            socket.emit('join', { uid, ...createUser });
+
             socket.on("get-message", message => {
                 !state.isOpen && setNewMessagesCount(state => state + 1);
                 sendMessage(message.data.text)
@@ -77,7 +98,10 @@ function Chatbot() {
     }, [uid]);
     setTimeout(() => { },)
     function onMessageWasSent(message) {
-        socket.emit('message', { ...message, ...createUser, uid, time: `${new Date()}` })
+        const mainMessage = { ...message, ...createUser, uid, time: `${new Date()}` }
+        socket.emit('message', mainMessage);
+        console.log(message);
+        dispatch(postChat(mainMessage))
         setState(state => ({
             ...state,
             messageList: [...state.messageList, message]

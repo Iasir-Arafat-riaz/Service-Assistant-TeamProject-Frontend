@@ -12,14 +12,14 @@ const ClientCard = props => {
     const allMessage = allChat.filter(data => data?.uid === uid);
     const lastMessage = allMessage[allMessage.length - 1];
     return (
-        <Paper sx={{
+        <Paper elevation={uid === currentId ? 2 : 1} sx={{
             pb: 1, mb: 2,
             transition: 'all .3s ',
-            background: uid === currentId ? '#eae7fa78' : '#eae7fa36',
+            background: uid === currentId ? '#f3f3f3' : '#fff',
             borderLeft: '2px solid transparent',
             borderColor: uid === currentId ? '#ff631b8a' : 'transparent'
 
-        }} onClick={() => handleClick(uid)}>
+        }} onClick={() => handleClick(uid, props.data)}>
             <Stack direction='row'>
                 {
                     email ? <Stack direction='row' justifyContent='center' alignItems='center' style={{ width: '80px', }}>

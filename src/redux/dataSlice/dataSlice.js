@@ -140,6 +140,21 @@ export const serviceProviders = createAsyncThunk(
         return response.data;
     }
 );
+export const postChat = createAsyncThunk(
+    "chat/postChat",
+    async (info) => {
+        const response = await axios.post('http://localhost:5000/chat', info)
+        return response.data;
+    }
+);
+export const getChatFromDb = createAsyncThunk(
+    "chat/postChat",
+    async (info) => {
+        const response = await axios.get(`http://localhost:5000/chat`);
+        return response.data;
+    }
+);
+
 
 export const dataSlice = createSlice({
     name: 'data',
@@ -251,6 +266,13 @@ export const dataSlice = createSlice({
                 state.allUser = payload;
                 state.getLoad = false;
             })
+
+            .addCase(getChatFromDb.fulfilled, (state, { payload }) => {
+                if (payload.length) {
+                    state.allChat = payload
+                }
+            })
+
     },
 })
 

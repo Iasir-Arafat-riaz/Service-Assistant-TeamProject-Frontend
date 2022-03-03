@@ -20,7 +20,7 @@ const Message = (props) => {
                 mr: author === 'admin' ? 2 : 0,
                 ml: author === 'admin' ? 0 : 2
             }} className={` ${author === 'admin' ? 'mr-2 md:mr-5' : 'ml- md:ml-5'}`}>
-                <Stack direction='col'>
+                <Stack direction='column'>
                     <Typography variant='subtitle1' component='span'
                         sx={{ wordBreak: " break-all", p: 1, px: 2 }}
                         className='break-all max-w-lg text-left p-2 px-3'>
