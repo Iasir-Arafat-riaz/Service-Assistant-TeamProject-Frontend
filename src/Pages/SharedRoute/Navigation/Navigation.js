@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import axios from 'axios'
 import {
   Divider,
   Drawer,
@@ -17,6 +18,9 @@ import {
   MenuItem,
   Container,
 } from "@mui/material";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import Popover from '@mui/material/Popover';
+import Badge from '@mui/material/Badge';
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
@@ -27,11 +31,11 @@ import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
 import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
-import "./Navigation.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { allData } from "../../../redux/dataSlice/dataSlice";
 import useFirebase from "../../../Hooks/useFirebase";
+import "./Navigation.css";
 
 const Navigation = () => {
   const navRef = useRef(null);
@@ -43,11 +47,30 @@ const Navigation = () => {
   const { user } = useSelector(allData);
   const { handleSignOut } = useFirebase();
   const goHome = () => {
-    navigate("/home");
+    navigate("/home")
+  }
+  // Mui popover for notificatio 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const [notificationNumber, setNotificationNumber] = useState([])
   useEffect(() => {
-    // console.log(navRef.current.classList);
+    const api = `http://localhost:5000/notification/${user?.email}`
+    axios.get(api).then((res) => {
+      console.log(res.data, "got notification");
+      setNotificationNumber(res.data)
+
+    });
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
@@ -304,11 +327,67 @@ const Navigation = () => {
             )}
 
             {user?.email && (
-              <Tooltip arrow title="My Account">
-                <IconButton onClick={handleOpenUserMenu}>
-                  <Avatar alt="Remy Sharp" src={user?.photoURL} />
-                </IconButton>
-              </Tooltip>
+              <>
+                <>
+
+
+                  <Button aria-describedby={id} variant="" onClick={handleClick}>
+                    <Badge badgeContent={notificationNumber.length} color="primary">
+                      <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
+
+                    </Badge>
+                  </Button>
+                  <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Typography sx={{ p: 2 }}>
+                      {
+                        notificationNumber.map(notificationMessage =>
+                          //   <div className="notificationBar">
+
+                          //   <div><img src={notificationMessage.image} alt="notification image" width="120px" height="60px"></img></div>
+                          //   <div>
+
+                          //   {notificationMessage.message} <br>
+                          //   </br>
+                          //   provider name: Ac service <br>
+                          //   </br>
+                          //   Date: 24 january, 2022
+                          //   </div>
+
+                          // </div>
+                          <div class="notifi-box" id="box">
+                            {/* <h2>Notifications <span>17</span></h2> */}
+                            <div class="notifi-item">
+                              <img src={notificationMessage.image} width="120px" height="60px" alt="img" />
+                              <div class="text">
+                                <h4>Elias Abdurrahman</h4>
+                                <p>@lorem ipsum dolor sit amet</p>
+                              </div>
+                            </div>
+
+
+                          </div>
+
+                        )
+                      }</Typography>
+                  </Popover>
+
+                </>
+                <Tooltip arrow title="My Account">
+                  <IconButton onClick={handleOpenUserMenu}>
+                    <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                  </IconButton>
+
+                </Tooltip>
+              </>
             )}
 
             {user?.email && (
@@ -328,10 +407,16 @@ const Navigation = () => {
                 onClose={handleCloseUserMenu}
               >
                 {/* menu items */}
+
+
+
                 <MenuItem
                   sx={{ display: "grid", gap: 1, justifyContent: "center" }}
                 >
-                  <Box sx={{ display: "flex", justifyContent: "center" }}>
+
+                  <Box
+                    sx={{ display: "flex", justifyContent: "center" }}
+                  >
                     <Avatar
                       style={{ borderRadius: "50%", margin: "0 auto" }}
                       src={user?.photoURL}
