@@ -76,6 +76,9 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                                 defaultValue={user.email}
                             />
 
+
+
+
                             <TextField sx={inputStyle} id="outlined-basic" label="Your address where you available for deliver *" variant="outlined" {...register("address", { required: true })} />
 
                             <TextField sx={inputStyle} id="outlined-multiline-static"

@@ -80,7 +80,8 @@ const CheckoutForm = () => {
             setError('');
             setSuccess("your payment is done");
             setProcessing(false);
-            const data = { ...selectedService, orderInfo: orderInfo };
+            const date = new Date();
+            const data = { ...selectedService, orderInfo: orderInfo, date: date };
             axios.post('http://localhost:5000/myorder', data).then(() => {
             });
         };

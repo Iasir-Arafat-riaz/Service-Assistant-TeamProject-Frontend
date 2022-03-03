@@ -12,19 +12,16 @@ import { useDispatch } from 'react-redux';
 const MyOrdersTable = () => {
 
     const [savedService, setSavedService] = useState([]);
-    const { user } = useSelector(allData);
+    const { user, singleServiceDetails } = useSelector(allData);
     const [loading, setLoading] = useState(true);
-    const [checkInput, setCheckInput] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
 
-    // input checked
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
-
+    // data load
     useEffect(() => {
         setLoading(true)
         fetch(`http://localhost:5000/myorder?email=${user.email}`).then(res => res.json()).then(data => {
@@ -35,19 +32,23 @@ const MyOrdersTable = () => {
     }, [user])
 
 
-    // console.log(localStorage.getItem('idToken'));
     if (loading) {
         return <h3>Loading...</h3>
     };
 
-    // reviewIndex
-    // to={`/dashboard/review/${service?.selectServiceId}`} 
 
-
+    // hanlde change route
     const handleRouteChange = (selectServiceId, index) => {
         navigate(`/dashboard/review/${selectServiceId}`);
-        dispatch(reviewServiceIndex(index));
+        dispatch(reviewServiceIndex(parseInt(index) + 1));
+        // console.log(index)
+        // parentId = selectServiceId
     };
+
+
+
+
+
 
 
     return (
@@ -59,7 +60,9 @@ const MyOrdersTable = () => {
                     savedService?.map((service, index) => <Grid item key={index} xs={12} md={6} lg={4} >
 
                         <Card sx={{ maxWidth: 345, mb: 4 }}>
+
                             <CardActionArea>
+
                                 <CardMedia
                                     component="img"
                                     height="140"
