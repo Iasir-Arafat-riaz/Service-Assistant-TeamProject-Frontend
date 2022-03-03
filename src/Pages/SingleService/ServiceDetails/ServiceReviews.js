@@ -19,7 +19,7 @@ const ServiceReviews = ({ service }) => {
 
             {
                 service.Reviews.slice(start, end).map((review, index) => <Box sx={{ display: 'flex', gap: 2, mt: 5 }} key={index}>
-                    <Avatar>{review.user?.slice(0, 1)}</Avatar>
+                    <Avatar>{review?.user?.slice(0, 1)}</Avatar>
                     <Box>
                         <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 15 }}>{review.user} Mahfujur Rahman</Typography>
 

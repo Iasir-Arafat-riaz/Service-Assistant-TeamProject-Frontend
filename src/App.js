@@ -7,8 +7,6 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 
 import io from "socket.io-client";
 
-import { useEffect } from "react";
-
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
@@ -37,6 +35,9 @@ import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
 import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/BecomeaProvider";
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
 import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
+
+import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
+
 
 // made a socket with server
 
@@ -116,6 +117,10 @@ const App = () => {
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
+          />
+          <Route
+            path="/dashboard/provider/appointment"
+            element={<AppointmentRequest />}
           />
 
           {/* add service request from service provider */}

@@ -10,10 +10,8 @@ import Navigation from "../../SharedRoute/Navigation/Navigation";
 import { setItemInLocal } from "../../../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, singleService } from "../../../redux/dataSlice/dataSlice";
-
+import Footer from '../../SharedRoute/Footer/Footer';
 const SingleService = () => {
-
-
   const { serviceId } = useParams();
 
   setItemInLocal(serviceId);
@@ -37,7 +35,7 @@ const SingleService = () => {
   // console.log(matchService)
 
   const question1 = Object?.keys(matchService?.overview[0]);
-  const question2 = Object?.keys(matchService?.overview[1]);
+  // const question2 = Object?.keys(matchService?.overview[1]);
   // const question3 = Object?.keys(matchService?.overview[2]);
 
   return (
@@ -52,9 +50,10 @@ const SingleService = () => {
           <ServiceDetails
             singleServiceLoading={singleServiceLoading}
             question1={question1}
-            question2={question2}
+            // question2={question2}
             matchService={matchService}
           />
+         
         </Box>
       )}
     </>

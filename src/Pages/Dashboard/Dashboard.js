@@ -207,6 +207,19 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Make Service Request"} />
             </ListItem>
+
+            <ListItem
+              component={NavLink}
+              activeStyle={{ color: "red" }}
+              to={`/dashboard/provider/appointment`}
+              button
+            >
+              <ListItemIcon>
+                <AnchorIcon/>
+              </ListItemIcon>
+              <ListItemText primary={"Appointment"} />
+            </ListItem>
+
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}

@@ -6,7 +6,7 @@ import './Footer.css';
 
 const Footer = () => {
     return (
-        <footer style={{ background: "#151414", height: 'auto', padding: 100 }}>
+        <footer style={{ background: "#151414", height: 'auto', padding: 100,  }}>
             <Container>
                 <Grid container spacing={2}>
 
