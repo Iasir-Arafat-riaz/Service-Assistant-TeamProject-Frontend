@@ -113,9 +113,8 @@ const AddServiceRequest = () => {
   // handle image input
   const handleImage = (e) => {};
 
-  // submit form
+  // submit form handler function
   const handleSubmit = (e) => {
-    e.preventDefault();
     const feature = serviceData.serviceFeature.split("\n");
     const included = serviceData.whatIncluded.split("\n");
     const serviceRequest = {
@@ -136,7 +135,27 @@ const AddServiceRequest = () => {
       serviceProvider: [],
       allServices: serviceOptions,
     };
-    console.log(serviceRequest);
+
+    let formData = new FormData();
+    // for (i in serviceRequest) {
+    //   formData.append(i, serviceData[i]);
+    // }
+    formData.append("parentService", serviceRequest.parentService);
+    formData.append("Title", serviceRequest.Title);
+    formData.append("Rating", serviceRequest.Rating);
+    formData.append("FQA", JSON.stringify(serviceRequest.FQA));
+    formData.append("overview", JSON.stringify(serviceRequest.overview));
+    formData.append(
+      "mainFeatures",
+      JSON.stringify(serviceRequest.mainFeatures)
+    );
+    formData.append("Reviews", JSON.stringify(serviceRequest.Reviews));
+    formData.append(
+      "serviceProvider",
+      JSON.stringify(serviceRequest.serviceProvider)
+    );
+    formData.append("allServices", JSON.stringify(serviceRequest.allServices));
+    // formData ready to sent for saving
   };
 
   useEffect(() => {
