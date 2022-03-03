@@ -160,7 +160,7 @@ const Overview = () => {
                     <RoundedServiceCart allData={allData}></RoundedServiceCart>
                 </Grid>
                 <Grid item xs={12} md={9}>
-                    <OrdersTable></OrdersTable>
+                    <OrdersTable allOrders={allOrders}></OrdersTable>
                 </Grid>
             </Grid>
 
