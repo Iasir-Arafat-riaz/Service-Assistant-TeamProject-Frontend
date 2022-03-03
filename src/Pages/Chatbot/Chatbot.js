@@ -106,9 +106,8 @@ function Chatbot() {
             ...state,
             messageList: [...state.messageList, message]
         }));
-        if (state.messageList?.length === 0) {
-            sendMessage("Thanks For you question. will reply soon")
-        }
+
+        autoReplay(message);
     }
     // this is a test 
     function onFilesSelected(fileList) {
@@ -153,7 +152,44 @@ function Chatbot() {
         }));
     }
     console.log(newMessagesCount);
+    const qna = [
+        {
+            discount: 'we dont provider any discount '
+        },
+        {
+            "about provider": "Our providers are so well be heavier and have enough skill to make you work done  "
+        },
+        {
+            "how to be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
+        },
+        {
+            "be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
+        },
+        {
+            "orders": 'click here https://service-assistant-a2z.web.app/dashboard/myorders'
+        },
+        {
+            "my orders": 'click here https://service-assistant-a2z.web.app/dashboard/myorders'
+        },
+    ]
 
+    const autoReplay = ({ data: { text } }) => {
+        if (state.messageList?.length === 0) {
+            sendMessage("Thanks For you question. will reply soon")
+        }
+        console.log(text)
+        for (let element of qna) {
+            const question = Object.keys(element)
+            const ans = Object.values(element)
+            console.log(question);
+            if (text.toLowerCase().includes(question[0])) {
+                console.log('in', element);
+                sendMessage(ans[0] + ' replay.bot ');
+                break;
+            }
+        };
+
+    }
     return (
         <div >
             <Launcher

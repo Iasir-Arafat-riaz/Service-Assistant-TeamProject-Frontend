@@ -58,7 +58,7 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
+        const response = await axios.get(` http://localhost:5000/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
@@ -219,7 +219,7 @@ export const dataSlice = createSlice({
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
                 console.log(action.payload);
-                state.user = { ...state.user, role: action.payload.admin ? 'admin' : 'user' }
+                state.user = { ...state.user, role: action.payload.role }
                 state.loading = false;
             })
             .addCase(isAdmin.rejected, (state, action) => {

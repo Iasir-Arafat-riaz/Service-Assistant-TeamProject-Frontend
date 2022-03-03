@@ -19,9 +19,12 @@ const AdminChat = () => {
 
     useEffect(() => {
         socket.on('user', user => {
+            console.log(user);
             const getClients = saveUser(user);
             console.log('get Clients', getClients);
-            setAllClientLocal(getClients);
+            if (getClients) {
+                setAllClientLocal(getClients);
+            }
         });
         socket.on('get-message', message => {
             // add message change position of user 
@@ -50,7 +53,6 @@ const AdminChat = () => {
         }
     }, [allClientLocal])
     useEffect(() => {
-
         dispatch(getAllUser())
         dispatch(getChatFromDb());
 
@@ -82,7 +84,6 @@ const AdminChat = () => {
     return (
         <Box >
             <Grid container spacing={4}>
-
                 <Grid item xs={12} md={5}>
                     <Box height={"80vh"} sx={{ px: 1, overflow: 'scroll' }}  >
                         {
@@ -90,7 +91,7 @@ const AdminChat = () => {
                         }
                         <Typography variant='h6' gutterBottom>Random user</Typography>
                         {
-                            allClientLocal.map(userData => <ClientCard key={userData.uid} currentId={uid} data={userData} handleClick={handleClick}></ClientCard>)
+                            allClientLocal && allClientLocal?.map(userData => <ClientCard key={userData.uid} currentId={uid} data={userData} handleClick={handleClick}></ClientCard>)
                         }
                     </Box>
                 </Grid>
