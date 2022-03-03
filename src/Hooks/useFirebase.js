@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, getIdToken } from "firebase/auth";
 import { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux'
@@ -43,7 +43,6 @@ const useFirebase = () => {
 
     const signUpWithEmail = (info) => {
         const { name, email, password, location, navigate } = info;
-        console.log(info);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
@@ -93,6 +92,7 @@ const useFirebase = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 // setUser(user);
+                getIdToken(user).then(idToken => localStorage.setItem('idToken', idToken));
                 dispatch(login({
                     displayName: user.displayName,
                     email: user.email,
@@ -108,7 +108,7 @@ const useFirebase = () => {
             }
 
         });
-    }, []);
+    }, [auth]);
 
     const handleSignOut = () => {
         signOut(auth).then(() => {

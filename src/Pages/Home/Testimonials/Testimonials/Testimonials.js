@@ -35,8 +35,8 @@ const Testimonials = () => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-                    infinite: true,
-                    dots: true
+                    infinite: false,
+                    dots: false
                 }
             },
             {

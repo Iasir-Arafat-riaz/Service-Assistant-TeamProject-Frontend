@@ -10,7 +10,7 @@ const Testimonial = ({ testiominal }) => {
     return (
 
 
-        <Paper elevation={3} sx={{ p: 3, width: 300, m: 1, borderRadius: 2 }}>
+        <Paper elevation={2} sx={{ p: 3, width: 300, borderRadius: 2, m: '5px auto' }}>
 
             <RiDoubleQuotesL style={{ display: 'block', fontSize: 22, color: "#FF5E14" }} />
 

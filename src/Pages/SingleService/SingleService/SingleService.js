@@ -8,54 +8,51 @@ import ServiceDetails from "../ServiceDetails/ServiceDetails";
 import Loading from "../../SharedRoute/Loader/Loading";
 import Navigation from "../../SharedRoute/Navigation/Navigation";
 import { setItemInLocal } from "../../../utils/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { allData, singleService } from "../../../redux/dataSlice/dataSlice";
 
 const SingleService = () => {
-  const [serviceDetials, setServiceDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
+
 
   const { serviceId } = useParams();
 
   setItemInLocal(serviceId);
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get("https://fierce-meadow-12011.herokuapp.com/singleservice")
-      .then((res) => {
-        setServiceDetails(res.data);
-        setLoading(false);
-      });
-  }, []);
+    dispatch(singleService());
+  }, [dispatch])
 
-  if (loading) {
+
+  const { singleServiceDetails, singleServiceLoading } = useSelector(allData)
+
+  if (singleServiceLoading) {
     return <Loading />;
   }
 
-  const matchService = serviceDetials?.find(
-    (service) => service.parentService == serviceId
+  const matchService = singleServiceDetails?.find(
+    (service) => parseInt(service.parentService) === parseInt(serviceId)
   );
+
+  // console.log(matchService)
+
   const question1 = Object?.keys(matchService?.overview[0]);
-
   const question2 = Object?.keys(matchService?.overview[1]);
-  const question3 = Object?.keys(matchService?.overview[2]);
-
-  // const question2 = Object?.keys(matchService?.overview[1]);
   // const question3 = Object?.keys(matchService?.overview[2]);
-
 
   return (
     <>
       <Navigation />
-      {loading ? (
+      {singleServiceLoading ? (
         <Loading />
       ) : (
         <Box>
           <Navigation />
           <SingleServiceHeader matchService={matchService} />
           <ServiceDetails
+            singleServiceLoading={singleServiceLoading}
             question1={question1}
-            // question2={question2}
-            // question3={question3}
+            question2={question2}
             matchService={matchService}
           />
         </Box>

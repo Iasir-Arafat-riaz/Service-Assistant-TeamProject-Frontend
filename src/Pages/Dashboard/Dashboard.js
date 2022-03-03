@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
+import SavedSearchOutlinedIcon from '@mui/icons-material/SavedSearchOutlined';
 import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -127,7 +128,7 @@ const Dashboard = (props) => {
               button
             >
               <ListItemIcon>
-                <AnchorIcon/>
+                <AnchorIcon />
               </ListItemIcon>
               <ListItemText primary={"Provider Overview"} />
             </ListItem>
@@ -167,7 +168,7 @@ const Dashboard = (props) => {
               <ListItemText primary={"Manage Products"} />
             </ListItem>
 
-            
+
             <ListItem
               component={NavLink}
               activeStyle={{ color: "red" }}
@@ -179,17 +180,17 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Add Products"} />
             </ListItem>
-            
+
 
             <ListItem
-           
+
               component={NavLink}
               activeStyle={{ color: "red" }}
               to={`/dashboard/addBanner`}
               button
             >
               <ListItemIcon>
-              <AddPhotoAlternateIcon/>
+                <AddPhotoAlternateIcon />
               </ListItemIcon>
               <ListItemText primary={"Add Banner"} />
             </ListItem>
@@ -273,6 +274,30 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Manage Testimonial"} />
             </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/savedservice`}
+              button
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Saved Service"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/becomeaprovider`}
+              button
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Become a provider ?"} />
+            </ListItem>
+
+
           </Box>
         }
         <ListItem button>

@@ -41,7 +41,7 @@ const MakeAdmin = () => {
 
   useEffect(() => {
     dispatch(getAllUser());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (allUser?.length) {

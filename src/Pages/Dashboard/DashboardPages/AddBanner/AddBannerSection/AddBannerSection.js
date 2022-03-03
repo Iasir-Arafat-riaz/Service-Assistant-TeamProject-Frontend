@@ -2,8 +2,12 @@ import {
   Autocomplete,
   Box,
   Button,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
   Stack,
   TextField,
   Typography,
@@ -46,41 +50,65 @@ const AddBannerSection = ({ banner }) => {
 
   return (
     <Box>
-      <Grid container spacing={2} alignItems="center" justifyContent="center">
+
+      <Grid sx={{ boxShadow: 2, p: 2, mb: 5 }} container spacing={2} alignItems="center" justifyContent="center">
+
         <Grid item xs={12} md={6}>
           <PreviewHeader bannerInfo={bannerInfo} banner={banner} />
         </Grid>
+
         <Grid item xs={12} md={6}>
-          <Paper elevation={3} sx={{ p: 2 }}>
+
+          <Box>
+
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack direction="column" elevation={2}>
+
+              <Stack direction="column">
+
                 <TextField
                   required
                   type="text"
                   sx={{ mb: 3 }}
                   {...register("imageUrl")}
                   label="Enter image url"
-                  variant="standard"
+                  variant="outlined"
                 />
+
                 <TextField
                   required
                   type="text"
                   sx={{ mb: 3 }}
                   {...register("bannerText")}
                   label="Write Banner text"
-                  variant="standard"
+                  variant="outlined"
                 />
-                <select id="formOption" {...register("bannerNumber")}>
+
+
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Banner number</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="formOption"
+                    {...register("bannerNumber")}
+                    label="Age"
+                  >
+                    <MenuItem value="One">Update First Banner</MenuItem>
+                    <MenuItem value="Two">Update Second Banner</MenuItem>
+                    <MenuItem value="Three">Update Third Banner</MenuItem>
+                  </Select>
+                </FormControl>
+                {/* 
+                <select style={{ padding: 15, width: '100%' }} id="formOption" {...register("bannerNumber")}>
                   <option value="One">Update First Banner</option>
                   <option value="Two">Update Second Banner</option>
                   <option value="Three">Update Third Banner</option>
-                </select>
-                <Button type="submit" variant="contained">
+                </select> */}
+                <Button sx={{ borderRadius: 0, p: 1, mt: 3 }} type="submit" variant="contained">
                   Add Banner
                 </Button>
               </Stack>
             </form>
-          </Paper>
+          </Box>
         </Grid>
       </Grid>
     </Box>

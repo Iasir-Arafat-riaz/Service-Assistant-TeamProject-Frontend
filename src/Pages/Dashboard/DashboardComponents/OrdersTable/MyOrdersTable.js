@@ -1,77 +1,125 @@
-import React from 'react';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import { Box, Card, CardActionArea, CardContent, Grid } from '@mui/material';
-import CategoryIcon from '@mui/icons-material/Category';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { Link } from 'react-router-dom';
+import { CardActionArea, Typography, CardMedia, CardContent, Grid, Card, Avatar, Chip } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { allData, reviewServiceIndex } from '../../../../redux/dataSlice/dataSlice';
+import { Box } from '@mui/system';
+import BadgeIcon from '@mui/icons-material/Badge';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import CallIcon from '@mui/icons-material/Call';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const MyOrdersTable = () => {
-    function createData(avatar, name, image, service, price, status,category) {
-        return { avatar, name, image, service, price, status,category };
-    }
 
-    const columns = [
-        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/tXJ6vWL/acmasterservice.jpg", "AC Basic Service", 1500, 'Approved','AC Repair Service'),
-        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/0D8zbWF/1617776411-microwaveovenrepairservices.jpg", "Microwave Oven Repair", 2700, 'Approved','Appliance Repair'),
-        createData('A2Z', '1 - 1.5 Ton', "https://i.ibb.co/MgdQXhG/1617878110-salonservicesformen.jpg", "Home Shifting", 4500, 'Approved','Mens Care')
-    ];
+    const [savedService, setSavedService] = useState([]);
+    const { user } = useSelector(allData);
+    const [loading, setLoading] = useState(true);
+    const [checkInput, setCheckInput] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+
+
+    // input checked
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+
+
+    useEffect(() => {
+        setLoading(true)
+        fetch(`http://localhost:5000/myorder?email=${user.email}`).then(res => res.json()).then(data => {
+            setSavedService(data);
+            setLoading(false);
+        })
+
+    }, [user])
+
+
+    // console.log(localStorage.getItem('idToken'));
+    if (loading) {
+        return <h3>Loading...</h3>
+    };
+
+    // reviewIndex
+    // to={`/dashboard/review/${service?.selectServiceId}`} 
+
+
+    const handleRouteChange = (selectServiceId, index) => {
+        navigate(`/dashboard/review/${selectServiceId}`);
+        dispatch(reviewServiceIndex(index));
+    };
+
+
     return (
-        < >
+        <>
             <Grid container spacing={2}>
-                {
-                    columns.map((column) =>
 
-                        <Grid item md={4}>
-                            <Card sx={{ maxWidth: 345 }}>
-                                <CardActionArea>
-                                    <CardMedia
-                                        component="img"
-                                        height="140"
-                                        image={column.image}
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                       <Box sx={{display: "flex", justifyContent: "space-between", alignItems: 'center'}}>
-                                       <Typography
-                                            gutterBottom
-                                            variant="h6" 
-                                            component="div">
-                                            {column.service}
-                                        </Typography>
-                                        <Typography
-                                            sx={{}}>
-                                            {column.status}
-                                        </Typography>
-                                       </Box>
-                                        <IconButton
-                                            aria-label="Category"
-                                            sx={{ paddingLeft: 0 }}>
-                                            <CategoryIcon />
-                                            <Link
-                                                to='/services'
-                                                style={{ textDecoration: 'none' }}>
-                                                <Typography
-                                                    sx={{ paddingLeft: 1 }}>
-                                                    {column.category}
-                                                </Typography>
-                                            </Link>
-                                        </IconButton>
-                                        <IconButton
-                                            aria-label="Payment"
-                                            sx={{ paddingLeft: "0px" }}>
-                                            <AttachMoneyIcon />
-                                            <Typography>
-                                                {column.price} BDT
-                                            </Typography>
-                                        </IconButton>
-                                    </CardContent>
-                                </CardActionArea>
-                            </Card>
-                        </Grid>
-                    )}
+
+                {
+                    savedService?.map((service, index) => <Grid item key={index} xs={12} md={6} lg={4} >
+
+                        <Card sx={{ maxWidth: 345, mb: 4 }}>
+                            <CardActionArea>
+                                <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={service?.parentService?.Image}
+                                    alt="green iguana"
+                                />
+
+                                <CardContent>
+
+                                    <Typography sx={{ fontSize: 22 }} gutterBottom variant="h5" component="div">
+                                        {service?.parentService?.Title}
+                                    </Typography>
+
+                                    <Typography sx={{ fontSize: 15, fontWeight: 'bold', mb: 1 }} variant="h6">Status: pending</Typography>
+
+                                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+
+                                        <Typography sx={{ fontSize: 15, fontWeight: 'bold', mb: 1 }} variant="h6">{service?.Name}</Typography>
+
+                                        <Typography sx={{ fontSize: 15, fontWeight: 'bold' }} variant="h6">Price: {service?.Price} tk</Typography>
+
+                                    </Box>
+
+                                    <Typography sx={{ fontSize: 15, fontWeight: 'bold' }} variant="h6">Service provider -</Typography>
+
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1, border: '1px solid #d0d0d0', borderRadius: 6 }}>
+
+                                        <Avatar alt="Remy Sharp" src={service.provider?.photoURL} />
+
+                                        <Box>
+                                            <Typography sx={{ fontSize: 15 }} variant="h6">{service?.provider?.displayName}</Typography>
+
+                                            <Typography sx={{ fontSize: 13 }} variant="h6">{service?.provider?.email}</Typography>
+                                        </Box>
+
+                                    </Box>
+
+                                    <Typography sx={{ fontSize: 15, fontWeight: 'bold', mt: 1 }} variant="h6">Order info -</Typography>
+
+
+                                    <Box>
+                                        <Typography sx={{ fontSize: 15 }} variant="h6">Name:- {service?.orderInfo?.name}</Typography>
+
+                                        <Typography sx={{ fontSize: 15 }} variant="h6">Phone:- {service?.orderInfo?.number}</Typography>
+
+                                        <Typography sx={{ fontSize: 15 }} variant="h6">Adress:- {service?.orderInfo?.address}</Typography>
+                                    </Box>
+
+                                    <span onClick={() => handleRouteChange(service.selectServiceId, index)} style={{ marginTop: 10, display: 'block', letterSpacing: 2, textDecoration: 'underline' }}>WRITE A REVIEW?</span>
+
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                    )
+                }
+
+
+
+
             </Grid>
         </>
     );

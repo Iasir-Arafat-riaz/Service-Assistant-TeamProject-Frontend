@@ -3,7 +3,7 @@ import React from "react";
 
 const RecentlyView = ({ Name, Img }) => {
   return (
-    <Box sx={{ width: 250, p: 0, borderRadius: 3, mb: 1 }}>
+    <Box sx={{ width: 250, p: 0, borderRadius: 3, mb: 1, m: '0 auto' }}>
       <Paper
         elevation={2}
         sx={{
