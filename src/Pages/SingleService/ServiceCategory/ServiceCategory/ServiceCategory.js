@@ -52,10 +52,9 @@ const ServiceCategory = ({ service }) => {
                         py: 5,
                         px: 2,
                         mr: 5,
-                        position: 'fixed',
-                        scrollBehavior: 'smooth',
                         top: '30%',
-                        zIndex: 1
+                        minWidth: '345px'
+                        
                     }}>
                     <Typography
                         variant='h5'

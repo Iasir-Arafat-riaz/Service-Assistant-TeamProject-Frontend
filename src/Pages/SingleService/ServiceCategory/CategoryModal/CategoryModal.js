@@ -23,9 +23,12 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '50%',
+    width: '70%',
     bgcolor: 'background.paper',
     boxShadow: 24,
+    height: '80vh',
+    overflowY: 'scroll',
+    overflowX:'hidden'
 };
 
 // box style
@@ -36,7 +39,8 @@ const box = {
     px: 2,
     background: "#F4F5F8",
     mb: 4,
-    pt: 1
+    pt: 1,
+   
 };
 
 const serviceOption = {
@@ -141,13 +145,13 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service }) => {
                 <Box sx={style}>
 
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3,}}>
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
                             AC servicing
                         </Typography>
                     </Box>
 
-                    <Button onClick={handleCloseModal} sx={{ mt: -25, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
+                    <Button onClick={handleCloseModal} sx={{ mt: -20, ml: -1 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
                     <Grid container spacing={0}>
 
                         <Box sx={{ width: '100%' }}>
