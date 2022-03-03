@@ -11,9 +11,10 @@ import {
 import Box from "@mui/material/Box";
 import ServiceDetailsForm from "./compoent/ServiceDetailsForm";
 
+// component
 const AddServiceRequest = () => {
   const [serviceData, setServiceData] = useState({
-    serviceTItle: "",
+    serviceName: "",
     serviceFeature: "",
     whatIncluded: "",
   });
@@ -34,26 +35,45 @@ const AddServiceRequest = () => {
     },
   ]);
 
-  const [serviceDetailsInput, setServiceDetailsInput] = useState([
-    { mainOption: 0, keyOption: 1 },
-  ]);
+  // handlers functions
+  const handleServiceChange = (e, index) => {
+    const newServiceOptions = serviceOptions.map((item) => {
+      if (item.optionId === index) {
+        if (item[e.target.name] === "serviceOptionImage") {
+          item[e.target.name] = e.target.files[0];
+        } else {
+          item[e.target.name] = e.target.value;
+        }
+      }
+      return item;
+    });
+    setServiceOptions(newServiceOptions);
+  };
 
   const handleChange = (e) => {
+    if (e.target.name === "serviceImage") {
+      setServiceData({ ...serviceData, [e.target.name]: e.target.files[0] });
+    }
     setServiceData({ ...serviceData, [e.target.name]: e.target.value });
   };
 
-  const handleServiceOptons = (e) => {
-    console.log(e.target.name, e.target.value);
+  const handleServiceOptons = (e, position, id) => {
+    const newServiceOptions = serviceOptions.map((item) => {
+      if (item.optionId === position) {
+        item.serviceDetails = item.serviceDetails.map((ele) => {
+          if (ele.optionKeyId === id) {
+            ele = { ...ele, [e.target.name]: e.target.value };
+          }
+          return ele;
+        });
+      }
+      return item;
+    });
+    setServiceOptions(newServiceOptions);
   };
 
   const handleAddMoreDetails = (index) => {
     console.log("add more details clicked", index);
-    const newArrInput = serviceDetailsInput.map((item) => {
-      if (item.mainOption === index) {
-        item.keyOption = item.keyOption + 1;
-      }
-      return item;
-    });
 
     const newServiceArr = serviceOptions.map((item) => {
       if (item.optionId === index) {
@@ -69,12 +89,9 @@ const AddServiceRequest = () => {
       return item;
     });
     setServiceOptions(newServiceArr);
-    setServiceDetailsInput(newArrInput);
   };
 
   const handleAddServiceField = () => {
-    console.log("clicked");
-    const len = serviceDetailsInput.length;
     const len2 = serviceOptions.length;
     setServiceOptions([
       ...serviceOptions,
@@ -92,10 +109,34 @@ const AddServiceRequest = () => {
         ],
       },
     ]);
-    setServiceDetailsInput([
-      ...serviceDetailsInput,
-      { mainOption: len, keyOption: 1 },
-    ]);
+  };
+  // handle image input
+  const handleImage = (e) => {};
+
+  // submit form
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const feature = serviceData.serviceFeature.split("\n");
+    const included = serviceData.whatIncluded.split("\n");
+    const serviceRequest = {
+      parentService: "",
+      Title: serviceData.serviceName,
+      Rating: 0,
+      FQA: [],
+      overview: [
+        { "Service Features": feature },
+        { "What's Excluded?": included },
+      ],
+      mainFeatures: [
+        "7 Days Service Warranty",
+        "24/7 Customer Support",
+        `Trusted & Reliable ${serviceData.serviceName} Technicians`,
+      ],
+      Reviews: [],
+      serviceProvider: [],
+      allServices: serviceOptions,
+    };
+    console.log(serviceRequest);
   };
 
   useEffect(() => {
@@ -129,6 +170,7 @@ const AddServiceRequest = () => {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
@@ -166,9 +208,10 @@ const AddServiceRequest = () => {
                   key={index}
                   handleAddMoreDetails={handleAddMoreDetails}
                   totalRow={item.serviceDetails.length}
-                  pos={index}
+                  pos={item.optionId}
                   serviceOption={item}
                   handleServiceOptons={handleServiceOptons}
+                  handleServiceChange={handleServiceChange}
                 />
               );
             })}
@@ -185,6 +228,13 @@ const AddServiceRequest = () => {
             </Button>
           </Box>
         </Grid>
+        <Button
+          variant="outlined"
+          sx={{ marginTop: "15px", marginLeft: "10px" }}
+          onClick={handleSubmit}
+        >
+          Submit form
+        </Button>
       </form>
     </>
   );
