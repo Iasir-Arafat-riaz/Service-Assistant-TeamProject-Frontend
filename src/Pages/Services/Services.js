@@ -13,6 +13,7 @@ import { makeStyles } from "@mui/styles";
 import ServiceCard from "./Component/ServiceCard";
 import Navigation from "../SharedRoute/Navigation/Navigation";
 import { allData, loadServiceCategory, singleService } from "../../redux/dataSlice/dataSlice";
+import Loading from "../SharedRoute/Loader/Loading";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -60,8 +61,7 @@ const Services = () => {
   }, []);
 
   if (serviceIsLoading) {
-    return <h1 style={{ marginTop: "100px" }}>Loading....</h1>;
-    // return <Loading />;
+    return <Loading/>
   }
 
   return (
