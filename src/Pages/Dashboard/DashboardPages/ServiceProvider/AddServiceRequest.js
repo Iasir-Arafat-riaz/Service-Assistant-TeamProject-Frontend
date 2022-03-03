@@ -138,7 +138,7 @@ const AddServiceRequest = () => {
 
     let formData = new FormData();
     // for (i in serviceRequest) {
-    //   formData.append(i, serviceData[i]);
+    //   formData.append(i, serviceData[i]); parentService, allServices,Title,Rating,FQA,overview,mainFeatures,Reviews,serviceProvider
     // }
     formData.append("parentService", serviceRequest.parentService);
     formData.append("Title", serviceRequest.Title);
@@ -156,6 +156,23 @@ const AddServiceRequest = () => {
     );
     formData.append("allServices", JSON.stringify(serviceRequest.allServices));
     // formData ready to sent for saving
+    const api="https://fierce-meadow-12011.herokuapp.com/servicerequest";
+
+    fetch(api, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          console.log(data);
+          console.log("Registration Successfull");
+         
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   useEffect(() => {
