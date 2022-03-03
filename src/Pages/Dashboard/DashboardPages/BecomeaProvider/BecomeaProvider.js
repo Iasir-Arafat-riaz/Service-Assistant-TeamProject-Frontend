@@ -48,7 +48,6 @@ const BecomeaProvider = () => {
             }
 
 
-            {allServices.length}
 
         </div>
     );

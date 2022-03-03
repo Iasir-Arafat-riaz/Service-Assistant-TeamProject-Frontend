@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert, Button, Grid, Paper, Rating, TextField, Typography } from '@mui/material';
@@ -6,7 +7,7 @@ import { Box } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { allData } from '../../../../redux/dataSlice/dataSlice';
+import { allData, parentServiceId } from '../../../../redux/dataSlice/dataSlice';
 import { singleService } from '../../../../redux/dataSlice/dataSlice';
 
 const AddServiceReview = () => {
@@ -34,6 +35,9 @@ const AddServiceReview = () => {
         mb: 3,
     };
 
+    useEffect(() => {
+        dispatch(parentServiceId(id));
+    }, [id])
 
     const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
     const today = new Date();
@@ -87,15 +91,33 @@ const AddServiceReview = () => {
     };
     // deleteReview
     const DeleteReview = () => {
+
+        swal({
+            title: "Are you sure you want to delete?",
+            // text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete(`http://localhost:5000/singleservice/deleteReview?parentId=${id}&&uid=${user.uid}`).then(res => {
+                        setDeleting(false);
+                        swal("Your review is deleted!", {
+                            icon: "success",
+                        });
+                    })
+
+                }
+            });
+
         setDeleting(true);
         // useEffect(() => {
-        axios.delete(`http://localhost:5000/singleservice/deleteReview?parentId=${id}&&uid=${user.uid}`).then(res => {
-            setDeleting(false)
-        })
+
         // }, [])
 
     }
-    console.log(matchService?.allServices)
+    // console.log(matchService?.allServices)
 
     return (
         <>
@@ -154,7 +176,7 @@ const AddServiceReview = () => {
 
             <Grid container spacing={2}>
 
-                <Grid item md={6} xs={12}>
+                <Grid item md={6} lg={4} xs={12}>
 
 
                     {
@@ -181,7 +203,7 @@ const AddServiceReview = () => {
                 </Grid>
 
                 {/* update form */}
-                <Grid item lg={6} xs={12}>
+                <Grid item lg={6} md={6} xs={12}>
                     {
                         openBox && <Paper elevation={3} sx={{ p: 2, width: { xs: 300, lg: 400 } }}>
 

@@ -27,7 +27,8 @@ const initialState = {
     serviceProviderLoading: true,
     orderInfo: {},
     selectedService: {},
-    reviewIndex: 0
+    reviewIndex: 0,
+    id: Number,
 }
 
 // async task
@@ -198,7 +199,10 @@ export const dataSlice = createSlice({
         },
         reviewServiceIndex: (state, { payload }) => {
             state.reviewIndex = payload;
-        }
+        },
+        parentServiceId: (state, { payload }) => {
+            state.id = payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -262,6 +266,6 @@ export const dataSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

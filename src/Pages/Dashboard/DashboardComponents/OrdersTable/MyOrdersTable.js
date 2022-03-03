@@ -3,16 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { allData, reviewServiceIndex } from '../../../../redux/dataSlice/dataSlice';
 import { Box } from '@mui/system';
-import BadgeIcon from '@mui/icons-material/Badge';
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
-import CallIcon from '@mui/icons-material/Call';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const MyOrdersTable = () => {
 
     const [savedService, setSavedService] = useState([]);
-    const { user, singleServiceDetails } = useSelector(allData);
+    const { user, singleServiceDetails, id } = useSelector(allData);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -45,10 +42,14 @@ const MyOrdersTable = () => {
         // parentId = selectServiceId
     };
 
+    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
+
+    // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
+    // console.log(matchService.Reviews);
 
 
 
-
+    // console.log(id)
 
 
     return (
