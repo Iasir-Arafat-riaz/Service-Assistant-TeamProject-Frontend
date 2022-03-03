@@ -97,13 +97,12 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : (
-        <Slider {...slickSlider}>
-          {services.map((service) => (
-            <RecentlyView key={service._id} {...service} />
-          ))}
-        </Slider>
-      )}
+      ) : services.length>0&& <Slider {...slickSlider}>
+      {services.map((service) => (
+        <RecentlyView key={service._id} {...service} />
+      ))}
+    </Slider>}
+      
     </Container>
   );
 };
