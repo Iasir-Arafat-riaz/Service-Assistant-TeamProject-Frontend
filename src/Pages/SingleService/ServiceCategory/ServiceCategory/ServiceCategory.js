@@ -14,13 +14,18 @@ const ServiceCategory = ({ service }) => {
     const [index, setIndex] = useState(0);
     const [open, setOpen] = React.useState(false);
     const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
+    const [selectService, setSelectService] = useState({});
     const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
 
     // open modal
-    const handleOpen = index => {
+    const handleOpenModal = (index, service) => {
         setOpen(true);
+        setSelectService(service);
         setIndex(index);
     };
+
+
+
     // close modal
     const handleClose = () => setOpen(false);
 
@@ -80,7 +85,7 @@ const ServiceCategory = ({ service }) => {
 
                     {
                         matchService?.allServices?.map((service, index) => <Box
-                            onClick={() => handleOpen(index)}
+                            onClick={() => handleOpenModal(index, service)}
                             sx={box} key={index}>
                             {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
                             <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
@@ -92,12 +97,13 @@ const ServiceCategory = ({ service }) => {
             }
             {/* Modal */}
             <CategoryModal
-                // selectService={selectService}
+                selectServiceId={matchService.parentService}
                 index={index}
+                selectService={selectService}
                 open={open}
                 service={matchService}
                 handleClose={handleClose}
-                handleOpen={handleOpen}
+                handleOpen={handleOpenModal}
             />
         </>
     );
