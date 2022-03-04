@@ -14,10 +14,11 @@ import Footer from '../../SharedRoute/Footer/Footer';
 const SingleService = () => {
   const { serviceId } = useParams();
 
-  setItemInLocal(serviceId);
+
 
   const dispatch = useDispatch();
   useEffect(() => {
+
     dispatch(singleService());
   }, [dispatch])
 
@@ -53,7 +54,7 @@ const SingleService = () => {
             // question2={question2}
             matchService={matchService}
           />
-         
+
         </Box>
       )}
     </>

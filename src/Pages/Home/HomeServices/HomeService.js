@@ -2,6 +2,7 @@ import { Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { setItemInLocal } from '../../../utils/utils';
 
 const HomeService = ({ service }) => {
 
@@ -11,7 +12,10 @@ const HomeService = ({ service }) => {
     const navigate = useNavigate();
 
     const handleRouteChange = () => {
-        navigate(`/Home/service-details/${Id}`)
+        navigate(`/Home/service-details/${Id}`);
+        setItemInLocal({
+            ...service, Id
+        });
     };
     //console.log(service.Services[0])
 

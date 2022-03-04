@@ -11,28 +11,30 @@ import Slider from "react-slick";
 const RecentlyViews = () => {
 
   const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const recentIds = initialRecent();
+  const [loading, setLoading] = useState(false);
   //console.log(recentIds);
 
   useEffect(() => {
-    axios
-      .get("https://fierce-meadow-12011.herokuapp.com/services")
-      .then((res) => {
-        const service = [];
-        res.data.filter((item) => {
-          item.Services.forEach((ele) => {
-            // //console.log(recentIds.includes(ele.Id));
-            if (recentIds.includes(ele.Id)) {
-              service.push(ele);
-            }
-          });
-        });
-        // //console.log(recentService);
-        // setServices(res.data.slice(5, 9));
-        setServices(service);
-        setLoading(false);
-      });
+    // axios
+    //   .get("https://fierce-meadow-12011.herokuapp.com/services")
+    //   .then((res) => {
+    //     const service = [];
+    //     res.data.filter((item) => {
+    //       item.Services.forEach((ele) => {
+    //         // //console.log(recentIds.includes(ele.Id));
+    //         if (recentIds.includes(ele.Id)) {
+    //           service.push(ele);
+    //         }
+    //       });
+    //     });
+    //     // //console.log(recentService);
+    //     // setServices(res.data.slice(5, 9));
+    //     setServices(service);
+    //     setLoading(false);
+    //   });
+    setServices(initialRecent())
+
+
   }, []);
 
   // slick slider
@@ -80,7 +82,7 @@ const RecentlyViews = () => {
           sx={{ mb: 2 }}
           height={30}
         />
-      ) : (
+      ) : services.length > 0 && (
         <Typography variant="h5" sx={{ fontWeight: "bold", mb: 3 }}>
           Recently View
         </Typography>
@@ -97,12 +99,16 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : services.length>0&& <Slider {...slickSlider}>
-      {services.map((service) => (
-        <RecentlyView key={service._id} {...service} />
-      ))}
-    </Slider>}
-      
+      ) : services.length > 4 ? <Slider {...slickSlider}>
+        {services.map((service) => (
+          <RecentlyView key={service._id} {...service} />
+        ))}
+      </Slider> : <Stack direction='row'>
+        {services.map((service) => (
+          <RecentlyView key={service._id} {...service} />
+        ))}
+      </Stack>}
+
     </Container>
   );
 };
