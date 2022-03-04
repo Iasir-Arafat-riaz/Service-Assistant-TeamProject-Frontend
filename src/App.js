@@ -39,31 +39,10 @@ import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
 
 
-// made a socket with server
-
-// made a socket with server
-// const socket = io('https://fierce-meadow-12011.herokuapp.com/');
-
-// made a socket with server
-// const socket = io("https://fierce-meadow-12011.herokuapp.com");
-
-// made a socket with server
-
-// made a socket with server
-
-// const socket = io("https://fierce-meadow-12011.herokuapp.com/");
-
-// connecting the server
 
 const App = () => {
   const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
+ 
 
   return (
     <BrowserRouter>

@@ -15,7 +15,7 @@ const AddBanner = () => {
       })
      
   }, [])
-  // console.log(banners);
+  // //console.log(banners);
   if(load){
     return <Stack justifyContent="center" alignItems="center">
     <CircularProgress></CircularProgress>

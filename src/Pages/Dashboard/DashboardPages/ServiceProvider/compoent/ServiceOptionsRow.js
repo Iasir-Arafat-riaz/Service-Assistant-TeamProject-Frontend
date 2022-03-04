@@ -9,7 +9,7 @@ const ServiceOptionsRow = ({
   optionKeyId,
   pos,
 }) => {
-  console.log(serviceOptionsName);
+  //console.log(serviceOptionsName);
   return (
     <Grid item container spacing={2}>
       <Grid item xs={6} sm={6} md={4}>

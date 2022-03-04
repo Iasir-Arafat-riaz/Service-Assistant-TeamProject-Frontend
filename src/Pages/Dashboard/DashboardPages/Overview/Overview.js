@@ -62,8 +62,8 @@ const Overview = () => {
             })
         }
     }, [loading])
-    console.log(allData);
-    console.log(allProvider);
+    //console.log(allData);
+    //console.log(allProvider);
     if (loading) {
         return <Stack alignItems='center' >
             <CircularProgress></CircularProgress>

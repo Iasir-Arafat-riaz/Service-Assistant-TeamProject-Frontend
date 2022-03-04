@@ -44,7 +44,7 @@ const MyOrdersTable = () => {
         // dispatch(reviewServiceIndex(index));
 
         dispatch(reviewServiceIndex(parseInt(index) + 1));
-        // console.log(index)
+        // //console.log(index)
         // parentId = selectServiceId
 
     };
@@ -52,11 +52,11 @@ const MyOrdersTable = () => {
     // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
 
     // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
-    // console.log(matchService.Reviews);
+    // //console.log(matchService.Reviews);
 
 
 
-    // console.log(id)
+    // //console.log(id)
 
 
     return (

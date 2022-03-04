@@ -29,7 +29,7 @@ const ServiceCard = ({ Name, Img, Id }) => {
   const classes = useStyles();
 
   const handleCardClick = (id) => {
-    console.log("card clicked");
+    //console.log("card clicked");
     navigate(`/Home/service-details/${id}`);
   };
   return (

@@ -6,7 +6,7 @@ import React from "react";
 const PreviewHeader = ({ bannerInfo, banner }) => {
   const { imageUrl, bannerText, bannerNumber, id } = bannerInfo;
 
-  // console.log("this is banners datas",banner)
+  // //console.log("this is banners datas",banner)
 
 
 

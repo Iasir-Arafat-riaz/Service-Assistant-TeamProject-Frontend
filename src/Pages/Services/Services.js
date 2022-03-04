@@ -45,13 +45,13 @@ const Services = () => {
   const dispatch = useDispatch();
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
-  console.log(allServices);
+  //console.log(allServices);
 
   const drawerWidth = 240;
-  console.log(allServices);
+  //console.log(allServices);
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
-    console.log(url);
+    //console.log(url);
     navigate(url);
   };
 

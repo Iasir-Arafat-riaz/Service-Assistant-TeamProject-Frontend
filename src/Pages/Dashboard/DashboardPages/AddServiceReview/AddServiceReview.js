@@ -57,7 +57,7 @@ const AddServiceReview = () => {
                 setLoading(true);
             });
         } else {
-            // console.log(data);
+            // //console.log(data);
             // axios.put(`https://fierce-meadow-12011.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
             //     reset();
 
@@ -69,7 +69,7 @@ const AddServiceReview = () => {
     // 
 
 
-    // console.log(user);
+    // //console.log(user);
     const handleEditService = () => {
         setAlert(false);
         setOpenBox(true);
@@ -79,7 +79,7 @@ const AddServiceReview = () => {
     // handle delete review;
 
 
-    // console.log('first');
+    // //console.log('first');
     const UpdateReview = (data) => {
         setUpdateing(true);
         // useEffect(() => {
@@ -117,7 +117,7 @@ const AddServiceReview = () => {
         // }, [])
 
     }
-    // console.log(matchService?.allServices)
+    // //console.log(matchService?.allServices)
 
     return (
         <>

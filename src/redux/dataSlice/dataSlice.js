@@ -52,7 +52,7 @@ export const putUserToDb = createAsyncThunk(
 export const makeAdmin = createAsyncThunk(
     'data/makeAdmin',
     async (info) => {
-        console.log(info);
+        //console.log(info);
         const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/admin/makeadmin/${info.email} `, info);
         return response.data
     }
@@ -161,7 +161,7 @@ export const getChatFromDb = createAsyncThunk(
 export const saveService = createAsyncThunk(
     "service/save",
     async (info) => {
-        console.log(info)
+        //console.log(info)
         const response = await axios.post('https://fierce-meadow-12011.herokuapp.com/saveservice', info)
         return response.data;
     }
@@ -217,7 +217,7 @@ export const dataSlice = createSlice({
             state.allChat = [...state.allChat, payload];
         },
         changeUserPosition: (state, { payload }) => {
-            console.log(payload);
+            //console.log(payload);
             const uid = payload?.uid;
             const getUser = state.allUser.filter(user => user.uid === uid)[0];
             const withoutUser = state.allUser.filter(user => user.uid !== uid);
@@ -233,13 +233,13 @@ export const dataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(makeAdmin.fulfilled, (state, action) => {
-                console.log('doen');
+                //console.log('doen');
             })
             .addCase(isAdmin.pending, (state, action) => {
                 state.loading = true;
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
-                console.log(action.payload);
+                //console.log(action.payload);
                 state.user = { ...state.user, role: action.payload.role }
                 state.loading = false;
             })
@@ -254,7 +254,7 @@ export const dataSlice = createSlice({
                 state.allServices = payload;
             })
             .addCase(loadServiceCategory.rejected, (state, { payload }) => {
-                console.log(payload);
+                //console.log(payload);
             })
             .addCase(singleService.pending, (state, action) => {
                 state.singleServiceLoading = true;

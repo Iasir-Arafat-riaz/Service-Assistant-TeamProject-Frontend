@@ -13,7 +13,7 @@ import { Container, Grid, Paper, Typography } from '@mui/material';
 const SingleServiceHeader = ({ matchService }) => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
-    console.log(matchService.mainFeatures)
+    //console.log(matchService.mainFeatures)
 
     return (
         <>

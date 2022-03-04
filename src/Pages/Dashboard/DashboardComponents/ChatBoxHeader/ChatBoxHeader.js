@@ -3,7 +3,7 @@ import { bgcolor, Box } from '@mui/system';
 import React from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 const ChatBoxHeader = props => {
-    console.log(props.user);
+    //console.log(props.user);
     const { uid, avatar, photoURL, displayName, email } = props?.user;
     return (
         <Stack direction='row' px={2} py={1} justifyContent='space-between' alignItems='center' sx={{

@@ -115,7 +115,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
     const handleAddToCart = (service) => {
         if (user.email) {
             dispatch(saveService({ ...service, email: user.email, parentService: selectService }));
-            // console.log({ idToken: localStorage.getItem('idToken') })
+            // //console.log({ idToken: localStorage.getItem('idToken') })
         } else {
             navigate('/login')
         }

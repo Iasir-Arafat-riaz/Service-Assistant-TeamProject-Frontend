@@ -28,11 +28,11 @@ const AddBannerSection = ({ banner }) => {
     bannerNumber: watch("bannerNumber"),
   };
 
-  console.log(bannerInfo);
+  //console.log(bannerInfo);
 
   const onSubmit = (data) => {
     data._id = banner._id;
-    console.log(data);
+    //console.log(data);
     // reset();
     axios.put("https://fierce-meadow-12011.herokuapp.com/headerBanners", data).then((response) => {
       if (response.status == 200) {

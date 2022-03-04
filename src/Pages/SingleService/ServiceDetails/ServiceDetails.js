@@ -12,7 +12,7 @@ const ServiceDetails = ({ matchService, question1, question2, question3, singleS
         return 'loading...'
     }
 
-    // console.log(singleServiceLoading)
+    // //console.log(singleServiceLoading)
     return (
 
         <Container sx={{ pt: 10, pb: 10 }}>

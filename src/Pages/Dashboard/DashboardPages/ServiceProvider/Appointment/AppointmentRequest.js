@@ -22,7 +22,7 @@ const AppointmentRequest = () => {
         axios.get(`https://fierce-meadow-12011.herokuapp.com/provider/appointment/kawsarm104@gmail.com`)
             .then(res => {
                 setProviderEmail(res.data)
-                console.log("provider email", res.data)
+                //console.log("provider email", res.data)
             })
     }, []);
 

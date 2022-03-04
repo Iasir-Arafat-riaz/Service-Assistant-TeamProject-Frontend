@@ -73,7 +73,7 @@ const AddServiceRequest = () => {
   };
 
   const handleAddMoreDetails = (index) => {
-    console.log("add more details clicked", index);
+    //console.log("add more details clicked", index);
 
     const newServiceArr = serviceOptions.map((item) => {
       if (item.optionId === index) {
@@ -165,8 +165,8 @@ const AddServiceRequest = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          console.log(data);
-          console.log("Registration Successfull");
+          //console.log(data);
+          //console.log("Registration Successfull");
          
         }
       })
@@ -176,7 +176,7 @@ const AddServiceRequest = () => {
   };
 
   useEffect(() => {
-    console.log(serviceOptions);
+    //console.log(serviceOptions);
   });
   return (
     <>

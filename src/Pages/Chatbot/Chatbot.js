@@ -65,7 +65,7 @@ function Chatbot() {
             if (!user?.email) {
                 const id = initSocket();
                 setUid(id);
-                console.log('id create', id);
+                //console.log('id create', id);
             }
             else {
                 setUid(user?.uid);
@@ -100,7 +100,7 @@ function Chatbot() {
     function onMessageWasSent(message) {
         const mainMessage = { ...message, ...createUser, uid, time: `${new Date()}` }
         socket.emit('message', mainMessage);
-        console.log(message);
+        //console.log(message);
         dispatch(postChat(mainMessage))
         setState(state => ({
             ...state,
@@ -151,7 +151,7 @@ function Chatbot() {
             isOpen: !state.isOpen,
         }));
     }
-    console.log(newMessagesCount);
+    //console.log(newMessagesCount);
     const qna = [
         {
             discount: 'we dont provider any discount '
@@ -177,13 +177,13 @@ function Chatbot() {
         if (state.messageList?.length === 0) {
             sendMessage("Thanks For you question. will reply soon")
         }
-        console.log(text)
+        //console.log(text)
         for (let element of qna) {
             const question = Object.keys(element)
             const ans = Object.values(element)
-            console.log(question);
+            //console.log(question);
             if (text.toLowerCase().includes(question[0])) {
-                console.log('in', element);
+                //console.log('in', element);
                 sendMessage(ans[0] + ' replay.bot ');
                 break;
             }

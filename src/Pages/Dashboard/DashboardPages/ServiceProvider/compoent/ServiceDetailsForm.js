@@ -13,7 +13,7 @@ const ServiceDetailsForm = ({
 }) => {
   // const optionRow = Array.from({ length: totalRow }, (v, i) => i);
   const optionRow = serviceOption.serviceDetails;
-  console.log(serviceOption);
+  //console.log(serviceOption);
   return (
     <Grid container spacing={2}>
       <Typography

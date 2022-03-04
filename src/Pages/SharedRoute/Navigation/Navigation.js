@@ -79,7 +79,7 @@ const Navigation = () => {
   }
 
   const handleCardClick = (id) => {
-    console.log("card clicked");
+    //console.log("card clicked");
     navigate(`/Home/service-details/${id}`);
   };
 
@@ -88,7 +88,7 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    // console.log(navRef.current.classList);
+    // //console.log(navRef.current.classList);
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {

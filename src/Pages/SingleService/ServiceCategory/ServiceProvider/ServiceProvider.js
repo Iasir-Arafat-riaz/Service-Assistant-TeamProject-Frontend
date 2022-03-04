@@ -13,7 +13,7 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
         dispatch(serviceProviders());
     }, [dispatch])
 
-    console.log(selectService)
+    //console.log(selectService)
     // style
 
     const serviceProvider = {
@@ -24,7 +24,7 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
         pb: 1,
         px: 2
     };
-    // console.log(parentService)
+    // //console.log(parentService)
 
     const selectServiceProvider = provider => {
         // dispatch(addToCart({ ...category, email: user.email, payment: true, provider: provider }))

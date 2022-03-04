@@ -33,7 +33,7 @@ const SavedServices = () => {
     }, [user])
 
 
-    // console.log(localStorage.getItem('idToken'));
+    // //console.log(localStorage.getItem('idToken'));
     if (loading) {
         return <h3>Loading...</h3>
     };
@@ -52,7 +52,7 @@ const SavedServices = () => {
         selectedService.push({ ...service, email: user.email });
         // }
         localStorage.setItem('selectedService', JSON.stringify(selectedService))
-        // console.log(selectedService);
+        // //console.log(selectedService);
     };
 
 
