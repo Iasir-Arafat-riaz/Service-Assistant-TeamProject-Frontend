@@ -25,7 +25,7 @@ function Chatbot() {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/chat/${uid}`)
+        axios.get(`https://fierce-meadow-12011.herokuapp.com/chat/${uid}`)
             .then(res => {
                 setState(state => ({
                     ...state,

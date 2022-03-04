@@ -16,7 +16,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: { xs: '90%', md: 400 },
     bgcolor: 'background.paper',
     border: '2px solid #fff',
     boxShadow: 24,
@@ -39,7 +39,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // submit form
     const onSubmit = data => {
-        axios.post('http://localhost:5000/provider', { ...category, data, image: user.photoURL }).then(() => {
+        axios.post('https://fierce-meadow-12011.herokuapp.com/provider', { ...category, data, image: user.photoURL }).then(() => {
             reset();
             handleCloseModal();
         })
@@ -75,6 +75,9 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                                 label="Email"
                                 defaultValue={user.email}
                             />
+
+
+
 
                             <TextField sx={inputStyle} id="outlined-basic" label="Your address where you available for deliver *" variant="outlined" {...register("address", { required: true })} />
 

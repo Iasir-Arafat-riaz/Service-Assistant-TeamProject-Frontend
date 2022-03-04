@@ -15,7 +15,7 @@ const Contact = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        axios.post('http://localhost:5000/sendEmail', data)
+        axios.post('https://fierce-meadow-12011.herokuapp.com/sendEmail', data)
             .then(function (response) {
                 setLoading(false);
             })

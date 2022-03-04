@@ -30,9 +30,9 @@ const Overview = () => {
     });
     useEffect(() => {
         setLoading(true);
-        let one = "http://localhost:5000/orders/"
-        let two = "http://localhost:5000/provider/allProvider"
-        let three = "http://localhost:5000/singleservice/count"
+        let one = "https://fierce-meadow-12011.herokuapp.com/orders/"
+        let two = "https://fierce-meadow-12011.herokuapp.com/provider/allProvider"
+        let three = "https://fierce-meadow-12011.herokuapp.com/singleservice/count"
         const requestOne = axios.get(one);
         const requestTwo = axios.get(two);
         const requestThree = axios.get(three);

@@ -28,7 +28,8 @@ const initialState = {
     serviceProviderLoading: true,
     orderInfo: {},
     selectedService: {},
-    reviewIndex: 0
+    reviewIndex: 0,
+    id: Number,
 }
 
 // async task
@@ -59,7 +60,7 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(` http://localhost:5000/admin/checkadmin/${info.email}`);
+        const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
@@ -76,7 +77,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "http://localhost:5000/services"
+            "https://fierce-meadow-12011.herokuapp.com/services"
         ).then((res) => res.json());
         return response;
     }
@@ -85,7 +86,7 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await axios.get("http://localhost:5000/singleservice")
+        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
         return response.data;
     }
 );
@@ -144,14 +145,14 @@ export const serviceProviders = createAsyncThunk(
 export const postChat = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.post('http://localhost:5000/chat', info)
+        const response = await axios.post('https://fierce-meadow-12011.herokuapp.com/chat', info)
         return response.data;
     }
 );
 export const getChatFromDb = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.get(`http://localhost:5000/chat`);
+        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/chat`);
         return response.data;
     }
 );
@@ -221,7 +222,13 @@ export const dataSlice = createSlice({
             const getUser = state.allUser.filter(user => user.uid === uid)[0];
             const withoutUser = state.allUser.filter(user => user.uid !== uid);
             state.allUser = [getUser, ...withoutUser]
-        }
+        },
+        reviewServiceIndex: (state, { payload }) => {
+            state.reviewIndex = payload;
+        },
+        parentServiceId: (state, { payload }) => {
+            state.id = payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -292,6 +299,6 @@ export const dataSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, addChat, changeUserPosition } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat,changeUserPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

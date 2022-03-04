@@ -17,7 +17,7 @@ const Service = ({ category }) => {
     return (
         <>
 
-            <Grid item xs={6} sm={6} md={4} lg={3} >
+            <Grid item xs={12} sm={6} md={4} lg={3} >
                 <Card>
                     <CardActionArea>
 
@@ -29,6 +29,7 @@ const Service = ({ category }) => {
                         </CardContent>
 
                         <Button onClick={() => handleOpenModal(category.Id)} variant="outlined" sx={{ mb: 2, ml: 2 }}>Become a provider</Button>
+                        <Button variant="outlined" sx={{ mb: 2, ml: 2 }}>See Details</Button>
 
                     </CardActionArea>
                 </Card>

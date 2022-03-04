@@ -80,8 +80,9 @@ const CheckoutForm = () => {
             setError('');
             setSuccess("your payment is done");
             setProcessing(false);
-            const data = { ...selectedService, orderInfo: orderInfo };
-            axios.post('http://localhost:5000/myorder', data).then(() => {
+            const date = new Date();
+            const data = { ...selectedService, orderInfo: orderInfo, date: date };
+            axios.post('https://fierce-meadow-12011.herokuapp.com/myorder', data).then(() => {
             });
         };
     };

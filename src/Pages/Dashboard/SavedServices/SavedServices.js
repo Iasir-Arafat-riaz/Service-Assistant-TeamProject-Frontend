@@ -21,11 +21,11 @@ const SavedServices = () => {
 
     // const email = 'mahfujglobal@gmail.com'
     useEffect(() => {
-        axios.post('http://localhost:5000/saveservice/jwttoken', localStorage.getItem('idToken'))
+        axios.post('https://fierce-meadow-12011.herokuapp.com/saveservice/jwttoken', localStorage.getItem('idToken'))
     }, [])
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/saveservice?email=${user.email}`).then(res => res.json()).then(data => {
+        fetch(`https://fierce-meadow-12011.herokuapp.com/saveservice?email=${user.email}`).then(res => res.json()).then(data => {
             setSavedService(data);
             setLoading(false);
         })
