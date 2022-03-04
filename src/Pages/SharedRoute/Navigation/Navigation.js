@@ -1,23 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from 'axios'
-import {
-  Divider,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Typography,
-  Menu,
-  Avatar,
-  Button,
-  Tooltip,
-  MenuItem,
-  Container,
-} from "@mui/material";
+import { Divider, Drawer, List, ListItem, ListItemText, AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Button, Tooltip, MenuItem, Container, ListItemIcon, } from "@mui/material";
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Popover from '@mui/material/Popover';
 import Badge from '@mui/material/Badge';
@@ -32,45 +15,68 @@ import { AiOutlineHome } from "react-icons/ai";
 import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux";
-import { allData } from "../../../redux/dataSlice/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { allData, getNotification } from "../../../redux/dataSlice/dataSlice";
+import notificationIcon from '../../images/notification-icon.jpg';
 import useFirebase from "../../../Hooks/useFirebase";
 import "./Navigation.css";
+import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 
 const Navigation = () => {
+
   const navRef = useRef(null);
   const navigate = useNavigate();
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
-  const { user } = useSelector(allData);
+  const { user, notificationCount } = useSelector(allData);
   const { handleSignOut } = useFirebase();
+  const dispatch = useDispatch();
   const goHome = () => {
     navigate("/home")
   }
   // Mui popover for notificatio 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [anchorEl, setAnchorEl] = React.useState(null);
 
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
+  // const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const [notificationNumber, setNotificationNumber] = useState([])
+  const [notifications, setNotifications] = useState([])
   useEffect(() => {
-    const api = `http://localhost:5000/notification/${user?.email}`
+    const api = `http://localhost:5000/notification/getnotification?email=${user?.email}`
     axios.get(api).then((res) => {
-      console.log(res.data, "got notification");
-      setNotificationNumber(res.data)
+      setNotifications(res.data)
 
     });
+    // 
+    // dispatch(getNotification(user?.email))
+
+  }, [notificationCount])
+
+  // const number = Math.random() * 100
+
+  console.log(notificationCount)
+
+
+  useEffect(() => {
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
@@ -106,7 +112,7 @@ const Navigation = () => {
     height: "25px",
     borderRadius: "50px",
     padding: "8px",
-    marginRight: "20px",
+    marginRight: "0px",
     backgroundColor: "#FF5E14",
     color: "whiteSmoke",
   };
@@ -331,56 +337,101 @@ const Navigation = () => {
                 <>
 
 
-                  <Button aria-describedby={id} variant="" onClick={handleClick}>
-                    <Badge badgeContent={notificationNumber.length} color="primary">
-                      <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
-
-                    </Badge>
-                  </Button>
-                  <Popover
-                    id={id}
-                    open={open}
-                    anchorEl={anchorEl}
-                    onClose={handleClose}
-                    anchorOrigin={{
-                      vertical: 'bottom',
-                      horizontal: 'left',
-                    }}
+                  <IconButton
+                    onClick={handleClick}
+                    size="small"
+                    sx={{ mx: 3 }}
+                    aria-controls={open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
                   >
-                    <Typography sx={{ p: 2 }}>
-                      {
-                        notificationNumber.map(notificationMessage =>
-                          //   <div className="notificationBar">
-
-                          //   <div><img src={notificationMessage.image} alt="notification image" width="120px" height="60px"></img></div>
-                          //   <div>
-
-                          //   {notificationMessage.message} <br>
-                          //   </br>
-                          //   provider name: Ac service <br>
-                          //   </br>
-                          //   Date: 24 january, 2022
-                          //   </div>
-
-                          // </div>
-                          <div class="notifi-box" id="box">
-                            {/* <h2>Notifications <span>17</span></h2> */}
-                            <div class="notifi-item">
-                              <img src={notificationMessage.image} width="120px" height="60px" alt="img" />
-                              <div class="text">
-                                <h4>Elias Abdurrahman</h4>
-                                <p>@lorem ipsum dolor sit amet</p>
-                              </div>
-                            </div>
+                    <Badge badgeContent={notifications?.length} color="primary">
 
 
-                          </div>
+                      <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
+                    </Badge>
 
-                        )
-                      }</Typography>
-                  </Popover>
+                    {/* <Avatar sx={{ width: 32, height: 32 }}>M</Avatar> */}
+
+
+                  </IconButton>
+
+                  <Menu sx={{
+
+                  }}
+                    anchorEl={anchorEl}
+                    id="account-menu"
+                    open={open}
+                    onClose={handleClose}
+                    onClick={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+
+                      sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 1.5,
+                        height: 300,
+                        width: 400,
+                        overflowY: 'scroll',
+                        '& .MuiAvatar-root': {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        '&:before': {
+                          content: '""',
+                          display: 'block',
+                          position: 'absolute',
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: 'background.paper',
+                          transform: 'translateY(-50%) rotate(45deg)',
+                          zIndex: 0,
+                        },
+                      },
+                    }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                  >
+                    {
+                      notificationIcon.length > 0
+                        ?
+                        <Box>
+                          {
+                            notifications.map(notification => <Box sx={{ borderBottom: '2px solid #F4F5F8', mb: 1 }}>
+
+                              <MenuItem>
+
+                                <Avatar sx={{ width: 40, height: 40, borderRadius: 0 }} src={notification?.image}></Avatar>
+
+                                <Typography variant="h6" sx={{ fontSize: 14 }}>{notification?.message}</Typography>
+
+
+
+                              </MenuItem>
+
+                              <small style={{ paddingLeft: 10 }}>{notification.time}</small>
+
+                            </Box>)
+
+                          }
+                        </Box>
+                        :
+                        <Box sx={{ width: 250, display: 'grid', alignItems: 'center', justifyContent: 'center' }}>
+                          <img src={notificationIcon} style={{ marginTop: '50%' }} width="100" height="100" alt="" />
+                          <Typography variant="body2">No message notification!</Typography>
+                        </Box>}
+
+
+                  </Menu>
+
 
                 </>
+
                 <Tooltip arrow title="My Account">
                   <IconButton onClick={handleOpenUserMenu}>
                     <Avatar alt="Remy Sharp" src={user?.photoURL} />

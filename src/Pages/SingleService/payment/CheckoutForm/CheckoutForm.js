@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import Alert from '@mui/material/Alert';
 import { CircularProgress, Paper } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { allData } from '../../../../redux/dataSlice/dataSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { allData, setNotificationCount } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
+import { current } from '@reduxjs/toolkit';
 
 
 const CheckoutForm = () => {
@@ -14,12 +15,16 @@ const CheckoutForm = () => {
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
     const [process, setProcessing] = useState(false);
+    const dispatch = useDispatch();
     const [clientSecret, setClientSecret] = useState("");
 
 
     const { selectedService, user, orderInfo } = useSelector(allData);
     const price = selectedService.Price;
 
+    // current time
+    const today = new Date();
+    const time = today.getHours() + ":" + today.getMinutes();
 
     useEffect(() => {
         fetch('http://localhost:5000/myorder/createpaymentstatus', {
@@ -81,8 +86,14 @@ const CheckoutForm = () => {
             setSuccess("your payment is done");
             setProcessing(false);
             const date = new Date();
+
             const data = { ...selectedService, orderInfo: orderInfo, date: date };
+            const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
+            const image = selectedService?.parentService?.Image;
             axios.post('http://localhost:5000/myorder', data).then(() => {
+                axios.post('https://fierce-meadow-12011.herokuapp.com/notification', { message, image, seen: false, email: user.email, time: time })
+                const number = Math.random() * 100
+                dispatch(setNotificationCount(parseInt(number)));
             });
         };
     };

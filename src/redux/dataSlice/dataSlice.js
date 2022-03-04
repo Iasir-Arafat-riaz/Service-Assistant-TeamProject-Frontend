@@ -28,7 +28,10 @@ const initialState = {
     orderInfo: {},
     selectedService: {},
     reviewIndex: 0,
-    id: Number,
+    id: 0,
+    notifications: [],
+    notificationLoading: true,
+    notificationCount: 0
 }
 
 // async task
@@ -151,6 +154,15 @@ export const saveService = createAsyncThunk(
     }
 );
 
+// export const getNotification = createAsyncThunk(
+//     "get/notification",
+//     async (info) => {
+//         console.log(info)
+//         const response = await axios.get(`http://localhost:5000/notification/getnotification?email=${info}`)
+//         return response.data;
+//     }
+// )
+
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -202,6 +214,9 @@ export const dataSlice = createSlice({
         },
         parentServiceId: (state, { payload }) => {
             state.id = payload;
+        },
+        setNotificationCount: (state, { payload }) => {
+            state.notificationCount = parseInt(state.notificationCount) + parseInt(payload);
         },
     },
     extraReducers: (builder) => {
@@ -261,11 +276,19 @@ export const dataSlice = createSlice({
                 state.allUser = payload;
                 state.getLoad = false;
             })
+
+        // .addCase(getNotification.pending, (state, { payload }) => {
+        //     state.notificationLoading = true;
+        // })
+        // .addCase(getNotification.fulfilled, (state, { payload }) => {
+        //     state.notificationLoading = false;
+        //     state.notifications = payload;
+        // })
     },
 })
 
 // Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, setNotificationCount } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
