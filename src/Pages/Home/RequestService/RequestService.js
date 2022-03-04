@@ -35,7 +35,7 @@ const RequestService = () => {
                         </Typography>
                         <Stack spacing={2} direction="row">
                             <Button
-                                style={{ backgroundColor: "#C71F66", }}
+                                style={{ backgroundColor: "#EC6B20", }}
                                 sx={{
                                     borderRadius: 2,
                                     p: 2,
@@ -46,7 +46,7 @@ const RequestService = () => {
                                 Request for Service
                             </Button>
                             <Button
-                                style={{ borderColor: "#C71F66", }}
+                                style={{ borderColor: "#FF5E14", }}
                                 sx={{
                                     borderRadius: 2,
                                     py: 2,

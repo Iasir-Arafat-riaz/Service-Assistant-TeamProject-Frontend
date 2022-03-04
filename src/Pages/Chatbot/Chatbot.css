@@ -7,4 +7,5 @@
 .sc-message--content.sent .sc-message--text{
     color: #263238;
     background-color: #f4f7f9;
+    width: initial;
 }

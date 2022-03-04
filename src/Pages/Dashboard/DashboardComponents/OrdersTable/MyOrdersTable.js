@@ -1,7 +1,9 @@
 import { CardActionArea, Typography, CardMedia, CardContent, Grid, Card, Avatar, Chip } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { allData, reviewServiceIndex } from '../../../../redux/dataSlice/dataSlice';
+// comment-out from riaz for data undefined
+// import { allData, reviewServiceIndex } from '../../../../redux/dataSlice/dataSlice';
+import { allData } from '../../../../redux/dataSlice/dataSlice';
 import { Box } from '@mui/system';
 import BadgeIcon from '@mui/icons-material/Badge';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
@@ -46,7 +48,8 @@ const MyOrdersTable = () => {
 
     const handleRouteChange = (selectServiceId, index) => {
         navigate(`/dashboard/review/${selectServiceId}`);
-        dispatch(reviewServiceIndex(index));
+        // comment-out from riaz for data undefined
+        // dispatch(reviewServiceIndex(index));
     };
 
 

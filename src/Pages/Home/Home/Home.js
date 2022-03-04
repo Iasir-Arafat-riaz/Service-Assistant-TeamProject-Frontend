@@ -25,7 +25,7 @@ const Home = () => {
             <RequestService/>
 
             {
-                !loading && user?.email ? !user.role === 'admin' && <Chatbot></Chatbot> : <Chatbot></Chatbot>
+                !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
             <Footer />
         </>

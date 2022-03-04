@@ -51,7 +51,7 @@ import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider
 
 // made a socket with server
 
-const socket = io("https://fierce-meadow-12011.herokuapp.com/");
+// const socket = io("https://fierce-meadow-12011.herokuapp.com/");
 
 // connecting the server
 

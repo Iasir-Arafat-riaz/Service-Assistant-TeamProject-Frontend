@@ -111,7 +111,6 @@ const Dashboard = (props) => {
           <Box>
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/overview`}
               button
             >
@@ -123,7 +122,6 @@ const Dashboard = (props) => {
             {/* Service Provider Overview */}
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/providerOverview`}
               button
             >
@@ -135,7 +133,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/manageAllOrders`}
               button
             >
@@ -146,7 +143,6 @@ const Dashboard = (props) => {
             </ListItem>
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/adminChat`}
               button
             >
@@ -158,7 +154,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/manageproducts`}
               button
             >
@@ -171,7 +166,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/addproduct`}
               button
             >
@@ -185,7 +179,6 @@ const Dashboard = (props) => {
             <ListItem
 
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/addBanner`}
               button
             >
@@ -198,7 +191,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/make-service-request`}
               button
             >
@@ -222,7 +214,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/makeAdmin`}
               button
             >
@@ -233,7 +224,6 @@ const Dashboard = (props) => {
             </ListItem>
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/myorders`}
               button
             >
@@ -245,7 +235,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/servicerequest`}
               button
             >

@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Launcher } from 'popup-chat-react'
 import "./Chatbot.css"
 import { useSelector, useDispatch } from 'react-redux';
-import { allData, getSocket } from '../../redux/dataSlice/dataSlice';
+import { allData, getSocket, postChat } from '../../redux/dataSlice/dataSlice';
 import uuid from 'react-uuid'
 import useSocket from '../../Hooks/useSocket';
 import { getRandomOptions } from '../../utilities/bighead';
 import { faker } from '@faker-js/faker';
+import axios from 'axios';
 // import monsterImgUrl from '../../images/banner-1.jpg'
 
 function Chatbot() {
     const { socket } = useSocket();
-    const data = useSelector(allData);
-    const [id, setId] = useState();
+    const { user, loading } = useSelector(allData);
+    const dispatch = useDispatch()
+    const [uid, setUid] = useState();
+    const [myChats, setMyChats] = useState([]);
     const [newMessagesCount, setNewMessagesCount] = useState(0);
     const [createUser, setCreateUser] = useState({});
     const [state, setState] = useState({
@@ -20,62 +23,91 @@ function Chatbot() {
         isOpen: false,
         fileUpload: true,
     });
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/chat/${uid}`)
+            .then(res => {
+                setState(state => ({
+                    ...state,
+                    messageList: [...state.messageList, ...res.data]
+                }));
+            })
+    }, [uid])
+
     //get id and init socket 
     const initSocket = () => {
         const getChatId = localStorage.getItem("chatId");
         const userInfo = localStorage.getItem("user");
-
         if (!getChatId) {
+            // creating avatar name id
             const createId = uuid();
             const createAvatar = getRandomOptions();
             const randomName = faker.name.findName();
             setCreateUser({ avatar: createAvatar, displayName: randomName, });
+
+            //save item
             localStorage.setItem("chatId", JSON.stringify(createId));
             localStorage.setItem("user", JSON.stringify({ displayName: randomName, avatar: createAvatar }));
-            console.log('if', createId);
+
             return createId;
         }
         else {
             const initialId = JSON.parse(getChatId);
             const parseUserInfo = JSON.parse(userInfo);
             setCreateUser(parseUserInfo);
-            console.log('else', getChatId);
             return initialId;
         }
 
     }
-    // main working of socket 
+    // main working of socket  
     useEffect(() => {
-        const id = initSocket();
-        setId(id);
-    }, [])
+        if (!loading) {
+            if (!user?.email) {
+                const id = initSocket();
+                setUid(id);
+                console.log('id create', id);
+            }
+            else {
+                setUid(user?.uid);
+                setCreateUser({
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    email: user.email,
+                })
+            }
+        }
+
+    }, [user, loading])
     useEffect(() => {
-        if (id) {
-            console.log(id, 'dfdkfljjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-            console.log({ id, ...createUser });
-            socket.emit('join', { id, ...createUser });
+        if (!createUser.email) {
+            if (uid) {
+                socket.emit('join', { uid, ...createUser })
+            }
+        }
+        if (uid) {
+
             socket.on("get-message", message => {
-                console.log(message, 'bot')
                 !state.isOpen && setNewMessagesCount(state => state + 1);
-                console.log(message);
                 sendMessage(message.data.text)
             });
+
         }
         return () => {
-            socket.emit('leave', id);
+            socket.emit('leave', uid);
         }
-    }, [id]);
+    }, [uid]);
     setTimeout(() => { },)
     function onMessageWasSent(message) {
-        socket.emit('message', { ...message, displayName: createUser.displayName, avatar: createUser.avatar, id, time: `${new Date()}` })
-
+        const mainMessage = { ...message, ...createUser, uid, time: `${new Date()}` }
+        socket.emit('message', mainMessage);
+        console.log(message);
+        dispatch(postChat(mainMessage))
         setState(state => ({
             ...state,
             messageList: [...state.messageList, message]
         }));
-        if (state.messageList?.length === 0) {
-            sendMessage("Thanks For you question. will reply soon")
-        }
+
+        autoReplay(message);
     }
     // this is a test 
     function onFilesSelected(fileList) {
@@ -120,7 +152,44 @@ function Chatbot() {
         }));
     }
     console.log(newMessagesCount);
+    const qna = [
+        {
+            discount: 'we dont provider any discount '
+        },
+        {
+            "about provider": "Our providers are so well be heavier and have enough skill to make you work done  "
+        },
+        {
+            "how to be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
+        },
+        {
+            "be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
+        },
+        {
+            "orders": 'click here https://service-assistant-a2z.web.app/dashboard/myorders'
+        },
+        {
+            "my orders": 'click here https://service-assistant-a2z.web.app/dashboard/myorders'
+        },
+    ]
 
+    const autoReplay = ({ data: { text } }) => {
+        if (state.messageList?.length === 0) {
+            sendMessage("Thanks For you question. will reply soon")
+        }
+        console.log(text)
+        for (let element of qna) {
+            const question = Object.keys(element)
+            const ans = Object.values(element)
+            console.log(question);
+            if (text.toLowerCase().includes(question[0])) {
+                console.log('in', element);
+                sendMessage(ans[0] + ' replay.bot ');
+                break;
+            }
+        };
+
+    }
     return (
         <div >
             <Launcher

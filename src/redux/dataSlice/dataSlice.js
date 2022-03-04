@@ -24,6 +24,7 @@ const initialState = {
     testimonials: [],
     testimonialLoading: true,
     providers: [],
+    allChat: [],
     serviceProviderLoading: true,
     orderInfo: {},
     selectedService: {},
@@ -58,7 +59,7 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
+        const response = await axios.get(` http://localhost:5000/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
@@ -140,6 +141,21 @@ export const serviceProviders = createAsyncThunk(
         return response.data;
     }
 );
+export const postChat = createAsyncThunk(
+    "chat/postChat",
+    async (info) => {
+        const response = await axios.post('http://localhost:5000/chat', info)
+        return response.data;
+    }
+);
+export const getChatFromDb = createAsyncThunk(
+    "chat/postChat",
+    async (info) => {
+        const response = await axios.get(`http://localhost:5000/chat`);
+        return response.data;
+    }
+);
+
 
 export const saveService = createAsyncThunk(
     "service/save",
@@ -196,8 +212,15 @@ export const dataSlice = createSlice({
         selectedServiceAndProvider(state, { payload }) {
             state.selectedService = payload;
         },
-        reviewServiceIndex: (state, { payload }) => {
-            state.reviewIndex = payload;
+        addChat: (state, { payload }) => {
+            state.allChat = [...state.allChat, payload];
+        },
+        changeUserPosition: (state, { payload }) => {
+            console.log(payload);
+            const uid = payload?.uid;
+            const getUser = state.allUser.filter(user => user.uid === uid)[0];
+            const withoutUser = state.allUser.filter(user => user.uid !== uid);
+            state.allUser = [getUser, ...withoutUser]
         }
     },
     extraReducers: (builder) => {
@@ -210,7 +233,7 @@ export const dataSlice = createSlice({
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
                 console.log(action.payload);
-                state.user = { ...state.user, role: action.payload.admin ? 'admin' : 'user' }
+                state.user = { ...state.user, role: action.payload.role }
                 state.loading = false;
             })
             .addCase(isAdmin.rejected, (state, action) => {
@@ -257,11 +280,18 @@ export const dataSlice = createSlice({
                 state.allUser = payload;
                 state.getLoad = false;
             })
+
+            .addCase(getChatFromDb.fulfilled, (state, { payload }) => {
+                if (payload.length) {
+                    state.allChat = payload
+                }
+            })
+
     },
 })
 
 // Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, addChat, changeUserPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
