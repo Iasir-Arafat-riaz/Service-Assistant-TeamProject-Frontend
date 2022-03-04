@@ -93,12 +93,8 @@ const RequestService = () => {
                         </Typography>
                         <Stack spacing={2} direction="row">
                             <Button
-<<<<<<< HEAD
-                                style={{ backgroundColor: "#EC6B20", }}
-=======
                                 onClick={handleOpen}
                                 style={{ backgroundColor: "#C71F66", }}
->>>>>>> remotes/origin/rakib
                                 sx={{
                                     borderRadius: 2,
                                     p: 2,
