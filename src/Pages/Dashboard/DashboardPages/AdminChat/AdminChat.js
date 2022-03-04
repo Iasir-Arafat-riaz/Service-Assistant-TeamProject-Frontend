@@ -27,8 +27,7 @@ const AdminChat = () => {
             }
         });
         socket.on('get-message', message => {
-            // add message change position of user 
-            //console.log(message);
+            // add message change position of user  
             dispatch(addChat(message));
             if (message.email) {
                 dispatch(changeUserPosition(message))
@@ -39,7 +38,7 @@ const AdminChat = () => {
     useEffect(() => {
         //local user 
         let allId = [];
-        if (allClientLocal.length && user?.role === 'admin') {
+        if (allClientLocal.length) {
 
             allClientLocal.forEach(element => {
                 allId = [...allId, element.uid];
@@ -64,7 +63,7 @@ const AdminChat = () => {
     useEffect(() => {
         // getting all userId  
         let allId = [];
-        if (allUser.length && user?.role === 'admin') {
+        if (allUser.length) {
 
             allUser.forEach(element => {
                 allId = [...allId, element.uid];
@@ -87,7 +86,7 @@ const AdminChat = () => {
                 <Grid item xs={12} md={5}>
                     <Box height={"80vh"} sx={{ px: 1, overflow: 'scroll' }}  >
                         {
-                            allUser?.length && allUser.map(userData => <ClientCard key={userData?.uid} user currentId={uid} data={userData} handleClick={handleClick}></ClientCard>)
+                            allUser.filter(userData => userData.email !== user.email).map(userData => <ClientCard key={userData?.uid} user currentId={uid} data={userData} handleClick={handleClick}></ClientCard>)
                         }
                         <Typography variant='h6' gutterBottom>Random user</Typography>
                         {

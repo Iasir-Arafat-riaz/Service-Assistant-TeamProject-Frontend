@@ -1,5 +1,7 @@
 import { Avatar, IconButton, Stack, Typography } from '@mui/material';
 import { bgcolor, Box } from '@mui/system';
+import { BigHead } from "@bigheads/core";
+
 import React from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 const ChatBoxHeader = props => {
@@ -11,7 +13,15 @@ const ChatBoxHeader = props => {
             background: '#d6d6d678'
         }}>
             <Stack direction='row' alignItems='center'>
-                <Avatar src={photoURL} alt={displayName}></Avatar>
+                {
+                    email ? <Avatar src={photoURL} alt={displayName}></Avatar> : <Box sx={{ width: '50px' }}>
+                        {
+                            avatar ? <BigHead
+                                {...avatar}
+                            ></BigHead> : <Avatar src={photoURL} alt={displayName}></Avatar>
+                        }
+                    </Box>
+                }
                 <Typography ml={2}>{displayName}</Typography>
             </Stack>
             <Box>

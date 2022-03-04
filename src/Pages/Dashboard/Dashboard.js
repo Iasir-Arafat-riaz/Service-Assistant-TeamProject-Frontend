@@ -86,28 +86,6 @@ const Dashboard = (props) => {
       <Divider />
       <List>
         {
-          // <Box>
-          //     <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/pay`} button >
-          //         <ListItemIcon>
-          //             <PaymentIcon />
-          //         </ListItemIcon>
-          //         <ListItemText primary={'pay'} />
-          //     </ListItem>
-          //     <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/myorders`} button >
-          //         <ListItemIcon>
-          //             <ShoppingCartIcon />
-          //         </ListItemIcon>
-          //         <ListItemText primary={'MyOrders'} />
-          //     </ListItem>
-          //     <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/review`} button >
-          //         <ListItemIcon>
-          //             <RateReviewIcon />
-          //         </ListItemIcon>
-          //         <ListItemText primary={'Review'} />
-          //     </ListItem>
-          // </Box>
-        }
-        {
           <Box>
             <ListItem
               component={NavLink}
@@ -202,12 +180,11 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/provider/appointment`}
               button
             >
               <ListItemIcon>
-                <AnchorIcon/>
+                <AnchorIcon />
               </ListItemIcon>
               <ListItemText primary={"Appointment"} />
             </ListItem>

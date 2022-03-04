@@ -85,7 +85,7 @@ function Chatbot() {
             }
         }
         if (uid) {
-
+            socket.emit('join', { uid, ...createUser })
             socket.on("get-message", message => {
                 !state.isOpen && setNewMessagesCount(state => state + 1);
                 sendMessage(message.data.text)
@@ -154,13 +154,16 @@ function Chatbot() {
     //console.log(newMessagesCount);
     const qna = [
         {
-            discount: 'we dont provider any discount '
+            discount: 'we dont provide any discount '
         },
         {
             "about provider": "Our providers are so well be heavier and have enough skill to make you work done  "
         },
         {
             "how to be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
+        },
+        {
+            "can i be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
         },
         {
             "be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'

@@ -29,7 +29,7 @@ const initialState = {
     orderInfo: {},
     selectedService: {},
     reviewIndex: 0,
-    id: Number,
+    id: 0,
 }
 
 // async task
@@ -60,7 +60,7 @@ export const makeAdmin = createAsyncThunk(
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(` https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
+        const response = await axios.get(`http://localhost:5000/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
@@ -239,8 +239,8 @@ export const dataSlice = createSlice({
                 state.loading = true;
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
-                //console.log(action.payload);
-                state.user = { ...state.user, role: action.payload.role }
+                console.log(action.payload);
+                state.user.role = action.payload.role
                 state.loading = false;
             })
             .addCase(isAdmin.rejected, (state, action) => {
@@ -299,6 +299,6 @@ export const dataSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat,changeUserPosition } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
