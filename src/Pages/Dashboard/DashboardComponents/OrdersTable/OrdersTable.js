@@ -9,11 +9,8 @@ import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material'
 import OrdersTableRow from '../OrdersTableRow/OrdersTableRow';
 
-const OrdersTable = ({ allOrders }) => {
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-    }
-    const pendingOrders = allOrders.filter(data => data.status === 'pending').slice(0, 6);
+const OrdersTable = ({ allOrders, all }) => {
+    const pendingOrders = allOrders?.filter(data => data.status === 'pending');
 
     return (
         < >
@@ -29,7 +26,10 @@ const OrdersTable = ({ allOrders }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {pendingOrders.map(data => <OrdersTableRow key={data._id} data={data}></OrdersTableRow>)}
+                        {
+                            all ? pendingOrders.map(data => <OrdersTableRow key={data._id} data={data}></OrdersTableRow>) : pendingOrders.slice(0, 6).map(data => <OrdersTableRow key={data._id} data={data}></OrdersTableRow>)
+
+                        }
                     </TableBody>
                 </Table>
             </TableContainer>
