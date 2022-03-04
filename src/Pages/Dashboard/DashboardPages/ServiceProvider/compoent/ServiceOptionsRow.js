@@ -6,8 +6,10 @@ const ServiceOptionsRow = ({
   serviceOptionsPrice,
   serviceOptionsQuantity,
   handleServiceOptons,
+  optionKeyId,
+  pos,
 }) => {
-  console.log(serviceOptionsName);
+  //console.log(serviceOptionsName);
   return (
     <Grid item container spacing={2}>
       <Grid item xs={6} sm={6} md={4}>
@@ -17,7 +19,7 @@ const ServiceOptionsRow = ({
           variant="standard"
           fullWidth
           name="serviceOptionsName"
-          onChange={handleServiceOptons}
+          onChange={(e) => handleServiceOptons(e, pos, optionKeyId)}
         />
       </Grid>
       <Grid item xs={6} sm={6} md={4}>
@@ -27,7 +29,7 @@ const ServiceOptionsRow = ({
           variant="standard"
           fullWidth
           name="serviceOptionsPrice"
-          onChange={handleServiceOptons}
+          onChange={(e) => handleServiceOptons(e, pos, optionKeyId)}
         />
       </Grid>
       <Grid item xs={6} sm={6} md={4}>
@@ -37,7 +39,7 @@ const ServiceOptionsRow = ({
           variant="standard"
           fullWidth
           name="serviceOptionsQuantity"
-          onChange={handleServiceOptons}
+          onChange={(e) => handleServiceOptons(e, pos, optionKeyId)}
         />
       </Grid>
 

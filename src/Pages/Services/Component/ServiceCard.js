@@ -29,7 +29,7 @@ const ServiceCard = ({ Name, Img, Id }) => {
   const classes = useStyles();
 
   const handleCardClick = (id) => {
-    console.log("card clicked");
+    //console.log("card clicked");
     navigate(`/Home/service-details/${id}`);
   };
   return (
@@ -40,8 +40,8 @@ const ServiceCard = ({ Name, Img, Id }) => {
           <CardActionArea onClick={() => handleCardClick(Id)}>
             <CardMedia component="img" height="200px" image={Img} alt={Name} />
             <CardContent>
-              <Typography gutterBottom variant="h6" component="div">
-                {Name.slice(0-23)}
+              <Typography sx={{fontSize:"17px"}} gutterBottom variant="h6" component="div">
+                {Name.slice(0,30)}
               </Typography>
             </CardContent>
           </CardActionArea>

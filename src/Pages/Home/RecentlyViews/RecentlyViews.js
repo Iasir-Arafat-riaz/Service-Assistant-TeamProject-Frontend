@@ -13,7 +13,7 @@ const RecentlyViews = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const recentIds = initialRecent();
-  console.log(recentIds);
+  //console.log(recentIds);
 
   useEffect(() => {
     axios
@@ -22,13 +22,13 @@ const RecentlyViews = () => {
         const service = [];
         res.data.filter((item) => {
           item.Services.forEach((ele) => {
-            // console.log(recentIds.includes(ele.Id));
+            // //console.log(recentIds.includes(ele.Id));
             if (recentIds.includes(ele.Id)) {
               service.push(ele);
             }
           });
         });
-        // console.log(recentService);
+        // //console.log(recentService);
         // setServices(res.data.slice(5, 9));
         setServices(service);
         setLoading(false);
@@ -97,13 +97,12 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : (
-        <Slider {...slickSlider}>
-          {services.map((service) => (
-            <RecentlyView key={service._id} {...service} />
-          ))}
-        </Slider>
-      )}
+      ) : services.length>0&& <Slider {...slickSlider}>
+      {services.map((service) => (
+        <RecentlyView key={service._id} {...service} />
+      ))}
+    </Slider>}
+      
     </Container>
   );
 };

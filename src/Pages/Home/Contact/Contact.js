@@ -15,7 +15,7 @@ const Contact = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        axios.post('http://localhost:5000/sendEmail', data)
+        axios.post('https://fierce-meadow-12011.herokuapp.com/sendEmail', data)
             .then(function (response) {
                 setLoading(false);
             })
@@ -43,8 +43,8 @@ const Contact = () => {
                             <VscCallOutgoing style={{ fontSize: 25, color: '#FF5E14' }} />
 
                             <span>
-                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>8 800 567.890.11</Typography>
-                                <Typography variant='body2'>Mon-Fri 9am-6pm</Typography>
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>+8801622118833</Typography>
+                                <Typography variant='body2'>24/7 Customer Support</Typography>
                             </span>
 
                         </Box>
@@ -91,10 +91,11 @@ const Contact = () => {
 
                     <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} >
                         <Box sx={{ display: 'flex', alignItems: "center", gap: 1 }}>
-                            <img src={logo} alt="" />
+                        <img width={100} src={logo} alt="" />
                             <span>
-                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Melbourne, Australia</Typography>
-                                <Typography variant='body2'> 795 South Park Avenue</Typography>
+                            
+                                <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Dhaka,Banladesh</Typography>
+                                <Typography variant='body2'> City Center, Motijheel</Typography>
                             </span>
                         </Box>
 

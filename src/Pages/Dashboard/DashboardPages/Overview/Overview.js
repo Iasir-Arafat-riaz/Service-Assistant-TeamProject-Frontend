@@ -1,6 +1,7 @@
-import { Box, Container, Stack, Grid, Paper, Typography, IconButton } from '@mui/material';
-import React from 'react';
+import { Box, Container, Stack, Grid, Paper, Typography, IconButton, CircularProgress } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import axios from 'axios';
 import CountUp from 'react-countup';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -9,8 +10,65 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import OrdersTable from '../../DashboardComponents/OrdersTable/OrdersTable';
 import RecentMomentChart from '../../DashboardComponents/GraphCharts/RecentMomentChart';
 import RoundedServiceCart from '../../DashboardComponents/GraphCharts/RoundedServiceCart';
+import { recentMoment, totalApproveOrders, totalEarning, totalOrders, totalSales } from '../../../../utilities/dataAnalize';
 
 const Overview = () => {
+
+    const [allOrders, setAllOrders] = useState([]);
+    const [allProvider, setAllProvider] = useState([]);
+    const [serviceCount, setServiceCount] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [allData, setAllData] = useState({
+        recentMoment: [],
+        earning: 0,
+        sales: 0,
+        orders: 0,
+        providers: 0,
+        ordersApprove: 0,
+        totalService: 0,
+
+    });
+    useEffect(() => {
+        setLoading(true);
+        let one = "https://fierce-meadow-12011.herokuapp.com/orders/"
+        let two = "https://fierce-meadow-12011.herokuapp.com/provider/allProvider"
+        let three = "https://fierce-meadow-12011.herokuapp.com/singleservice/count"
+        const requestOne = axios.get(one);
+        const requestTwo = axios.get(two);
+        const requestThree = axios.get(three);
+        axios.all([requestOne, requestTwo, requestThree])
+            .then(
+                axios.spread((...responses) => {
+                    setAllOrders(responses[0].data)
+                    setAllProvider(responses[1].data);
+                    setServiceCount(responses[2].data.count)
+                })).catch(errors => {
+                    // react on errors.
+                }).finally(() => setLoading(false))
+    }, [])
+
+    useEffect(() => {
+        if (!loading) {
+            setAllData(state => {
+                return {
+                    recentMoment: recentMoment(allOrders),
+                    earning: totalEarning(allOrders),
+                    sales: totalSales(allOrders),
+                    orders: totalOrders(allOrders),
+                    ordersApprove: totalApproveOrders(allOrders),
+                    providers: allProvider.length,
+                    totalService: serviceCount,
+                }
+            })
+        }
+    }, [loading])
+    //console.log(allData);
+    //console.log(allProvider);
+    if (loading) {
+        return <Stack alignItems='center' >
+            <CircularProgress></CircularProgress>
+        </Stack >
+    }
     return (
         <>
             <Grid container spacing={2}>
@@ -30,9 +88,9 @@ const Overview = () => {
                                         }}
                                     > <DirectionsCarIcon></DirectionsCarIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={2540} /></Typography>
-                                <Typography color='red' variant='body1' component={'span'}>-3.25%</Typography>
-                                <Typography variant='body1' component={'span'}> Since last week</Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={allData.sales} /></Typography>
+                                <Typography color='red' variant='body1' component={'span'}>Bad</Typography>
+                                <Typography variant='body1' component={'span'}> sales</Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -49,9 +107,9 @@ const Overview = () => {
                                         }}
                                     > <AttachMoneyIcon></AttachMoneyIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom>$<CountUp end={4130} /></Typography>
-                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>2.8%</Typography>
-                                <Typography variant='body1' component={'span'}> Since last week</Typography>
+                                <Typography variant='h5' gutterBottom>$<CountUp end={allData.earning} /></Typography>
+                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>Good</Typography>
+                                <Typography variant='body1' component={'span'}> earning </Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -68,9 +126,9 @@ const Overview = () => {
                                         }}
                                     > <HomeRepairServiceIcon></HomeRepairServiceIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={347} /></Typography>
-                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>58</Typography>
-                                <Typography variant='body1' component={'span'}> Added recently</Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={allData.providers} /></Typography>
+                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>Good</Typography>
+                                <Typography variant='body1' component={'span'}> lever provider</Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -87,24 +145,23 @@ const Overview = () => {
                                         }}
                                     > <LocalGroceryStoreIcon></LocalGroceryStoreIcon></IconButton>
                                 </Box>
-                                <Typography variant='h5' gutterBottom><CountUp end={554} /></Typography>
-                                <Typography color='red' variant='body1' component={'span'}>-5.7%</Typography>
-                                <Typography variant='body1' component={'span'}> Since last week</Typography>
+                                <Typography variant='h5' gutterBottom><CountUp end={allData.orders} /></Typography>
+                                <Typography color='red' variant='body1' component={'span'}>Bad</Typography>
+                                <Typography variant='body1' component={'span'}> orders </Typography>
                             </Paper>
                         </Grid>
 
                     </Grid>
                 </Grid>
                 <Grid item xs={12} md={7}>
-                    <RecentMomentChart></RecentMomentChart>
+                    <RecentMomentChart data={allData.recentMoment}></RecentMomentChart>
                 </Grid>
                 <Grid item xs={12} md={3}>
-                    <RoundedServiceCart></RoundedServiceCart>
+                    <RoundedServiceCart allData={allData}></RoundedServiceCart>
                 </Grid>
                 <Grid item xs={12} md={9}>
-                    <OrdersTable></OrdersTable>
+                    <OrdersTable allOrders={allOrders}></OrdersTable>
                 </Grid>
-
             </Grid>
 
 

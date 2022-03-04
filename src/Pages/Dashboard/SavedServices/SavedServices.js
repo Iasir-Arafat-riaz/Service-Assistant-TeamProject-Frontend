@@ -21,11 +21,11 @@ const SavedServices = () => {
 
     // const email = 'mahfujglobal@gmail.com'
     useEffect(() => {
-        axios.post('http://localhost:5000/saveservice/jwttoken', localStorage.getItem('idToken'))
+        axios.post('https://fierce-meadow-12011.herokuapp.com/saveservice/jwttoken', localStorage.getItem('idToken'))
     }, [])
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/saveservice?email=${user.email}`).then(res => res.json()).then(data => {
+        fetch(`https://fierce-meadow-12011.herokuapp.com/saveservice?email=${user.email}`).then(res => res.json()).then(data => {
             setSavedService(data);
             setLoading(false);
         })
@@ -33,7 +33,7 @@ const SavedServices = () => {
     }, [user])
 
 
-    // console.log(localStorage.getItem('idToken'));
+    // //console.log(localStorage.getItem('idToken'));
     if (loading) {
         return <h3>Loading...</h3>
     };
@@ -52,7 +52,7 @@ const SavedServices = () => {
         selectedService.push({ ...service, email: user.email });
         // }
         localStorage.setItem('selectedService', JSON.stringify(selectedService))
-        // console.log(selectedService);
+        // //console.log(selectedService);
     };
 
 

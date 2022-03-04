@@ -22,6 +22,8 @@ const CheckoutForm = () => {
     const { selectedService, user, orderInfo } = useSelector(allData);
     const price = selectedService.Price;
 
+    console.log(selectedService)
+
     // current time
     const today = new Date();
     const time = today.getHours() + ":" + today.getMinutes();
@@ -91,7 +93,7 @@ const CheckoutForm = () => {
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;
             axios.post('http://localhost:5000/myorder', data).then(() => {
-                axios.post('https://fierce-meadow-12011.herokuapp.com/notification', { message, image, seen: false, email: user.email, time: time })
+                axios.post('http://localhost:5000/notification', { message, image, seen: false, email: user.email, time: time })
                 const number = Math.random() * 100
                 dispatch(setNotificationCount(parseInt(number)));
             });

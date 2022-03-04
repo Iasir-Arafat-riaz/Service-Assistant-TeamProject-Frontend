@@ -1,25 +1,39 @@
-import { TableCell, FormControl, MenuItem, TextField, TableRow, } from '@mui/material';
-import React, { useState } from 'react';
+import { TableCell, FormControl, MenuItem, TextField, TableRow, Button, } from '@mui/material';
+import { convertLength } from '@mui/material/styles/cssUtils';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const OrdersTableRow = ({ row }) => {
-    const [status, setStatus] = useState(row.protein);
+const OrdersTableRow = ({ data }) => {
+
+    const [status, setStatus] = useState(data.status);
+
     const handleChange = e => {
         setStatus(e.target.value);
-    }
+        // UpdateStatus();
+        const updateStatus = e.target.value;
+        axios.put(`http://localhost:5000/orders/changestatus/${data._id}`, { updateStatus })
+
+        console.log(updateStatus);
+    };
 
 
+
+    // update status 
     return (
         <TableRow
-            key={row.name}
+            key={data._id}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
             <TableCell component="th" scope="row">
-                {row.name}
+                {data?.Name.slice(0, 20)}
             </TableCell>
-            <TableCell >{row.calories}</TableCell>
-            <TableCell >{row.fat}</TableCell>
-            <TableCell >{row.carbs}</TableCell>
+            <TableCell >{data?.provider.name ? data?.provider.name : data?.provider?.displayName}</TableCell>
+            <TableCell >{data.orderInfo?.name}</TableCell>
+            <TableCell >{data.Price}</TableCell>
             <TableCell sx={{ p: 0 }}>
+                {/* {
+                    status === 'pending'
+                        ? */}
                 <TextField
                     pt={20}
                     id="standard-select-currency"
@@ -31,6 +45,7 @@ const OrdersTableRow = ({ row }) => {
                     <MenuItem value='approve'>Approve</MenuItem>
                     <MenuItem value='pending'>Pending</MenuItem>
                 </TextField>
+
             </TableCell>
         </TableRow>
     );

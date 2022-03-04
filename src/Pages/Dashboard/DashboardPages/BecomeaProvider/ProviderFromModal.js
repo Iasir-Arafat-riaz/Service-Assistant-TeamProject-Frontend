@@ -39,7 +39,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // submit form
     const onSubmit = data => {
-        axios.post('http://localhost:5000/provider', { ...category, data, image: user.photoURL }).then(() => {
+        axios.post('https://fierce-meadow-12011.herokuapp.com/provider', { ...category, data, image: user.photoURL }).then(() => {
             reset();
             handleCloseModal();
         })

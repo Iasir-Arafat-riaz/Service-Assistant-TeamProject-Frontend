@@ -1,13 +1,16 @@
 import { CardActionArea, Typography, CardMedia, CardContent, Grid, Card, Avatar, Chip } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+// comment-out from riaz for data undefined
 import { allData, reviewServiceIndex } from '../../../../redux/dataSlice/dataSlice';
+// import { allData } from '../../../../redux/dataSlice/dataSlice';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 const MyOrdersTable = () => {
 
+    // order 
     const [savedService, setSavedService] = useState([]);
     const { user, singleServiceDetails, id } = useSelector(allData);
     const [loading, setLoading] = useState(true);
@@ -21,7 +24,7 @@ const MyOrdersTable = () => {
     // data load
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/myorder?email=${user.email}`).then(res => res.json()).then(data => {
+        fetch(`https://fierce-meadow-12011.herokuapp.com/myorder?email=${user.email}`).then(res => res.json()).then(data => {
             setSavedService(data);
             setLoading(false);
         })
@@ -37,19 +40,24 @@ const MyOrdersTable = () => {
     // hanlde change route
     const handleRouteChange = (selectServiceId, index) => {
         navigate(`/dashboard/review/${selectServiceId}`);
+
+        // comment-out from riaz for data undefined
+        // dispatch(reviewServiceIndex(index));
+
         dispatch(reviewServiceIndex(parseInt(index) + 1));
-        // console.log(index)
+        // //console.log(index)
         // parentId = selectServiceId
+
     };
 
     // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
 
     // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
-    // console.log(matchService.Reviews);
+    // //console.log(matchService.Reviews);
 
 
 
-    // console.log(id)
+    // //console.log(id)
 
 
     return (

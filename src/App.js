@@ -7,8 +7,6 @@ import ContactUs from "./Pages/ContactUs/ContactUs";
 
 import io from "socket.io-client";
 
-import { useEffect } from "react";
-
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
@@ -22,16 +20,11 @@ import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddT
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
 import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
-
-import axios from "axios";
-
 import useFirebase from "../src/Hooks/useFirebase";
 
 import AddServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/AddServiceRequest";
 
-
 import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
-
 
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
@@ -43,21 +36,9 @@ import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/Be
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
 import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
-// made a socket with server
+import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
 
-// made a socket with server
-// const socket = io('https://fierce-meadow-12011.herokuapp.com/');
 
-// made a socket with server
-// const socket = io("https://fierce-meadow-12011.herokuapp.com");
-
-// made a socket with server
-
-// made a socket with server
-
-const socket = io("https://fierce-meadow-12011.herokuapp.com/");
-
-// connecting the server
 
 const App = () => {
   // const { } = useFirebase();
@@ -122,13 +103,16 @@ const App = () => {
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
+          <Route
+            path="/dashboard/provider/appointment"
+            element={<AppointmentRequest />}
+          />
 
           {/* add service request from service provider */}
           <Route
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
           ></Route>
-
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}

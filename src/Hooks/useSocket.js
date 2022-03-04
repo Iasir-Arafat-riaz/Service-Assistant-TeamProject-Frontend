@@ -1,10 +1,9 @@
 
 import { io } from 'socket.io-client';
-const socket = io("https://fierce-meadow-12011.herokuapp.com/");
+const socket = io("http://localhost:5000/");
 const useSocket = () => {
     // common function 
     const jsParse = data => {
-        console.log('parse', data);
         return JSON.parse(data);
     }
     const jsStringify = data => {
@@ -13,14 +12,11 @@ const useSocket = () => {
 
     // user user in local storage
     const saveUser = user => {
-        console.log(user, 'dkfjdkfjdkljk');
-        if (user.id) {
+        if (user.uid) {
             const allClient = getAllClientLocal();
-            console.log(allClient, 'saveUser');
             if (allClient) {
-                const checkingUser = allClient.find(data => data.id === user.id);
-                console.log(checkingUser);
-                if (!checkingUser?.id) {
+                const checkingUser = allClient.find(data => data.uid === user.uid);
+                if (!checkingUser?.uid) {
                     localStorage.setItem('clients', jsStringify([...allClient, user]));
                     return [...allClient, user];
                 }
@@ -34,7 +30,6 @@ const useSocket = () => {
     }
     const getAllClientLocal = () => {
         const allClient = localStorage.getItem("clients");
-        console.log('all', allClient);
         if (allClient) {
             return jsParse(allClient);
         }

@@ -13,7 +13,7 @@ const HomeService = ({ service }) => {
     const handleRouteChange = () => {
         navigate(`/Home/service-details/${Id}`)
     };
-    console.log(service.Services[0])
+    //console.log(service.Services[0])
 
     return (
 

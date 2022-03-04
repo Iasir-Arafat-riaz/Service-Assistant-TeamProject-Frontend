@@ -7,6 +7,7 @@ import Navigation from '../../SharedRoute/Navigation/Navigation';
 import Header from '../Header/Header';
 import HomeServices from '../HomeServices/HomeServices';
 import RecentlyViews from '../RecentlyViews/RecentlyViews';
+import RequestService from '../RequestService/RequestService';
 import Testimonials from '../Testimonials/Testimonials/Testimonials';
 import TrendingServices from '../TrendingServices/TrendingServices';
 
@@ -21,10 +22,10 @@ const Home = () => {
             <HomeServices />
             <TrendingServices />
             <Testimonials />
-
+            <RequestService/>
 
             {
-                !loading && user?.email ? !user.role === 'admin' && <Chatbot></Chatbot> : <Chatbot></Chatbot>
+                !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
             <Footer />
         </>

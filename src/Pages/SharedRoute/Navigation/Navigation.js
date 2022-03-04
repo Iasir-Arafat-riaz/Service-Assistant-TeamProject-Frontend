@@ -1,9 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from 'axios'
-import { Divider, Drawer, List, ListItem, ListItemText, AppBar, Box, Toolbar, IconButton, Typography, Menu, Avatar, Button, Tooltip, MenuItem, Container, ListItemIcon, } from "@mui/material";
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import Popover from '@mui/material/Popover';
-import Badge from '@mui/material/Badge';
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  Container,
+  CardContent,
+  CardActionArea,
+  Card,
+  Grid,
+  Modal,
+  TextField,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
@@ -14,69 +33,62 @@ import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
 import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
-import { useNavigate } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux";
-import { allData, getNotification } from "../../../redux/dataSlice/dataSlice";
-import notificationIcon from '../../images/notification-icon.jpg';
-import useFirebase from "../../../Hooks/useFirebase";
 import "./Navigation.css";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { allData } from "../../../redux/dataSlice/dataSlice";
+import useFirebase from "../../../Hooks/useFirebase";
+import axios from "axios";
 
 const Navigation = () => {
-
   const navRef = useRef(null);
   const navigate = useNavigate();
   const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
-  const { user, notificationCount } = useSelector(allData);
+  const { user } = useSelector(allData);
   const { handleSignOut } = useFirebase();
-  const dispatch = useDispatch();
-  const goHome = () => {
-    navigate("/home")
+
+  const [APIData, setAPIData] = useState([])
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    axios.get(`https://fierce-meadow-12011.herokuapp.com/singleservice`)
+      .then((response) => {
+        setAPIData(response.data);
+      })
+  }, [])
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue)
+    if (searchInput !== '') {
+      const filteredData = APIData.filter((item) => {
+        return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+      })
+      setFilteredResults(filteredData)
+    }
+    else {
+      setFilteredResults(APIData)
+    }
   }
-  // Mui popover for notificatio 
-  // const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleCardClick = (id) => {
+    //console.log("card clicked");
+    navigate(`/Home/service-details/${id}`);
   };
 
-  // const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  const [notifications, setNotifications] = useState([])
-  useEffect(() => {
-    const api = `http://localhost:5000/notification/getnotification?email=${user?.email}`
-    axios.get(api).then((res) => {
-      setNotifications(res.data)
-
-    });
-    // 
-    // dispatch(getNotification(user?.email))
-
-  }, [notificationCount])
-
-  // const number = Math.random() * 100
-
-  console.log(notificationCount)
-
+  const goHome = () => {
+    navigate("/home");
+  };
 
   useEffect(() => {
+    // //console.log(navRef.current.classList);
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
@@ -112,7 +124,7 @@ const Navigation = () => {
     height: "25px",
     borderRadius: "50px",
     padding: "8px",
-    marginRight: "0px",
+    marginRight: "20px",
     backgroundColor: "#FF5E14",
     color: "whiteSmoke",
   };
@@ -128,28 +140,28 @@ const Navigation = () => {
 
   // search popup
 
-  const openSearchBox = () => {
-    document.querySelector("#myOverlay").style.display = "block";
-  };
-  const closeSearchBox = () => {
-    document.querySelector("#myOverlay").style.display = "none";
-  };
+  // const openSearchBox = () => {
+  //   document.querySelector("#myOverlay").style.display = "block";
+  // };
+  // const closeSearchBox = () => {
+  //   document.querySelector("#myOverlay").style.display = "none";
+  // };
 
   // form submit
-  const handaleSubmitForm = (e) => {
-    e.preventDefault();
-  };
+  // const handaleSubmitForm = (e) => {
+  //   e.preventDefault();
+  // };
 
   // trigger button
-  useEffect(() => {
-    let input = document.getElementById("search");
-    input.addEventListener("keyup", (event) => {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-        closeSearchBox();
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   let input = document.getElementById("search");
+  //   input.addEventListener("keyup", (event) => {
+  //     if (event.keyCode === 13) {
+  //       event.preventDefault();
+  //       closeSearchBox();
+  //     }
+  //   });
+  // }, []);
 
   // style sheets
 
@@ -313,13 +325,107 @@ const Navigation = () => {
             className={navItemContainer}
           >
             {/* search button */}
+
             <Tooltip arrow title="Search...">
               <SearchIcon
                 type="button"
-                onClick={openSearchBox}
+                onClick={handleOpen}
                 style={navButton}
               />
             </Tooltip>
+
+
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box
+                xs={12}
+                md={12}
+                sx={{
+                  top: '10%',
+                  width: "100%",
+                  bgcolor: '#F4F5F8',
+                  boxShadow: 24,
+                  p: 4,
+                  height: '200px',
+                  overflow: 'scroll'
+                }}>
+                <TextField icon='search'
+                  placeholder='Search Services...'
+                  onChange={(e) => searchItems(e.target.value)}
+                  sx={{ width: '80%', left: '5%', mb: 3 }}
+                  id="standard-search"
+                  type="search"
+                  variant="standard"
+
+                />
+                {/* <Button
+                  onClick={handleClose}
+                  sx={{
+                    mt: -4,
+                    ml: 15
+                    
+                  }}>
+                  <CloseIcon
+                    sx={{
+                      boxShadow: 3,
+                      fontSize: 26,
+                      p: 1,
+                      borderRadius: '50%',
+                      backgroundColor: 'white',
+                      color: '#FF5E14'
+                    }}
+                  />
+                </Button> */}
+
+                <Grid
+                  container
+                  spacing={3}
+
+                >
+                  {
+                    searchInput.length > 1 ? (
+                      filteredResults.map((item) => {
+                        return (
+                          <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
+                            <Card >
+                              <CardActionArea onClick={() => handleCardClick(item.parentService)}>
+                                <CardContent>
+                                  <Typography>
+                                    {item.Title}
+                                  </Typography>
+                                </CardContent>
+                              </CardActionArea>
+                            </Card>
+                          </Grid>
+                        )
+                      })
+                    ) : (
+
+                      APIData.map((item) => {
+                        return (
+                          <Grid item md={12} xs={12}>
+                            {/* <Card sx={{}}>
+                                        <CardActionArea>
+                                            <CardContent>
+                                                <Typography>
+                                                    {item.Title}
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Card> */}
+                          </Grid>
+                        )
+                      })
+                    )
+                  }
+                </Grid>
+              </Box>
+            </Modal>
+
 
             {!user?.email && (
               <Button variant="text" onClick={handleUserLogin}>
@@ -333,112 +439,11 @@ const Navigation = () => {
             )}
 
             {user?.email && (
-              <>
-                <>
-
-
-                  <IconButton
-                    onClick={handleClick}
-                    size="small"
-                    sx={{ mx: 3 }}
-                    aria-controls={open ? 'account-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
-                  >
-                    <Badge badgeContent={notifications?.length} color="primary">
-
-
-                      <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
-                    </Badge>
-
-                    {/* <Avatar sx={{ width: 32, height: 32 }}>M</Avatar> */}
-
-
-                  </IconButton>
-
-                  <Menu sx={{
-
-                  }}
-                    anchorEl={anchorEl}
-                    id="account-menu"
-                    open={open}
-                    onClose={handleClose}
-                    onClick={handleClose}
-                    PaperProps={{
-                      elevation: 0,
-
-                      sx: {
-                        overflow: 'visible',
-                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                        mt: 1.5,
-                        height: 300,
-                        width: 400,
-                        overflowY: 'scroll',
-                        '& .MuiAvatar-root': {
-                          width: 32,
-                          height: 32,
-                          ml: -0.5,
-                          mr: 1,
-                        },
-                        '&:before': {
-                          content: '""',
-                          display: 'block',
-                          position: 'absolute',
-                          top: 0,
-                          right: 14,
-                          width: 10,
-                          height: 10,
-                          bgcolor: 'background.paper',
-                          transform: 'translateY(-50%) rotate(45deg)',
-                          zIndex: 0,
-                        },
-                      },
-                    }}
-                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                  >
-                    {
-                      notificationIcon.length > 0
-                        ?
-                        <Box>
-                          {
-                            notifications.map(notification => <Box sx={{ borderBottom: '2px solid #F4F5F8', mb: 1 }}>
-
-                              <MenuItem>
-
-                                <Avatar sx={{ width: 40, height: 40, borderRadius: 0 }} src={notification?.image}></Avatar>
-
-                                <Typography variant="h6" sx={{ fontSize: 14 }}>{notification?.message}</Typography>
-
-
-
-                              </MenuItem>
-
-                              <small style={{ paddingLeft: 10 }}>{notification.time}</small>
-
-                            </Box>)
-
-                          }
-                        </Box>
-                        :
-                        <Box sx={{ width: 250, display: 'grid', alignItems: 'center', justifyContent: 'center' }}>
-                          <img src={notificationIcon} style={{ marginTop: '50%' }} width="100" height="100" alt="" />
-                          <Typography variant="body2">No message notification!</Typography>
-                        </Box>}
-
-
-                  </Menu>
-
-
-                </>
-
-                <Tooltip arrow title="My Account">
-                  <IconButton onClick={handleOpenUserMenu}>
-                    <Avatar alt="Remy Sharp" src={user?.photoURL} />
-                  </IconButton>
-
-                </Tooltip>
-              </>
+              <Tooltip arrow title="My Account">
+                <IconButton onClick={handleOpenUserMenu}>
+                  <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                </IconButton>
+              </Tooltip>
             )}
 
             {user?.email && (
@@ -458,16 +463,10 @@ const Navigation = () => {
                 onClose={handleCloseUserMenu}
               >
                 {/* menu items */}
-
-
-
                 <MenuItem
                   sx={{ display: "grid", gap: 1, justifyContent: "center" }}
                 >
-
-                  <Box
-                    sx={{ display: "flex", justifyContent: "center" }}
-                  >
+                  <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Avatar
                       style={{ borderRadius: "50%", margin: "0 auto" }}
                       src={user?.photoURL}
@@ -502,7 +501,8 @@ const Navigation = () => {
         </Drawer>
       </React.Fragment>
 
-      <Box id="myOverlay" className="overlay">
+
+      {/* <Box id="myOverlay" className="overlay">
         <span
           className="closebtn"
           onClick={closeSearchBox}
@@ -512,10 +512,62 @@ const Navigation = () => {
         </span>
         <Box className="overlay-content">
           <form id="search" onSubmit={handaleSubmitForm}>
-            <input type="search" placeholder="Search.." name="search" />
+            <input onChange={(e) => searchItems(e.target.value)} type="search" placeholder="Search.." name="search" />
           </form>
+
+
+          <Grid container spacing={3} >
+                {searchInput.length > 1 ? (
+                    filteredResults.map((item) => {
+                        return (
+                            <Grid item md={4}>
+                                <Card sx={{ minWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="60"
+                                            image={item.Image}
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <CardHeader>{item.Title}</CardHeader>
+                                            <Typography>
+                                                {item.Title}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        )
+                    })
+                ) : (
+
+                    APIData.map((item) => {
+                        return (
+                            <Grid item md={4}>
+                                <Card sx={{ maxWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component="img"
+                                            height="60"
+                                            image={item.Image}
+                                            alt="green iguana"
+                                        />
+                                        <CardContent>
+                                            <CardHeader>{item.Title}</CardHeader>
+                                            <Typography>
+                                                {item.Title}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Grid>
+                        )
+                    })
+                )}
+            </Grid>
         </Box>
-      </Box>
+      </Box> */}
     </Container>
   );
 };

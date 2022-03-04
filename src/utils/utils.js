@@ -1,5 +1,6 @@
 // const initialIds = [3, 4, 10, 6, 9];
 const initialIds = [31, 41, 101, 61, 91];
+// const initialIds = [];
 
 export const getItemFromLocal = () => {
   const ids = JSON.parse(localStorage.getItem("recentView"));

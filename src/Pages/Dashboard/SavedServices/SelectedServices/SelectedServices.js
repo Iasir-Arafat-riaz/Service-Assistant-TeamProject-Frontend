@@ -105,7 +105,7 @@ const SelectedServices = () => {
         setSelectedServices(JSON.parse(localStorage.getItem("selectedService")))
     }, [count])
 
-    // console.log(selectedService)
+    // //console.log(selectedService)
 
 
     const handleStpperNext = category => {
@@ -122,10 +122,10 @@ const SelectedServices = () => {
     };
 
     const handleDeleteService = id => {
-        // console.log(id)
+        // //console.log(id)
         const matchService = selectedServices?.filter(service => service._id !== id);
         setCount(count + 1);
-        // console.log(matchService);
+        // //console.log(matchService);
 
         // localStorage.removeItem(matchService);
         // localStorage.setItem('')

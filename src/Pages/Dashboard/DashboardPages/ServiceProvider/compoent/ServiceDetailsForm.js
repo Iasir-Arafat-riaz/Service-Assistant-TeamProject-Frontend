@@ -9,10 +9,11 @@ const ServiceDetailsForm = ({
   pos,
   serviceOption,
   handleServiceOptons,
+  handleServiceChange,
 }) => {
   // const optionRow = Array.from({ length: totalRow }, (v, i) => i);
   const optionRow = serviceOption.serviceDetails;
-  console.log(serviceOption);
+  //console.log(serviceOption);
   return (
     <Grid container spacing={2}>
       <Typography
@@ -31,6 +32,7 @@ const ServiceDetailsForm = ({
             variant="standard"
             fullWidth
             name="serviceOptionTitle"
+            onChange={(e) => handleServiceChange(e, pos)}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={6}>
@@ -41,6 +43,7 @@ const ServiceDetailsForm = ({
             fullWidth
             type="file"
             name="serviceOptionImage"
+            onChange={(e) => handleServiceChange(e, pos)}
             InputLabelProps={{
               shrink: true,
             }}
@@ -52,6 +55,7 @@ const ServiceDetailsForm = ({
           key={index}
           {...item}
           handleServiceOptons={handleServiceOptons}
+          pos={pos}
         />
       ))}
       <Button

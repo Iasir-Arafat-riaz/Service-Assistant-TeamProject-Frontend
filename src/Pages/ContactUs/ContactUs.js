@@ -1,15 +1,17 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Navigation from "../SharedRoute/Navigation/Navigation";
+import Contact from "../Home/Contact/Contact";
+import { Box } from "@mui/system";
 const ContactUs = () => {
   return (
-    <div>
+    <Box>
       <Navigation />
-      <div style={{ marginTop: "100px" }}>
-        <h1>Contact Us</h1>
-        <Button variant="contained">Hello World</Button>
+      <div style={{ marginTop: "300px" }}>
+       
+        <Contact/>
       </div>
-    </div>
+    </Box>
   );
 };
 

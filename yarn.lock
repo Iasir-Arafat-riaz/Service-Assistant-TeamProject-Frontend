@@ -8892,6 +8892,11 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
+"react-scrollable-feed@^1.3.1":
+  "integrity" "sha512-C+ED45W+wY5EKhBmS2h6D/Nt0fv1Qx0KrvhHwpKpqpooeb/PjyLZqyVSCdFDSTJ2d9baP1Qa7ZB7/SXFnYghMA=="
+  "resolved" "https://registry.npmjs.org/react-scrollable-feed/-/react-scrollable-feed-1.3.1.tgz"
+  "version" "1.3.1"
+
 "react-slick@^0.28.1":
   "integrity" "sha512-JwRQXoWGJRbUTE7eZI1rGIHaXX/4YuwX6gn7ulfvUZ4vFDVQAA25HcsHSYaUiRCduTr6rskyIuyPMpuG6bbluw=="
   "resolved" "https://registry.npmjs.org/react-slick/-/react-slick-0.28.1.tgz"
