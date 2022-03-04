@@ -32,7 +32,7 @@ const ServiceCard = ({ Name, Img, Id }) => {
   const handleCardClick = (id) => {
     //console.log("card clicked");
     navigate(`/Home/service-details/${id}`);
-    setItemInLocal({ Name, Img, Id })
+    setItemInLocal({ Category: Name, Img, Id })
   };
   return (
     <>
