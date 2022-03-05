@@ -42,7 +42,7 @@ import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider
 
 const App = () => {
   const { } = useFirebase();
- 
+
 
   return (
     <BrowserRouter>
@@ -53,27 +53,20 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="/dashboard" element={<Overview />} />
-          <Route path="/dashboard/overview" element={<Overview />} />
-          <Route
-            path="/dashboard/manageAllOrders"
-            element={<ManageAllOrders />}
-          />
-          <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
-          <Route path="/dashboard/myorders" element={<MyOrder />} />
-          <Route path="/dashboard/addproduct" element={<Addproduct />} />
-
-          <Route path="addBanner" element={<AddBanner />} />
-          <Route path="providerOverview" element={<ProviderOverview />} />
-
-          <Route path="/dashboard/adminChat" element={<AdminChat />} />
-
-          <Route
+        <Route path="/dashboard" element={<Overview />} />
+        <Route path="/dashboard/overview" element={<Overview />} />
+        <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />}/>
+        <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
+        <Route path="/dashboard/myorders" element={<MyOrder />} />
+        <Route path="/dashboard/addproduct" element={<Addproduct />} />
+        <Route path="addBanner" element={<AddBanner />} />
+        <Route path="providerOverview" element={<ProviderOverview />} />
+        <Route path="/dashboard/adminChat" element={<AdminChat />} />
+        <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
-
-          <Route
+        <Route
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
           />
