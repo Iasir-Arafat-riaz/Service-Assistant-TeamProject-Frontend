@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import {
   Divider,
   Drawer,
@@ -22,6 +23,8 @@ import {
   Grid,
   Modal,
   TextField,
+  Popover,
+  Badge,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -35,8 +38,8 @@ import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { allData } from "../../../redux/dataSlice/dataSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { allData, getNotification, setNotificationCount, updateMessageStatus } from "../../../redux/dataSlice/dataSlice";
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
@@ -47,16 +50,22 @@ const Navigation = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [openModal, setOpenModal] = React.useState(false);
   const [state, setState] = React.useState(false);
-  const { user } = useSelector(allData);
+  const { user, notifications, notificationCount } = useSelector(allData);
   const { handleSignOut } = useFirebase();
-
+  // const [notificationNumber, setNotificationNumber] = useState([])
+  const dispatch = useDispatch();
   const [APIData, setAPIData] = useState([])
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
+  const [messageSeen, setMessageSeen] = useState([]);
 
   const [open, setOpen] = React.useState(false);
+  const [isMessageSeen, setIsMessageSeen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open2 = Boolean(anchorEl);
+  const id = open2 ? 'simple-popover' : undefined;
 
   useEffect(() => {
     axios.get(`https://fierce-meadow-12011.herokuapp.com/singleservice`)
@@ -65,6 +74,33 @@ const Navigation = () => {
       })
   }, [])
 
+  // let 
+  // let MessageSeen;
+  useEffect(() => {
+    const filterMessage = notifications.filter(notification => notification.email === user.email && notification.seen === false);
+    setMessageSeen(filterMessage)
+    setIsMessageSeen(true);
+  }, [anchorElUser, notificationCount, isMessageSeen])
+  // console.log(messageSeen);
+  // console.log(MessageSeen);
+  // console.log(messageSeen);
+  // get notification
+  useEffect(() => {
+    dispatch(getNotification(user));
+    // setIsMessageSeen(false);
+  }, [user, notificationCount])
+
+  // console.log(notifications)
+  // console.log(notificationCount);
+
+  const handleClickClose = () => {
+    setAnchorEl(null);
+    setIsMessageSeen(false);
+  };
+
+  // current notifications 
+  const currentNotifications = [...notifications].reverse()
+  // console.log(currentNotifications);
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
     if (searchInput !== '') {
@@ -88,6 +124,7 @@ const Navigation = () => {
   };
 
   useEffect(() => {
+
     // //console.log(navRef.current.classList);
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
@@ -103,7 +140,7 @@ const Navigation = () => {
         }
       }
     });
-  }, [user]);
+  }, []);
 
   // setSearchValue("Hello world")
   const handleOpenUserMenu = (event) => {
@@ -116,8 +153,26 @@ const Navigation = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    setIsMessageSeen(true);
   };
 
+
+  // message status change
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    // StatusChange();
+    dispatch(updateMessageStatus(user));
+    const number = Math.random() * 100;
+    dispatch(setNotificationCount(parseInt(number)))
+    // setIsMessageSeen(true);
+    // console.log(filterMessage);
+    // axios.put(`http://localhost:5000/notification/statuschange/${user.email}`)
+
+  };
+
+  // console.log(let  MessageSeen);
+  // dispatch(setNotificationCount(parseInt(Math.random() * 100)))
   // nav button
   const navButton = {
     width: "25px",
@@ -246,6 +301,8 @@ const Navigation = () => {
       </List>
     </Box>
   );
+
+
 
   return (
     <Container id="back-to-top-anchor">
@@ -426,6 +483,64 @@ const Navigation = () => {
               </Box>
             </Modal>
 
+            {user?.email && (
+              <>
+                <>
+
+                  <Button aria-describedby={id} variant="" onClick={handleClick}>
+
+                    {messageSeen?.length > 0 ? <Badge badgeContent={notifications.length} color="primary">
+                      <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
+                    </Badge>
+                      :
+                      <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
+                    }
+
+                  </Button>
+
+
+
+
+
+                  <Popover
+                    sx={{ borderRadius: 5 }}
+                    id={id}
+                    open={open2}
+                    anchorEl={anchorEl}
+                    onClose={handleClickClose}
+                    anchorOrigin={{
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    }}
+                  >
+                    <Box sx={{ width: '300px', height: '300px', borderRadius: 5, p: 2 }}>
+                      {
+                        currentNotifications.map((notification) => <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2, mb: 1, borderBottom: '2px solid #F4F5F8', pb: 1 }}>
+
+                          <Avatar alt="notification image" sx={{ borderRadius: 0, width: 60, height: 60 }} src={notification?.image} />
+
+                          <Box>
+                            <Typography variant="h6" sx={{ fontSize: 14 }}>{notification.message}</Typography>
+                            <Typography variant="h6" sx={{ fontSize: 11 }}>Time: {notification.time}</Typography>
+
+                          </Box>
+
+                        </Box>
+                        )
+                      }
+                    </Box>
+                  </Popover>
+
+                </>
+                <Tooltip arrow title="My Account">
+                  <IconButton onClick={handleOpenUserMenu}  >
+                    <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                  </IconButton>
+
+                </Tooltip>
+              </>
+            )}
+
 
             {!user?.email && (
               <Button variant="text" onClick={handleUserLogin}>
@@ -438,13 +553,13 @@ const Navigation = () => {
               </Button>
             )}
 
-            {user?.email && (
+            {/* {user?.email && (
               <Tooltip arrow title="My Account">
                 <IconButton onClick={handleOpenUserMenu}>
                   <Avatar alt="Remy Sharp" src={user?.photoURL} />
                 </IconButton>
               </Tooltip>
-            )}
+            )} */}
 
             {user?.email && (
               <Menu

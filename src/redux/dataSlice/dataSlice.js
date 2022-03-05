@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 
@@ -32,7 +33,8 @@ const initialState = {
     id: 0,
     notifications: [],
     notificationLoading: true,
-    notificationCount: 0
+    notificationCount: 0,
+
 }
 
 // async task
@@ -170,14 +172,21 @@ export const saveService = createAsyncThunk(
     }
 );
 
-// export const getNotification = createAsyncThunk(
-//     "get/notification",
-//     async (info) => {
-//         console.log(info)
-//         const response = await axios.get(`http://localhost:5000/notification/getnotification?email=${info}`)
-//         return response.data;
-//     }
-// )
+export const getNotification = createAsyncThunk(
+    "get/notification",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`http://localhost:5000/notification/getnotification?email=${info.email}`)
+        return response.data;
+    }
+)
+
+export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
+    async (info) => {
+        const response = await axios.put(`http://localhost:5000/notification/statuschange/${info.email}`)
+        return response.data;
+    }
+)
 
 export const dataSlice = createSlice({
     name: 'data',
@@ -307,6 +316,13 @@ export const dataSlice = createSlice({
                 if (payload.length) {
                     state.allChat = payload
                 }
+            })
+            .addCase(getNotification.pending, (state, { payload }) => {
+                state.notificationLoading = true;
+            })
+            .addCase(getNotification.fulfilled, (state, { payload }) => {
+                state.notifications = payload;
+                state.notificationLoading = false;
             })
 
     },
