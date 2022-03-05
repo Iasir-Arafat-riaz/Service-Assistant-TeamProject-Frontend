@@ -43,6 +43,8 @@ import { allData, getNotification, setNotificationCount, updateMessageStatus } f
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
+
+
 const Navigation = () => {
   const navRef = useRef(null);
   const navigate = useNavigate();
@@ -498,7 +500,7 @@ const Navigation = () => {
 
                   </Button>
 
-
+                  {/* <StyledBadge badgeContent={15} variant="dot"> */}
 
 
 
@@ -683,7 +685,7 @@ const Navigation = () => {
             </Grid>
         </Box>
       </Box> */}
-    </Container>
+    </Container >
   );
 };
 export default Navigation;
