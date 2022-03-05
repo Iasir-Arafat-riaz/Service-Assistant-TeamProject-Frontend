@@ -9,13 +9,17 @@ const OrdersTableRow = ({ data }) => {
 
     const handleChange = e => {
         setStatus(e.target.value);
-        // UpdateStatus();
         const updateStatus = e.target.value;
-        axios.put(`http://localhost:5000/orders/changestatus/${data._id}`, { updateStatus })
+        UpdateStatus(updateStatus);
 
         console.log(updateStatus);
     };
 
+    const UpdateStatus = updateStatus => {
+        useEffect(() => {
+            axios.put(`http://localhost:5000/orders/changestatus/${data._id}`, { updateStatus })
+        }, [updateStatus])
+    }
 
 
     // update status 

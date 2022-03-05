@@ -2,7 +2,7 @@ import { CardActionArea, Typography, CardMedia, CardContent, Grid, Card, Avatar,
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 // comment-out from riaz for data undefined
-import { allData, reviewServiceIndex } from '../../../../redux/dataSlice/dataSlice';
+import { allData, parentServiceId, reviewServiceIndex, singleService } from '../../../../redux/dataSlice/dataSlice';
 // import { allData } from '../../../../redux/dataSlice/dataSlice';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,9 @@ const MyOrdersTable = () => {
     const dispatch = useDispatch();
 
 
-
+    useEffect(() => {
+        dispatch(singleService());
+    }, [dispatch])
 
 
     // data load
@@ -46,15 +48,21 @@ const MyOrdersTable = () => {
 
         dispatch(reviewServiceIndex(parseInt(index) + 1));
         // //console.log(index)
+        // const id = JSON?.parse(localStorage?.getItem("parentId"));
+        // localStorage.setItem('parentId', JSON.stringify([...selectServiceId, selectServiceId]))
         // parentId = selectServiceId
 
     };
 
-    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
-
+    // console.log(parentId)
+    // // dispatch(parentServiceId(parentId))
+    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(parentId));
     // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
-    // //console.log(matchService.Reviews);
+    // console.log(matchReviews);
+    // console.log(singleServiceDetails);
 
+    // // //console.log(matchService.Reviews);
+    // console.log(matchReviews)
 
 
     // //console.log(id)
@@ -66,7 +74,7 @@ const MyOrdersTable = () => {
 
 
                 {
-                    savedService?.map((service, index) => <Grid item key={index} xs={12} md={6} lg={4} >
+                    savedService?.map((service, index) => <Grid item key={index} xs={12} md={6} lg={4}>
 
                         <Card sx={{ maxWidth: 345, mb: 4 }}>
 

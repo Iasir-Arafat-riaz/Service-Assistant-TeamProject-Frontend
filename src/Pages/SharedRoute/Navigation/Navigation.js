@@ -54,7 +54,6 @@ const Navigation = () => {
   const [state, setState] = React.useState(false);
   const { user, notifications, notificationCount } = useSelector(allData);
   const { handleSignOut } = useFirebase();
-  // const [notificationNumber, setNotificationNumber] = useState([])
   const dispatch = useDispatch();
   const [APIData, setAPIData] = useState([])
   const [filteredResults, setFilteredResults] = useState([]);
@@ -80,20 +79,15 @@ const Navigation = () => {
   // let MessageSeen;
   useEffect(() => {
     const filterMessage = notifications.filter(notification => notification.email === user.email && notification.seen === false);
-    setMessageSeen(filterMessage)
+    setMessageSeen(filterMessage);
+    const number = Math.random() * 100
     setIsMessageSeen(true);
   }, [anchorElUser, notificationCount, isMessageSeen])
-  // console.log(messageSeen);
-  // console.log(MessageSeen);
-  // console.log(messageSeen);
-  // get notification
+
   useEffect(() => {
     dispatch(getNotification(user));
-    // setIsMessageSeen(false);
   }, [user, notificationCount])
 
-  // console.log(notifications)
-  // console.log(notificationCount);
 
   const handleClickClose = () => {
     setAnchorEl(null);
@@ -102,7 +96,6 @@ const Navigation = () => {
 
   // current notifications 
   const currentNotifications = [...notifications].reverse()
-  // console.log(currentNotifications);
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
     if (searchInput !== '') {
@@ -127,16 +120,13 @@ const Navigation = () => {
 
   useEffect(() => {
 
-    // //console.log(navRef.current.classList);
     window.addEventListener("scroll", () => {
       const scroll = window.pageYOffset;
       if (scroll > 100) {
-        // document.getElementById("navbar").classList.add("scroll-nav");
         if (navRef.current) {
           navRef.current.classList.add("scroll-nav");
         }
       } else {
-        // document.getElementById("navbar").classList.remove("scroll-nav");
         if (navRef.current) {
           navRef.current.classList.remove("scroll-nav");
         }
@@ -163,18 +153,13 @@ const Navigation = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    // StatusChange();
     dispatch(updateMessageStatus(user));
     const number = Math.random() * 100;
     dispatch(setNotificationCount(parseInt(number)))
-    // setIsMessageSeen(true);
-    // console.log(filterMessage);
-    // axios.put(`http://localhost:5000/notification/statuschange/${user.email}`)
+
 
   };
 
-  // console.log(let  MessageSeen);
-  // dispatch(setNotificationCount(parseInt(Math.random() * 100)))
   // nav button
   const navButton = {
     width: "25px",
@@ -195,30 +180,6 @@ const Navigation = () => {
     fontSize: "15px",
   };
 
-  // search popup
-
-  // const openSearchBox = () => {
-  //   document.querySelector("#myOverlay").style.display = "block";
-  // };
-  // const closeSearchBox = () => {
-  //   document.querySelector("#myOverlay").style.display = "none";
-  // };
-
-  // form submit
-  // const handaleSubmitForm = (e) => {
-  //   e.preventDefault();
-  // };
-
-  // trigger button
-  // useEffect(() => {
-  //   let input = document.getElementById("search");
-  //   input.addEventListener("keyup", (event) => {
-  //     if (event.keyCode === 13) {
-  //       event.preventDefault();
-  //       closeSearchBox();
-  //     }
-  //   });
-  // }, []);
 
   // style sheets
 
@@ -421,24 +382,7 @@ const Navigation = () => {
                   variant="standard"
 
                 />
-                {/* <Button
-                  onClick={handleClose}
-                  sx={{
-                    mt: -4,
-                    ml: 15
-                    
-                  }}>
-                  <CloseIcon
-                    sx={{
-                      boxShadow: 3,
-                      fontSize: 26,
-                      p: 1,
-                      borderRadius: '50%',
-                      backgroundColor: 'white',
-                      color: '#FF5E14'
-                    }}
-                  />
-                </Button> */}
+
 
                 <Grid
                   container
@@ -467,15 +411,7 @@ const Navigation = () => {
                       APIData.map((item) => {
                         return (
                           <Grid item md={12} xs={12}>
-                            {/* <Card sx={{}}>
-                                        <CardActionArea>
-                                            <CardContent>
-                                                <Typography>
-                                                    {item.Title}
-                                                </Typography>
-                                            </CardContent>
-                                        </CardActionArea>
-                                    </Card> */}
+
                           </Grid>
                         )
                       })
@@ -500,7 +436,6 @@ const Navigation = () => {
 
                   </Button>
 
-                  {/* <StyledBadge badgeContent={15} variant="dot"> */}
 
 
 
@@ -555,13 +490,7 @@ const Navigation = () => {
               </Button>
             )}
 
-            {/* {user?.email && (
-              <Tooltip arrow title="My Account">
-                <IconButton onClick={handleOpenUserMenu}>
-                  <Avatar alt="Remy Sharp" src={user?.photoURL} />
-                </IconButton>
-              </Tooltip>
-            )} */}
+
 
             {user?.email && (
               <Menu
@@ -619,72 +548,7 @@ const Navigation = () => {
       </React.Fragment>
 
 
-      {/* <Box id="myOverlay" className="overlay">
-        <span
-          className="closebtn"
-          onClick={closeSearchBox}
-          title="Close Overlay"
-        >
-          ×
-        </span>
-        <Box className="overlay-content">
-          <form id="search" onSubmit={handaleSubmitForm}>
-            <input onChange={(e) => searchItems(e.target.value)} type="search" placeholder="Search.." name="search" />
-          </form>
 
-
-          <Grid container spacing={3} >
-                {searchInput.length > 1 ? (
-                    filteredResults.map((item) => {
-                        return (
-                            <Grid item md={4}>
-                                <Card sx={{ minWidth: 345 }}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            component="img"
-                                            height="60"
-                                            image={item.Image}
-                                            alt="green iguana"
-                                        />
-                                        <CardContent>
-                                            <CardHeader>{item.Title}</CardHeader>
-                                            <Typography>
-                                                {item.Title}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </Grid>
-                        )
-                    })
-                ) : (
-
-                    APIData.map((item) => {
-                        return (
-                            <Grid item md={4}>
-                                <Card sx={{ maxWidth: 345 }}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            component="img"
-                                            height="60"
-                                            image={item.Image}
-                                            alt="green iguana"
-                                        />
-                                        <CardContent>
-                                            <CardHeader>{item.Title}</CardHeader>
-                                            <Typography>
-                                                {item.Title}
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </Grid>
-                        )
-                    })
-                )}
-            </Grid>
-        </Box>
-      </Box> */}
     </Container >
   );
 };

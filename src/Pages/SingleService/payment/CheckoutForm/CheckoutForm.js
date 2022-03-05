@@ -97,6 +97,8 @@ const CheckoutForm = () => {
                 const number = Math.random() * 100
                 dispatch(setNotificationCount(parseInt(number)));
             });
+            const number = Math.random() * 100
+            dispatch(setNotificationCount(parseInt(number)));
         };
     };
 
