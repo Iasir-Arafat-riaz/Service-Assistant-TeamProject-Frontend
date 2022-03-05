@@ -5,7 +5,7 @@ import {
     ThemeProvider,
 } from '@mui/material/styles';
 import { Box } from '@mui/system';
-import detailsBanner from '../../images/service-details-banner.png';
+// import detailsBanner from '../../images/service-details-banner.png';
 import '../SingleService.css';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Paper, Typography } from '@mui/material';
@@ -14,12 +14,20 @@ const SingleServiceHeader = ({ matchService }) => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
     //console.log(matchService.mainFeatures)
-
     return (
         <>
-
             <ThemeProvider theme={theme}>
-                <Box sx={{ backgroundImage: `url(${detailsBanner})`, width: '100%', height: '50vh', mt: 10, display: 'flex', justifyContent: 'center', backgroundAttachment: 'fixed' }}>
+                <Box
+                    sx={{
+                        backgroundImage: `url(${matchService.Img})`, backgroundRepeat: 'no-repeat',
+                        backgroundSize: '100%',
+                        backgroundPosition: ' right center',
+                        height: '50vh',
+                        mt: 10,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        backgroundAttachment: 'fixed'
+                    }}>
 
                     <Box
                         sx={{ m: 4 }}
@@ -39,7 +47,7 @@ const SingleServiceHeader = ({ matchService }) => {
                             <Typography sx={{ fontSize: 20, mb: 1, fontWeight: 'bold', color: 'white' }} variant="h6">Main feature</Typography>
                             {
                                 matchService.mainFeatures.map((text, index) => (
-                                    <Typography sx={{  color: 'white' }} variant="h6"><li>{text}</li></Typography>
+                                    <Typography sx={{ color: 'white' }} variant="h6"><li>{text}</li></Typography>
                                 ))
                             }
                         </Paper>
