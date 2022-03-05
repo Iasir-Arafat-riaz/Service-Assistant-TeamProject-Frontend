@@ -19,9 +19,9 @@ const SingleServiceHeader = ({ matchService }) => {
             <ThemeProvider theme={theme}>
                 <Box
                     sx={{
-                        backgroundImage: `url(${matchService.Img})`, backgroundRepeat: 'no-repeat',
+                        backgroundImage: `url(${matchService.Img})`, backgroundRepeat: 'repeat-y',
                         backgroundSize: '100%',
-                        backgroundPosition: ' right center',
+                        backgroundPosition: 'center',
                         height: '50vh',
                         mt: 10,
                         display: 'flex',
