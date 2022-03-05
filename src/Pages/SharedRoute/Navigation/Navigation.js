@@ -59,7 +59,7 @@ const Navigation = () => {
 
   const [notificationNumber, setNotificationNumber] = useState([])
   useEffect(() => {
-    const api = `http://localhost:5000/notification/${user?.email}`
+    const api = `http://fierce-meadow-12011.herokuapp.com/notification/${user?.email}`
     axios.get(api).then((res) => {
       console.log(res.data,"got notification");
       setNotificationNumber(res.data)
