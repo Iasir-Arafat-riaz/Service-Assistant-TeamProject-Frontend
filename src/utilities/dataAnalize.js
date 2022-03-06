@@ -31,7 +31,7 @@ export const recentMoment = (data) => {
 export const totalEarning = (data) => {
     let price = 0;
     data.forEach(element => {
-        console.log(element.Price)
+        // price = price + element.Price;
         if (element.Price) {
 
             price = price + element.Price;
