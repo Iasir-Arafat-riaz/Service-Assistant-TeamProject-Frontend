@@ -22,12 +22,21 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+<<<<<<< HEAD
     width: { xs: '100%', lg: '70%', xl: '50%' },
     height: { xs: '100%', md: 'auto', lg: '80vh', xl: 'auto' },
     bgcolor: 'background.paper',
     boxShadow: 24,
     overflowY: 'scroll',
     overflowX: 'hidden'
+=======
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+    width: { xs: '100%', lg: '70%', xl: '50%' },
+    height: { xs: '100%', md: '80vh', xl: 'auto' },
+>>>>>>> remotes/origin/rakib
 };
 
 // box style

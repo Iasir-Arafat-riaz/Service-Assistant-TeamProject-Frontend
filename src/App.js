@@ -34,18 +34,24 @@ import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/
 import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
 import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/BecomeaProvider";
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
-import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
+<<<<<<< HEAD
 import useSocket from "./Hooks/useSocket";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+=======
+// import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
+// import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
+// import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
+>>>>>>> remotes/origin/rakib
 
 
 
 const App = () => {
   const { } = useFirebase();
+<<<<<<< HEAD
   const { socket } = useSocket();
   const { user } = useSelector(allData);
   const dispatch = useDispatch();
@@ -61,6 +67,9 @@ const App = () => {
       dispatch(newNotification(message))
     });
   }, [])
+=======
+
+>>>>>>> remotes/origin/rakib
 
   return (
     <BrowserRouter>
@@ -73,24 +82,17 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard" element={<Overview />} />
           <Route path="/dashboard/overview" element={<Overview />} />
-          <Route
-            path="/dashboard/manageAllOrders"
-            element={<ManageAllOrders />}
-          />
+          <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
-
           <Route path="addBanner" element={<AddBanner />} />
           <Route path="providerOverview" element={<ProviderOverview />} />
-
           <Route path="/dashboard/adminChat" element={<AdminChat />} />
-
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
-
           <Route
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
