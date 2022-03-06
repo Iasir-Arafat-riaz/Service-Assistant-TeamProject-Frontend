@@ -131,7 +131,7 @@ const AddServiceReview = () => {
 
                     <Box sx={{ width: { xs: "100%", lg: '48%' } }}>
 
-                        <TextField {...register("name", { required: true })} sx={inputStyle} id="outlined-basic" label="Your Name *" variant="outlined" />
+                        <TextField {...register("user", { required: true })} sx={inputStyle} id="outlined-basic" label="Your Name *" variant="outlined" />
 
 
                         <Box sx={{ mb: 2, border: '1px solid #c4c4c4', p: 0.8, borderRadius: 1, pl: 1.5 }}>
@@ -219,7 +219,7 @@ const AddServiceReview = () => {
 
                                 <Box sx={{ width: { xs: "100%" } }}>
 
-                                    <TextField {...register("name", { required: true })} sx={inputStyle} id="outlined-basic" label="Your Name *" variant="outlined" />
+                                    <TextField {...register("user", { required: true })} sx={inputStyle} id="outlined-basic" label="Your Name *" variant="outlined" />
 
 
                                     <Box sx={{ mb: 2, border: '1px solid #c4c4c4', p: 0.8, borderRadius: 1, pl: 1.5 }}>

@@ -1,11 +1,28 @@
-import { TableCell, FormControl, MenuItem, TextField, TableRow, } from '@mui/material';
-import React, { useState } from 'react';
+import { TableCell, FormControl, MenuItem, TextField, TableRow, Button, } from '@mui/material';
+import { convertLength } from '@mui/material/styles/cssUtils';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 const OrdersTableRow = ({ data }) => {
+
     const [status, setStatus] = useState(data.status);
+
     const handleChange = e => {
         setStatus(e.target.value);
+        const updateStatus = e.target.value;
+        UpdateStatus(updateStatus);
+
+        console.log(updateStatus);
+    };
+
+    const UpdateStatus = updateStatus => {
+        useEffect(() => {
+            axios.put(`http://localhost:5000/orders/changestatus/${data._id}`, { updateStatus })
+        }, [updateStatus])
     }
+
+
+    // update status 
     return (
         <TableRow
             key={data._id}
@@ -18,6 +35,9 @@ const OrdersTableRow = ({ data }) => {
             <TableCell >{data.orderInfo?.name}</TableCell>
             <TableCell >{data.Price}</TableCell>
             <TableCell sx={{ p: 0 }}>
+                {/* {
+                    status === 'pending'
+                        ? */}
                 <TextField
                     pt={20}
                     id="standard-select-currency"
@@ -29,6 +49,7 @@ const OrdersTableRow = ({ data }) => {
                     <MenuItem value='approve'>Approve</MenuItem>
                     <MenuItem value='pending'>Pending</MenuItem>
                 </TextField>
+
             </TableCell>
         </TableRow>
     );

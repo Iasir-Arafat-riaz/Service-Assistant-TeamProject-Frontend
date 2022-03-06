@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 
@@ -30,6 +31,10 @@ const initialState = {
     selectedService: {},
     reviewIndex: 0,
     id: 0,
+    notifications: [],
+    notificationLoading: true,
+    notificationCount: 0,
+
 }
 
 // async task
@@ -167,6 +172,22 @@ export const saveService = createAsyncThunk(
     }
 );
 
+export const getNotification = createAsyncThunk(
+    "get/notification",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`http://localhost:5000/notification/getnotification?email=${info.email}`)
+        return response.data;
+    }
+)
+
+export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
+    async (info) => {
+        const response = await axios.put(`http://localhost:5000/notification/statuschange/${info.email}`)
+        return response.data;
+    }
+)
+
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -228,6 +249,9 @@ export const dataSlice = createSlice({
         },
         parentServiceId: (state, { payload }) => {
             state.id = payload;
+        },
+        setNotificationCount: (state, { payload }) => {
+            state.notificationCount = parseInt(state.notificationCount) + parseInt(payload);
         },
     },
     extraReducers: (builder) => {
@@ -293,12 +317,18 @@ export const dataSlice = createSlice({
                     state.allChat = payload
                 }
             })
+            .addCase(getNotification.pending, (state, { payload }) => {
+                state.notificationLoading = true;
+            })
+            .addCase(getNotification.fulfilled, (state, { payload }) => {
+                state.notifications = payload;
+                state.notificationLoading = false;
+            })
 
     },
 })
 
-// Action creators are generated for each case reducer function
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

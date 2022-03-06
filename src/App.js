@@ -41,8 +41,14 @@ import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider
 
 
 const App = () => {
-  const { } = useFirebase();
- 
+  // const { } = useFirebase();
+  // const { socket } = useSocket();
+  // useEffect(() => {
+  //   socket.on("get-message", message => {
+  //     console.log(message, 'homoe')
+  //   });
+  //   socket.emit('message', { data: 'datahome ' })
+  // }, []);
 
   return (
     <BrowserRouter>

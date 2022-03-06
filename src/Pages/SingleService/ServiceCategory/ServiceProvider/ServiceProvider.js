@@ -13,8 +13,9 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
         dispatch(serviceProviders());
     }, [dispatch])
 
-    //console.log(selectService)
+    console.log(parentService)
     // style
+    // console.log(parentService)
 
     const serviceProvider = {
         mb: 3,
