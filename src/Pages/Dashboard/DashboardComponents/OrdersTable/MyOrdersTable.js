@@ -38,7 +38,7 @@ const MyOrdersTable = () => {
         return <h3>Loading...</h3>
     };
 
-
+    // let parentId;
     // hanlde change route
     const handleRouteChange = (selectServiceId, index) => {
         navigate(`/dashboard/review/${selectServiceId}`);
@@ -47,25 +47,31 @@ const MyOrdersTable = () => {
         // dispatch(reviewServiceIndex(index));
 
         dispatch(reviewServiceIndex(parseInt(index) + 1));
+        const data = { selectServiceId, email: user.email };
+        dispatch(parentServiceId(data));
         // //console.log(index)
         // const id = JSON?.parse(localStorage?.getItem("parentId"));
-        // localStorage.setItem('parentId', JSON.stringify([...selectServiceId, selectServiceId]))
+        localStorage.setItem('parentId', JSON.stringify(id))
         // parentId = selectServiceId
 
     };
+    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(parentId));
+    // console.log(parentId)
 
     // console.log(parentId)
     // // dispatch(parentServiceId(parentId))
-    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(parentId));
     // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
     // console.log(matchReviews);
     // console.log(singleServiceDetails);
 
     // // //console.log(matchService.Reviews);
     // console.log(matchReviews)
+    const handleOnload = id => {
+        const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
+        console.log(matchService)
+    }
 
-
-    // //console.log(id)
+    // console.log(id)
 
 
     return (
@@ -93,7 +99,7 @@ const MyOrdersTable = () => {
                                         {service?.parentService?.Title}
                                     </Typography>
 
-                                    <Typography sx={{ fontSize: 15, fontWeight: 'bold', mb: 1 }} variant="h6">Status: pending</Typography>
+                                    <Typography sx={{ fontSize: 15, fontWeight: 'bold', mb: 1 }} variant="h6">Status: {service.status}</Typography>
 
                                     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
