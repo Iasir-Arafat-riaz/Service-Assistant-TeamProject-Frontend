@@ -51,6 +51,7 @@ const UserLogin = () => {
 			alert('Wrong input ')
 		}
 	}
+
 	const handleLogin = () => {
 		if (watch('loginEmail').length && watch('loginPass').length >= 6) {
 			logInWithEmail({ email: watch('loginEmail'), password: watch('loginPass'), location, navigate })

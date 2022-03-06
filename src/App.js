@@ -37,6 +37,11 @@ import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/
 import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
+import LoginPopup from "./Pages/Login/LoginPopup/LoginPopup";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { allData } from "./redux/dataSlice/dataSlice";
+import PendingProviders from "./Pages/Dashboard/DashboardPages/PendingProviders/PendingProviders";
 
 
 
@@ -49,9 +54,22 @@ const App = () => {
   //   });
   //   socket.emit('message', { data: 'datahome ' })
   // }, []);
+  const { user } = useSelector(allData);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleOpen();
+    }, 5000)
+  }, [user])
 
   return (
     <BrowserRouter>
+
+      {!user?.email && <LoginPopup handleOpen={handleOpen} handleClose={handleClose} open={open} />}
+
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -99,6 +117,7 @@ const App = () => {
           <Route path="/dashboard/savedservice" element={<SavedServices />} />
           <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
           <Route path="/dashboard/review/:id" element={<AddServiceReview />} />
+          <Route path="/dashboard/pendingprovider" element={<PendingProviders />} />
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
@@ -120,6 +139,9 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
+
+
+
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

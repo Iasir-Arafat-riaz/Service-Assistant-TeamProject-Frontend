@@ -67,6 +67,7 @@ const useFirebase = () => {
                 })
 
                 navigate(location.state?.from.pathname || '/')
+                info?.handleClose();
                 // ...
             }).catch(error => {
 
