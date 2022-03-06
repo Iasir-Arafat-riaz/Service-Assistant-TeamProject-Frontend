@@ -58,7 +58,7 @@ import {
                     label="Enter image url"
                     variant="standard"
                   />
-                  <TextField
+                  <TextField 
                     required
                     type="text"
                     sx={{ mb: 3 }}
