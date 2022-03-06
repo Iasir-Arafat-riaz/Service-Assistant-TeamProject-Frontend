@@ -36,22 +36,22 @@ import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/Be
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
-<<<<<<< HEAD
+
 import useSocket from "./Hooks/useSocket";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
-=======
+
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
 // import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
->>>>>>> remotes/origin/rakib
+
 
 
 
 const App = () => {
   const { } = useFirebase();
-<<<<<<< HEAD
+
   const { socket } = useSocket();
   const { user } = useSelector(allData);
   const dispatch = useDispatch();
@@ -67,9 +67,7 @@ const App = () => {
       dispatch(newNotification(message))
     });
   }, [])
-=======
 
->>>>>>> remotes/origin/rakib
 
   return (
     <BrowserRouter>

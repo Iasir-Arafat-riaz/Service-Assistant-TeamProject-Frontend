@@ -540,14 +540,7 @@ const Navigation = () => {
           {list}
         </Drawer>
       </React.Fragment>
-<<<<<<< HEAD
-
-
-
-    </Container >
-=======
     </Container>
->>>>>>> remotes/origin/rakib
   );
 };
 export default Navigation;
