@@ -156,7 +156,7 @@ const AddServiceRequest = () => {
     );
     formData.append("allServices", JSON.stringify(serviceRequest.allServices));
     // formData ready to sent for saving
-    const api="https://fierce-meadow-12011.herokuapp.com/servicerequest";
+    const api="http://localhost:5000/servicerequest";
 
     fetch(api, {
       method: "POST",
