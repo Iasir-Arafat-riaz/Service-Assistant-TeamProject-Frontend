@@ -8,8 +8,7 @@ import firebaseInit from "./../../firebase/firebase.init";
 firebaseInit();
 // cartItems: localStorage.getItem('cartItems')
 // ? JSON.parse(localStorage.getItem('cartItems'))
-// : [],
-
+// : [], 
 const initialState = {
     user: {},
     loading: true,
@@ -187,6 +186,14 @@ export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
         return response.data;
     }
 )
+export const sendNotification = createAsyncThunk("sendNotification/notification",
+    async (info) => {
+        const modifyInfo = { ...info, seen: false, time: new Date() }
+        console.log(modifyInfo);
+        const response = await axios.post(`http://localhost:5000/notification`, modifyInfo)
+        return response.data;
+    }
+)
 
 export const dataSlice = createSlice({
     name: 'data',
@@ -250,9 +257,12 @@ export const dataSlice = createSlice({
         parentServiceId: (state, { payload }) => {
             state.id.push(payload);
         },
-        setNotificationCount: (state, { payload }) => {
-            state.notificationCount = parseInt(state.notificationCount) + parseInt(payload);
+
+        newNotification: (state, { payload }) => {
+            state.notifications = [payload, ...state.notifications]
         },
+
+
     },
     extraReducers: (builder) => {
         builder
@@ -321,14 +331,27 @@ export const dataSlice = createSlice({
                 state.notificationLoading = true;
             })
             .addCase(getNotification.fulfilled, (state, { payload }) => {
-                state.notifications = payload;
+                state.notifications = payload.reverse();
                 state.notificationLoading = false;
+            })
+            .addCase(sendNotification.fulfilled, (state, { payload }) => {
+                console.log('done');
+                console.log(payload);
+                if (state.user.email === payload.email) {
+                    state.notifications.push(payload)
+                }
+            })
+            .addCase(sendNotification.pending, (state, { payload }) => {
+                console.log('pending');
+            })
+            .addCase(sendNotification.rejected, (state, { payload }) => {
+                console.log('rejected');
             })
 
     },
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

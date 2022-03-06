@@ -37,18 +37,30 @@ import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/
 import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
+import useSocket from "./Hooks/useSocket";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { allData, newNotification } from "./redux/dataSlice/dataSlice";
 
 
 
 const App = () => {
-  // const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
+  const { } = useFirebase();
+  const { socket } = useSocket();
+  const { user } = useSelector(allData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user.email) {
+      socket.emit('joinAll', user.email);
+      console.log('send');
+    }
+  }, [user, socket]);
+  useEffect(() => {
+    socket.on("get-notification", message => {
+      dispatch(newNotification(message))
+    });
+  }, [])
 
   return (
     <BrowserRouter>
