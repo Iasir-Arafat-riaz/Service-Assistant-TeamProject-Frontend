@@ -30,7 +30,7 @@ const initialState = {
     orderInfo: {},
     selectedService: {},
     reviewIndex: 0,
-    id: 0,
+    id: [],
     notifications: [],
     notificationLoading: true,
     notificationCount: 0,
@@ -248,7 +248,7 @@ export const dataSlice = createSlice({
             state.reviewIndex = payload;
         },
         parentServiceId: (state, { payload }) => {
-            state.id = payload;
+            state.id.push(payload);
         },
         setNotificationCount: (state, { payload }) => {
             state.notificationCount = parseInt(state.notificationCount) + parseInt(payload);

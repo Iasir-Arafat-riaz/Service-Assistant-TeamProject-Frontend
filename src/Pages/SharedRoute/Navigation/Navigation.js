@@ -78,7 +78,7 @@ const Navigation = () => {
   // let 
   // let MessageSeen;
   useEffect(() => {
-    const filterMessage = notifications.filter(notification => notification.email === user.email && notification.seen === false);
+    const filterMessage = notifications.filter(notification => notification?.email === user?.email && notification.seen === false);
     setMessageSeen(filterMessage);
     const number = Math.random() * 100
     setIsMessageSeen(true);

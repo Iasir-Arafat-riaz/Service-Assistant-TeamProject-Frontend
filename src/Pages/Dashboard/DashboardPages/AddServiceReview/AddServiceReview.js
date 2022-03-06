@@ -35,9 +35,9 @@ const AddServiceReview = () => {
         mb: 3,
     };
 
-    useEffect(() => {
-        dispatch(parentServiceId(id));
-    }, [id])
+    // useEffect(() => {
+    //     dispatch(parentServiceId(id));
+    // }, [id])
 
     const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
     const today = new Date();
