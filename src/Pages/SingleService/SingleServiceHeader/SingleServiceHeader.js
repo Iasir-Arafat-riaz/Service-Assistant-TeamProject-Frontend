@@ -19,7 +19,8 @@ const SingleServiceHeader = ({ matchService }) => {
             <ThemeProvider theme={theme}>
                 <Box
                     sx={{
-                        backgroundImage: `url(${matchService.Img})`, backgroundRepeat: 'repeat-y',
+                        backgroundImage: `linear-gradient(270deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${matchService.Img})`,
+                        backgroundRepeat: 'repeat-y',
                         backgroundSize: '100%',
                         backgroundPosition: 'center',
                         height: '50vh',
