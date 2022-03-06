@@ -1,12 +1,19 @@
 import { Box, Paper, Typography } from '@mui/material';
 import React from 'react';
+import {useNavigate} from "react-router-dom"
 
 const TrendingService = ({ service }) => {
+    const navigate=useNavigate()
+    
 
-    const { Category, Img } = service;
+    const { Category, Img,Services } = service;
+    const id =Services[0].Id
+    const hadleRouteChange=()=>{
+        navigate(`/Home/service-details/${id}`)
+    }
 
     return (
-        <Box sx={{ width: 250, p: 0, borderRadius: 3, mb: 1 }}>
+        <Box onClick={hadleRouteChange} sx={{ width: 250, p: 0, borderRadius: 3, mb: 1, m: '0 auto' }}>
 
             <Paper elevation={2} sx={{ backgroundImage: `url(${Img})`, height: 185, backgroundSize: 'cover', borderRadius: 3 }}>
             </Paper>

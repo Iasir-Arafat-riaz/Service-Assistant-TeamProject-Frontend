@@ -1,0 +1,27 @@
+.user-img{
+    vertical-align: middle;
+    max-width: 100px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 100%;
+}
+.admin-span{ 
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(252,176,69,1) 100%);
+    color: white;
+    padding: 4px 20px; 
+    display: inline-block;
+    font-weight: bold; 
+    border-radius: 50px;
+} 
+.client-span{ 
+    background: rgb(1,110,119);
+    background: linear-gradient(90deg, rgba(1,110,119,0.8015581232492998) 0%, rgba(69,189,252,0.7819502801120448) 100%);
+
+
+    color: white;
+    padding: 4px 20px; 
+    display: inline-block;
+    font-weight: bold; 
+    border-radius: 50px;
+} 

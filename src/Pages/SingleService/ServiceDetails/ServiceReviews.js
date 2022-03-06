@@ -5,9 +5,6 @@ import { Box } from '@mui/system';
 
 const ServiceReviews = ({ service }) => {
 
-    const postsPerPage = 2;
-    let start = 0;
-    let end = postsPerPage;
 
 
 
@@ -18,10 +15,10 @@ const ServiceReviews = ({ service }) => {
             <Rate name="read-only" value={service.Rating} readOnly />
 
             {
-                service.Reviews.slice(start, end).map(review => <Box sx={{ display: 'flex', gap: 2, mt: 5 }}>
-                    <Avatar>{review.user.slice(0, 1)}</Avatar>
+                service.Reviews.map((review, index) => <Box sx={{ display: 'flex', gap: 2, mt: 5 }} key={index}>
+                    <Avatar>{review?.user?.slice(0, 1)}</Avatar>
                     <Box>
-                        <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 15 }}>{review.user} Mahfujur Rahman</Typography>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', fontSize: 15 }}>{review.user}</Typography>
 
                         <Rate name="read-only" sx={{ fontSize: 16, mt: 1 }} value={review.rating} readOnly />
 

@@ -1,9 +1,7 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Paper, Typography } from "@mui/material";
 import React from "react";
-import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { ImQuotesLeft } from "react-icons/im";
-import { ImQuotesRight } from "react-icons/im";
-import Rating from "react-rating";
+import { RiDoubleQuotesL } from "react-icons/ri";
+import Rating from '@mui/material/Rating';
 
 const Testimonial = ({ testiominal }) => {
 
@@ -11,34 +9,27 @@ const Testimonial = ({ testiominal }) => {
 
     return (
 
-        <Grid item xs={4} sx={{ mb: 0, pb: 0 }}>
 
-            <Paper elevation={0} sx={{ px: 2, pt: 2, mb: 0, height: 'auto', background: '#ff5e140a', borderRadius: 3 }}>
+        <Paper elevation={2} sx={{ p: 3, width: 300, borderRadius: 2, m: '5px auto' }}>
 
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pb: 2 }}>
-                    <img src={image} width="60" alt="" />
-                    <Box>
-                        <Typography variant='h6'>{name}</Typography>
-                        <Typography sx={{ color: "#64748B" }} variant='body2'>{profession}</Typography>
-                    </Box>
-                </Box>
+            <RiDoubleQuotesL style={{ display: 'block', fontSize: 22, color: "#FF5E14" }} />
 
+            <Typography variant='body' sx={{ lineHeight: 1.5, fontWeight: 400, color: "#7E7E7E" }} >
+                {description.slice(0, 250)}
+            </Typography> <br />
 
-                <Typography variant='body' sx={{ lineHeight: 1.5, color: "#334155" }} >
-                    {description}
-                </Typography>
+            <Rating name="read-only" sx={{ fontSize: 17, mt: 1 }} value={rating} readOnly />
 
-                <br />
-                <Rating
-                    style={{ marginTop: 13, color: "#FF5E14", marginBottom: 5 }}
-                    emptySymbol={<AiOutlineStar />}
-                    fullSymbol={<AiFillStar />}
-                    initialRating={`${rating}`}
-                    readonly
-                />
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Avatar alt={name} src={image} sx={{ width: 70, height: 70, border: '2px solid #C7C7C7' }} />
+            </Box>
 
-            </Paper>
-        </Grid>
+            <Box sx={{ display: 'grid', justifyContent: 'center', }}>
+                <Typography variant='h6' sx={{ fontSize: 18, fontWeight: 'bold' }}>{name}</Typography>
+                <Typography sx={{ color: "#64748B", fontSize: 14 }} variant='body2'>{profession}</Typography>
+            </Box>
+
+        </Paper>
     );
 };
 
