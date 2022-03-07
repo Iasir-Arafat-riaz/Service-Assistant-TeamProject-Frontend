@@ -26,6 +26,7 @@ const AddBannerSection = ({ banner }) => {
   const bannerInfo = {
     imageUrl: watch("imageUrl"),
     bannerText: watch("bannerText"),
+    bannerTex2: watch("bannerTex2"),
     bannerNumber: watch("bannerNumber"),
   };
 
@@ -104,6 +105,14 @@ const AddBannerSection = ({ banner }) => {
                   label="Write Banner text"
                   variant="outlined"
                 />
+                <TextField
+                  required
+                  type="text"
+                  sx={{ mb: 3 }}
+                  {...register("bannerTex2")}
+                  label="Write Banner text-2"
+                  variant="outlined"
+                />
 
 
                 <FormControl fullWidth>
@@ -113,6 +122,7 @@ const AddBannerSection = ({ banner }) => {
                     id="formOption"
                     {...register("bannerNumber")}
                     label="Age"
+                    required
                   >
                     <MenuItem value="One">Update First Banner</MenuItem>
                     <MenuItem value="Two">Update Second Banner</MenuItem>

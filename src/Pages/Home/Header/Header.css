@@ -1,0 +1,21 @@
+/* paddingTop:"250px",paddingBottom:"400px",color:"silver",textShadow: "1px 1px  black", marginLeft:"150px" */
+.bannerText{
+    
+    color: black;
+    text-shadow: 1px 1px  black;
+    padding-left: 150px;
+
+}
+#commonBannerText{
+    color: #FF5E14;
+    padding-left: 150px;
+}
+.bannerTextBox{
+    padding-top: 250px;
+    padding-bottom: 400px;
+}
+@media only screen and (max-width: 600px){
+    .bannerText,#commonBannerText{
+        padding-left: 30px
+    }
+}

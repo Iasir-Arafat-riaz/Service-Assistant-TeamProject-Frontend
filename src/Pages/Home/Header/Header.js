@@ -10,6 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ScrollTop from '../../SharedRoute/ScrollTop/ScrollTop';
 import Contact from '../Contact/Contact';
 import { Box, Typography } from '@mui/material';
+import "./Header.css"
 
 const Header = (props) => {
     const settings = {
@@ -27,6 +28,7 @@ const Header = (props) => {
     .then(res=>res.json())
     .then(data=>setBanner(data))
   },[])
+  console.log(banners)
     return (
         <header >
             <Slider {...settings} style={{ zIndex: '-1' }}>
@@ -35,7 +37,11 @@ const Header = (props) => {
                     banners.map(banner=> <Box sx={{backgroundImage:`url(${banner.imageUrl})`,backgroundRepeat: "no-repeat",
                     backgroundSize: "cover"}} key={banner._id} type="button">
                     {/* <img type="button" src={banner.imageUrl} alt="" /> */}
-                    <Typography variant="h4" align="center" sx={{paddingTop:"250px",paddingBottom:"400px",color:"silver",textShadow: "1px 1px  black"}}>{banner.bannerText}</Typography>
+                    <Box className='bannerTextBox'>
+                        <Typography id='commonBannerText'><b>Service Deliver with professionalism</b></Typography>
+                    <Typography className='bannerText'   variant="h4" ><b>{banner.bannerText}</b></Typography>
+                    <Typography className='bannerText'   variant="h4" ><b>{banner.bannerTex2}</b></Typography>
+                    </Box>
                 </Box>)
                 }
 

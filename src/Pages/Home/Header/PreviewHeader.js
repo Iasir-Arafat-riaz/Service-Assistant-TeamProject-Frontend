@@ -4,7 +4,7 @@ import React from "react";
 
 
 const PreviewHeader = ({ bannerInfo, banner }) => {
-  const { imageUrl, bannerText, bannerNumber, id } = bannerInfo;
+  const { imageUrl, bannerText, bannerNumber, id, bannerTex2 } = bannerInfo;
 
   // //console.log("this is banners datas",banner)
 
@@ -32,9 +32,11 @@ const PreviewHeader = ({ bannerInfo, banner }) => {
           </article>
 
           <Typography variant="h6" align={"center"} sx={{ textShadow: "1px 1px  black", color: "silver" }}><b><i>{banner.bannerText}</i></b></Typography>
+          <Typography variant="h6" align={"center"} sx={{ textShadow: "1px 1px  black", color: "silver" }}><b><i>{banner.bannerTex2}</i></b></Typography>
 
         </Box>
         <Typography variant="h6" sx={{ mt: 1 }}>Banner Text : {banner.bannerText}</Typography>
+        <Typography variant="h6" sx={{ mt: 1 }}>Banner Text-2 : {banner.bannerTex2}</Typography>
 
         {/* <Button size="small">{banner.bannerNumber}</Button> */}
 
@@ -43,10 +45,10 @@ const PreviewHeader = ({ bannerInfo, banner }) => {
   }
   else {
     return (
-      <Box sx={{ marginTop: "40px" }}>
+      <Box >
 
-        <Typography variant="h4">
-          <b>Preview : {id}</b>
+<Typography variant="h5" sx={{ fontWeight: 'bold' }}>
+          Preview Banner
         </Typography>
         <br />
         <Box
@@ -62,9 +64,11 @@ const PreviewHeader = ({ bannerInfo, banner }) => {
 
           </article>
           <Typography variant="h6" align={"center"} sx={{ textShadow: "1px 1px  black", color: "silver" }}><b><i>{bannerText}</i></b></Typography>
+          <Typography variant="h6" align={"center"} sx={{ textShadow: "1px 1px  black", color: "silver" }}><b><i>{bannerTex2}</i></b></Typography>
 
         </Box>
         <Typography>Banner Text : {bannerText}</Typography>
+        <Typography>Banner Text-2 : {bannerTex2}</Typography>
 
         {/* <Button size="small">{bannerNumber}</Button> */}
 
