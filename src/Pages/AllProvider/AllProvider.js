@@ -63,8 +63,8 @@ const AllProvider = () => {
     };
     return (
        <Container>
-            <Box sx={{ width: '100%' }}>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>All Providers</Typography>
+        <Box sx={{ width: '100%' }}>
+        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>All Providers</Typography>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
             <Item>1</Item>

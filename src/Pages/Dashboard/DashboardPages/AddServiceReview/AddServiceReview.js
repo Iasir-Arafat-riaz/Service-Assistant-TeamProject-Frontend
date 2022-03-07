@@ -39,6 +39,8 @@ const AddServiceReview = () => {
     //     dispatch(parentServiceId(id));
     // }, [id])
 
+    // add review to user 
+
     const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
