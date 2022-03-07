@@ -15,7 +15,7 @@ const PreviewHeader = ({ bannerInfo, banner }) => {
       <Box >
 
         <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-          Preview : {banner.id}
+          Preview Banner
         </Typography>
         <br />
         <Box
