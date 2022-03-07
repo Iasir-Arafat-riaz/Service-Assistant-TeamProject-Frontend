@@ -3,7 +3,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import Alert from '@mui/material/Alert';
 import { CircularProgress, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { allData, setNotificationCount } from '../../../../redux/dataSlice/dataSlice';
+import { allData, sendNotification, setNotificationCount } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
 import { current } from '@reduxjs/toolkit';
 
@@ -93,12 +93,8 @@ const CheckoutForm = () => {
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;
             axios.post('http://localhost:5000/myorder', data).then(() => {
-                axios.post('http://localhost:5000/notification', { message, image, seen: false, email: user.email, time: time })
-                const number = Math.random() * 100
-                dispatch(setNotificationCount(parseInt(number)));
+                dispatch(sendNotification({ message, image, email: user.email, }))
             });
-            const number = Math.random() * 100
-            dispatch(setNotificationCount(parseInt(number)));
         };
     };
 

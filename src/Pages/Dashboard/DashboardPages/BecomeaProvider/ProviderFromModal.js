@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { TextField } from '@mui/material';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { Avatar, Input, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -27,7 +28,8 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
 
     const { user } = useSelector(allData);
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, watch, setValue } = useForm();
+    const [imgLoading, setImgLoading] = useState(true)
 
     // input style
     const inputStyle = {
@@ -39,13 +41,34 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // submit form
     const onSubmit = data => {
-        axios.post('http://localhost:5000/addprovider', { ...category, data, image: user.photoURL }).then(() => {
+        console.log(data)
+        axios.post('http://localhost:5000/addprovider', { ...category, data }).then(() => {
             reset();
             handleCloseModal();
         })
     };
 
+    useEffect(() => {
+        const file = watch('providerImage');
+        // console.log(file)
+        if (file?.length) {
+            let body = new FormData()
+            body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
+            body.append('image', file[0])
+            setImgLoading(false);
+            axios({
+                method: 'post',
+                url: 'https://api.imgbb.com/1/upload',
+                data: body
+            }).then(res => {
+                console.log(res)
+                setValue('travelImg', res.data?.data?.url)
+            }).finally(() => setImgLoading(true))
+        }
+        else {
+        }
 
+    }, [watch('providerImage')]);
 
     return (
         <>
@@ -65,7 +88,11 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                     <Box sx={{ p: 2 }}>
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                            <TextField sx={inputStyle} id="outlined-basic" label="Name *" variant="outlined" {...register("name", { required: true })} />
+                            <label style={{ fontSize: 14, marginBottom: 3, display: 'block' }}>Provider Image *</label>
+
+                            <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" />
+
+                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("name", { required: true })} />
 
                             <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
 
@@ -79,15 +106,19 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
 
 
-                            <TextField sx={inputStyle} id="outlined-basic" label="Your address where you available for deliver *" variant="outlined" {...register("address", { required: true })} />
+                            <TextField sx={inputStyle} id="outlined-basic" label="Your address *" variant="outlined" {...register("address", { required: true })} />
 
                             <TextField sx={inputStyle} id="outlined-multiline-static"
-                                label="Why do you want to join this service as a provider *"
+                                label="Tell about your organization *"
                                 multiline
                                 rows={3} {...register("qanswer", { required: true })} />
 
+                            {
+                                watch("travelImg") && <Box> <Avatar alt="Remy Sharp" src={watch("travelImg")} /> </Box>
+                            }
 
-                            <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>SUBMIT</Button>
+                            {imgLoading ? <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>SUBMIT</Button> :
+                                <Button variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>Loading...</Button>}
 
                         </form>
 

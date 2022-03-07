@@ -34,14 +34,17 @@ import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/
 import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
 import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/BecomeaProvider";
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
-import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
 import LoginPopup from "./Pages/Login/LoginPopup/LoginPopup";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { allData } from "./redux/dataSlice/dataSlice";
 import PendingProviders from "./Pages/Dashboard/DashboardPages/PendingProviders/PendingProviders";
+
+import useSocket from "./Hooks/useSocket";
+import { useSelector, useDispatch } from "react-redux";
+import { newNotification } from "./redux/dataSlice/dataSlice";
+
 
 
 
@@ -54,7 +57,6 @@ const App = () => {
   //   });
   //   socket.emit('message', { data: 'datahome ' })
   // }, []);
-  const { user } = useSelector(allData);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -63,7 +65,25 @@ const App = () => {
     setTimeout(() => {
       handleOpen();
     }, 5000)
-  }, [user])
+  }, [])
+  const { } = useFirebase();
+
+  const { socket } = useSocket();
+  const { user } = useSelector(allData);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user.email) {
+      socket.emit('joinAll', user.email);
+      console.log('send');
+    }
+  }, [user, socket]);
+  useEffect(() => {
+    socket.on("get-notification", message => {
+      dispatch(newNotification(message))
+    });
+  }, [])
+
 
   return (
     <BrowserRouter>
@@ -79,24 +99,17 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard" element={<Overview />} />
           <Route path="/dashboard/overview" element={<Overview />} />
-          <Route
-            path="/dashboard/manageAllOrders"
-            element={<ManageAllOrders />}
-          />
+          <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
-
           <Route path="addBanner" element={<AddBanner />} />
           <Route path="providerOverview" element={<ProviderOverview />} />
-
           <Route path="/dashboard/adminChat" element={<AdminChat />} />
-
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
-
           <Route
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}

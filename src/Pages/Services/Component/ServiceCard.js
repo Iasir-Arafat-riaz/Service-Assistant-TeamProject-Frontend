@@ -10,6 +10,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { CardActionArea } from "@mui/material";
 import { Link } from "react-router-dom";
+import { setItemInLocal } from "../../../utils/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +32,7 @@ const ServiceCard = ({ Name, Img, Id }) => {
   const handleCardClick = (id) => {
     //console.log("card clicked");
     navigate(`/Home/service-details/${id}`);
+    setItemInLocal({ Category: Name, Img, Id })
   };
   return (
     <>

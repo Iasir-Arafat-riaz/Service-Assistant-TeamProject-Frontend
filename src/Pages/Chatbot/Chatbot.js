@@ -157,7 +157,7 @@ function Chatbot() {
             discount: 'we dont provide any discount '
         },
         {
-            "about provider": "Our providers are so well be heavier and have enough skill to make you work done  "
+            "about provider": "Our providers are so well be heavier and have enough skill to make your work done  "
         },
         {
             "how to be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'

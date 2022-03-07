@@ -58,7 +58,7 @@ const Navigation = () => {
   const [APIData, setAPIData] = useState([])
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [messageSeen, setMessageSeen] = useState([]);
+  const [messageSeen, setMessageSeen] = useState(0);
 
   const [open, setOpen] = React.useState(false);
   const [isMessageSeen, setIsMessageSeen] = useState(false);
@@ -75,27 +75,25 @@ const Navigation = () => {
       })
   }, [])
 
+  useEffect(() => {
+    dispatch(getNotification(user));
+  }, [user, dispatch, isMessageSeen])
+
   // let 
   // let MessageSeen;
   useEffect(() => {
-    const filterMessage = notifications.filter(notification => notification?.email === user?.email && notification.seen === false);
-    setMessageSeen(filterMessage);
-    const number = Math.random() * 100
-    setIsMessageSeen(true);
-  }, [anchorElUser, notificationCount, isMessageSeen])
+    const filterMessage = notifications.filter(notification => notification.seen === false);
+    console.log(filterMessage);
+    setMessageSeen(filterMessage.length);
+  }, [notifications, user])
 
-  useEffect(() => {
-    dispatch(getNotification(user));
-  }, [user, notificationCount])
 
 
   const handleClickClose = () => {
     setAnchorEl(null);
-    setIsMessageSeen(false);
   };
 
-  // current notifications 
-  const currentNotifications = [...notifications].reverse()
+  // current notifications  
   const searchItems = (searchValue) => {
     setSearchInput(searchValue)
     if (searchInput !== '') {
@@ -145,7 +143,6 @@ const Navigation = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    setIsMessageSeen(true);
   };
 
 
@@ -154,8 +151,7 @@ const Navigation = () => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     dispatch(updateMessageStatus(user));
-    const number = Math.random() * 100;
-    dispatch(setNotificationCount(parseInt(number)))
+    setIsMessageSeen(true);
 
 
   };
@@ -382,8 +378,6 @@ const Navigation = () => {
                   variant="standard"
 
                 />
-
-
                 <Grid
                   container
                   spacing={3}
@@ -427,7 +421,7 @@ const Navigation = () => {
 
                   <Button aria-describedby={id} variant="" onClick={handleClick}>
 
-                    {messageSeen?.length > 0 ? <Badge badgeContent={notifications.length} color="primary">
+                    {messageSeen > 0 ? <Badge badgeContent={messageSeen} color="primary">
                       <NotificationsNoneIcon className="svg_icons" color="action"></NotificationsNoneIcon >
                     </Badge>
                       :
@@ -452,7 +446,7 @@ const Navigation = () => {
                   >
                     <Box sx={{ width: '300px', height: '300px', borderRadius: 5, p: 2 }}>
                       {
-                        currentNotifications.map((notification) => <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2, mb: 1, borderBottom: '2px solid #F4F5F8', pb: 1 }}>
+                        notifications.map((notification) => <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2, mb: 1, borderBottom: '2px solid #F4F5F8', pb: 1 }}>
 
                           <Avatar alt="notification image" sx={{ borderRadius: 0, width: 60, height: 60 }} src={notification?.image} />
 
@@ -546,10 +540,7 @@ const Navigation = () => {
           {list}
         </Drawer>
       </React.Fragment>
-
-
-
-    </Container >
+    </Container>
   );
 };
 export default Navigation;

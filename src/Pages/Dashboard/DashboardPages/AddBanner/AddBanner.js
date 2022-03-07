@@ -4,7 +4,7 @@ import AddBannerSection from './AddBannerSection/AddBannerSection';
 
 const AddBanner = () => {
   const [banners, setBanner] = useState([])
-  const [load,setLoad]=useState(true)
+  const [load, setLoad] = useState(true)
   useEffect(() => {
     setLoad(true)
     fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
@@ -13,13 +13,13 @@ const AddBanner = () => {
         setBanner(data)
         setLoad(false)
       })
-     
+
   }, [])
   // //console.log(banners);
-  if(load){
+  if (load) {
     return <Stack justifyContent="center" alignItems="center">
-    <CircularProgress></CircularProgress>
-  </Stack>
+      <CircularProgress></CircularProgress>
+    </Stack>
   }
   return (
     <>
