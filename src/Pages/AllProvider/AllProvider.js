@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import axios from 'axios'
 import { styled } from '@mui/material/styles';
 
-import {Container, Grid} from '@mui/material';
+import {Container, Grid,Typography} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Slider from "react-slick";
@@ -64,6 +64,7 @@ const AllProvider = () => {
     return (
        <Container>
             <Box sx={{ width: '100%' }}>
+            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>All Providers</Typography>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
             <Item>1</Item>
