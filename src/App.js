@@ -41,6 +41,7 @@ import useSocket from "./Hooks/useSocket";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+import SingleProviderDetails from "./Pages/ProviderProfile/SingleProviderDetails";
 
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
@@ -126,7 +127,9 @@ const App = () => {
             element={<AddServiceRequest />}
           ></Route>
         </Route>
+
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/providerProfile" element={<SingleProviderDetails />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
           path="home/service-details/:serviceId"
