@@ -13,7 +13,8 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { CardHeader } from '@mui/material';
+import { Box, CardHeader } from '@mui/material';
+import './AllProvider.css'
 
 const AllProviderChild = (props) => {
     const {displayName,email,image, photoURL, role,rating, createdAt,uid,_id} = props.provider
@@ -75,8 +76,22 @@ const AllProviderChild = (props) => {
           vertical: 'top',
           horizontal: 'left',
         }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
       >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+        <Typography sx={{ }}>
+          <Box className="footer-social-icon" style={{display:"flex",padding:"5px",}}>
+                            <span style={{color:"black",marginTop:"3px"}}> Share: </span>
+                            <span style={{marginLeft:"3px",marginTop:"2px"}}>
+
+                            <a href="#"><i className="fab fa-facebook-f facebook-bg"></i></a>
+                            <a href="#"><i className="fab fa-twitter twitter-bg"></i></a>
+                            <a href="#"><i className="fab fa-google-plus-g google-bg"></i></a>
+                            </span>
+                        </Box>
+                        </Typography>
       </Popover>
     </div>
 
