@@ -9,6 +9,7 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ScrollTop from '../../SharedRoute/ScrollTop/ScrollTop';
 import Contact from '../Contact/Contact';
+import { Box, Typography } from '@mui/material';
 
 const Header = (props) => {
     const settings = {
@@ -31,9 +32,11 @@ const Header = (props) => {
             <Slider {...settings} style={{ zIndex: '-1' }}>
 
                 {
-                    banners.map(banner=> <article key={banner._id} type="button">
-                    <img type="button" src={banner.imageUrl} alt="" />
-                </article>)
+                    banners.map(banner=> <Box sx={{backgroundImage:`url(${banner.imageUrl})`,backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover"}} key={banner._id} type="button">
+                    {/* <img type="button" src={banner.imageUrl} alt="" /> */}
+                    <Typography variant="h4" align="center" sx={{paddingTop:"250px",paddingBottom:"400px",color:"silver",textShadow: "1px 1px  black"}}>{banner.bannerText}</Typography>
+                </Box>)
                 }
 
                 {/* <article type="button">
