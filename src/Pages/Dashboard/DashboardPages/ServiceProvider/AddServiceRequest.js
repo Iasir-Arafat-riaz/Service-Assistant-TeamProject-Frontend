@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import {
   Typography,
   TextField,
   Grid,
-  Input,
   Divider,
   Button,
 } from "@mui/material";
@@ -17,6 +16,7 @@ const AddServiceRequest = () => {
     serviceName: "",
     serviceFeature: "",
     whatIncluded: "",
+    serviceImage: null,
   });
 
   const [serviceOptions, setServiceOptions] = useState([
@@ -39,7 +39,7 @@ const AddServiceRequest = () => {
   const handleServiceChange = (e, index) => {
     const newServiceOptions = serviceOptions.map((item) => {
       if (item.optionId === index) {
-        if (item[e.target.name] === "serviceOptionImage") {
+        if (e.target.name === "serviceOptionImage") {
           item[e.target.name] = e.target.files[0];
         } else {
           item[e.target.name] = e.target.value;
@@ -52,17 +52,21 @@ const AddServiceRequest = () => {
 
   const handleChange = (e) => {
     if (e.target.name === "serviceImage") {
+      console.log(e.target.files)
       setServiceData({ ...serviceData, [e.target.name]: e.target.files[0] });
+    }else {
+      setServiceData({ ...serviceData, [e.target.name]: e.target.value });
     }
-    setServiceData({ ...serviceData, [e.target.name]: e.target.value });
+    
   };
 
   const handleServiceOptons = (e, position, id) => {
     const newServiceOptions = serviceOptions.map((item) => {
       if (item.optionId === position) {
         item.serviceDetails = item.serviceDetails.map((ele) => {
-          if (ele.optionKeyId === id) {
-            ele = { ...ele, [e.target.name]: e.target.value };
+          if (ele.optionKeyId === id) {            
+              ele = { ...ele, [e.target.name]: e.target.value };          
+            
           }
           return ele;
         });
@@ -119,6 +123,7 @@ const AddServiceRequest = () => {
     const included = serviceData.whatIncluded.split("\n");
     const serviceRequest = {
       parentService: "",
+      serviceImage: serviceData.serviceImage,
       Title: serviceData.serviceName,
       Rating: 0,
       FQA: [],
@@ -133,46 +138,51 @@ const AddServiceRequest = () => {
       ],
       Reviews: [],
       serviceProvider: [],
-      allServices: serviceOptions,
+      allServices: serviceOptions.map(item => {
+
+        const name = item.serviceOptionImage.name
+        item = {...item, "serviceOptionImage": name};
+        return item;
+
+      }),
     };
 
-    let formData = new FormData();
-    // for (i in serviceRequest) {
-    //   formData.append(i, serviceData[i]); parentService, allServices,Title,Rating,FQA,overview,mainFeatures,Reviews,serviceProvider
-    // }
-    formData.append("parentService", serviceRequest.parentService);
-    formData.append("Title", serviceRequest.Title);
-    formData.append("Rating", serviceRequest.Rating);
-    formData.append("FQA", JSON.stringify(serviceRequest.FQA));
-    formData.append("overview", JSON.stringify(serviceRequest.overview));
-    formData.append(
-      "mainFeatures",
-      JSON.stringify(serviceRequest.mainFeatures)
-    );
-    formData.append("Reviews", JSON.stringify(serviceRequest.Reviews));
-    formData.append(
-      "serviceProvider",
-      JSON.stringify(serviceRequest.serviceProvider)
-    );
-    formData.append("allServices", JSON.stringify(serviceRequest.allServices));
-    // formData ready to sent for saving
-    const api="https://fierce-meadow-12011.herokuapp.com/servicerequest";
-
-    fetch(api, {
-      method: "POST",
-      body: formData,
+    // bundling all images
+    const images = serviceOptions.map(item => item.serviceOptionImage)
+    images.push(serviceData.serviceImage)
+    let formData = new FormData();    
+    
+    Array.from(images).forEach(item => {
+      formData.append("images", item)
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          //console.log(data);
-          //console.log("Registration Successfull");
-         
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+
+    formData.append("parentService", serviceRequest.parentService) 
+    formData.append("serviceImage", serviceData.serviceImage.name)   
+    formData.append("Title", serviceRequest.Title)
+    formData.append("Rating", serviceRequest.Rating)
+    formData.append("FQA", JSON.stringify(serviceRequest.FQA))
+    formData.append("overview", JSON.stringify(serviceRequest.overview))
+    formData.append("mainFeatures", JSON.stringify(serviceRequest.mainFeatures))
+    formData.append("Reviews", JSON.stringify(serviceRequest.Reviews))
+    formData.append("serviceProvider", JSON.stringify(serviceRequest.serviceProvider))
+    formData.append("allServices", JSON.stringify(serviceRequest.allServices))
+
+    // make service request API endpoint
+    const url = 'http://localhost:5000/api/v1/add-service-request';
+
+    // sending HTTP request to the server
+    axios.post(url, formData, {headers: {'Content-Type': 'multipart/form-data'}})        
+    .then((data) => {
+
+      if (data.status === 201){
+        // do something in the UI
+      }
+
+    })
+    .catch((err) => {
+      console.log("error sagar", err);
+    })   
+
   };
 
   useEffect(() => {
@@ -183,7 +193,7 @@ const AddServiceRequest = () => {
       <Typography variant="h4" component="div" gutterBottom>
         Add Service Request
       </Typography>
-      <form>
+      <form encType="multipart/form-data">
         <Grid container spacing={3}>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
@@ -203,11 +213,12 @@ const AddServiceRequest = () => {
               fullWidth
               type="file"
               name="serviceImage"
+              onChange={handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleChange}
             />
+            {/* <input type="file" name="serviceImage" onChange={handleChange} ref= {imgRef}/> */}
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
