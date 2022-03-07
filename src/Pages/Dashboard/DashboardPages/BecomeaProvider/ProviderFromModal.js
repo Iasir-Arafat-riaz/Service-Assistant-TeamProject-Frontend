@@ -29,7 +29,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     const { user } = useSelector(allData);
     const { register, handleSubmit, reset, watch, setValue } = useForm();
-    const [imgLoading, setImgLoading] = useState(true)
+    const [imgLoading, setImgLoading] = useState(true);
 
     // input style
     const inputStyle = {
@@ -42,7 +42,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
     // submit form
     const onSubmit = data => {
         console.log(data)
-        axios.post('http://localhost:5000/addprovider', { ...category, data }).then(() => {
+        axios.post('http://localhost:5000/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
             reset();
             handleCloseModal();
         })
@@ -92,7 +92,13 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
                             <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" />
 
-                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("name", { required: true })} />
+                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                {
+                                    watch("travelImg") && <Box> <Avatar sx={{ width: 60, height: 60, mb: 1 }} alt="Remy Sharp" src={watch("travelImg")} /> </Box>
+                                }
+                            </Box>
+
+                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("providerName", { required: true })} />
 
                             <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
 
@@ -101,6 +107,10 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                                 id="outlined-error"
                                 label="Email"
                                 value={user.email}
+                            />
+                            <TextField sx={inputStyle}
+                                {...register("bio", { required: true })}
+                                label="Provider bio *"
                             />
 
 
@@ -111,11 +121,8 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                             <TextField sx={inputStyle} id="outlined-multiline-static"
                                 label="Tell about your organization *"
                                 multiline
-                                rows={3} {...register("qanswer", { required: true })} />
+                                rows={3} {...register("about", { required: true })} />
 
-                            {
-                                watch("travelImg") && <Box> <Avatar alt="Remy Sharp" src={watch("travelImg")} /> </Box>
-                            }
 
                             {imgLoading ? <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>SUBMIT</Button> :
                                 <Button variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>Loading...</Button>}

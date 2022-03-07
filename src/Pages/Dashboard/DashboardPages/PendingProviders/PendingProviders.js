@@ -36,7 +36,6 @@ const PendingProviders = () => {
     const ApproveProvider = (email, id, parentId) => {
         const matchUser = allUser.find(user => user.email === email);
         setLoading(true);
-        console.log(matchUser);
         axios.put(`http://localhost:5000/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
             axios.post(`http://localhost:5000/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
             axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`);
@@ -92,9 +91,9 @@ const PendingProviders = () => {
                                     </TableCell>
                                     <TableCell >{provider?.Name}</TableCell>
                                     <TableCell >
-                                        <Avatar src={provider?.image} alt="providerImage" />
+                                        <Avatar src={provider?.data?.travelImg} alt="providerImage" />
                                     </TableCell>
-                                    <TableCell >{provider?.data?.name}</TableCell>
+                                    <TableCell >{provider?.data?.providerName}</TableCell>
                                     <TableCell >{provider?.data?.number}</TableCell>
                                     <TableCell >{provider?.data?.email}</TableCell>
                                     <TableCell >{provider?.data?.address}</TableCell>
