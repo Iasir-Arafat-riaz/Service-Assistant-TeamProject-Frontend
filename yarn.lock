@@ -1975,7 +1975,7 @@
     "prop-types" "^15.7.2"
     "react-is" "^17.0.2"
 
-"@mui/icons-material@^5.3.1":
+"@mui/icons-material@^5.0.0", "@mui/icons-material@^5.3.1":
   "integrity" "sha512-8zBWCaE8DHjIGZhGgMod92p6Rm38EhXrS+cZtaV0+jOTMeWh7z+mvswXzb/rVKc0ZYqw6mQYBcn2uEs2yclI9w=="
   "resolved" "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.3.1.tgz"
   "version" "5.3.1"
@@ -2044,7 +2044,7 @@
     "@emotion/cache" "^11.7.1"
     "prop-types" "^15.7.2"
 
-"@mui/styles@^5.3.0":
+"@mui/styles@^5.0.0", "@mui/styles@^5.3.0":
   "integrity" "sha512-TPfK8c8Zpydpynl4deNv43c0puriXSjf44eadyYle7veVQt5dnT3vgyIqXjP8Ypia653kEVe++GpXTvXnylU7A=="
   "resolved" "https://registry.npmjs.org/@mui/styles/-/styles-5.3.0.tgz"
   "version" "5.3.0"
@@ -7329,6 +7329,18 @@
   "integrity" "sha512-mVsXw91OON3J3uIVh9taIF1ZyDbcikRNCWv3KzsaJAGZTJbq0w1wdC8weCmyD3JDfAkxqK4WgVJITWPmVKJeDA=="
   "resolved" "https://registry.npmjs.org/material-icons/-/material-icons-1.10.6.tgz"
   "version" "1.10.6"
+
+"material-ui-popup-state@^2.0.0":
+  "integrity" "sha512-1sbb9xpMs7OxG0SOGfGO0ZnwiLtqZSoXda0/AqqJkpouT4e0nADXutQtDJFMa9GUMNAODVDlYnNmfqM+MhFjsg=="
+  "resolved" "https://registry.npmjs.org/material-ui-popup-state/-/material-ui-popup-state-2.0.0.tgz"
+  "version" "2.0.0"
+  dependencies:
+    "@babel/runtime" "^7.12.5"
+    "@mui/icons-material" "^5.0.0"
+    "@mui/material" "^5.0.0"
+    "@mui/styles" "^5.0.0"
+    "classnames" "^2.2.6"
+    "prop-types" "^15.7.2"
 
 "mdn-data@2.0.14":
   "integrity" "sha512-dn6wd0uw5GsdswPFfsgMp5NSB0/aDe6fK94YJV/AJDYXL6HVLWBsxeq7js7Ad+mU2K9LAlwpk6kN2D5mwCPVow=="

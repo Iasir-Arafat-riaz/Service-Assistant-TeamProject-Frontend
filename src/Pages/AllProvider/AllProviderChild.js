@@ -7,14 +7,28 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-
-import CardHeader from '@mui/material/CardHeader';
+import Button from '@mui/material/Button';
+import Popover from '@mui/material/Popover';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { CardHeader } from '@mui/material';
 
 const AllProviderChild = (props) => {
     const {displayName,email,image, photoURL, role,rating, createdAt,uid,_id} = props.provider
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
     return (
         <Card  sx={{ml:2}}>
         <CardMedia
@@ -49,16 +63,49 @@ const AllProviderChild = (props) => {
           {/* <Link to={`/dashboard/alladvocates/${_id}`} style={{ textDecoration: "none" }}>
             <Button size="small" className="">View Details</Button>
           </Link> */}
-           <CardHeader
+          <>
+          <div>
+
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+      </Popover>
+    </div>
+
+</>
+
+        <CardHeader
+           
        
        action={
          <IconButton aria-label="settings">
-           <MoreVertIcon />
+           <MoreVertIcon onClick={handleClick}>
+        </MoreVertIcon>
          </IconButton>
        }
+       
     
      />
-        {/* </CardActions> */}
+        {/* </CardActions>      <Popover
+  anchorOrigin={{
+    vertical: 'top',
+    horizontal: 'left',
+  }}
+  transformOrigin={{
+    vertical: 'bottom',
+    horizontal: 'right',
+  }}
+>
+  The content of the Popover.
+</Popover>*/}
       </Card>
     );
 };
