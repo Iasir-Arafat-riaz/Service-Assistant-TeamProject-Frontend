@@ -1,9 +1,11 @@
 import React,{useState, useEffect} from 'react';
 import axios from 'axios'
 import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
+
+import {Container, Grid} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Slider from "react-slick";
 
 const AllProvider = () => {
     const [providers, setProviders] = useState([])
@@ -23,8 +25,45 @@ const AllProvider = () => {
         textAlign: 'center',
         color: theme.palette.text.secondary,
       }));
+      // slick slider
+    const slickSlider = {
+        dots: false,
+        infinite: false,
+        speed: 2000,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        autoplay: false,
+        autoplaySpeed: 2000,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: false,
+                    dots: false
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    };
     return (
-        <Box sx={{ width: '100%' }}>
+       <Container>
+            <Box sx={{ width: '100%' }}>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={6}>
             <Item>1</Item>
@@ -40,6 +79,7 @@ const AllProvider = () => {
           </Grid>
         </Grid>
       </Box>
+       </Container>
     );
 };
 
