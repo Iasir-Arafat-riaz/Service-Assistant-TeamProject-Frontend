@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Typography,
@@ -115,7 +115,7 @@ const AddServiceRequest = () => {
     ]);
   };
   // handle image input
-  const handleImage = (e) => {};
+  // const handleImage = (e) => {};
 
   // submit form handler function
   const handleSubmit = (e) => {
