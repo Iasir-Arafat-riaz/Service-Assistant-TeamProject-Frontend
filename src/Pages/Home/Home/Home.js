@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../redux/dataSlice/dataSlice';
+import AllProvider from '../../AllProvider/AllProvider';
 import Chatbot from '../../Chatbot/Chatbot';
 import Footer from '../../SharedRoute/Footer/Footer';
 import Navigation from '../../SharedRoute/Navigation/Navigation';
@@ -21,6 +22,7 @@ const Home = () => {
             <RecentlyViews />
             <HomeServices />
             <TrendingServices />
+            <AllProvider></AllProvider>
             <Testimonials />
             <RequestService/>
 
