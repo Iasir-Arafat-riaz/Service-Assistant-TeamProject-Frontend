@@ -3,8 +3,17 @@ import { Typography, Box, TextField, Grid, Input } from "@mui/material";
 import Button from "@mui/material/Button";
 import ServiceOptionsRow from "./ServiceOptionsRow";
 
-const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
-  const optionRow = Array.from({ length: totalRow }, (v, i) => i);
+const ServiceDetailsForm = ({
+  handleAddMoreDetails,
+  totalRow,
+  pos,
+  serviceOption,
+  handleServiceOptons,
+  handleServiceChange,
+}) => {
+  // const optionRow = Array.from({ length: totalRow }, (v, i) => i);
+  const optionRow = serviceOption.serviceDetails;
+  //console.log(serviceOption);
   return (
     <Grid container spacing={2}>
       <Typography
@@ -16,16 +25,17 @@ const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
         {`Service ${pos + 1}`}
       </Typography>
       <Grid item container spacing={2}>
-        <Grid item sx={12} sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id="serviceOptionsTitle"
             label="Title"
             variant="standard"
             fullWidth
             name="serviceOptionTitle"
+            onChange={(e) => handleServiceChange(e, pos)}
           />
         </Grid>
-        <Grid item sx={12} sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={6}>
           <TextField
             id="serviceOptionImage"
             label="Service Option Image"
@@ -33,6 +43,7 @@ const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
             fullWidth
             type="file"
             name="serviceOptionImage"
+            onChange={(e) => handleServiceChange(e, pos)}
             InputLabelProps={{
               shrink: true,
             }}
@@ -40,7 +51,12 @@ const ServiceDetailsForm = ({ handleAddMoreDetails, totalRow, pos }) => {
         </Grid>
       </Grid>
       {optionRow.map((item, index) => (
-        <ServiceOptionsRow key={index} />
+        <ServiceOptionsRow
+          key={index}
+          {...item}
+          handleServiceOptons={handleServiceOptons}
+          pos={pos}
+        />
       ))}
       <Button
         variant="outlined"

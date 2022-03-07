@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
+import SavedSearchOutlinedIcon from '@mui/icons-material/SavedSearchOutlined';
 import { Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -85,32 +86,9 @@ const Dashboard = (props) => {
       <Divider />
       <List>
         {
-          // <Box>
-          //     <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/pay`} button >
-          //         <ListItemIcon>
-          //             <PaymentIcon />
-          //         </ListItemIcon>
-          //         <ListItemText primary={'pay'} />
-          //     </ListItem>
-          //     <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/myorders`} button >
-          //         <ListItemIcon>
-          //             <ShoppingCartIcon />
-          //         </ListItemIcon>
-          //         <ListItemText primary={'MyOrders'} />
-          //     </ListItem>
-          //     <ListItem component={NavLink} activeStyle={{ "color": 'red' }} to={`/Dashboard/review`} button >
-          //         <ListItemIcon>
-          //             <RateReviewIcon />
-          //         </ListItemIcon>
-          //         <ListItemText primary={'Review'} />
-          //     </ListItem>
-          // </Box>
-        }
-        {
           <Box>
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/overview`}
               button
             >
@@ -122,19 +100,17 @@ const Dashboard = (props) => {
             {/* Service Provider Overview */}
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/providerOverview`}
               button
             >
               <ListItemIcon>
-                <AnchorIcon/>
+                <AnchorIcon />
               </ListItemIcon>
               <ListItemText primary={"Provider Overview"} />
             </ListItem>
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/manageAllOrders`}
               button
             >
@@ -145,7 +121,6 @@ const Dashboard = (props) => {
             </ListItem>
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/adminChat`}
               button
             >
@@ -157,7 +132,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/manageproducts`}
               button
             >
@@ -167,10 +141,9 @@ const Dashboard = (props) => {
               <ListItemText primary={"Manage Products"} />
             </ListItem>
 
-            
+
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/addproduct`}
               button
             >
@@ -179,17 +152,16 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Add Products"} />
             </ListItem>
-            
+
 
             <ListItem
-           
+
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/addBanner`}
               button
             >
               <ListItemIcon>
-              <AddPhotoAlternateIcon/>
+                <AddPhotoAlternateIcon />
               </ListItemIcon>
               <ListItemText primary={"Add Banner"} />
             </ListItem>
@@ -197,7 +169,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/make-service-request`}
               button
             >
@@ -206,9 +177,20 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Make Service Request"} />
             </ListItem>
+
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
+              to={`/dashboard/provider/appointment`}
+              button
+            >
+              <ListItemIcon>
+                <AnchorIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Appointment"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
               to={`/dashboard/makeAdmin`}
               button
             >
@@ -219,7 +201,6 @@ const Dashboard = (props) => {
             </ListItem>
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/myorders`}
               button
             >
@@ -231,7 +212,6 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              activeStyle={{ color: "red" }}
               to={`/dashboard/servicerequest`}
               button
             >
@@ -273,6 +253,30 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Manage Testimonial"} />
             </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/savedservice`}
+              button
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Saved Service"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/becomeaprovider`}
+              button
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Become a provider ?"} />
+            </ListItem>
+
+
           </Box>
         }
         <ListItem button>

@@ -7,16 +7,18 @@ export const getItemFromLocal = () => {
   return ids;
 };
 
-export const setItemInLocal = (id) => {
+export const setItemInLocal = (data) => {
+  console.log(data);
   const exist = getItemFromLocal();
   if (!exist) {
-    localStorage.setItem("recentView", JSON.stringify(initialIds));
-    return;
+    localStorage.setItem("recentView", JSON.stringify([data]));
+
   }
-  const newId = parseInt(id);
-  if (!exist.includes(newId)) {
-    const newIdsArray = [newId, ...exist].slice(0, 5);
-    localStorage.setItem("recentView", JSON.stringify(newIdsArray));
+  else {
+    let withoutThis = exist.filter(info => info.Id !== data.Id);
+    const newData = [data, ...withoutThis];
+    localStorage.setItem("recentView", JSON.stringify(newData));
+
   }
 };
 

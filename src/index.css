@@ -43,4 +43,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.slick-next, .slick-prev{
+padding: 2px !important;
+width: 40px !important;
+height: 40px !important;
+background-color: #F4F5F8 !important;
+border-radius: 50% !important;
+z-index: 9 !important;
+}
 
+/* .slick-prev.slick-disabled:before, .slick-next.slick-disabled:before{
+  color: red !important; */
+/* } */
+.slick-prev:before, .slick-next:before{
+color: #FF5E14 !important
+};
+
+.slick-prev.slick-disabled, .slick-next.slick-disabled{
+
+}

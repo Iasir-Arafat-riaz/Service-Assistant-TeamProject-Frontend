@@ -31,7 +31,7 @@ const Header = (props) => {
             <Slider {...settings} style={{ zIndex: '-1' }}>
 
                 {
-                    banners.map(banner=> <article type="button">
+                    banners.map(banner=> <article key={banner._id} type="button">
                     <img type="button" src={banner.imageUrl} alt="" />
                 </article>)
                 }

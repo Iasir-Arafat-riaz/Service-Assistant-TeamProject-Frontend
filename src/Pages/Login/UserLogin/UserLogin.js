@@ -1,11 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import React, { useEffect, } from "react";
 import useFirebase from "../../../Hooks/useFirebase";
 import Navigation from "../../SharedRoute/Navigation/Navigation";
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-
 import "./UserLogin.css";
+
 
 const UserLogin = () => {
 	const { googleSignIn, logInWithEmail, signUpWithEmail } = useFirebase();
@@ -43,7 +43,7 @@ const UserLogin = () => {
 		});
 	}, [])
 	const handleSignUp = () => {
-		console.log(watch('signupEmail'));
+		//console.log(watch('signupEmail'));
 		if (watch('signupEmail').length && watch('name').length && watch('signupPass').length >= 6) {
 			signUpWithEmail({ name: watch('name'), email: watch('signupEmail'), password: watch('signupPass'), location, navigate })
 		}
@@ -62,38 +62,46 @@ const UserLogin = () => {
 	const onSubmit = () => {
 	}
 	return (
-		<Box>
+		<>
 			<Navigation />
+
 			<Box className="userLogin">
-				<Box>
-					<form onSubmit={handleSubmit(onSubmit)} className="form-structor" style={{ "marginTop": "150px" }}>
-						<div className="signup">
-							<h2 className="form-title" id="signup"><span>or</span>Sign up</h2>
-							<div className="form-holder">
-								<input type="text" className="input" placeholder="Name" {...register("name", { required: true })} />
+
+				<form onSubmit={handleSubmit(onSubmit)} className="form-structor" style={{ "marginTop": "150px" }}>
+
+
+					<Box className="signup">
+
+						<h2 className="form-title" id="signup"><span>or</span>Sign up</h2>
+
+						<Box className="form-holder">
+							<input type="text" className="input" placeholder="Name" {...register("name", { required: true })} />
+							<input type="email" className="input" placeholder="Email"
+								{...register("signupEmail")} />
+							<input type="password" className="input" placeholder="Password"  {...register("signupPass", { required: true, minLength: 6 })} />
+						</Box>
+
+						<button onClick={handleSignUp} className="submit-btn">Sign up</button>
+						<Typography variant="h5" ><button className="google-btn" onClick={() => googleSignIn(location, navigate)} >Google Login</button></Typography>
+
+					</Box>
+
+					<Box className="login slide-up">
+						<Box className="center">
+							<h2 className="form-title" id="login"><span>or</span>Log in</h2>
+							<Box className="form-holder">
 								<input type="email" className="input" placeholder="Email"
-									{...register("signupEmail")} />
-								<input type="password" className="input" placeholder="Password"  {...register("signupPass", { required: true, minLength: 6 })} />
-							</div>
-							<button onClick={handleSignUp} className="submit-btn">Sign up</button>
-							<Typography variant="h5" ><button className="google-btn" onClick={() => googleSignIn(location, navigate)} >Google Login</button></Typography>
-						</div>
-						<div className="login slide-up">
-							<div className="center">
-								<h2 className="form-title" id="login"><span>or</span>Log in</h2>
-								<div className="form-holder">
-									<input type="email" className="input" placeholder="Email"
-										{...register("loginEmail", { required: true })} />
-									<input type="password" {...register("loginPass", { required: true })} className="input" placeholder="Password" />
-								</div>
-								<button onClick={handleLogin} className="submit-btn">Log in</button>
-								<Typography variant="h5" ><button onClick={() => googleSignIn(location, navigate)} className="google-btn">Google Login</button></Typography>
-							</div>
-						</div>
-					</form>
-				</Box>
+									{...register("loginEmail", { required: true })} />
+								<input type="password" {...register("loginPass", { required: true })} className="input" placeholder="Password" />
+							</Box>
+							<button onClick={handleLogin} className="submit-btn">Log in</button>
+							<Typography variant="h5" ><button onClick={() => googleSignIn(location, navigate)} className="google-btn">Google Login</button></Typography>
+						</Box>
+					</Box>
+
+				</form>
 			</Box>
-		</Box>
+		</>
 	);
 };
 

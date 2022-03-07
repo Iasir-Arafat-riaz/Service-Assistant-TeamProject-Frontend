@@ -1,21 +1,22 @@
 import { Avatar, Button, Skeleton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { allData, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
+import { addToCart, allData, selectedServiceAndProvider, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
 
-const ServiceProvider = ({ handleNext }) => {
+const ServiceProvider = ({ handleNext, category, parentService, selectServiceId, selectService }) => {
 
-    // const [providers, setProviders] = useState([]);
     const dispatch = useDispatch();
-    const { providers, serviceProviderLoading } = useSelector(allData);
+    const { providers, serviceProviderLoading, user } = useSelector(allData);
 
     useEffect(() => {
-        dispatch(serviceProviders())
+        dispatch(serviceProviders());
     }, [dispatch])
 
+    console.log(parentService)
     // style
+    // console.log(parentService)
+
     const serviceProvider = {
         mb: 3,
         display: "flex",
@@ -24,6 +25,15 @@ const ServiceProvider = ({ handleNext }) => {
         pb: 1,
         px: 2
     };
+    // //console.log(parentService)
+
+    const selectServiceProvider = provider => {
+        // dispatch(addToCart({ ...category, email: user.email, payment: true, provider: provider }))
+        dispatch(selectedServiceAndProvider({ ...category, email: user.email, payment: true, provider: provider, parentService: selectService, selectServiceId: selectServiceId, status: 'pending' }))
+        handleNext();
+    };
+
+
 
     return (
 
@@ -43,7 +53,7 @@ const ServiceProvider = ({ handleNext }) => {
                 serviceProviderLoading ?
                     <Box>
                         {[...new Array(3)].map((ske, index) => (
-                            <Skeleton variant="rectangular" width="100%" height={60} sx={{ mb: 2 }} />
+                            <Skeleton key={index} variant="rectangular" width="100%" height={60} sx={{ mb: 2 }} />
 
                         ))}
                     </Box>
@@ -61,7 +71,7 @@ const ServiceProvider = ({ handleNext }) => {
                                     </Box>
 
                                 </Box>
-                                <Button onClick={handleNext} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
+                                <Button onClick={() => selectServiceProvider(provider)} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
                             </Box>
                             )
                         }

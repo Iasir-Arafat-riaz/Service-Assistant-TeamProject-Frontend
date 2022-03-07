@@ -2,16 +2,16 @@ import React from 'react';
 import { Area, AreaChart, CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Box, Container, Stack, Grid, Paper, Typography, IconButton } from '@mui/material';
 
-const data01 = [
-    { name: 'Order Approve', value: 300 },
-    { name: 'Order pending', value: 500 },
-    { name: 'Service Request', value: 234 },
-    { name: 'Available Service', value: 400 },
-];
+
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-const RoundedServiceCart = () => {
+const RoundedServiceCart = ({ allData }) => {
+    const data01 = [
+        { name: 'Order Approve', value: allData.ordersApprove },
+        { name: 'Order pending', value: allData.orders },
+        { name: 'Available Service', value: allData.totalService },
+    ];
     return (
-        <Paper elevation={3} >
+        <Paper elevation={3} sx={{ height: '100%' }}>
             <Typography variant='body1' pt={2} ml={2}>Overall Service</Typography>
             <ResponsiveContainer width="100%" height={200}>
                 <PieChart >

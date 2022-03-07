@@ -13,7 +13,7 @@ export const loadServiceCategory = createAsyncThunk(
     const response = await fetch(
       "https://fierce-meadow-12011.herokuapp.com/services"
     ).then((res) => res.json());
-    console.log(response);
+    //console.log(response);
     return response;
   }
 );
@@ -35,7 +35,7 @@ const serviceCategorySlice = createSlice({
       state.allServices = payload;
     },
     [loadServiceCategory.rejected]: (state, { payload }) => {
-      console.log(payload);
+      //console.log(payload);
     },
   },
 });

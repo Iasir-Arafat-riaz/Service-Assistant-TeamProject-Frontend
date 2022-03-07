@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 import { allData, singleService, loadServiceCategory } from "../../../redux/dataSlice/dataSlice";
 import { useSelector, useDispatch } from "react-redux";
+import useSlick from '../../../Hooks/useSlick';
 
 const HomeServices = () => {
 
@@ -23,27 +24,26 @@ const HomeServices = () => {
     // slick slider
     const slickSlider = {
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 2000,
         slidesToShow: 4,
         slidesToScroll: 3,
-        autoplay: true,
         autoplaySpeed: 2000,
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                     infinite: true,
                     dots: true
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 900,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
                     initialSlide: 1
                 }
             },
@@ -51,7 +51,6 @@ const HomeServices = () => {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
                 }
             }
         ]
