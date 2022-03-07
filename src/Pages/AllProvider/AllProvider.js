@@ -6,6 +6,7 @@ import {Container, Grid,Typography} from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Slider from "react-slick";
+import AllProviderChild from './AllProviderChild';
 
 const AllProvider = () => {
     const [providers, setProviders] = useState([])
@@ -30,7 +31,7 @@ const AllProvider = () => {
         dots: false,
         infinite: false,
         speed: 2000,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 3,
         autoplay: false,
         autoplaySpeed: 2000,
@@ -63,22 +64,18 @@ const AllProvider = () => {
     };
     return (
        <Container>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%'  }} >
         <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>All Providers</Typography>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
-            <Item>1</Item>
-          </Grid>
-          <Grid item xs={6}>
-            <Item>2</Item>
-          </Grid>
-          <Grid item xs={6}>
-            <Item>3</Item>
-          </Grid>
-          <Grid item xs={6}>
-            <Item>4</Item>
-          </Grid>
-        </Grid>
+        {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}> */}
+        <Slider {...slickSlider}>
+        {providers.map((provider) => (
+          <AllProviderChild
+            key={provider._id}
+            provider={provider}
+          ></AllProviderChild>
+        ))}
+        </Slider>
+         {/* </Grid> */}
       </Box>
        </Container>
     );
