@@ -41,6 +41,7 @@ import useSocket from "./Hooks/useSocket";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
@@ -111,6 +112,7 @@ const App = () => {
           <Route path="/dashboard/savedservice" element={<SavedServices />} />
           <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
           <Route path="/dashboard/review/:id" element={<AddServiceReview />} />
+          <Route path="/dashboard/allprovider/:id" element={<SingleProviderDetails />} />
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}

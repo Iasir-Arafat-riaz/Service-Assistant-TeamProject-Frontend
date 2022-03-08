@@ -15,6 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, CardHeader } from '@mui/material';
 import './AllProvider.css'
+import { Link } from 'react-router-dom';
 
 const AllProviderChild = (props) => {
     const {displayName,email,image, photoURL, role,rating, createdAt,uid,_id} = props.provider
@@ -31,6 +32,7 @@ const AllProviderChild = (props) => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
     return (
+      <Link to={`/dashboard/allprovider/${_id}`} title={`Click to view more details about ${displayName}`} style={{ textDecoration: "none" }}>
         <Card  sx={{ml:2}}>
         <CardMedia
           component="img"
@@ -44,6 +46,7 @@ const AllProviderChild = (props) => {
   src={photoURL}
   sx={{ width: 50, height: 50, mt: -3, ml:2 }}
 />
+        
         <CardContent>
        
           <Typography gutterBottom variant="h6" component="div">
@@ -60,13 +63,11 @@ const AllProviderChild = (props) => {
           A Place Where We Care Life
           </Typography>
         </CardContent>
-        {/* <CardActions className="d-flex justify-content-end"> */}
-          {/* <Link to={`/dashboard/alladvocates/${_id}`} style={{ textDecoration: "none" }}>
-            <Button size="small" className="">View Details</Button>
-          </Link> */}
+        
+        
           <>
-          <div>
-
+          <div >
+          
       <Popover
         id={id}
         open={open}
@@ -97,7 +98,7 @@ const AllProviderChild = (props) => {
 
 </>
 
-        <CardHeader
+   <CardHeader
            
        
        action={
@@ -122,6 +123,7 @@ const AllProviderChild = (props) => {
   The content of the Popover.
 </Popover>*/}
       </Card>
+</Link>
     );
 };
 
