@@ -41,6 +41,7 @@ const MyOrdersTable = () => {
     // let parentId;
     // hanlde change route
     const handleRouteChange = (selectServiceId, index) => {
+
         navigate(`/dashboard/review/${selectServiceId}`);
 
         // comment-out from riaz for data undefined
