@@ -1,20 +1,20 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
+import React,{useState,useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-
+import axios from 'axios'
 const SingleProviderDetails = () => {
     const { id } = useParams();
-    // useEffect(() => {
-    //     const api = ``
-    //   axios.get(api).then()
-    
-     
-    // }, [])
-    
-    
+    const [providerDetails, setProviderDetails] = useState({})
+   
+    useEffect(() => {
+        const api = `http://localhost:5000/users/providers/${id}`
+        axios.get(api).then(res => {
+          setProviderDetails(res.data)
+            console.log(res.data,"== got provider")
+        })
+    }, [id]);
     return (
         <div>
-                single provider Details.... of {id}
+            name of the provider is {providerDetails.displayName}
         </div>
     );
 };

@@ -2,14 +2,11 @@ import React from 'react';
 // material ui card start 
 import Card from '@mui/material/Card';
 import Rating from '@mui/material/Rating';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
-import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -110,51 +107,10 @@ const AllProviderChild = (props) => {
        
     
      />
-        {/* </CardActions>      <Popover
-  anchorOrigin={{
-    vertical: 'top',
-    horizontal: 'left',
-  }}
-  transformOrigin={{
-    vertical: 'bottom',
-    horizontal: 'right',
-  }}
->
-  The content of the Popover.
-</Popover>*/}
+     
       </Card>
 </Link>
     );
 };
 
 export default AllProviderChild;
-/*
-<Card className="" >
-          <CardMedia
-            component="img"
-            style={{width:"100%"}}
-            height="250"
-            image={image}
-            alt="advocate pic"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h6" component="div">
-              {displayName} 
-            </Typography>
-            <Typography gutterBottom variant="p" component="div">
-             Specialized In: {category}
-            </Typography>
-            <Typography gutterBottom variant="p" component="div">
-             Fees: {advocate?.fees} BDT
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {textArea?.split(' ').slice(0, 8).toString().replace(/,/g, ' space')}
-            </Typography>
-          </CardContent>
-          <CardActions className="d-flex justify-content-end">
-            <Link to={`/dashboard/alladvocates/${_id}`} style={{ textDecoration: "none" }}>
-              <Button size="small" className="">View Details</Button>
-            </Link>
-          </CardActions>
-        </Card>
-        */
