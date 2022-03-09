@@ -22,14 +22,14 @@ const AddServiceRequest = () => {
   const [serviceOptions, setServiceOptions] = useState([
     {
       optionId: 0,
-      serviceOptionTitle: "",
-      serviceOptionImage: "",
-      serviceDetails: [
+      Title: "",
+      Image: "",
+      Key: [
         {
           optionKeyId: 1,
-          serviceOptionsName: "",
-          serviceOptionsPrice: "",
-          serviceOptionsQuantity: "",
+          Name: "",
+          Price: "",
+          Quantity: "",
         },
       ],
     },
@@ -39,7 +39,7 @@ const AddServiceRequest = () => {
   const handleServiceChange = (e, index) => {
     const newServiceOptions = serviceOptions.map((item) => {
       if (item.optionId === index) {
-        if (e.target.name === "serviceOptionImage") {
+        if (e.target.name === "Image") {
           item[e.target.name] = e.target.files[0];
         } else {
           item[e.target.name] = e.target.value;
@@ -52,7 +52,6 @@ const AddServiceRequest = () => {
 
   const handleChange = (e) => {
     if (e.target.name === "serviceImage") {
-      console.log(e.target.files)
       setServiceData({ ...serviceData, [e.target.name]: e.target.files[0] });
     }else {
       setServiceData({ ...serviceData, [e.target.name]: e.target.value });
@@ -63,7 +62,7 @@ const AddServiceRequest = () => {
   const handleServiceOptons = (e, position, id) => {
     const newServiceOptions = serviceOptions.map((item) => {
       if (item.optionId === position) {
-        item.serviceDetails = item.serviceDetails.map((ele) => {
+        item.Key = item.Key.map((ele) => {
           if (ele.optionKeyId === id) {            
               ele = { ...ele, [e.target.name]: e.target.value };          
             
@@ -81,14 +80,14 @@ const AddServiceRequest = () => {
 
     const newServiceArr = serviceOptions.map((item) => {
       if (item.optionId === index) {
-        const len = item.serviceDetails.length + 1;
+        const len = item.Key.length + 1;
         const obj = {
           optionKeyId: len,
-          serviceOptionsName: "",
-          serviceOptionsPrice: "",
-          serviceOptionsQuantity: "",
+          Name: "",
+          Price: "",
+          Quantity: "",
         };
-        item.serviceDetails.push(obj);
+        item.Key.push(obj);
       }
       return item;
     });
@@ -96,19 +95,19 @@ const AddServiceRequest = () => {
   };
 
   const handleAddServiceField = () => {
-    const len2 = serviceOptions.length;
+    const len = serviceOptions.length;
     setServiceOptions([
       ...serviceOptions,
       {
-        optionId: len2,
-        serviceOptionTitle: "",
-        serviceOptionImage: "",
-        serviceDetails: [
+        optionId: len,
+        Title: "",
+        Image: "",
+        Key: [
           {
             optionKeyId: 1,
-            serviceOptionsName: "",
-            serviceOptionsPrice: "",
-            serviceOptionsQuantity: "",
+            Name: "",
+            Price: "",
+            Quantity: "",
           },
         ],
       },
@@ -140,15 +139,15 @@ const AddServiceRequest = () => {
       serviceProvider: [],
       allServices: serviceOptions.map(item => {
 
-        const name = item.serviceOptionImage.name
-        item = {...item, "serviceOptionImage": name};
+        const name = item.Image.name
+        item = {...item, "Image": name};
         return item;
 
       }),
     };
 
     // bundling all images
-    const images = serviceOptions.map(item => item.serviceOptionImage)
+    const images = serviceOptions.map(item => item.Image)
     images.push(serviceData.serviceImage)
     let formData = new FormData();    
     
@@ -157,7 +156,7 @@ const AddServiceRequest = () => {
     })
 
     formData.append("parentService", serviceRequest.parentService) 
-    formData.append("serviceImage", serviceData.serviceImage.name)   
+    formData.append("Img", serviceData.serviceImage.name)   
     formData.append("Title", serviceRequest.Title)
     formData.append("Rating", serviceRequest.Rating)
     formData.append("FQA", JSON.stringify(serviceRequest.FQA))
@@ -254,7 +253,7 @@ const AddServiceRequest = () => {
                 <ServiceDetailsForm
                   key={index}
                   handleAddMoreDetails={handleAddMoreDetails}
-                  totalRow={item.serviceDetails.length}
+                  totalRow={item.Key.length}
                   pos={item.optionId}
                   serviceOption={item}
                   handleServiceOptons={handleServiceOptons}

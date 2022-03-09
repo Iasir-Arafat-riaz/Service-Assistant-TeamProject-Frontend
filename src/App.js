@@ -41,6 +41,8 @@ import useSocket from "./Hooks/useSocket";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+import AdminPendingRequest from "./Pages/Dashboard/DashboardPages/AdminPendingRequest/AdminPendingRequest";
+import AddNewServiceCategory from "./Pages/Dashboard/DashboardPages/AddNewServiceCategory/AddNewServiceCategory";
 
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
@@ -120,11 +122,20 @@ const App = () => {
             element={<AppointmentRequest />}
           />
 
-          {/* add service request from service provider */}
+          {/* add service request from service provider - by sagar */}
           <Route
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
           ></Route>
+
+          {/* all the pending request list route - by sagar */}
+          <Route path="/dashboard/all-pending-services" element={<AdminPendingRequest />}></Route>
+
+          {/* add new service category for admin - by sagar */}
+
+          <Route path="/dashboard/add-service-category" element={<AddNewServiceCategory />}></Route>
+
+
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
