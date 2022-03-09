@@ -2,6 +2,7 @@ import {
   Autocomplete,
   Box,
   Button,
+  CircularProgress,
   FormControl,
   Grid,
   InputLabel,
@@ -13,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import PreviewHeader from "../../../../Home/Header/PreviewHeader";
@@ -25,13 +26,14 @@ const AddBannerSection = ({ banner }) => {
   const bannerInfo = {
     imageUrl: watch("imageUrl"),
     bannerText: watch("bannerText"),
+    bannerTex2: watch("bannerTex2"),
     bannerNumber: watch("bannerNumber"),
   };
 
   //console.log(bannerInfo);
 
   const onSubmit = (data) => {
-    data._id = banner._id;
+    // data._id = banner._id;
     //console.log(data);
     // reset();
     axios.put("https://fierce-meadow-12011.herokuapp.com/headerBanners", data).then((response) => {
@@ -43,10 +45,31 @@ const AddBannerSection = ({ banner }) => {
           showConfirmButton: false,
           timer: 1500,
         });
+        reset()
       }
     });
 
   };
+
+  const [banners, setBanner] = useState([]);
+  const [load, setLoad] = useState(true);
+  useEffect(() => {
+    setLoad(true);
+    fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
+      .then((res) => res.json())
+      .then((data) => {
+        setBanner(data);
+        setLoad(false);
+      });
+  }, []);
+  // //console.log(banners);
+  if (load) {
+    return (
+      <Stack justifyContent="center" alignItems="center">
+        <CircularProgress></CircularProgress>
+      </Stack>
+    );
+  }
 
   return (
     <Box>
@@ -54,7 +77,7 @@ const AddBannerSection = ({ banner }) => {
       <Grid sx={{ boxShadow: 2, p: 2, mb: 5 }} container spacing={2} alignItems="center" justifyContent="center">
 
         <Grid item xs={12} md={6}>
-          <PreviewHeader bannerInfo={bannerInfo} banner={banner} />
+          <PreviewHeader bannerInfo={bannerInfo} banner={banners[0]} />
         </Grid>
 
         <Grid item xs={12} md={6}>
@@ -82,6 +105,14 @@ const AddBannerSection = ({ banner }) => {
                   label="Write Banner text"
                   variant="outlined"
                 />
+                <TextField
+                  required
+                  type="text"
+                  sx={{ mb: 3 }}
+                  {...register("bannerTex2")}
+                  label="Write Banner text-2"
+                  variant="outlined"
+                />
 
 
                 <FormControl fullWidth>
@@ -91,6 +122,7 @@ const AddBannerSection = ({ banner }) => {
                     id="formOption"
                     {...register("bannerNumber")}
                     label="Age"
+                    required
                   >
                     <MenuItem value="One">Update First Banner</MenuItem>
                     <MenuItem value="Two">Update Second Banner</MenuItem>

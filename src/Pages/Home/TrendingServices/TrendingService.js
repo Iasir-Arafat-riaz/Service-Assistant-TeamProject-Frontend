@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom"
 const TrendingService = ({ service }) => {
     const navigate=useNavigate()
     
-
+console.log(service)
     const { Category, Img,Services } = service;
     const id =Services[0].Id
     const hadleRouteChange=()=>{

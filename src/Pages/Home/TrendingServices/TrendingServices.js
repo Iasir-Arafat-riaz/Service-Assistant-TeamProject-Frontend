@@ -52,7 +52,7 @@ const TrendingServices = () => {
             }
         ]
     };
-
+console.log(services)
 
     return (
         <Container sx={{ mb: 8 }}>
