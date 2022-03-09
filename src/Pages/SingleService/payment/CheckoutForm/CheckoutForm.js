@@ -29,7 +29,7 @@ const CheckoutForm = () => {
     const time = today.getHours() + ":" + today.getMinutes();
 
     useEffect(() => {
-        fetch('http://localhost:5000/myorder/createpaymentstatus', {
+        fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -92,7 +92,7 @@ const CheckoutForm = () => {
             const data = { ...selectedService, orderInfo: orderInfo, date: date };
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;
-            axios.post('http://localhost:5000/myorder', data).then(() => {
+            axios.post('https://dry-sea-00611.herokuapp.com/myorder', data).then(() => {
                 dispatch(sendNotification({ message, image, email: user.email, }))
             });
         };

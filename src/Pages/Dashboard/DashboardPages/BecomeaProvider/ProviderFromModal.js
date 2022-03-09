@@ -43,7 +43,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
     const onSubmit = data => {
 
         if (user.role !== 'provider') {
-            axios.post('http://localhost:5000/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
+            axios.post('https://dry-sea-00611.herokuapp.com/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
                 reset();
                 handleCloseModal();
             });
@@ -52,7 +52,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // add service 
     const addService = () => {
-        axios.post('http://localhost:5000/providerdetials/addservice/mahbuburrofficial@gmail.com', category).then(res => {
+        axios.post('https://dry-sea-00611.herokuapp.com/providerdetials/addservice/mahbuburrofficial@gmail.com', category).then(res => {
             handleCloseModal();
         });
     }
