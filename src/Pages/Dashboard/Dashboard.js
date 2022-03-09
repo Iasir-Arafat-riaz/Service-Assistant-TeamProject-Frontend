@@ -129,6 +129,16 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Chat with user"} />
             </ListItem>
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/ordersChat`}
+              button
+            >
+              <ListItemIcon>
+                <ContactSupportIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Orders Chat"} />
+            </ListItem>
 
             <ListItem
               component={NavLink}

@@ -111,7 +111,7 @@ const AddServiceRequest = () => {
     ]);
   };
   // handle image input
-  const handleImage = (e) => {};
+  const handleImage = (e) => { };
 
   // submit form handler function
   const handleSubmit = (e) => {
@@ -156,7 +156,7 @@ const AddServiceRequest = () => {
     );
     formData.append("allServices", JSON.stringify(serviceRequest.allServices));
     // formData ready to sent for saving
-    const api="https://fierce-meadow-12011.herokuapp.com/servicerequest";
+    const api = "https://fierce-meadow-12011.herokuapp.com/servicerequest";
 
     fetch(api, {
       method: "POST",
@@ -167,7 +167,7 @@ const AddServiceRequest = () => {
         if (data.insertedId) {
           //console.log(data);
           //console.log("Registration Successfull");
-         
+
         }
       })
       .catch((error) => {

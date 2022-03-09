@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import banner1 from '../../images/banner-1.jpg';
@@ -20,20 +20,20 @@ const Header = (props) => {
         slidesToShow: 1,
         slidesToScroll: 1
     };
-    const [banners,setBanner]=useState([])
-  useEffect(()=>{
-    fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
-    .then(res=>res.json())
-    .then(data=>setBanner(data))
-  },[])
+    const [banners, setBanner] = useState([])
+    useEffect(() => {
+        fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
+            .then(res => res.json())
+            .then(data => setBanner(data))
+    }, [])
     return (
         <header >
             <Slider {...settings} style={{ zIndex: '-1' }}>
 
                 {
-                    banners.map(banner=> <article key={banner._id} type="button">
-                    <img type="button" src={banner.imageUrl} alt="" />
-                </article>)
+                    banners.map(banner => <article key={banner._id} type="button">
+                        <img type="button" src={banner.imageUrl} alt="" />
+                    </article>)
                 }
 
                 {/* <article type="button">

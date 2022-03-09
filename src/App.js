@@ -41,6 +41,7 @@ import useSocket from "./Hooks/useSocket";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
 
 
 
@@ -124,6 +125,14 @@ const App = () => {
           <Route
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
+          ></Route>
+          <Route
+            path="/dashboard/ordersChat"
+            element={<OrdersChat />}
+          ></Route>
+          <Route
+            path="/dashboard/ordersChat/:urlId"
+            element={<OrdersChat single />}
           ></Route>
         </Route>
         <Route path="/contact" element={<ContactUs />} />

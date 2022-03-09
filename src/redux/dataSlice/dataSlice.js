@@ -33,6 +33,8 @@ const initialState = {
     notifications: [],
     notificationLoading: true,
     notificationCount: 0,
+    orderChats: [],
+    otherOrders: [],
 
 }
 
@@ -194,7 +196,14 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
         return response.data;
     }
 )
-
+export const getOtherOrders = createAsyncThunk(
+    "data/getOtherOrders",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`http://localhost:5000/provider/appointment/${info.email}`)
+        return response.data;
+    }
+)
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -203,7 +212,7 @@ export const dataSlice = createSlice({
             state.user = action.payload
         },
         logout: (state, action) => {
-            state.user = null
+            state.user = {}
         },
         changeRole: (state, { payload }) => {
             const email = payload.email;
@@ -244,12 +253,22 @@ export const dataSlice = createSlice({
         addChat: (state, { payload }) => {
             state.allChat = [...state.allChat, payload];
         },
+        addOrderChat: (state, { payload }) => {
+            state.orderChats = [...state.orderChats, payload];
+        },
         changeUserPosition: (state, { payload }) => {
             //console.log(payload);
             const uid = payload?.uid;
             const getUser = state.allUser.filter(user => user.uid === uid)[0];
             const withoutUser = state.allUser.filter(user => user.uid !== uid);
             state.allUser = [getUser, ...withoutUser]
+        },
+        changeOtherOrdersPosition: (state, { payload }) => {
+            //console.log(payload);
+            const id = payload?.id;
+            const getUser = state.otherOrders.filter(order => order._id === id)[0];
+            const withoutUser = state.otherOrders.filter(order => order._id !== id);
+            state.otherOrders = [getUser, ...withoutUser]
         },
         reviewServiceIndex: (state, { payload }) => {
             state.reviewIndex = payload;
@@ -261,6 +280,7 @@ export const dataSlice = createSlice({
         newNotification: (state, { payload }) => {
             state.notifications = [payload, ...state.notifications]
         },
+
 
 
     },
@@ -348,10 +368,14 @@ export const dataSlice = createSlice({
                 console.log('rejected');
             })
 
+            .addCase(getOtherOrders.fulfilled, (state, { payload }) => {
+                state.otherOrders = payload.reverse();
+            })
+
     },
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
