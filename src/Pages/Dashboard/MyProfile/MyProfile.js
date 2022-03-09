@@ -27,7 +27,7 @@ const MyProfile = () => {
     }, [user?.email]);
     
     return (
-        <Card  sx={{}}>
+        <Card  sx={{width:"40%",  alignItems:"center",  justify:"center"}}>
         <CardMedia
           component="img"
           style={{width:"100%",marginX:"30%"}}
@@ -57,7 +57,10 @@ const MyProfile = () => {
           <Typography gutterBottom variant="h6" component="div">
             {user.name} 
           </Typography>
-       
+          <Typography gutterBottom variant="h6" component="div">
+            Update Information?
+          </Typography>
+
 
         </CardContent>
         
