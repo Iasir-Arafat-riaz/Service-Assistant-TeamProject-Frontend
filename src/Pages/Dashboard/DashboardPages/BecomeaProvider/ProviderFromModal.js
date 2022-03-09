@@ -37,12 +37,15 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
         mb: 2,
     };
 
+    console.log(user.role)
 
 
     // submit form
     const onSubmit = data => {
-        console.log(data)
-        axios.post('http://localhost:5000/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
+
+        const offerService = [category];
+
+        axios.post('http://localhost:5000/addprovider', { offerService: offerService, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
             reset();
             handleCloseModal();
         })

@@ -29,7 +29,8 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
 
     const selectServiceProvider = provider => {
         // dispatch(addToCart({ ...category, email: user.email, payment: true, provider: provider }))
-        dispatch(selectedServiceAndProvider({ ...category, email: user.email, payment: true, provider: provider, parentService: selectService, selectServiceId: selectServiceId, status: 'pending' }))
+        const { email } = provider;
+        dispatch(selectedServiceAndProvider({ ...category, email: user.email, payment: true, providerEmail: email, parentService: selectService, selectServiceId: selectServiceId, status: 'pending' }))
         handleNext();
     };
 

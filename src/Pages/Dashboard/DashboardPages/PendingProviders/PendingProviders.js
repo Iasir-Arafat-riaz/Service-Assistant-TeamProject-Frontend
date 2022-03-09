@@ -52,7 +52,6 @@ const PendingProviders = () => {
     };
 
 
-
     if (dataLoad) {
         return <Typography variant='h6'>Loading...</Typography>
     };
