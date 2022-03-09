@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { Avatar, Input, TextField } from '@mui/material';
+import { Avatar, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -43,17 +42,24 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
     // submit form
     const onSubmit = data => {
 
-        const offerService = [category];
-
-        axios.post('http://localhost:5000/addprovider', { offerService: offerService, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
-            reset();
-            handleCloseModal();
-        })
+        if (user.role !== 'provider') {
+            axios.post('http://localhost:5000/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
+                reset();
+                handleCloseModal();
+            });
+        };
     };
 
+    // add service 
+    const addService = () => {
+        axios.post('http://localhost:5000/providerdetials/addservice/mahbuburrofficial@gmail.com', category).then(res => {
+            handleCloseModal();
+        });
+    }
+
+    // hosting image
     useEffect(() => {
         const file = watch('providerImage');
-        // console.log(file)
         if (file?.length) {
             let body = new FormData()
             body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
@@ -70,7 +76,6 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
         }
         else {
         }
-
     }, [watch('providerImage')]);
 
     return (
@@ -83,7 +88,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                 <Box sx={style}>
 
                     <Typography id="modal-modal-title" variant="h6" sx={{ mb: 0, boxShadow: 3, p: 1, textAlign: 'center' }} component="h2">
-                        Please give this information
+                        {user?.role !== 'provider' ? 'Please give this information' : 'Want to add this service ?'}
                     </Typography>
 
                     <Button onClick={handleCloseModal} sx={{ mt: -16, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
@@ -91,19 +96,32 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                     <Box sx={{ p: 2 }}>
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                            <label style={{ fontSize: 14, marginBottom: 3, display: 'block' }}>Provider Image *</label>
+                            {
+                                user.role !== 'provider' && <Box>   <label style={{ fontSize: 14, marginBottom: 3, display: 'block' }}>Provider Image *</label>
 
-                            <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" />
+                                    <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" />
 
-                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                {
-                                    watch("travelImg") && <Box> <Avatar sx={{ width: 60, height: 60, mb: 1 }} alt="Remy Sharp" src={watch("travelImg")} /> </Box>
-                                }
-                            </Box>
+                                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                        {
+                                            watch("travelImg") && <Box> <Avatar sx={{ width: 60, height: 60, mb: 1 }} alt="Remy Sharp" src={watch("travelImg")} /> </Box>
+                                        }
+                                    </Box>
 
-                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("providerName", { required: true })} />
+                                    <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("providerName", { required: true })} />
 
-                            <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
+                                    <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
+
+                                </Box>
+
+                            }
+
+
+
+                            {user.role === 'provider' && <Box>
+                                <Box sx={{ backgroundImage: `url(${category.Img})`, width: '100%', height: 220, objectFit: 'cover', backgroundSize: 'cover' }}></Box>
+                                <Typography variant='h6' sx={{ my: 2, fontSize: 17 }}>Service Name:-  {category.Name}</Typography>
+                            </Box>}
+
 
                             <TextField sx={inputStyle}
                                 {...register("email", { required: true })}
@@ -111,24 +129,43 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                                 label="Email"
                                 value={user.email}
                             />
-                            <TextField sx={inputStyle}
-                                {...register("bio", { required: true })}
-                                label="Provider bio *"
-                            />
 
+                            {user?.role !== 'provider' && <Box>
 
+                                <TextField sx={inputStyle}
+                                    {...register("bio", { required: true })}
+                                    label="Provider bio *"
+                                />
 
+                                <TextField sx={inputStyle} id="outlined-basic" label="Your address *" variant="outlined" {...register("address", { required: true })} />
 
-                            <TextField sx={inputStyle} id="outlined-basic" label="Your address *" variant="outlined" {...register("address", { required: true })} />
+                                <TextField sx={inputStyle} id="outlined-multiline-static"
+                                    label="Tell about your organization *"
+                                    multiline
+                                    rows={3} {...register("about", { required: true })} />
 
-                            <TextField sx={inputStyle} id="outlined-multiline-static"
-                                label="Tell about your organization *"
-                                multiline
-                                rows={3} {...register("about", { required: true })} />
+                            </Box>
+                            }
 
-
-                            {imgLoading ? <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>SUBMIT</Button> :
-                                <Button variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>Loading...</Button>}
+                            {
+                                user.role === 'provider' ?
+                                    <Box>
+                                        <Button type='submit' onClick={addService} variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>
+                                            ADD+
+                                        </Button>
+                                    </Box>
+                                    :
+                                    <Box>
+                                        {
+                                            imgLoading
+                                                ?
+                                                <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>
+                                                    SUBMIT
+                                                </Button>
+                                                :
+                                                <Button variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>Loading...</Button>
+                                        }
+                                    </Box>}
 
                         </form>
 

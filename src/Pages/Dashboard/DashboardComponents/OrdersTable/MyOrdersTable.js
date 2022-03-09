@@ -112,7 +112,7 @@ const MyOrdersTable = () => {
 
                                     <Typography sx={{ fontSize: 15, fontWeight: 'bold' }} variant="h6">Service provider -</Typography>
 
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1, border: '1px solid #d0d0d0', borderRadius: 6 }}>
+                                    {/* <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1, border: '1px solid #d0d0d0', borderRadius: 6 }}>
 
                                         <Avatar alt="Remy Sharp" src={service.provider?.photoURL} />
 
@@ -122,7 +122,7 @@ const MyOrdersTable = () => {
                                             <Typography sx={{ fontSize: 13 }} variant="h6">{service?.provider?.email}</Typography>
                                         </Box>
 
-                                    </Box>
+                                    </Box> */}
 
                                     <Typography sx={{ fontSize: 15, fontWeight: 'bold', mt: 1 }} variant="h6">Order info -</Typography>
 

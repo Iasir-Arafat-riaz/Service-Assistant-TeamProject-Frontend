@@ -18,7 +18,7 @@ const PendingProviders = () => {
 
 
     const [pendingProviders, setPendingProviders] = useState([]);
-    const { allUser } = useSelector(allData);
+    const { allUser, user } = useSelector(allData);
     const [loading, setLoading] = useState(true);
     const [dataLoad, setDataLoad] = useState(false);
     const dispatch = useDispatch();
@@ -38,7 +38,11 @@ const PendingProviders = () => {
         setLoading(true);
         axios.put(`http://localhost:5000/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
             axios.post(`http://localhost:5000/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-            axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`);
+            axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`).then(res => {
+                const { Id, Img, Name, backgroundImage, data, date, rating, reviewUser } = pendingProviders.find(provider => provider.data.email === email);
+                const offerService = [{ Id, Img, Name }];
+                axios.post('http://localhost:5000/providerdetials', { offerService, backgroundImage, data, date, rating, reviewUser })
+            })
             setLoading(false)
         })
     };
@@ -62,7 +66,7 @@ const PendingProviders = () => {
             {
                 pendingProviders.length === 0 && <Typography variant='h6'>No pending providers</Typography>
             }
-
+            {user.role}
             {
                 pendingProviders.length !== 0 && <TableContainer component={Paper}>
                     <Table sx={{ width: '100%' }} aria-label="simple table">
