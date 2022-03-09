@@ -34,19 +34,40 @@ import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/
 import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
 import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/BecomeaProvider";
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
-import MyOrderPage from "./Pages/MyOrderPage/MyOrderPage";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
+import LoginPopup from "./Pages/Login/LoginPopup/LoginPopup";
+import { useEffect, useState } from "react";
+import { allData } from "./redux/dataSlice/dataSlice";
+import PendingProviders from "./Pages/Dashboard/DashboardPages/PendingProviders/PendingProviders";
+
 import useSocket from "./Hooks/useSocket";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+import { newNotification } from "./redux/dataSlice/dataSlice";
 import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
 
 
 
 const App = () => {
+  // const { } = useFirebase();
+  // const { socket } = useSocket();
+  // useEffect(() => {
+  //   socket.on("get-message", message => {
+  //     console.log(message, 'homoe')
+  //   });
+  //   socket.emit('message', { data: 'datahome ' })
+  // }, []);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleOpen();
+    }, 5000)
+  }, [])
   const { } = useFirebase();
+
   const { socket } = useSocket();
   const { user } = useSelector(allData);
   const dispatch = useDispatch();
@@ -63,8 +84,12 @@ const App = () => {
     });
   }, [])
 
+
   return (
     <BrowserRouter>
+
+      {!user?.email && <LoginPopup handleOpen={handleOpen} handleClose={handleClose} open={open} />}
+
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -74,24 +99,17 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard" element={<Overview />} />
           <Route path="/dashboard/overview" element={<Overview />} />
-          <Route
-            path="/dashboard/manageAllOrders"
-            element={<ManageAllOrders />}
-          />
+          <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
           <Route path="/dashboard/myorders" element={<MyOrder />} />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
-
           <Route path="addBanner" element={<AddBanner />} />
           <Route path="providerOverview" element={<ProviderOverview />} />
-
           <Route path="/dashboard/adminChat" element={<AdminChat />} />
-
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
-
           <Route
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
@@ -112,6 +130,7 @@ const App = () => {
           <Route path="/dashboard/savedservice" element={<SavedServices />} />
           <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
           <Route path="/dashboard/review/:id" element={<AddServiceReview />} />
+          <Route path="/dashboard/pendingprovider" element={<PendingProviders />} />
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
@@ -141,6 +160,9 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
+
+
+
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

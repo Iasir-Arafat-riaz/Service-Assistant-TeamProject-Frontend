@@ -270,8 +270,8 @@ const Navigation = () => {
         ref={navRef}
         className={navbar}
         position="fixed"
-        style={{ boxShadow: "none" }}
-        sx={{ paddingX: 3, paddingY: 1, background: "none" }}
+        style={{ boxShadow: 0.5 }}
+        sx={{ paddingX: 3, paddingY: 1, background: "#fff" }}
       >
         <IconButton
           sx={{ mr: 40, zIndex: 999999, color: "#FF5E14" }}
@@ -540,10 +540,7 @@ const Navigation = () => {
           {list}
         </Drawer>
       </React.Fragment>
-
-
-
-    </Container >
+    </Container>
   );
 };
 export default Navigation;

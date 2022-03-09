@@ -16,18 +16,18 @@ import OrderInfo from '../OrderInfo/OrderInfo';
 import { useNavigate } from 'react-router-dom';
 
 
-
+// modal style
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: { xs: '100%', lg: '70%', xl: '50%' },
-    height: { xs: '100%', md: 'auto', lg: '80vh', xl: 'auto' },
     bgcolor: 'background.paper',
     boxShadow: 24,
     overflowY: 'scroll',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    width: { xs: '100%', lg: '70%', xl: '50%' },
+    height: { xs: '100%', md: '80vh', xl: 'auto' },
 };
 
 // box style
@@ -158,12 +158,15 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
 
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
+
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
                             AC servicing
                         </Typography>
+
                     </Box>
 
                     <Button onClick={handleCloseModal} sx={{ mt: -20, ml: -1 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
+
                     <Grid container spacing={0}>
 
                         <Box sx={{ width: '100%' }}>
@@ -270,7 +273,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                             {
                                 activeStep === 0 || activeStep === 1 || activeStep === 2 || activeStep === 3 ? <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-                                    <img style={{ margin: '75px 0' }} src="https://i.ibb.co/gzTXmwt/Screenshot-15.png" alt="cartImagw" />
+                                    <img style={{ margin: '75px 0' }} src="https://i.ibb.co/gzTXmwt/Screenshot-15.png" alt="cartImage" />
 
                                 </Box>
                                     :
