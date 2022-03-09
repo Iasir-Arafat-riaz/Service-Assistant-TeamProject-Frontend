@@ -62,18 +62,12 @@ const MyProfile = () => {
           <Typography gutterBottom variant="h6" component="div">   
             {user.displayName} 
           </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {user.email} 
-          </Typography>
+          
   
 
-          <Typography gutterBottom variant="h6" component="div">
-            {user.role} 
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
-            {user.name} 
-          </Typography>
-          <Typography gutterBottom variant="h6" component="div">
+        
+         
+          <Typography gutterBottom variant="h6" component="p">
             <Button onClick={handleOpen}>Update Information?</Button>
           </Typography>
 
