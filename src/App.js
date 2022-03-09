@@ -42,6 +42,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, newNotification } from "./redux/dataSlice/dataSlice";
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
+import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
@@ -92,11 +93,12 @@ const App = () => {
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
           />
+          <Route path="/dashboard/myprofile" element={<MyProfile />} />
           <Route
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
           />
-          <Route
+          <Route 
             path="/dashboard/pendingtestimonial"
             element={<PendingTestimonial />}
           />
