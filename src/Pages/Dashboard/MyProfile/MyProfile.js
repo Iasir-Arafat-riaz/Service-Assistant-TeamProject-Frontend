@@ -8,10 +8,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-
-import IconButton from '@mui/material/IconButton';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box, CardHeader } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import UpdateMyProfile from './UpdateMyProfile';
 
 const MyProfile = () => {
     const [profile, setProfile] = useState(null)
@@ -25,6 +25,22 @@ const MyProfile = () => {
             console.log(res.data,"== got user profile")
         })
     }, [user?.email]);
+
+    // mui modal 
+    const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '1px solid white',
+    boxShadow: 24,
+    p: 4,
+  };
     
     return (
         <Card  sx={{width:"40%",  alignItems:"center",  justify:"center"}}>
@@ -58,11 +74,22 @@ const MyProfile = () => {
             {user.name} 
           </Typography>
           <Typography gutterBottom variant="h6" component="div">
-            Update Information?
+            <Button onClick={handleOpen}>Update Information?</Button>
           </Typography>
 
 
         </CardContent>
+        
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+         <UpdateMyProfile></UpdateMyProfile>
+        </Box>
+      </Modal>
         
         
           <>
