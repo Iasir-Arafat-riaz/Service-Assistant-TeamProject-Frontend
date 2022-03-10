@@ -24,7 +24,7 @@ const AddNewServiceCategory = () => {
     formData.append('Services', JSON.stringify(serviceCategoryInfo.Services))
 
     // API endpoint
-    const url = 'http://localhost:5000/api/v1/add-service-category';
+    const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-category';
 
     axios.post(url, formData, {headers: {'Content-Type':'multipart/form-data'}}).then(data => {}).catch(err => {
       console.log(err)
