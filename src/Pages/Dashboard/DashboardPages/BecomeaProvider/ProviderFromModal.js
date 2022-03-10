@@ -52,7 +52,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // add service 
     const addService = () => {
-        axios.post('https://dry-sea-00611.herokuapp.com/providerdetials/addservice/mahbuburrofficial@gmail.com', category).then(res => {
+        axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addservice/${user.email}`, category).then(res => {
             handleCloseModal();
         });
     }
