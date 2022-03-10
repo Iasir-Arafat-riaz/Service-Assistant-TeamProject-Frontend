@@ -12,7 +12,7 @@ const TrendingServices = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/services').then(res => {
+        axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => {
             setLoading(false);
             setServices(res.data);
         })

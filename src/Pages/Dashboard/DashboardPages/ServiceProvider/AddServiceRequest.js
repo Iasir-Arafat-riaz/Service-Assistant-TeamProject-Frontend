@@ -156,7 +156,7 @@ const AddServiceRequest = () => {
     );
     formData.append("allServices", JSON.stringify(serviceRequest.allServices));
     // formData ready to sent for saving
-    const api="https://fierce-meadow-12011.herokuapp.com/servicerequest";
+    const api="https://dry-sea-00611.herokuapp.com/servicerequest";
 
     fetch(api, {
       method: "POST",

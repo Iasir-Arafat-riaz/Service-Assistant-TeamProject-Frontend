@@ -16,7 +16,7 @@ const RecentlyViews = () => {
 
   useEffect(() => {
     // axios
-    //   .get("https://fierce-meadow-12011.herokuapp.com/services")
+    //   .get("https://dry-sea-00611.herokuapp.com/services")
     //   .then((res) => {
     //     const service = [];
     //     res.data.filter((item) => {

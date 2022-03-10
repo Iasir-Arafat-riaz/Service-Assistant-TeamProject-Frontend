@@ -69,7 +69,7 @@ const Navigation = () => {
   const id = open2 ? 'simple-popover' : undefined;
 
   useEffect(() => {
-    axios.get(`https://fierce-meadow-12011.herokuapp.com/singleservice`)
+    axios.get(`https://dry-sea-00611.herokuapp.com/singleservice`)
       .then((response) => {
         setAPIData(response.data);
       })
