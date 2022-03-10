@@ -29,12 +29,12 @@ const AllProviderChild = (props) => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
     return (
-      <Link to={`/dashboard/allprovider/${_id}`} title={`Click to view more details about ${displayName}`} style={{ textDecoration: "none" }}>
         <Card  sx={{ml:2}}>
+
         <CardMedia
           component="img"
           style={{width:"100%"}}
-          height="250"
+          height="220"
           image={image}
           alt="advocate pic"
         />
@@ -65,7 +65,7 @@ const AllProviderChild = (props) => {
           <>
           <div >
           
-      <Popover
+      {/* <Popover
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -90,13 +90,14 @@ const AllProviderChild = (props) => {
                             </span>
                         </Box>
                         </Typography>
-      </Popover>
+      </Popover> */}
     </div>
 
 </>
 
+<Link to={`/dashboard/allprovider/${_id}`} title={`Click to view more details about ${displayName}`} style={{ textDecoration: "none" }}>          
    <CardHeader
-           
+ 
        
        action={
          <IconButton aria-label="settings">
@@ -108,8 +109,8 @@ const AllProviderChild = (props) => {
     
      />
      
-      </Card>
 </Link>
+      </Card>
     );
 };
 
