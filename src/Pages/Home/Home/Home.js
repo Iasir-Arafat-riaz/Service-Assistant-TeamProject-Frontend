@@ -21,9 +21,9 @@ const Home = () => {
             <Header />
             <RecentlyViews />
             <HomeServices />
-            <TrendingServices />
-            <Testimonials />
+            {/* <TrendingServices /> */}
             <WorkFlow />
+            <Testimonials />
             <RequestService/>
 
             {

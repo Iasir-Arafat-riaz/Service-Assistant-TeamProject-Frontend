@@ -51,14 +51,14 @@ const AddServiceReview = () => {
 
         if (!matchReviews) {
             setLoading(false);
-            axios.post(`https://fierce-meadow-12011.herokuapp.com/singleservice/addreview/${id}`, { ...data, rating: value, date, id: user.uid, serviceId: id }).then(() => {
+            axios.post(`https://dry-sea-00611.herokuapp.com/singleservice/addreview/${id}`, { ...data, rating: value, date, id: user.uid, serviceId: id }).then(() => {
                 reset();
                 setAlert(true);
                 setLoading(true);
             });
         } else {
             // //console.log(data);
-            // axios.put(`https://fierce-meadow-12011.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
+            // axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
             //     reset();
 
             // });
@@ -83,7 +83,7 @@ const AddServiceReview = () => {
     const UpdateReview = (data) => {
         setUpdateing(true);
         // useEffect(() => {
-        axios.put(`https://fierce-meadow-12011.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
+        axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
             reset();
             setUpdateing(false);
         });
@@ -101,7 +101,7 @@ const AddServiceReview = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axios.delete(`https://fierce-meadow-12011.herokuapp.com/singleservice/deleteReview?parentId=${id}&&uid=${user.uid}`).then(res => {
+                    axios.delete(`https://dry-sea-00611.herokuapp.com/singleservice/deleteReview?parentId=${id}&&uid=${user.uid}`).then(res => {
                         setDeleting(false);
                         swal("Your review is deleted!", {
                             icon: "success",

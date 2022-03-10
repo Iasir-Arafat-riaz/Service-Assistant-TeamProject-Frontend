@@ -42,14 +42,14 @@ const initialState = {
 export const saveUserToDb = createAsyncThunk(
     'saveUserToDb/user',
     async (info) => {
-        const response = await axios.post(`https://fierce-meadow-12011.herokuapp.com/users/register`, info);
+        const response = await axios.post(`https://dry-sea-00611.herokuapp.com/users/register`, info);
         return response.data
     }
 )
 export const putUserToDb = createAsyncThunk(
     'data/putUserToDb',
     async (info) => {
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/users/register `, info);
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/users/register `, info);
         return response.data
     }
 )
@@ -57,21 +57,21 @@ export const makeAdmin = createAsyncThunk(
     'data/makeAdmin',
     async (info) => {
         //console.log(info);
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/admin/makeadmin/${info.email} `, info);
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/admin/makeadmin/${info.email} `, info);
         return response.data
     }
 )
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
 export const getAllUser = createAsyncThunk(
     'data/getAllUser',
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/users/allusers`);
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/users/allusers`);
         return response.data
     }
 )
@@ -81,7 +81,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "https://fierce-meadow-12011.herokuapp.com/services"
+            "https://dry-sea-00611.herokuapp.com/services"
         ).then((res) => res.json());
         return response;
     }
@@ -90,7 +90,7 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+        const response = await axios.get("https://dry-sea-00611.herokuapp.com/singleservice")
         return response.data;
     }
 );
@@ -98,7 +98,7 @@ export const singleService = createAsyncThunk(
 export const websiteReviews = createAsyncThunk(
     "testimonials/data",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
+        const response = await axios.get("https://dry-sea-00611.herokuapp.com/reviews")
         return response.data;
     }
 )
@@ -107,7 +107,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-        const response = await axios.delete(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
+        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`).then(() => {
             Swal.fire(
                 'Deleted',
                 'This testimonial has been deleted',
@@ -121,7 +121,7 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`).then(() => {
             Swal.fire(
                 'Approved!',
                 'This testimonial has been approved',
@@ -135,7 +135,7 @@ export const approvedTestimonial = createAsyncThunk(
 export const serviceProviders = createAsyncThunk(
     "providers/service",
     async () => {
-        const response = await axios.get('https://fierce-meadow-12011.herokuapp.com/users/finding/ids', {
+        const response = await axios.get('https://dry-sea-00611.herokuapp.com/users/finding/ids', {
             params: {
                 data: [
                     "62121eb1cef8c7b4915a6923",
@@ -149,14 +149,14 @@ export const serviceProviders = createAsyncThunk(
 export const postChat = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.post('https://fierce-meadow-12011.herokuapp.com/chat', info)
+        const response = await axios.post('https://dry-sea-00611.herokuapp.com/chat', info)
         return response.data;
     }
 );
 export const getChatFromDb = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/chat`);
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat`);
         return response.data;
     }
 );
@@ -166,7 +166,7 @@ export const saveService = createAsyncThunk(
     "service/save",
     async (info) => {
         //console.log(info)
-        const response = await axios.post('https://fierce-meadow-12011.herokuapp.com/saveservice', info)
+        const response = await axios.post('https://dry-sea-00611.herokuapp.com/saveservice', info)
         return response.data;
     }
 );

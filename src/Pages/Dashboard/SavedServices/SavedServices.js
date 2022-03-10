@@ -21,11 +21,11 @@ const SavedServices = () => {
 
     // const email = 'mahfujglobal@gmail.com'
     useEffect(() => {
-        axios.post('https://fierce-meadow-12011.herokuapp.com/saveservice/jwttoken', localStorage.getItem('idToken'))
+        axios.post('https://dry-sea-00611.herokuapp.com/saveservice/jwttoken', localStorage.getItem('idToken'))
     }, [])
     useEffect(() => {
         setLoading(true)
-        fetch(`https://fierce-meadow-12011.herokuapp.com/saveservice?email=${user.email}`).then(res => res.json()).then(data => {
+        fetch(`https://dry-sea-00611.herokuapp.com/saveservice?email=${user.email}`).then(res => res.json()).then(data => {
             setSavedService(data);
             setLoading(false);
         })

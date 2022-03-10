@@ -82,7 +82,7 @@ const Services = () => {
                 >
                   <List className={classes.listBottomPadding}>
                     {allServices.map((item) => {
-                      const ID = item.Category.split(" ")
+                      const ID = item?.Category?.split(" ")
                         .join("")
                         .toLowerCase();
                       return (
@@ -108,7 +108,7 @@ const Services = () => {
                 {/* <Typography sx={{ textAlign: "center", fontWeight: 'bold' }} gutterBottom variant="h4" component="div">OUR ALL SERVICES</Typography> */}
                 <Grid>
                   {allServices.map((service) => {
-                    const divID = service.Category.split(" ")
+                    const divID = service.Category?.split(" ")
                       .join("")
                       .toLowerCase();
                     return (
@@ -126,7 +126,7 @@ const Services = () => {
                           spacing={3}
                         >
 
-                          {service.Services.map((item) => (
+                          {service.Services?.map((item) => (
                             <ServiceCard key={item.Id} {...item} />
                           ))}
                         </Grid>

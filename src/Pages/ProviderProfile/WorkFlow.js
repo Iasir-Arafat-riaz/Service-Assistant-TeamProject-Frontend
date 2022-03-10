@@ -74,7 +74,7 @@ const WorkFlow = () => {
                     paddingBottom: '100px',
                     display: 'flex',
                     justifyContent: 'center',
-                    mb:6
+                    mb:3
                 }}
             >
                 <Grid

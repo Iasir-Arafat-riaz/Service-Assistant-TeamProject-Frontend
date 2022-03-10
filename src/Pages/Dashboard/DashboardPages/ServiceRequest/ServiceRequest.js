@@ -12,7 +12,7 @@ const ServiceRequest = () => {
     const [serviceRequest, setServiceRequest] = useState([]);
 
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/singleservice')
+        axios.get('https://dry-sea-00611.herokuapp.com/singleservice')
             .then(res => {
                 setServiceRequest(res.data)
             })
