@@ -18,7 +18,7 @@ import { recentMoment, todayEarning, totalApproveOrders, totalEarning, totalOrde
 
 const ProviderOverview = () => {
     const { user } = useSelector(allData);
-    const [pending, setPending] = useState([])
+    const [approve, setApprove] = useState([])
     const [allInfo, setAllInfo] = useState({
         last7Days: [],
         last7DaysSales: 0,
@@ -35,13 +35,14 @@ const ProviderOverview = () => {
                     const approvedOrdersData = responses[1].data
                     const completedOrdersData = responses[2].data
                     console.log(approvedOrdersData);
-                    setPending(pendingOrdersData)
+                    setApprove(approvedOrdersData)
                     setAllInfo({
                         last7Days: recentMoment(approvedOrdersData),
                         last7DaysSales: totalEarning(approvedOrdersData),
                         todayEaring: todayEarning(approvedOrdersData),
                         ongoingOrders: approvedOrdersData.length,
                         totalServed: completedOrdersData.length,
+                        pendingOrders: pendingOrdersData.length,
                     })
                 })
             )
@@ -71,7 +72,7 @@ const ProviderOverview = () => {
                                     </IconButton>
                                 </Box>
                                 <Typography variant='h5' gutterBottom><CountUp end={allInfo.last7DaysSales} />Tk</Typography>
-                                <Typography color='red' variant='body1' component={'span'}>-3.25%</Typography>
+                                <Typography color='red' variant='body1' component={'span'}>Bad</Typography>
                                 <Typography variant='body1' component={'span'}> Since last week</Typography>
                             </Paper>
                         </Grid>
@@ -90,7 +91,7 @@ const ProviderOverview = () => {
                                     > <AttachMoneyIcon></AttachMoneyIcon></IconButton>
                                 </Box>
                                 <Typography variant='h5' gutterBottom><CountUp end={allInfo.todayEaring} />Tk</Typography>
-                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>2.8%</Typography>
+                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>Good</Typography>
                                 <Typography variant='body1' component={'span'}> Since last week</Typography>
                             </Paper>
                         </Grid>
@@ -109,8 +110,8 @@ const ProviderOverview = () => {
                                     > <HomeRepairServiceIcon></HomeRepairServiceIcon></IconButton>
                                 </Box>
                                 <Typography variant='h5' gutterBottom><CountUp end={allInfo.ongoingOrders} /></Typography>
-                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}>3</Typography>
-                                <Typography variant='body1' component={'span'}> Recently Added</Typography>
+                                <Typography color='hsl(120deg 30% 75%)' variant='body1' component={'span'}><CountUp end={allInfo.pendingOrders} /></Typography>
+                                <Typography variant='body1' component={'span'}> Pending Orders</Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
@@ -138,7 +139,7 @@ const ProviderOverview = () => {
 
 
                 <Grid item xs={12} md={12}>
-                    <ProviderOrderTable data={pending} />
+                    <ProviderOrderTable data={approve} />
                 </Grid>
 
             </Grid>

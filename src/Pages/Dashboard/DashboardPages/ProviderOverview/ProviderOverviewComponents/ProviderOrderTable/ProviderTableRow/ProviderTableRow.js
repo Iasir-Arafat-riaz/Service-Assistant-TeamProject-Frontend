@@ -3,12 +3,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const ProviderTableRow = ({ row }) => {
-    const [status, setStatus] = useState(row.status === 'pending' && 'incomplete');
+    const [status, setStatus] = useState(row.status);
     console.log(row);
     const handleChange = e => {
         setStatus(e.target.value);
         if (e.target.value === 'completed') {
-            axios.put(`http://localhost:5000/orders/changestatus/${row._id}`, { data: { updateStatus: 'completed' } })
+            axios.put(`http://localhost:5000/orders/changestatus/${row._id}`, { updateStatus: 'completed' })
         }
     }
     return (
@@ -24,7 +24,7 @@ const ProviderTableRow = ({ row }) => {
             <TableCell >{row.Name}</TableCell>
             <TableCell sx={{ p: 0 }}>
                 {
-                    status === 'completed' ? <p style={{ color: 'green' }}>Completed</p> : <TextField
+                    status === 'completed' ? <p style={{ color: 'green' }}>Completed</p> : status === 'pending' ? <p style={{ color: 'red' }}>Waiting Permission</p> : <TextField
                         pt={20}
                         id="standard-select-currency"
                         select
@@ -33,7 +33,7 @@ const ProviderTableRow = ({ row }) => {
                         onChange={handleChange}
                     >
                         <MenuItem value='completed'>complete</MenuItem>
-                        <MenuItem value='incomplete'>Incomplete</MenuItem>
+                        <MenuItem value='approved'>Incomplete</MenuItem>
                     </TextField>
                 }
             </TableCell>
