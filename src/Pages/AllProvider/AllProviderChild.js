@@ -3,10 +3,8 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import Popover from '@mui/material/Popover';
+
 
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -29,20 +27,11 @@ const AllProviderChild = (props) => {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
     return (
-        <Card  sx={{ml:2}}>
-
-        <CardMedia
-          component="img"
-          style={{width:"100%"}}
-          height="220"
-          image={image}
-          alt="advocate pic"
-        />
-        <Avatar
-  alt="Remy Sharp"
-  src={photoURL}
-  sx={{ width: 50, height: 50, mt: -3, ml:2 }}
-/>
+        <Card  sx={{ml:2}} style={{ border: "none", boxShadow: "none" }}>
+           <Box sx={{ backgroundImage: `url(${image})`, width: '100%', height: '200px', backgroundSize: 'cover', objectFit: "cover" }}></Box>
+        <Box sx={{height:50,width:50,p:.5,ml:2, mt:-3,zIndex:5500 ,borderRadius:'50%',backgroundColor:'#fff'}}>
+        <img src={photoURL} style={{borderRadius:'50%',height:50,width:50}} alt="prvodierImage" />
+        </Box>
         
         <CardContent>
        
@@ -50,14 +39,14 @@ const AllProviderChild = (props) => {
             {displayName} 
           </Typography>
           <Typography gutterBottom variant="p" component="div">
-           <span style={{backgroundColor:"#ff7043", padding:2, color:"white"}}>Featured</span>
-           <span style={{backgroundColor:"#28a745", padding:2, color:"white", marginLeft:"7px"}}>Verified</span>
+           <span style={{backgroundColor:"#ff7043", padding:"2px 5px", color:"white"}}>Featured</span>
+           <span style={{backgroundColor:"#28a745", padding:"2px 5px", color:"white", marginLeft:"7px"}}>Verified</span>
           </Typography>
           <Typography gutterBottom variant="p" component="div">
           <Rating name="read-only" value={rating} readOnly />
           </Typography>
-          <Typography  variant="h6" color="text.primary" component="div">
-          A Place Where We Care Life
+          <Typography  variant="h6" color="#363636" component="div">
+          A Place Where We .....
           </Typography>
         </CardContent>
         
@@ -65,49 +54,31 @@ const AllProviderChild = (props) => {
           <>
           <div >
           
-      {/* <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-      >
-        <Typography sx={{ }}>
-          <Box className="footer-social-icon" style={{display:"flex",padding:"5px",}}>
-                            <span style={{color:"black",marginTop:"3px"}}> Share: </span>
-                            <span style={{marginLeft:"3px",marginTop:"2px"}}>
-
-                            <a href="#"><i className="fab fa-facebook-f facebook-bg"></i></a>
-                            <a href="#"><i className="fab fa-twitter twitter-bg"></i></a>
-                            <a href="#"><i className="fab fa-google-plus-g google-bg"></i></a>
-                            </span>
-                        </Box>
-                        </Typography>
-      </Popover> */}
     </div>
 
 </>
 
 <Link to={`/dashboard/allprovider/${_id}`} title={`Click to view more details about ${displayName}`} style={{ textDecoration: "none" }}>          
-   <CardHeader
+   <div style={{display:"flex",justifyContent: "space-around"}}>
+     <div >
+      Manchester, UK
+     </div>
+     <div>
+     <CardHeader
  
        
-       action={
-         <IconButton aria-label="settings">
-           <MoreVertIcon onClick={handleClick}>
-        </MoreVertIcon>
-         </IconButton>
-       }
-       
-    
-     />
+ action={
+   <IconButton aria-label="settings">
+     <MoreVertIcon onClick={handleClick}>
+  </MoreVertIcon>
+   </IconButton>
+ }
+ 
+
+/>
+     </div>
+  
+   </div>
      
 </Link>
       </Card>
