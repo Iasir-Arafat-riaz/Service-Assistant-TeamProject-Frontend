@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import Message from '../Message/Message';
 import ReactScrollableFeed from 'react-scrollable-feed'
 import OrdersMessage from '../OrdersMessage/OrdersMessage';
-
 const OrdersChatBox = ({ id, client }) => {
     const { socket } = useSocket();
     const dispatch = useDispatch();
@@ -19,10 +18,10 @@ const OrdersChatBox = ({ id, client }) => {
     const { photoURL, displayName, email, provider } = client;
     console.log('client', provider, client);
     const onSubmit = data => {
-        const mainData = { sender: user?.email, photoURL: user.photoURL, data, id, buyerEmail: email, provider: provider?.email, time: `${new Date()}`, }
+        const mainData = { sender: user?.email, photoURL: user.photoURL, data, id, buyerEmail: email, provider, time: `${new Date()}`, }
         console.log('main data', mainData);
         // send data
-        // dispatch(postChat(mainData));
+        dispatch(postChat(mainData));
         dispatch(addOrderChat(mainData))
         socket.emit('order-message', mainData)
         reset();

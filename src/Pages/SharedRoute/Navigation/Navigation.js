@@ -152,8 +152,7 @@ const Navigation = () => {
     setAnchorEl(event.currentTarget);
     dispatch(updateMessageStatus(user));
     setIsMessageSeen(true);
-
-
+    setMessageSeen(0);
   };
 
   // nav button

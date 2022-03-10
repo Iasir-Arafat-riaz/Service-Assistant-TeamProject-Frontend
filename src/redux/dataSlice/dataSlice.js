@@ -204,6 +204,22 @@ export const getOtherOrders = createAsyncThunk(
         return response.data;
     }
 )
+export const getProviderChatsDb = createAsyncThunk(
+    "data/getProviderChatsDb",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`http://localhost:5000/chat/provider/${info.email}`)
+        return response.data;
+    }
+)
+export const getSingleOrdersChat = createAsyncThunk(
+    "data/getSingleOrdersChat",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`http://localhost:5000/chat/singleOrder/${info.id}`)
+        return response.data;
+    }
+)
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -370,6 +386,12 @@ export const dataSlice = createSlice({
 
             .addCase(getOtherOrders.fulfilled, (state, { payload }) => {
                 state.otherOrders = payload.reverse();
+            })
+            .addCase(getProviderChatsDb.fulfilled, (state, { payload }) => {
+                state.orderChats = payload;
+            })
+            .addCase(getSingleOrdersChat.fulfilled, (state, { payload }) => {
+                state.orderChats = payload;
             })
 
     },

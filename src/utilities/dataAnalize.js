@@ -48,7 +48,7 @@ export const totalOrders = (data) => {
     return orders.length;
 }
 export const totalApproveOrders = (data) => {
-    const orders = data.filter(singleData => singleData.status === 'approve')
+    const orders = data.filter(singleData => singleData.status === 'approved')
     return orders.length;
 }
 

@@ -19,13 +19,14 @@ const OrdersMessage = (props) => {
             <Paper elevation={1} sx={{
                 display: 'inline-block',
                 my: 1,
+                maxWidth: '90%',
                 borderRadius: '10px',
                 mr: sender === user.email ? 2 : 0,
                 ml: sender === user.email ? 0 : 2
             }} className={` ${sender === user.email ? 'mr-2 md:mr-5' : 'ml- md:ml-5'}`}>
                 <Stack direction='column'>
                     <Typography variant='subtitle1' component='span'
-                        sx={{ wordBreak: " break-all", p: 1, px: 2 }}
+                        sx={{ wordBreak: " break-all", p: 1, px: 2, }}
                         className='break-all max-w-lg text-left p-2 px-3'>
                         <span>{text}</span>
 
@@ -36,9 +37,11 @@ const OrdersMessage = (props) => {
                 display: sender === user.email ? 'flex' : 'block',
                 justifyContent: 'flex-end'
             }} className={sender === user.email ? "flex justify-end" : 'block'}>
-                <Box sx={{ width: '50px' }}>
+                <Box sx={{ width: '40px' }}>
                     <Avatar
+                        sx={{ width: 30, height: 30 }}
                         src={photoURL}
+
                     ></Avatar>
                 </Box>
             </Box>

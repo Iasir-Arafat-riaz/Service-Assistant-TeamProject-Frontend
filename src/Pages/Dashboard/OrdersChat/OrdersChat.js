@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import useSocket from '../../../Hooks/useSocket';
-import { addOrderChat, allData, changeOtherOrdersPosition, getOtherOrders } from '../../../redux/dataSlice/dataSlice';
+import { addOrderChat, allData, changeOtherOrdersPosition, getOtherOrders, getProviderChatsDb, getSingleOrdersChat } from '../../../redux/dataSlice/dataSlice';
 import ChatBoxHeader from '../DashboardComponents/ChatBoxHeader/ChatBoxHeader';
 import MyOrdersCard from '../DashboardComponents/MyOrdersCard/MyOrdersCard';
 import OrderChatCard from '../DashboardComponents/OrderChatCard/OrderChatCard';
@@ -23,9 +23,8 @@ const OrdersChat = ({ single }) => {
 
     //join with id for user chat
     useEffect(() => {
-        console.log(urlId);
         if (urlId) {
-            console.log(urlId, 'in');
+
             socket.emit('join', { uid: urlId });
         }
         return () => {
@@ -34,35 +33,48 @@ const OrdersChat = ({ single }) => {
     }, [urlId]);
     //get orders info
     useEffect(() => {
-
         //user chat order card
         if (urlId) {
             axios.get(`http://localhost:5000/orders/${urlId}`)
                 .then(res => {
                     setOrderInfo(res.data);
-                    setClient({
-                        photoURL: res.data?.provider?.photoURL,
-                        displayName: res.data?.provider?.displayName,
-                        email: res.data.email,
-                        provider: res.data.provider
-                    })
                     setId(urlId)
-                    console.log(res);
                 })
+            dispatch(getSingleOrdersChat({ id: urlId }))
         }
         // for provider getting all other Order of provider
         if (user.role === 'provider') {
-            console.log('provider');
             dispatch(getOtherOrders({ email: user.email }))
+            dispatch(getProviderChatsDb({ email: user.email }))
         }
-    }, [user, urlId]);
+    }, [user, urlId, dispatch]);
+
+    // get info of provider
+    const getClient = () => {
+        axios.get(`http://localhost:5000/users/${orderInfo.providerEmail}`)
+            .then(res => {
+                setClient({
+                    photoURL: res.data?.photoURL,
+                    displayName: res.data?.displayName,
+                    email: orderInfo.email,
+                    provider: orderInfo.providerEmail,
+                });
+            })
+
+    }
     //init client
     useEffect(() => {
-        // if (orderInfo?._id) {
-        //     orderInfo?.provider.email === user.email && setClient(orderInfo)
-        // }
+        if (orderInfo?._id) {
+            orderInfo?.providerEmail !== user.email ? getClient() : setClient(
+                {
+                    photoURL: user.photoURL,
+                    displayName: user.displayName,
+                    email: orderInfo.email,
+                    provider: orderInfo.providerEmail,
+                }
+            )
+        }
     }, [orderInfo])
-    console.log(otherOrders);
     // join all order _id with server room
     useEffect(() => {
         let allId = []
@@ -82,7 +94,6 @@ const OrdersChat = ({ single }) => {
     // get all order message
     useEffect(() => {
         socket.on('get-order-message', data => {
-            console.log(data);
             // change position
             dispatch(changeOtherOrdersPosition(data))
             //add message to state
@@ -97,12 +108,7 @@ const OrdersChat = ({ single }) => {
     }
     const handleChangeUser = theData => {
         setId(theData._id);
-        setClient({
-            photoURL: theData?.parentService?.Image,
-            displayName: theData?.Name,
-            email: theData.email,
-            provider: theData.provider,
-        })
+        setClient(theData)
     }
 
     return (
@@ -120,7 +126,7 @@ const OrdersChat = ({ single }) => {
                 !single && <Grid item xs={12} md={6}>
                     <Box height={"80vh"} sx={{ px: 1, overflow: 'scroll' }}  >
                         {
-                            otherOrders.map(data => <OrderChatCard key={data?._id} handleChangeUser={handleChangeUser} data={data}></OrderChatCard>)
+                            otherOrders.map(data => <OrderChatCard key={data?._id} currentId={id} handleChangeUser={handleChangeUser} data={data}></OrderChatCard>)
                         }
                     </Box>
                 </Grid>
