@@ -68,7 +68,7 @@ const MyProfile = () => {
         
          
           <Typography gutterBottom variant="h6" component="p">
-            <Button onClick={handleOpen}>Update Information?</Button>
+            <p onClick={handleOpen}>Update Information?</p>
           </Typography>
 
 
@@ -81,7 +81,7 @@ const MyProfile = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-         <UpdateMyProfile></UpdateMyProfile>
+         <UpdateMyProfile email={user.email}></UpdateMyProfile>
         </Box>
       </Modal>
         
