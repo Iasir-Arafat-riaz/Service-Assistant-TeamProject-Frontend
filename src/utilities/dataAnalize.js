@@ -25,7 +25,7 @@ export const recentMoment = (data) => {
             }
         }
     }
-    //console.log(last7DaysData);
+    //console.log(last7DaysData); 
     return last7DaysData.reverse();
 }
 export const totalEarning = (data) => {

@@ -26,6 +26,7 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
+import PersonIcon from '@mui/icons-material/Person';
 
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
@@ -87,6 +88,7 @@ const Dashboard = (props) => {
       <List>
         {
           <Box>
+            
             <ListItem
               component={NavLink}
               to={`/dashboard/overview`}
@@ -154,7 +156,7 @@ const Dashboard = (props) => {
             </ListItem>
 
 
-            <ListItem
+            <ListItem 
 
               component={NavLink}
               to={`/dashboard/addBanner`}
