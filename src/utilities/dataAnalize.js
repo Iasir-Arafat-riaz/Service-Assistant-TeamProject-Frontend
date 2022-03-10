@@ -12,6 +12,7 @@ export const recentMoment = (data) => {
         last7DaysData.push(createData)
         return d
     })
+    console.log(data);
     for (const element of data) {
         const orderDate = onlyDate(element.date);
         //console.log(element);
@@ -50,6 +51,18 @@ export const totalOrders = (data) => {
 export const totalApproveOrders = (data) => {
     const orders = data.filter(singleData => singleData.status === 'approved')
     return orders.length;
+}
+export const todayEarning = (data) => {
+    const todays = data.filter(singleData => onlyDate(singleData.date) === onlyDate(new Date()))
+    let price = 0;
+    todays.forEach(element => {
+        // price = price + element.Price;
+        if (element.Price) {
+
+            price = price + element.Price;
+        }
+    });
+    return price;
 }
 
 
