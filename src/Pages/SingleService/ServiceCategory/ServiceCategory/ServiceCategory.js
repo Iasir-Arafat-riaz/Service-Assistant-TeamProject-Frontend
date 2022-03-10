@@ -15,7 +15,14 @@ const ServiceCategory = ({ service }) => {
     const [open, setOpen] = React.useState(false);
     const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
     const [selectService, setSelectService] = useState({});
-    const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
+    // const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
+    const matchService = singleServiceDetails?.find(service => {
+        if (serviceId.length > 4){
+            return service._id == serviceId;
+          }else {
+            return parseInt(service.parentService) === parseInt(serviceId)
+          }
+    });
 
     // open modal
     const handleOpenModal = (index, service) => {

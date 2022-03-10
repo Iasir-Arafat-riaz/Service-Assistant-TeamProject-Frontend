@@ -31,7 +31,7 @@ const ServiceDetailsForm = ({
             label="Title"
             variant="standard"
             fullWidth
-            name="serviceOptionTitle"
+            name="Title"
             onChange={(e) => handleServiceChange(e, pos)}
           />
         </Grid>
@@ -42,7 +42,7 @@ const ServiceDetailsForm = ({
             variant="standard"
             fullWidth
             type="file"
-            name="serviceOptionImage"
+            name="Image"
             onChange={(e) => handleServiceChange(e, pos)}
             InputLabelProps={{
               shrink: true,

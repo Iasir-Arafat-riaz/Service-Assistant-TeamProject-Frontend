@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios";
 import {
   Typography,
@@ -9,9 +10,14 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import ServiceDetailsForm from "./compoent/ServiceDetailsForm";
+import { allData } from "../../../../redux/dataSlice/dataSlice";
 
 // component
 const AddServiceRequest = () => {
+  const {user} = useSelector(allData);
+
+  console.log(user)
+  
   const [serviceData, setServiceData] = useState({
     serviceName: "",
     serviceFeature: "",
@@ -136,7 +142,7 @@ const AddServiceRequest = () => {
         `Trusted & Reliable ${serviceData.serviceName} Technicians`,
       ],
       Reviews: [],
-      serviceProvider: [],
+      serviceProvider: [user.uid],
       allServices: serviceOptions.map(item => {
 
         const name = item.Image.name
@@ -175,6 +181,7 @@ const AddServiceRequest = () => {
 
       if (data.status === 201){
         // do something in the UI
+        console.log('service request added to DB')
       }
 
     })

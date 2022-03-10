@@ -29,9 +29,23 @@ const SingleService = () => {
     return <Loading />;
   }
 
+  // const matchService = singleServiceDetails?.find(
+  //   (service) => parseInt(service.parentService) === parseInt(serviceId)
+  // );
+
+  console.log(singleServiceDetails);
+
   const matchService = singleServiceDetails?.find(
-    (service) => parseInt(service.parentService) === parseInt(serviceId)
+    (service) => {
+      console.log(service._id, serviceId);
+      if (serviceId.length > 4){
+        return service._id == serviceId;
+      }else {
+        return parseInt(service.parentService) === parseInt(serviceId)
+      }
+    }
   );
+  console.log(matchService);
 
   // //console.log(matchService)
 
