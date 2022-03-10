@@ -88,16 +88,7 @@ const Dashboard = (props) => {
       <List>
         {
           <Box>
-             <ListItem
-              component={NavLink}
-              to={`/dashboard/myprofile`}
-              button
-            >
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary={"My Profile"} /> 
-            </ListItem>
+            
             <ListItem
               component={NavLink}
               to={`/dashboard/overview`}
