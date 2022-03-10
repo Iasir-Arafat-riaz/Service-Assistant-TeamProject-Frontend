@@ -17,6 +17,7 @@ const Message = (props) => {
                 display: 'inline-block',
                 my: 1,
                 borderRadius: '10px',
+                maxWidth: '90%',
                 mr: author === 'admin' ? 2 : 0,
                 ml: author === 'admin' ? 0 : 2
             }} className={` ${author === 'admin' ? 'mr-2 md:mr-5' : 'ml- md:ml-5'}`}>

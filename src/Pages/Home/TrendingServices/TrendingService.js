@@ -1,14 +1,14 @@
 import { Box, Paper, Typography } from '@mui/material';
 import React from 'react';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const TrendingService = ({ service }) => {
-    const navigate=useNavigate()
-    
-console.log(service)
-    const { Category, Img,Services } = service;
-    const id =Services[0].Id
-    const hadleRouteChange=()=>{
+    const navigate = useNavigate()
+
+
+    const { Category, Img, Services } = service;
+    const id = Services && Services[0]?.Id
+    const hadleRouteChange = () => {
         navigate(`/Home/service-details/${id}`)
     }
 

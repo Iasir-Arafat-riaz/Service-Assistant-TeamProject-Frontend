@@ -66,11 +66,11 @@ const Dashboard = (props) => {
       >
         <Avatar
           sx={{ width: 70, height: 70 }}
-          src={user.photoURL}
+          src={user?.photoURL}
           alt='admin img'
         />
         <Typography variant="h6" gutterBottom mt={1}>
-          {user.displayName}
+          {user?.displayName}
         </Typography>
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" } }}>
@@ -130,6 +130,16 @@ const Dashboard = (props) => {
                 <ContactSupportIcon />
               </ListItemIcon>
               <ListItemText primary={"Chat with user"} />
+            </ListItem>
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/ordersChat`}
+              button
+            >
+              <ListItemIcon>
+                <ContactSupportIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Orders Chat"} />
             </ListItem>
 
             <ListItem
@@ -276,6 +286,17 @@ const Dashboard = (props) => {
                 <SavedSearchOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary={"Become a provider ?"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/pendingprovider`}
+              button
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Pending Providers"} />
             </ListItem>
 
 

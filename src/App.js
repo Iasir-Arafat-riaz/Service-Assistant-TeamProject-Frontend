@@ -36,11 +36,15 @@ import BecomeaProvider from "./Pages/Dashboard/DashboardPages/BecomeaProvider/Be
 import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/AddServiceReview";
 
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
+import LoginPopup from "./Pages/Login/LoginPopup/LoginPopup";
+import { useEffect, useState } from "react";
+import { allData } from "./redux/dataSlice/dataSlice";
+import PendingProviders from "./Pages/Dashboard/DashboardPages/PendingProviders/PendingProviders";
 
 import useSocket from "./Hooks/useSocket";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allData, newNotification } from "./redux/dataSlice/dataSlice";
+
+
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 
@@ -48,10 +52,30 @@ import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
 // import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
 
+import { newNotification } from "./redux/dataSlice/dataSlice";
+import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
+
 
 
 
 const App = () => {
+  // const { } = useFirebase();
+  // const { socket } = useSocket();
+  // useEffect(() => {
+  //   socket.on("get-message", message => {
+  //     console.log(message, 'homoe')
+  //   });
+  //   socket.emit('message', { data: 'datahome ' })
+  // }, []);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleOpen();
+    }, 5000)
+  }, [])
   const { } = useFirebase();
 
   const { socket } = useSocket();
@@ -73,6 +97,9 @@ const App = () => {
 
   return (
     <BrowserRouter>
+
+      {!user?.email && <LoginPopup handleOpen={handleOpen} handleClose={handleClose} open={open} />}
+
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -114,6 +141,7 @@ const App = () => {
           <Route path="/dashboard/savedservice" element={<SavedServices />} />
           <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
           <Route path="/dashboard/review/:id" element={<AddServiceReview />} />
+          <Route path="/dashboard/pendingprovider" element={<PendingProviders />} />
           <Route
             path="/dashboard/manageproducts"
             element={<Manageproducts />}
@@ -128,6 +156,14 @@ const App = () => {
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
           ></Route>
+          <Route
+            path="/dashboard/ordersChat"
+            element={<OrdersChat />}
+          ></Route>
+          <Route
+            path="/dashboard/ordersChat/:urlId"
+            element={<OrdersChat single />}
+          ></Route>
         </Route>
         <Route path="/contact" element={<ContactUs />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
@@ -135,6 +171,9 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
+
+
+
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>

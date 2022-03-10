@@ -80,7 +80,7 @@ console.log(services)
                     </Box>
                     : <Slider {...slickSlider}>
                         {
-                            services.map(service => <TrendingService sx={{}}
+                            services?.map(service => <TrendingService sx={{}}
                                 key={service._id}
                                 service={service}
                             />)

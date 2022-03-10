@@ -1,9 +1,9 @@
 import { Avatar, IconButton, Stack, Typography } from '@mui/material';
 import { bgcolor, Box } from '@mui/system';
 import { BigHead } from "@bigheads/core";
-
 import React from 'react';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import './ChatBoxHeader.css';
+import ChatIcon from '@mui/icons-material/Chat';
 const ChatBoxHeader = props => {
     //console.log(props.user);
     const { uid, avatar, photoURL, displayName, email } = props?.user;
@@ -26,7 +26,7 @@ const ChatBoxHeader = props => {
             </Stack>
             <Box>
                 <IconButton>
-                    <MoreHorizIcon></MoreHorizIcon>
+                    <ChatIcon sx={{ color: '#ff5f15b3' }}></ChatIcon>
                 </IconButton>
             </Box>
         </Stack>

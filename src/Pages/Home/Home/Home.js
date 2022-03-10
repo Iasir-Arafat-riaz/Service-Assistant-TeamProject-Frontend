@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../redux/dataSlice/dataSlice';
 import AllProvider from '../../AllProvider/AllProvider';
 import Chatbot from '../../Chatbot/Chatbot';
+import LoginPopup from '../../Login/LoginPopup/LoginPopup';
 import Footer from '../../SharedRoute/Footer/Footer';
 import Navigation from '../../SharedRoute/Navigation/Navigation';
 import Header from '../Header/Header';
@@ -14,7 +15,10 @@ import TrendingServices from '../TrendingServices/TrendingServices';
 
 
 const Home = () => {
+
     const { user, loading } = useSelector(allData);
+
+
     return (
         <>
             <Navigation />
@@ -24,12 +28,12 @@ const Home = () => {
             <TrendingServices />
             <AllProvider></AllProvider>
             <Testimonials />
-            <RequestService/>
-
+            <RequestService />
             {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
             <Footer />
+
         </>
     );
 };
