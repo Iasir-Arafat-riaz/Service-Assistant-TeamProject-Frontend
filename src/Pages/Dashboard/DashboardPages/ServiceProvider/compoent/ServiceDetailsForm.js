@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, TextField, Grid, Input } from "@mui/material";
+import { Typography, TextField, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import ServiceOptionsRow from "./ServiceOptionsRow";
 
@@ -12,7 +12,7 @@ const ServiceDetailsForm = ({
   handleServiceChange,
 }) => {
   // const optionRow = Array.from({ length: totalRow }, (v, i) => i);
-  const optionRow = serviceOption.serviceDetails;
+  const optionRow = serviceOption.Key;
   //console.log(serviceOption);
   return (
     <Grid container spacing={2}>
@@ -31,7 +31,7 @@ const ServiceDetailsForm = ({
             label="Title"
             variant="standard"
             fullWidth
-            name="serviceOptionTitle"
+            name="Title"
             onChange={(e) => handleServiceChange(e, pos)}
           />
         </Grid>
@@ -42,7 +42,7 @@ const ServiceDetailsForm = ({
             variant="standard"
             fullWidth
             type="file"
-            name="serviceOptionImage"
+            name="Image"
             onChange={(e) => handleServiceChange(e, pos)}
             InputLabelProps={{
               shrink: true,

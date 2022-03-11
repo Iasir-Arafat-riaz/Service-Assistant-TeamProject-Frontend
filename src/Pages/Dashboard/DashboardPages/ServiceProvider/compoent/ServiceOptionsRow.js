@@ -15,30 +15,30 @@ const ServiceOptionsRow = ({
       <Grid item xs={6} sm={6} md={4}>
         <TextField
           id="serviceOptionsName"
-          label="Name"
+          label="Service Options Name"
           variant="standard"
           fullWidth
-          name="serviceOptionsName"
+          name="Name"
           onChange={(e) => handleServiceOptons(e, pos, optionKeyId)}
         />
       </Grid>
       <Grid item xs={6} sm={6} md={4}>
         <TextField
           id="serviceOptionsPrice"
-          label="Price"
+          label="Service Options Price"
           variant="standard"
           fullWidth
-          name="serviceOptionsPrice"
+          name="Price"
           onChange={(e) => handleServiceOptons(e, pos, optionKeyId)}
         />
       </Grid>
       <Grid item xs={6} sm={6} md={4}>
         <TextField
-          id="serviceOptionsQuantity"
-          label="Quantity"
+          id="service Options Quantity"
+          label="Service Options Quantity"
           variant="standard"
           fullWidth
-          name="serviceOptionsQuantity"
+          name="Quantity"
           onChange={(e) => handleServiceOptons(e, pos, optionKeyId)}
         />
       </Grid>

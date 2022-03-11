@@ -1,35 +1,41 @@
 import React, { useEffect, useState } from "react";
-
+import { useSelector, useDispatch } from 'react-redux';
+import axios from "axios";
 import {
   Typography,
   TextField,
   Grid,
-  Input,
   Divider,
   Button,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import ServiceDetailsForm from "./compoent/ServiceDetailsForm";
+import { allData } from "../../../../redux/dataSlice/dataSlice";
 
 // component
 const AddServiceRequest = () => {
+  const {user} = useSelector(allData);
+
+  console.log(user)
+  
   const [serviceData, setServiceData] = useState({
     serviceName: "",
     serviceFeature: "",
     whatIncluded: "",
+    serviceImage: null,
   });
 
   const [serviceOptions, setServiceOptions] = useState([
     {
       optionId: 0,
-      serviceOptionTitle: "",
-      serviceOptionImage: "",
-      serviceDetails: [
+      Title: "",
+      Image: "",
+      Key: [
         {
           optionKeyId: 1,
-          serviceOptionsName: "",
-          serviceOptionsPrice: "",
-          serviceOptionsQuantity: "",
+          Name: "",
+          Price: "",
+          Quantity: "",
         },
       ],
     },
@@ -39,7 +45,7 @@ const AddServiceRequest = () => {
   const handleServiceChange = (e, index) => {
     const newServiceOptions = serviceOptions.map((item) => {
       if (item.optionId === index) {
-        if (item[e.target.name] === "serviceOptionImage") {
+        if (e.target.name === "Image") {
           item[e.target.name] = e.target.files[0];
         } else {
           item[e.target.name] = e.target.value;
@@ -53,16 +59,19 @@ const AddServiceRequest = () => {
   const handleChange = (e) => {
     if (e.target.name === "serviceImage") {
       setServiceData({ ...serviceData, [e.target.name]: e.target.files[0] });
+    }else {
+      setServiceData({ ...serviceData, [e.target.name]: e.target.value });
     }
-    setServiceData({ ...serviceData, [e.target.name]: e.target.value });
+    
   };
 
   const handleServiceOptons = (e, position, id) => {
     const newServiceOptions = serviceOptions.map((item) => {
       if (item.optionId === position) {
-        item.serviceDetails = item.serviceDetails.map((ele) => {
-          if (ele.optionKeyId === id) {
-            ele = { ...ele, [e.target.name]: e.target.value };
+        item.Key = item.Key.map((ele) => {
+          if (ele.optionKeyId === id) {            
+              ele = { ...ele, [e.target.name]: e.target.value };          
+            
           }
           return ele;
         });
@@ -77,14 +86,14 @@ const AddServiceRequest = () => {
 
     const newServiceArr = serviceOptions.map((item) => {
       if (item.optionId === index) {
-        const len = item.serviceDetails.length + 1;
+        const len = item.Key.length + 1;
         const obj = {
           optionKeyId: len,
-          serviceOptionsName: "",
-          serviceOptionsPrice: "",
-          serviceOptionsQuantity: "",
+          Name: "",
+          Price: "",
+          Quantity: "",
         };
-        item.serviceDetails.push(obj);
+        item.Key.push(obj);
       }
       return item;
     });
@@ -92,26 +101,26 @@ const AddServiceRequest = () => {
   };
 
   const handleAddServiceField = () => {
-    const len2 = serviceOptions.length;
+    const len = serviceOptions.length;
     setServiceOptions([
       ...serviceOptions,
       {
-        optionId: len2,
-        serviceOptionTitle: "",
-        serviceOptionImage: "",
-        serviceDetails: [
+        optionId: len,
+        Title: "",
+        Image: "",
+        Key: [
           {
             optionKeyId: 1,
-            serviceOptionsName: "",
-            serviceOptionsPrice: "",
-            serviceOptionsQuantity: "",
+            Name: "",
+            Price: "",
+            Quantity: "",
           },
         ],
       },
     ]);
   };
   // handle image input
-  const handleImage = (e) => { };
+  // const handleImage = (e) => {};
 
   // submit form handler function
   const handleSubmit = (e) => {
@@ -119,6 +128,7 @@ const AddServiceRequest = () => {
     const included = serviceData.whatIncluded.split("\n");
     const serviceRequest = {
       parentService: "",
+      serviceImage: serviceData.serviceImage,
       Title: serviceData.serviceName,
       Rating: 0,
       FQA: [],
@@ -132,47 +142,53 @@ const AddServiceRequest = () => {
         `Trusted & Reliable ${serviceData.serviceName} Technicians`,
       ],
       Reviews: [],
-      serviceProvider: [],
-      allServices: serviceOptions,
+      serviceProvider: [user.uid],
+      allServices: serviceOptions.map(item => {
+
+        const name = item.Image.name
+        item = {...item, "Image": name};
+        return item;
+
+      }),
     };
 
-    let formData = new FormData();
-    // for (i in serviceRequest) {
-    //   formData.append(i, serviceData[i]); parentService, allServices,Title,Rating,FQA,overview,mainFeatures,Reviews,serviceProvider
-    // }
-    formData.append("parentService", serviceRequest.parentService);
-    formData.append("Title", serviceRequest.Title);
-    formData.append("Rating", serviceRequest.Rating);
-    formData.append("FQA", JSON.stringify(serviceRequest.FQA));
-    formData.append("overview", JSON.stringify(serviceRequest.overview));
-    formData.append(
-      "mainFeatures",
-      JSON.stringify(serviceRequest.mainFeatures)
-    );
-    formData.append("Reviews", JSON.stringify(serviceRequest.Reviews));
-    formData.append(
-      "serviceProvider",
-      JSON.stringify(serviceRequest.serviceProvider)
-    );
-    formData.append("allServices", JSON.stringify(serviceRequest.allServices));
-    // formData ready to sent for saving
-    const api="https://dry-sea-00611.herokuapp.com/servicerequest";
-
-    fetch(api, {
-      method: "POST",
-      body: formData,
+    // bundling all images
+    const images = serviceOptions.map(item => item.Image)
+    images.push(serviceData.serviceImage)
+    let formData = new FormData();    
+    
+    Array.from(images).forEach(item => {
+      formData.append("images", item)
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          //console.log(data);
-          //console.log("Registration Successfull");
 
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    formData.append("parentService", serviceRequest.parentService) 
+    formData.append("Img", serviceData.serviceImage.name)   
+    formData.append("Title", serviceRequest.Title)
+    formData.append("Rating", serviceRequest.Rating)
+    formData.append("FQA", JSON.stringify(serviceRequest.FQA))
+    formData.append("overview", JSON.stringify(serviceRequest.overview))
+    formData.append("mainFeatures", JSON.stringify(serviceRequest.mainFeatures))
+    formData.append("Reviews", JSON.stringify(serviceRequest.Reviews))
+    formData.append("serviceProvider", JSON.stringify(serviceRequest.serviceProvider))
+    formData.append("allServices", JSON.stringify(serviceRequest.allServices))
+
+    // make service request API endpoint
+    const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-request';
+
+    // sending HTTP request to the server
+    axios.post(url, formData, {headers: {'Content-Type': 'multipart/form-data'}})        
+    .then((data) => {
+
+      if (data.status === 201){
+        // do something in the UI
+        console.log('service request added to DB')
+      }
+
+    })
+    .catch((err) => {
+      console.log("error sagar", err);
+    })   
+
   };
 
   useEffect(() => {
@@ -183,7 +199,7 @@ const AddServiceRequest = () => {
       <Typography variant="h4" component="div" gutterBottom>
         Add Service Request
       </Typography>
-      <form>
+      <form encType="multipart/form-data">
         <Grid container spacing={3}>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
@@ -203,11 +219,12 @@ const AddServiceRequest = () => {
               fullWidth
               type="file"
               name="serviceImage"
+              onChange={handleChange}
               InputLabelProps={{
                 shrink: true,
               }}
-              onChange={handleChange}
             />
+            {/* <input type="file" name="serviceImage" onChange={handleChange} ref= {imgRef}/> */}
           </Grid>
           <Grid item md={6} sm={12} xs={12}>
             <TextField
@@ -243,7 +260,7 @@ const AddServiceRequest = () => {
                 <ServiceDetailsForm
                   key={index}
                   handleAddMoreDetails={handleAddMoreDetails}
-                  totalRow={item.serviceDetails.length}
+                  totalRow={item.Key.length}
                   pos={item.optionId}
                   serviceOption={item}
                   handleServiceOptons={handleServiceOptons}

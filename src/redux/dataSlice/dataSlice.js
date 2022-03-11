@@ -193,6 +193,7 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
         const modifyInfo = { ...info, seen: false, time: new Date() }
         console.log(modifyInfo);
         const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
+
         return response.data;
     }
 )
@@ -217,6 +218,7 @@ export const getSingleOrdersChat = createAsyncThunk(
     async (info) => {
         // console.log(info)
         const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/singleOrder/${info.id}`)
+
         return response.data;
     }
 )

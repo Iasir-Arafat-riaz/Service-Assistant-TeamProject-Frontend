@@ -179,6 +179,7 @@ const Dashboard = (props) => {
             </ListItem>
 
 
+            {/* service request dashbord menu item - by sagar */}
             <ListItem
               component={NavLink}
               to={`/dashboard/make-service-request`}
@@ -189,6 +190,32 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Make Service Request"} />
             </ListItem>
+
+            {/* see all the pending reqest menu item - by sagar */}
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/all-pending-services`}
+              button
+            >
+              <ListItemIcon>
+                <RateReviewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Pending Service Request"} />
+            </ListItem>
+
+            {/* add new service category for admin - by sagar */}
+
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/add-service-category`}
+              button
+            >
+              <ListItemIcon>
+                <RateReviewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Service Category"} />
+            </ListItem>
+
 
             <ListItem
               component={NavLink}
