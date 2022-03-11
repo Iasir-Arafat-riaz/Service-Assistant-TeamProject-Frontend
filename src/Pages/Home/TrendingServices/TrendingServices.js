@@ -5,20 +5,21 @@ import useSlick from '../../../Hooks/useSlick';
 import Slider from 'react-slick';
 import TrendingService from './TrendingService';
 import { Link } from 'react-router-dom';
+import { allData, loadServiceCategory } from '../../../redux/dataSlice/dataSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const TrendingServices = () => {
 
-    const [services, setServices] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { allServices, serviceIsLoading } = useSelector(allData);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        axios.get('https://fierce-meadow-12011.herokuapp.com/services').then(res => {
-            setLoading(false);
-            setServices(res.data);
-        })
-    }, []);
+        dispatch(loadServiceCategory());
+    }, [dispatch]);
+
 
     // const { slickSlider } = useSlick();
+    // slick slider
     const slickSlider = {
         dots: false,
         infinite: false,
@@ -53,12 +54,13 @@ const TrendingServices = () => {
         ]
     };
 
+    const trendServices = [...allServices].reverse();
 
     return (
         <Container sx={{ mb: 8 }}>
 
             {
-                loading ?
+                serviceIsLoading ?
                     <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
                     :
                     <Box sx={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
@@ -69,7 +71,7 @@ const TrendingServices = () => {
 
 
             {
-                loading ?
+                serviceIsLoading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
                         {[...new Array(4)].map((ske, index) => <Stack key={index} spacing={1} >
@@ -80,7 +82,7 @@ const TrendingServices = () => {
                     </Box>
                     : <Slider {...slickSlider}>
                         {
-                            services.map(service => <TrendingService sx={{}}
+                            trendServices.map(service => <TrendingService sx={{}}
                                 key={service._id}
                                 service={service}
                             />)

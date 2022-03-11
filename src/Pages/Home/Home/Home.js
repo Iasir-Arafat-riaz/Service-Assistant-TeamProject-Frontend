@@ -7,7 +7,6 @@ import Footer from '../../SharedRoute/Footer/Footer';
 import Navigation from '../../SharedRoute/Navigation/Navigation';
 import Header from '../Header/Header';
 import HomeServices from '../HomeServices/HomeServices';
-import OurFacility from '../OurFacility/OurFacility';
 import RecentlyViews from '../RecentlyViews/RecentlyViews';
 import RequestService from '../RequestService/RequestService';
 import Testimonials from '../Testimonials/Testimonials/Testimonials';
@@ -32,7 +31,6 @@ const Home = () => {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
 
-            <OurFacility />
             <Footer />
 
         </>
