@@ -48,11 +48,15 @@ import { useDispatch, useSelector } from "react-redux";
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 
+import {  newNotification } from "./redux/dataSlice/dataSlice";
+
+
+
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
 // import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
 // import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
 
-import { newNotification } from "./redux/dataSlice/dataSlice";
+
 import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
 
 
@@ -165,7 +169,9 @@ const App = () => {
             element={<OrdersChat single />}
           ></Route>
         </Route>
+
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/providerProfile" element={<SingleProviderDetails />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
           path="home/service-details/:serviceId"

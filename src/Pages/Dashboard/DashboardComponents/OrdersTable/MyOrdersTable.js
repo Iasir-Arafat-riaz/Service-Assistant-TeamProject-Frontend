@@ -30,8 +30,8 @@ const MyOrdersTable = () => {
     // data load
     useEffect(() => {
         setLoading(true)
-        fetch(`https://fierce-meadow-12011.herokuapp.com/myorder?email=${user.email}`).then(res => res.json()).then(data => {
-            setSavedService(data.reverse());
+        fetch(`https://dry-sea-00611.herokuapp.com/myorder?email=${user.email}`).then(res => res.json()).then(data => {
+            setSavedService(data);
             setLoading(false);
         })
 
