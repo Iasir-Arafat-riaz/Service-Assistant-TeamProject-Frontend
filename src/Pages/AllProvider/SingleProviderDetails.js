@@ -6,7 +6,7 @@ const SingleProviderDetails = () => {
     const [providerDetails, setProviderDetails] = useState({})
    
     useEffect(() => {
-        const api = `http://localhost:5000/users/providers/${id}`
+        const api = `https://dry-sea-00611.herokuapp.com/users/providers/${id}`
         axios.get(api).then(res => {
           setProviderDetails(res.data)
             console.log(res.data,"== got provider")

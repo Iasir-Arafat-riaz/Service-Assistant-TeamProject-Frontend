@@ -61,6 +61,15 @@ const ServiceCategory = ({ service }) => {
                         minWidth: '345px'
 
                     }}>
+                       <Typography
+                        variant='h5'
+                        sx={{
+                            fontWeight: "bold",
+                            color: 'darkblue',
+                            marginBottom:"10px"
+                        }}>
+                        For Order Click Below
+                    </Typography>
                     <Typography
                         variant='h5'
                         sx={{
@@ -88,6 +97,7 @@ const ServiceCategory = ({ service }) => {
                             onClick={() => handleOpenModal(index, service)}
                             sx={box} key={index}>
                             {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
+                            
                             <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
                             <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />
                         </Box>)
@@ -96,6 +106,7 @@ const ServiceCategory = ({ service }) => {
                 </Paper>
             }
             {/* Modal */}
+            
             <CategoryModal
                 selectServiceId={matchService.parentService}
                 index={index}

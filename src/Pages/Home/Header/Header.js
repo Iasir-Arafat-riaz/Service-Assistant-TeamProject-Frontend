@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import banner1 from "../../images/banner-1.jpg";
@@ -13,32 +13,59 @@ import { Box, Container, Typography } from "@mui/material";
 import "./Header.css";
 
 const Header = (props) => {
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
-    const [banners, setBanner] = useState([])
-    useEffect(() => {
-        fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
-            .then(res => res.json())
-            .then(data => setBanner(data))
-    }, [])
-    return (
-        <header >
-            <Slider {...settings} style={{ zIndex: '-1' }}>
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+  const [banners, setBanner] = useState([]);
+  useEffect(() => {
+    fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
+      .then((res) => res.json())
+      .then((data) => setBanner(data));
+  }, []);
+  console.log(banners);
+  return (
+    <header>
+      <Slider {...settings} style={{ zIndex: "-1" }}>
+        {banners.map((banner) => (
+          <Box
+            sx={{
+              backgroundImage: `url(${banner.imageUrl})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+              height: "calc(100vh)",
+            }}
+            key={banner._id}
+            type="button"
+          >
+            {/* <img type="button" src={banner.imageUrl} alt="" /> */}
+            <Container
+              maxWidth="md"
+              sx={{ height: "100%", display: "flex", alignItems: "center" }}
+            >
+              <Box>
+                <Typography id="commonBannerText">
+                  <Typography variant="h6">
+                    Service Deliver with professionalism
+                  </Typography>
+                </Typography>
+                <Typography class="text1" variant="h4">
+                  <b>{banner.bannerText}</b>
+                </Typography>
+                <Typography class="text1" variant="h4">
+                  <b>{banner.bannerTex2}</b>
+                </Typography>
+              </Box>
+            </Container>
+          </Box>
+        ))}
 
-                {
-                    banners.map(banner => <article key={banner._id} type="button">
-                        <img type="button" src={banner.imageUrl} alt="" />
-                    </article>)
-                }
-
-                {/* <article type="button">
+        {/* <article type="button">
                     <img type="button" src={banner1} alt="" />
                 </article>
 

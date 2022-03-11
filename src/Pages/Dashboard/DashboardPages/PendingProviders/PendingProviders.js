@@ -25,7 +25,7 @@ const PendingProviders = () => {
 
     useEffect(() => {
         setDataLoad(true);
-        axios.get(`http://localhost:5000/addprovider`).then(res => {
+        axios.get(`https://dry-sea-00611.herokuapp.com/addprovider`).then(res => {
             setPendingProviders(res.data);
             setDataLoad(false);
         })
@@ -36,9 +36,9 @@ const PendingProviders = () => {
     const ApproveProvider = (email, id, parentId) => {
         const matchUser = allUser.find(user => user.email === email);
         setLoading(true);
-        axios.put(`http://localhost:5000/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
-            axios.post(`http://localhost:5000/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-            axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`);
+        axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
+            axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
+            axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`);
             setLoading(false)
         })
     };
@@ -46,7 +46,7 @@ const PendingProviders = () => {
     // delete provider
     const deleteProvider = id => {
         setLoading(true);
-        axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`).then(res => {
+        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
             setLoading(false);
         })
     };

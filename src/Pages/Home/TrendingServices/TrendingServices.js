@@ -14,7 +14,7 @@ const TrendingServices = () => {
     useEffect(() => {
         axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => {
             setLoading(false);
-            setServices(res.data);
+            setServices(res.data.reverse())
         })
     }, []);
 
@@ -53,6 +53,7 @@ const TrendingServices = () => {
         ]
     };
 console.log(services)
+// const servicesReverse = services.reverse()
 
     return (
         <Container sx={{ mb: 8 }}>

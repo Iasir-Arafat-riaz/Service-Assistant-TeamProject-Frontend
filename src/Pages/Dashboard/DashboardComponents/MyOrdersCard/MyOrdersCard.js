@@ -10,7 +10,7 @@ const MyOrdersCard = ({ service, notShow }) => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(true)
-        axios.get(`http://localhost:5000/provider/${service.providerEmail}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/provider/${service.providerEmail}`)
             .then(res => {
                 setGetProvider(res.data);
                 setLoading(false);

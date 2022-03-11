@@ -177,14 +177,14 @@ export const getNotification = createAsyncThunk(
     "get/notification",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`http://localhost:5000/notification/getnotification?email=${info.email}`)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/notification/getnotification?email=${info.email}`)
         return response.data;
     }
 )
 
 export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
     async (info) => {
-        const response = await axios.put(`http://localhost:5000/notification/statuschange/${info.email}`)
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/notification/statuschange/${info.email}`)
         return response.data;
     }
 )
@@ -192,7 +192,7 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
     async (info) => {
         const modifyInfo = { ...info, seen: false, time: new Date() }
         console.log(modifyInfo);
-        const response = await axios.post(`http://localhost:5000/notification`, modifyInfo)
+        const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
         return response.data;
     }
 )
@@ -200,7 +200,7 @@ export const getOtherOrders = createAsyncThunk(
     "data/getOtherOrders",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`http://localhost:5000/provider/appointment/${info.email}`)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
         return response.data;
     }
 )
@@ -208,7 +208,7 @@ export const getProviderChatsDb = createAsyncThunk(
     "data/getProviderChatsDb",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`http://localhost:5000/chat/provider/${info.email}`)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/provider/${info.email}`)
         return response.data;
     }
 )
@@ -216,7 +216,7 @@ export const getSingleOrdersChat = createAsyncThunk(
     "data/getSingleOrdersChat",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`http://localhost:5000/chat/singleOrder/${info.id}`)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/singleOrder/${info.id}`)
         return response.data;
     }
 )

@@ -35,11 +35,26 @@ const AllProviderChild = (props) => {
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const randomImage = () => {
+    const urls = [
+      "https://i.ibb.co/y5jq6XV/cardentingpainting.jpg",
+      "https://i.ibb.co/j9Nv898/glass.jpg",
+      "https://i.ibb.co/bBbvJMF/1617102282-unnamed.jpg",
+      "https://i.ibb.co/Zhy4K3M/1613631861-Veneer-with-polish.jpg",
+      "https://i.ibb.co/PCT5Mmp/manSalon.jpg",
+    ];
+    const i = Math.floor(Math.random()*5)
+    return urls[i]
+  };
   return (
     <Card sx={{ ml: 2 }} style={{ border: "none", boxShadow: "none" }}>
       <Box
         sx={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${
+            image
+              ? image
+              : randomImage()
+          })`,
           width: "100%",
           height: "200px",
           backgroundSize: "cover",
@@ -107,7 +122,7 @@ const AllProviderChild = (props) => {
         title={`Click to view more details about ${displayName}`}
         style={{ textDecoration: "none" }}
       >
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <div style={{ display: "flex", justifyContent: "space-around", alignItems:"center" }}>
           <div>Manchester, UK</div>
           <div>
             <CardHeader
