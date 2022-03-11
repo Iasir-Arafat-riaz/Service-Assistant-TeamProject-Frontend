@@ -38,41 +38,13 @@ const MyOrdersTable = () => {
         return <h3>Loading...</h3>
     };
 
-    // let parentId;
-    // hanlde change route
-    const handleRouteChange = (selectServiceId, index) => {
-
+    const handleRouteChange = (selectServiceId, index, service) => {
         navigate(`/dashboard/review/${selectServiceId}`);
-
-        // comment-out from riaz for data undefined
-        // dispatch(reviewServiceIndex(index));
-
         dispatch(reviewServiceIndex(parseInt(index) + 1));
-        const data = { selectServiceId, email: user.email };
+        const data = { selectServiceId, email: user.email, providerEmail: service.providerEmail };
         dispatch(parentServiceId(data));
-        // //console.log(index)
-        // const id = JSON?.parse(localStorage?.getItem("parentId"));
-        localStorage.setItem('parentId', JSON.stringify(id))
-        // parentId = selectServiceId
-
     };
-    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(parentId));
-    // console.log(parentId)
 
-    // console.log(parentId)
-    // // dispatch(parentServiceId(parentId))
-    // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
-    // console.log(matchReviews);
-    // console.log(singleServiceDetails);
-
-    // // //console.log(matchService.Reviews);
-    // console.log(matchReviews)
-    const handleOnload = id => {
-        const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
-        console.log(matchService)
-    }
-
-    // console.log(id)
 
 
     return (
@@ -81,7 +53,7 @@ const MyOrdersTable = () => {
 
 
                 {
-                    savedService?.map((service, index) => <Grid item key={index} xs={12} md={6} lg={4}>
+                    savedService?.map((service, index) => <Grid item key={service._id} xs={12} md={6} lg={4}>
 
                         <Card sx={{ maxWidth: 345, mb: 4 }}>
 
@@ -135,7 +107,7 @@ const MyOrdersTable = () => {
                                         <Typography sx={{ fontSize: 15 }} variant="h6">Adress:- {service?.orderInfo?.address}</Typography>
                                     </Box>
 
-                                    <span onClick={() => handleRouteChange(service.selectServiceId, index)} style={{ marginTop: 10, display: 'block', letterSpacing: 2, textDecoration: 'underline' }}>WRITE A REVIEW?</span>
+                                    <span onClick={() => handleRouteChange(service.selectServiceId, index, service)} style={{ marginTop: 10, display: 'block', letterSpacing: 2, textDecoration: 'underline' }}>WRITE A REVIEW?</span>
 
                                 </CardContent>
                             </CardActionArea>

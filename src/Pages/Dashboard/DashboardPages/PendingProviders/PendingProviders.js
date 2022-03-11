@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Avatar, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { allData, getAllUser } from '../../../../redux/dataSlice/dataSlice';
+import swal from 'sweetalert';
 
 
 // https://dry-sea-00611.herokuapp.com/
@@ -34,25 +35,58 @@ const PendingProviders = () => {
 
     // approve provider 
     const ApproveProvider = (email, id, parentId) => {
-        const matchUser = allUser.find(user => user.email === email);
-        setLoading(true);
-        axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
-            axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-            axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
-                const { Id, Img, Name, backgroundImage, data, date, rating, reviewUser } = pendingProviders.find(provider => provider.data.email === email);
-                const offerService = [{ Id, Img, Name }];
-                axios.post('https://dry-sea-00611.herokuapp.com/providerdetials', { offerService, backgroundImage, data, date, rating, reviewUser })
-            })
-            setLoading(false)
+
+
+
+        swal({
+            text: "Are you sure want to approve this provider?",
+            buttons: true,
+            dangerMode: true,
         })
+            .then((willDelete) => {
+                if (willDelete) {
+                    const matchUser = allUser.find(user => user.email === email);
+                    console.log(matchUser)
+                    setLoading(true);
+                    axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
+                        axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
+                        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
+                            const { Id, Img, Name, backgroundImage, data, date, rating, reviewUser } = pendingProviders.find(provider => provider.data.email === email);
+                            const offerService = [{ Id, Img, Name }];
+                            // const { logo, providerName, number, email, bio, address, about } = data;
+                            axios.post('https://dry-sea-00611.herokuapp.com/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data })
+
+                            swal("Provider has been approved!", {
+                                icon: "success",
+                            });
+                        })
+                        setLoading(false)
+                    })
+
+                }
+            });
+
+
     };
 
     // delete provider
     const deleteProvider = id => {
-        setLoading(true);
-        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
-            setLoading(false);
+
+        swal({
+            text: "Are you sure you want to delete this request?",
+            buttons: true,
+            dangerMode: true,
         })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
+                        setLoading(false);
+                        swal("provider request has been deleted!", {
+                            icon: "success",
+                        });
+                    })
+                }
+            });
     };
 
 
@@ -66,7 +100,6 @@ const PendingProviders = () => {
             {
                 pendingProviders.length === 0 && <Typography variant='h6'>No pending providers</Typography>
             }
-            {user.role}
             {
                 pendingProviders.length !== 0 && <TableContainer component={Paper}>
                     <Table sx={{ width: '100%' }} aria-label="simple table">

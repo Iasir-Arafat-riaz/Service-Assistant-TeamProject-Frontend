@@ -273,7 +273,7 @@ const Dashboard = (props) => {
               <ListItemIcon>
                 <SavedSearchOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={"Become a provider ?"} />
+              <ListItemText primary={user.role === 'provider' ? "Add another service" : "Become a provider ?"} />
             </ListItem>
 
             <ListItem

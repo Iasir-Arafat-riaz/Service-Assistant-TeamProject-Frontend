@@ -29,10 +29,12 @@ const initialState = {
     orderInfo: {},
     selectedService: {},
     reviewIndex: 0,
-    id: [],
+    providerEmail: {},
     notifications: [],
     notificationLoading: true,
     notificationCount: 0,
+    approvdedLoading: true,
+    deleteLoading: true,
 
 }
 
@@ -107,13 +109,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-        const response = await axios.delete(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Deleted',
-                'This testimonial has been deleted',
-                'success'
-            )
-        })
+        const response = await axios.delete(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 )
@@ -121,13 +117,7 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Approved!',
-                'This testimonial has been approved',
-                'success'
-            )
-        })
+        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 );
@@ -235,6 +225,12 @@ export const dataSlice = createSlice({
             // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
             saveService(state.cartItems);
         },
+        remaingTestimonials: (state, { payload }) => {
+            state.testimonials = state.testimonials.filter((item) => item._id !== payload)
+        },
+        deleteTestimonails: (state, { payload }) => {
+            state.testimonials = state.testimonials.filter((item) => item._id !== payload)
+        },
         addOrderInfo: (state, { payload }) => {
             state.orderInfo = payload;
         },
@@ -255,7 +251,7 @@ export const dataSlice = createSlice({
             state.reviewIndex = payload;
         },
         parentServiceId: (state, { payload }) => {
-            state.id.push(payload);
+            state.providerEmail = payload;
         },
 
         newNotification: (state, { payload }) => {
@@ -347,11 +343,23 @@ export const dataSlice = createSlice({
             .addCase(sendNotification.rejected, (state, { payload }) => {
                 console.log('rejected');
             })
+            .addCase(deleteTestimonial.pending, (state, { payload }) => {
+                state.deleteLoading = true;
+            })
+            .addCase(deleteTestimonial.fulfilled, (state, { payload }) => {
+                state.deleteLoading = false;
+            })
+            .addCase(approvedTestimonial.pending, (state, { payload }) => {
+                state.approvdedLoading = false;
+            })
+            .addCase(approvedTestimonial.fulfilled, (state, { payload }) => {
+                state.approvdedLoading = true;
+            })
 
     },
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
