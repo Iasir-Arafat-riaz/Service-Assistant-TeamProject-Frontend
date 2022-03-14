@@ -15,13 +15,22 @@ const ContactUs = () => {
 
       <Navigation />
 
-      <Box sx={{ backgroundImage: `url(https://i.ibb.co/YP95Zjt/contact-us-banner.jpg)`, height: '50vh', objectFit: 'cover', backgroundSize: 'cover' }}
+      <Box
+        sx={{
+          backgroundImage: `url(https://i.ibb.co/YP95Zjt/contact-us-banner.jpg)`,
+          height: '50vh',
+          objectFit: 'cover',
+          backgroundSize: 'cover'
+        }}
       >
       </Box>
 
+      {/* contact info */}
       <ContactInfo />
-
+      {/* contact form */}
       <ContactForm />
+
+
 
     </>
 
