@@ -16,7 +16,7 @@ const ServiceDetails = ({ matchService, question1, question2, question3, singleS
     return (
 
         <Container sx={{ pt: 10, pb: 10 }}>
-            <Grid container spacing={6}>
+            <Grid container spacing={6} sx={{ flexDirection: { md: 'row', xs: 'column-reverse' } }}>
                 {/* 
                 <Grid item xs={12} md={6} lg={3} >
                     <AllServicesList />
@@ -27,10 +27,10 @@ const ServiceDetails = ({ matchService, question1, question2, question3, singleS
                 </Grid>
 
                 <Grid item xs={12} md={6} lg={4}>
-                    
+
                     <ServiceCategory service={matchService} />
                 </Grid>
-              
+
             </Grid>
 
         </Container>
