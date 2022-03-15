@@ -31,17 +31,13 @@ const Home = () => {
             <HomeServices />
             <TrendingServices />
             <AllProvider></AllProvider>
-
-          
-          
-
             <Testimonials />
             <WorkFlow />
             <RequestService />
             {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
-             
+
             <Footer />
 
         </>

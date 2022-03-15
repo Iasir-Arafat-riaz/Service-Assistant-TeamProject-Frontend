@@ -37,7 +37,13 @@ div::-webkit-scrollbar-thumb {
 div:hover::-webkit-scrollbar-thumb{
   background: #bebebe;  
 }
-
+.testimonials-userWrap::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 20px;  
+}
+.testimonials-userWrap:hover::-webkit-scrollbar-thumb{
+  background: #ffffff;  
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

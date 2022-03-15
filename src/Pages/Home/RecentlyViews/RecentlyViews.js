@@ -7,6 +7,9 @@ import Stack from "@mui/material/Stack";
 import { Box } from "@mui/system";
 import { initialRecent } from "../../../utils/utils";
 import Slider from "react-slick";
+import CustomSlider from "../../SharedRoute/CustomSlider/CustomSlider";
+import HomeService from "../HomeServices/HomeService";
+import TrendingService from "../TrendingServices/TrendingService";
 
 const RecentlyViews = () => {
 
@@ -15,26 +18,7 @@ const RecentlyViews = () => {
   //console.log(recentIds);
 
   useEffect(() => {
-    // axios
-    //   .get("https://dry-sea-00611.herokuapp.com/services")
-    //   .then((res) => {
-    //     const service = [];
-    //     res.data.filter((item) => {
-    //       item.Services.forEach((ele) => {
-    //         // //console.log(recentIds.includes(ele.Id));
-    //         if (recentIds.includes(ele.Id)) {
-    //           service.push(ele);
-    //         }
-    //       });
-    //     });
-    //     // //console.log(recentService);
-    //     // setServices(res.data.slice(5, 9));
-    //     setServices(service);
-    //     setLoading(false);
-    //   });
     setServices(initialRecent())
-
-
   }, []);
 
   // slick slider
@@ -99,13 +83,9 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : services.length > 4 ? <Slider {...slickSlider}>
+      ) : services.length > 4 ? <CustomSlider data={services} component={RecentlyView}></CustomSlider> : <Stack direction='row'>
         {services.map((service) => (
-          <RecentlyView key={service._id} {...service} />
-        ))}
-      </Slider> : <Stack direction='row'>
-        {services.map((service) => (
-          <RecentlyView key={service._id} {...service} />
+          <RecentlyView single key={service._id} {...service} />
         ))}
       </Stack>}
 

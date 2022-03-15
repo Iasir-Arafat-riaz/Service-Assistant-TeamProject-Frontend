@@ -17,12 +17,13 @@ const AppointmentRequest = () => {
 
     const [providerEmail, setProviderEmail] = useState([]);
     const classes = useStyles();
+    const { user } = useSelector(allData)
 
     useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/kawsarm104@gmail.com`)
+        axios.get(`http://localhost:5000/provider/appointment/${user.email}`)
             .then(res => {
                 setProviderEmail(res.data)
-                //console.log("provider email", res.data)
+                console.log("provider email", res.data)
             })
     }, []);
 
@@ -43,7 +44,6 @@ const AppointmentRequest = () => {
                                     <CardContent>
                                         <Typography className={classes.root}>Service Name: {appointment.Name}</Typography>
                                         <Typography className={classes.root}>Price: {appointment.Price} BDT</Typography>
-                                        <Typography className={classes.root}>Provider Name: {appointment.provider.displayName}</Typography>
                                         <Typography className={classes.root}>Payment Status: {appointment.payment.toString()}</Typography>
                                         {/* <Typography>Service Category:
                                             {appointment.parentService.Title}</Typography> */}
@@ -53,7 +53,6 @@ const AppointmentRequest = () => {
                                         <Typography className={classes.root}>Customer Name: {appointment.orderInfo.name}</Typography>
                                         <Typography className={classes.root}>Contact: {appointment.orderInfo.number}</Typography>
                                         <Typography className={classes.root}>Address: {appointment.orderInfo.address}</Typography>
-                                        <Button variant="outlined" color="error" endIcon={<SendIcon />}>Reply</Button>
                                     </CardContent>
                                 </CardActionArea>
                             </Card>

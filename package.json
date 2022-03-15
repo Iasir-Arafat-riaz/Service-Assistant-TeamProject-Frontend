@@ -6,6 +6,7 @@
     "@bigheads/core": "^0.3.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@glidejs/glide": "^3.5.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@mui/icons-material": "^5.3.1",
     "@mui/lab": "^5.0.0-alpha.69",
@@ -50,7 +51,7 @@
     "styled-components": "^5.3.3",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.4.1",
-    "swiper": "^6.8.4",
+    "swiper": "^8.0.7",
     "timeline": "^3.4.1",
     "web-vitals": "^2.1.4"
   },
