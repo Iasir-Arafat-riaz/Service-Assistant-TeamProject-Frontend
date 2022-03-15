@@ -23,6 +23,7 @@ const PendingProviders = () => {
     const [loading, setLoading] = useState(true);
     const [dataLoad, setDataLoad] = useState(false);
     const dispatch = useDispatch();
+    const [provider, setProvider] = useState({});
 
     useEffect(() => {
         setDataLoad(true);
@@ -31,12 +32,18 @@ const PendingProviders = () => {
             setDataLoad(false);
         })
         dispatch(getAllUser());
-    }, [dispatch, loading])
+    }, [dispatch, loading]);
+
+
+    // load provider by email
+    useEffect(() => {
+        axios.get(`http://localhost:5000/users/${user.email}`).then(res => setProvider(res.data))
+    }, [provider, user])
+
+    // console.log(provider._id);
 
     // approve provider 
     const ApproveProvider = (email, id, parentId) => {
-
-
 
         swal({
             text: "Are you sure want to approve this provider?",
@@ -46,23 +53,19 @@ const PendingProviders = () => {
             .then((willDelete) => {
                 if (willDelete) {
                     const matchUser = allUser.find(user => user.email === email);
-                    console.log(matchUser)
                     setLoading(true);
-                    axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
-                        axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-                        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
+                    axios.put(`http://localhost:5000/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
+                        axios.post(`http://localhost:5000/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
+                        axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`).then(res => {
                             const { Id, Img, Name, backgroundImage, data, date, rating, reviewUser } = pendingProviders.find(provider => provider.data.email === email);
                             const offerService = [{ Id, Img, Name }];
-                            // const { logo, providerName, number, email, bio, address, about } = data;
-                            axios.post('https://dry-sea-00611.herokuapp.com/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data })
-
+                            axios.post('http://localhost:5000/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data, providerId: provider._id })
                             swal("Provider has been approved!", {
                                 icon: "success",
                             });
                         })
                         setLoading(false)
                     })
-
                 }
             });
 
@@ -71,7 +74,6 @@ const PendingProviders = () => {
 
     // delete provider
     const deleteProvider = id => {
-
         swal({
             text: "Are you sure you want to delete this request?",
             buttons: true,

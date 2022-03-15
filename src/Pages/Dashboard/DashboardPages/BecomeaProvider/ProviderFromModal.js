@@ -55,16 +55,15 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
         };
     };
 
-    console.log(user)
 
     // add service 
     const addService = () => {
         setLoading(false)
-        axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addservice/${user.email}`, category).then(res => {
+        axios.post(`http://localhost:5000/providerdetials/addservice/${user.email}`, category).then(res => {
             setLoading(true);
             handleCloseModal();
         });
-    }
+    };
 
     // hosting image
     useEffect(() => {

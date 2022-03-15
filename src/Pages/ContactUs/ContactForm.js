@@ -33,7 +33,7 @@ const ContactForm = () => {
 
             <Container sx={{ mt: 10 }}>
 
-                <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: '35px', mb: 5 }}>Contact Form</Typography>
+                <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: '35px', mb: 5, color: "#113849" }}>Contact Form</Typography>
 
 
                 <Grid container spacing={2}>

@@ -32,9 +32,9 @@ const ContactInfo = () => {
         <Container sx={{ mt: 10 }}>
 
 
-            <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center' }}>Contact Information</Typography>
+            <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', color: "#113849", fontSize: '35px' }}>Contact Information</Typography>
 
-            <Typography variant='body' sx={{ textAlign: 'center', display: 'block', mb: 5, mt: 2 }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque, officiis.</Typography>
+            <Typography variant='body2' sx={{ textAlign: 'center', display: 'block', mb: 5, mt: 2 }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque, officiis.</Typography>
 
             <Box container sx={{ columnGap: 5, display: 'flex' }}>
 
