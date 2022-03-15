@@ -3,12 +3,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Avatar, Grid, TextField } from '@mui/material';
+import { Avatar, Grid, IconButton, Input, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
+import { PhotoCamera } from '@mui/icons-material';
 
 const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, category }) => {
 
@@ -98,6 +99,8 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
             >
                 <Box sx={style}>
 
+
+
                     <Typography id="modal-modal-title" variant="h6" sx={{ mb: 0, boxShadow: 3, p: 1, textAlign: 'center' }} component="h2">
                         {user?.role !== 'provider' ? 'Please give this information' : 'Want to add this service ?'}
                     </Typography>
@@ -115,7 +118,14 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                                     {
                                         user.role !== 'provider' && <Box>   <label style={{ fontSize: 14, marginBottom: 3, display: 'block' }}>Provider Image *</label>
 
-                                            <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" />
+                                            {/* <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" /> */}
+
+                                            <label htmlFor="icon-button-file">
+                                                <Input style={{ marginBottom: 10 }} {...register("providerImage")} accept="image/*" id="icon-button-file" type="file" />
+                                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                                    <PhotoCamera sx={{ color: "black" }} />
+                                                </IconButton>
+                                            </label>
 
                                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                 {
