@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography } from "@mui/material";
-import axios from "axios";
-import RecentlyView from "./RecentlyView";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { Box } from "@mui/system";
 import { initialRecent } from "../../../utils/utils";
 import Slider from "react-slick";
+import CommonService from "../HomeServices/CommonService";
 
 const RecentlyViews = () => {
 
@@ -71,7 +70,7 @@ const RecentlyViews = () => {
       }
     ]
   };
-
+  // console.log(services[]?.Services[0]?.Id)
   return (
     <Container sx={{ mb: 8 }}>
       {loading ? (
@@ -99,15 +98,31 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : services.length > 4 ? <Slider {...slickSlider}>
-        {services.map((service) => (
-          <RecentlyView key={service._id} {...service} />
-        ))}
-      </Slider> : <Stack direction='row'>
-        {services.map((service) => (
-          <RecentlyView key={service._id} {...service} />
-        ))}
-      </Stack>}
+      )
+        :
+        services.length > 4 ?
+          <Slider {...slickSlider}>
+            {
+              services.map((service) => (
+                <CommonService
+                  key={service?._id}
+                  service={service}
+                />
+              ))
+            }
+          </Slider>
+          :
+          <Stack direction='row'>
+            {
+              services.map((service) => (
+                <CommonService
+                  key={service._id}
+                  service={service}
+                />
+              ))
+            }
+          </Stack>
+      }
 
     </Container>
   );

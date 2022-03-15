@@ -3,10 +3,10 @@ import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import axios from 'axios';
 import useSlick from '../../../Hooks/useSlick';
 import Slider from 'react-slick';
-import TrendingService from './TrendingService';
 import { Link } from 'react-router-dom';
 import { allData, loadServiceCategory } from '../../../redux/dataSlice/dataSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import CommonService from '../HomeServices/CommonService';
 
 const TrendingServices = () => {
 
@@ -82,7 +82,7 @@ const TrendingServices = () => {
                     </Box>
                     : <Slider {...slickSlider}>
                         {
-                            trendServices.map(service => <TrendingService sx={{}}
+                            trendServices.map(service => <CommonService
                                 key={service._id}
                                 service={service}
                             />)
