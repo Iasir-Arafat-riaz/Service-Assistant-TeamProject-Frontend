@@ -325,6 +325,16 @@ const Dashboard = (props) => {
               </ListItemIcon>
               <ListItemText primary={"Pending Providers"} />
             </ListItem>
+            <ListItem
+              component={NavLink}
+              to={`/Dashboard/addquestions`}
+              button
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Questions"} />
+            </ListItem>
 
 
           </Box>
