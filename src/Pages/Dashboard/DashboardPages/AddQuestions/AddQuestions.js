@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useForm } from "react-hook-form";
+import ShowQuestions from './ShowQuestions'
 
 import axios from 'axios'
 const AddQuestions = () => {
@@ -25,6 +26,7 @@ const AddQuestions = () => {
   
 
     return (
+        <>
         <form onSubmit={handleSubmit(onSubmit)}>
          <Box
       component="form"
@@ -41,6 +43,8 @@ const AddQuestions = () => {
      </Box>
      <Button variant="outlined"  type="submit">Add Question</Button>
    </form>
+   <ShowQuestions></ShowQuestions>
+        </>
     );
 };
 
