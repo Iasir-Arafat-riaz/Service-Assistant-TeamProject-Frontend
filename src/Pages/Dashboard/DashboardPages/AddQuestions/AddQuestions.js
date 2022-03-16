@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -7,7 +7,7 @@ import ShowQuestions from './ShowQuestions'
 
 import axios from 'axios'
 const AddQuestions = () => {
-
+    const [flag, setFlag] = useState(false)
     // React Hook form 
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -17,9 +17,10 @@ const AddQuestions = () => {
         axios.post(api, data).then((res) => {
           console.log(res, "inside axios");
           if (res.data.insertedId) {
-         
+            setFlag(true)
             reset();
           }
+          setFlag(false)
         });
         reset()
     };
@@ -43,7 +44,7 @@ const AddQuestions = () => {
      </Box>
      <Button variant="outlined"  type="submit">Add Question</Button>
    </form>
-   <ShowQuestions></ShowQuestions>
+   <ShowQuestions flag={flag}></ShowQuestions>
         </>
     );
 };

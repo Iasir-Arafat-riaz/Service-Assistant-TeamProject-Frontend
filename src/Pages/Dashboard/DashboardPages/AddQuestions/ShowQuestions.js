@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useState, useEffect} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import axios from 'axios'
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -19,8 +20,17 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const ShowQuestions = () => {
-    
+const ShowQuestions = (props) => {
+
+    const [questionsAnswers, setQuestionsAnswers] = useState([])
+
+    useEffect(() => {
+        const api = `http://localhost:5000/addquestions`
+        axios.get(api).then(res => {
+            setQuestionsAnswers(res.data)
+            console.log(res.data,"== got provider")
+        })
+    }, [props.flag]);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -32,16 +42,16 @@ const ShowQuestions = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {questionsAnswers.map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.question}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.answer}</TableCell>
+              <TableCell align="right">{row.answer}</TableCell>
             </TableRow>
           ))}
         </TableBody>
