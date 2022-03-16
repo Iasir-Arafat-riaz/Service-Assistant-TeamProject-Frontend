@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useForm } from "react-hook-form";
 import ShowQuestions from './ShowQuestions'
 
@@ -31,7 +32,7 @@ const AddQuestions = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
          <Box
       sx={{
-        '& > :not(style)': { m: 1, width: '25ch' },
+        '& > :not(style)': { m: 1, width: '35ch' },
       }}
       noValidate
       autoComplete="off"
@@ -40,7 +41,7 @@ const AddQuestions = () => {
       <TextField {...register("question", { required: true })}id="standard-basic"  label="Add Question" variant="standard" />
         <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
-     <Button variant="outlined"  type="submit">Add Question</Button>
+     <Button variant="outlined"  type="submit"> {flag?<CircularProgress/>:'Add Question'}</Button>
      </Box>
    </form>
    <ShowQuestions flag={flag}></ShowQuestions>

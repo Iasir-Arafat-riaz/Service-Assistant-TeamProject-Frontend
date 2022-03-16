@@ -8,6 +8,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import axios from 'axios'
+import Swal from 'sweetalert2';
+import swal from 'sweetalert';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -24,14 +26,38 @@ const rows = [
 const ShowQuestions = (props) => {
 
     const [questionsAnswers, setQuestionsAnswers] = useState([])
+    const [isDelete, setIsDelete] = useState(false)
 
     useEffect(() => {
+        
         const api = `http://localhost:5000/addquestions`
         axios.get(api).then(res => {
             setQuestionsAnswers(res.data)
             console.log(res.data,"== got provider")
         })
-    }, [props.flag]);
+    }, [props.flag,isDelete]);
+       // delete questions and answer
+       const handleDelete = id => {
+        Swal.fire({
+            title: 'Are you sure you want to delete?',
+            showCancelButton: true,
+            confirmButtonColor: '#D11A2A ',
+            cancelButtonColor: '#BBBBBB',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const api = `http://localhost:5000/addquestions/${id}`
+                axios.delete(api).then(res => {
+                    setIsDelete(true)
+                    swal("Questions and answer is deleted!", {
+                        icon: "success",
+                    });
+
+                })
+                setIsDelete(false)
+            }
+        })
+    };
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -52,7 +78,7 @@ const ShowQuestions = (props) => {
                 {row.question}
               </TableCell>
               <TableCell align="right">{row.answer}</TableCell>
-              <TableCell align="right"><DeleteOutlineIcon/></TableCell>
+              <TableCell align="right" onClick={() => handleDelete(row._id)} ><DeleteOutlineIcon/></TableCell>
             </TableRow>
           ))}
         </TableBody>
