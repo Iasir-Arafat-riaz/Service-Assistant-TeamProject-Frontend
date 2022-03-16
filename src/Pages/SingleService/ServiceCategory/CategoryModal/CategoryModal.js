@@ -160,7 +160,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                     <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
 
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
-                            AC servicing
+                        {matchService?.Title}
                         </Typography>
 
                     </Box>

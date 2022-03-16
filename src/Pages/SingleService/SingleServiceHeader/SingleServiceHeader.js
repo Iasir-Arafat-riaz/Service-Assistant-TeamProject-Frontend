@@ -20,20 +20,20 @@ const SingleServiceHeader = ({ matchService }) => {
                 <Box
                     sx={{
                         backgroundImage: `linear-gradient(270deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${matchService.Img})`,
-                        backgroundRepeat: 'repeat-y',
-                        backgroundSize: '100%',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        height: '50vh',
                         mt: 10,
                         display: 'flex',
                         justifyContent: 'center',
-                        backgroundAttachment: 'fixed'
+                        backgroundAttachment: 'fixed',
+                        height : { xs: '40vh', md : '50vh'}
                     }}>
 
                     <Box
-                        sx={{ m: 4 }}
+                        sx={{ mx: 4, mt: 4 }}
                     >
-                        <Typography variant='h4' sx={{ fontWeight: 'bold', color: '#fff', mb: 3 }}>{matchService?.Title}</Typography>
+                        <Typography variant='h4' sx={{ fontWeight: 'bold', color: '#fff', mb: 1 }}>{matchService?.Title}</Typography>
 
                         <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 5, fontWeight: 500, color: "#fff" }}>
                             <Link to="/home" style={{ textDecoration: 'none', color: "#fff", }}>Home</Link>  - <small style={{ color: '#FF5E14' }}>{matchService?.Title}</small>
@@ -43,7 +43,7 @@ const SingleServiceHeader = ({ matchService }) => {
 
                 </Box>
                 <Container>
-                    <Grid sx={{ mt: -24 }} item xs={12} md={5}>
+                    <Grid sx={{ mt: -25, }} item xs={12} md={5}>
                         <Paper elevation={0} sx={{ p: 2, backgroundColor: 'transparent' }}>
                             <Typography sx={{ fontSize: 20, mb: 1, fontWeight: 'bold', color: 'white' }} variant="h6">Main feature</Typography>
                             {
