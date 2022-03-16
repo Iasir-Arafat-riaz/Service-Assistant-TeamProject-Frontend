@@ -1,7 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 import { useForm } from "react-hook-form";
+
 import axios from 'axios'
 const AddQuestions = () => {
 
@@ -14,7 +16,6 @@ const AddQuestions = () => {
         axios.post(api, data).then((res) => {
           console.log(res, "inside axios");
           if (res.data.insertedId) {
-             alert("data inserted successfully");
          
             reset();
           }
@@ -35,11 +36,10 @@ const AddQuestions = () => {
     >
 
       <TextField {...register("question", { required: true })}id="standard-basic"  label="Add Question" variant="standard" />
-       <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
+        <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
      </Box>
-     
-     <input type="submit" />
+     <Button variant="outlined"  type="submit">Add Question</Button>
    </form>
     );
 };
