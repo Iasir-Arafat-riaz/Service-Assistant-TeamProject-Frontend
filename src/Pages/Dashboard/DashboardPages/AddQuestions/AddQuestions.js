@@ -2,12 +2,23 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useForm } from "react-hook-form";
+import axios from 'axios'
 const AddQuestions = () => {
 
     // React Hook form 
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
+       
+        const api = `http://localhost:5000/addquestions`
+        axios.post(api, data).then((res) => {
+          console.log(res, "inside axios");
+          if (res.data.insertedId) {
+             alert("data inserted successfully");
+         
+            reset();
+          }
+        });
         reset()
     };
   
@@ -23,8 +34,8 @@ const AddQuestions = () => {
       autoComplete="off"
     >
 
-      <TextField {...register("addQuestion", { required: true })}id="standard-basic"  label="Add Question" variant="standard" />
-       <TextField {...register("addAnswer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
+      <TextField {...register("question", { required: true })}id="standard-basic"  label="Add Question" variant="standard" />
+       <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
      </Box>
      
