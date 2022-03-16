@@ -22,7 +22,7 @@ const style = {
 const UpdateInfo = (props) => {
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
     
-    const [flag, setFlag] = useState(false)
+  
     let allData;
     console.log(props.questionId, 'got id from update info')
     const onSubmit = data => {
@@ -31,12 +31,12 @@ const UpdateInfo = (props) => {
         axios.put(api, data).then((res) => {
           console.log(res, "inside axios");
           if (res.status === 200) {
-            setFlag(true)
+            props.flag?props.setFlag(false):props.setFlag(true)
             console.log('update successful')
             reset();
             props.handleClose()
           }
-          setFlag(false)
+        
         
         });
     
@@ -45,7 +45,6 @@ const UpdateInfo = (props) => {
 
   return (
     <div>
-      <Button onClick={props.handleOpen}>Open modal</Button>
       <Modal
         open={props.open}
         onClose={props.handleClose}
@@ -62,7 +61,7 @@ const UpdateInfo = (props) => {
       <TextField {...register("question", { required: true })} id="standard-basic"  label="Add Question" variant="standard" />
         <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
-     <Button variant="outlined"  type="submit"> {flag?<CircularProgress/>:'Add Question'}</Button>
+     <Button variant="outlined"  type="submit"> Update Question</Button>
      </Box>
    </form>
           </Box>

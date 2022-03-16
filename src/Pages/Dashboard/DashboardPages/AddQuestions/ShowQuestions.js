@@ -96,7 +96,7 @@ const ShowQuestions = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
-    <UpdateInfo handleOpen={handleOpen} questionId={questionId} handleClose={handleClose} open={open}></UpdateInfo>
+    <UpdateInfo flag={props.flag} setFlag={props.setFlag} handleOpen={handleOpen} questionId={questionId} handleClose={handleClose} open={open}></UpdateInfo>
     </>
   );
 }

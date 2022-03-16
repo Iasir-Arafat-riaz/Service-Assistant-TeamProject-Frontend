@@ -7,46 +7,14 @@ import { useForm } from "react-hook-form";
 import ShowQuestions from './ShowQuestions'
 
 import axios from 'axios'
+import HookForm from './HookForm';
 const AddQuestions = () => {
     const [flag, setFlag] = useState(false)
-    // React Hook form 
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
-    let allData;
-    const onSubmit = data => {
-        console.log(data)
-        // allData = [...data];
-       
-        const api = `https://dry-sea-00611.herokuapp.com/addquestions`
-        axios.post(api, data).then((res) => {
-          console.log(res, "inside axios");
-          if (res.data.insertedId) {
-            setFlag(true)
-            reset();
-          }
-          setFlag(false)
-        });
-        reset()
-    };
-  
-    console.log(allData, 'from add question ')
+ 
     return (
         <>
-        <form onSubmit={handleSubmit(onSubmit)}>
-         <Box
-      sx={{
-        '& > :not(style)': { m: 1, width: '35ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-
-      <TextField {...register("question", { required: true })} id="standard-basic"  label="Add Question" variant="standard" />
-     <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
-  
-     <Button variant="outlined"  type="submit"> {flag?<CircularProgress/>:'Add Question'}</Button>
-     </Box>
-   </form>
-   <ShowQuestions flag={flag} allData = {allData}></ShowQuestions>
+            <HookForm flag={flag} setFlag={setFlag}></HookForm>
+            
         </>
     );
 };
