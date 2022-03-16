@@ -42,7 +42,7 @@ const ShowQuestions = (props) => {
     const handleDelete = id =>{
         swal({
             title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this imaginary file!",
+            text: "Once deleted, you will not be able to recover Data!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -59,7 +59,7 @@ const ShowQuestions = (props) => {
                             })
                             setIsDelete(false)
             } else {
-              swal("Your imaginary file is safe!");
+              swal("Your data file is safe!");
             }
           });
     }
