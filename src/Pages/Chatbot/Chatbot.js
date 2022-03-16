@@ -11,6 +11,7 @@ import axios from 'axios';
 // import monsterImgUrl from '../../images/banner-1.jpg'
 
 function Chatbot() {
+    const [questionAnswer, setQuestionAnswer] = useState({})
     const { socket } = useSocket();
     const { user, loading } = useSelector(allData);
     const dispatch = useDispatch()
@@ -31,6 +32,13 @@ function Chatbot() {
                     ...state,
                     messageList: [...state.messageList, ...res.data]
                 }));
+            })
+    }, [uid])
+    useEffect(() => {
+        axios.get(`https://dry-sea-00611.herokuapp.com/addquestions}`)
+            .then(res => {
+              setQuestionAnswer(res.data)
+              console.log(res.data,'==got question and answer from chatbot')
             })
     }, [uid])
 

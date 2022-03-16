@@ -14,7 +14,7 @@ const AddQuestions = () => {
     const onSubmit = data => {
         console.log(data)
        
-        const api = `http://localhost:5000/addquestions`
+        const api = `https://dry-sea-00611.herokuapp.com/addquestions`
         axios.post(api, data).then((res) => {
           console.log(res, "inside axios");
           if (res.data.insertedId) {
@@ -38,7 +38,7 @@ const AddQuestions = () => {
       autoComplete="off"
     >
 
-      <TextField {...register("question", { required: true })}id="standard-basic"  label="Add Question" variant="standard" />
+      <TextField {...register("question", { required: true })} id="standard-basic"  label="Add Question" variant="standard" />
         <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
      <Button variant="outlined"  type="submit"> {flag?<CircularProgress/>:'Add Question'}</Button>

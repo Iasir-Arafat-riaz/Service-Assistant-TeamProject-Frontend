@@ -1,5 +1,6 @@
 import  React,{useState, useEffect} from 'react';
 import Table from '@mui/material/Table';
+import Box from '@mui/material/Box';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -7,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import swal from 'sweetalert';
@@ -30,7 +32,7 @@ const ShowQuestions = (props) => {
 
     useEffect(() => {
         
-        const api = `http://localhost:5000/addquestions`
+        const api = `https://dry-sea-00611.herokuapp.com/addquestions`
         axios.get(api).then(res => {
             setQuestionsAnswers(res.data)
             console.log(res.data,"== got provider")
@@ -46,7 +48,7 @@ const ShowQuestions = (props) => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                const api = `http://localhost:5000/addquestions/${id}`
+                const api = `https://dry-sea-00611.herokuapp.com/addquestions/${id}`
                 axios.delete(api).then(res => {
                     setIsDelete(true)
                     swal("Questions and answer is deleted!", {
@@ -78,7 +80,11 @@ const ShowQuestions = (props) => {
                 {row.question}
               </TableCell>
               <TableCell align="right">{row.answer}</TableCell>
-              <TableCell align="right" onClick={() => handleDelete(row._id)} style={{cursor: "pointer"}} ><DeleteOutlineIcon/></TableCell>
+              <Box>
+              <TableCell align="right" onClick={() => handleDelete(row._id)} style={{cursor: "pointer",outlineColor:"red"}} ><EditIcon/></TableCell>
+              <TableCell align="right" onClick={() => handleDelete(row._id)} style={{cursor: "pointer",outlineColor:"red"}} ><DeleteOutlineIcon/></TableCell>
+           
+              </Box>
             </TableRow>
           ))}
         </TableBody>
