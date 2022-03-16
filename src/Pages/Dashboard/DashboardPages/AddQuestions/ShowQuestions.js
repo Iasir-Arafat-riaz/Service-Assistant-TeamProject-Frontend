@@ -78,7 +78,7 @@ const ShowQuestions = (props) => {
                 {row.question}
               </TableCell>
               <TableCell align="right">{row.answer}</TableCell>
-              <TableCell align="right" onClick={() => handleDelete(row._id)} ><DeleteOutlineIcon/></TableCell>
+              <TableCell align="right" onClick={() => handleDelete(row._id)} style={{cursor: "pointer"}} ><DeleteOutlineIcon/></TableCell>
             </TableRow>
           ))}
         </TableBody>
