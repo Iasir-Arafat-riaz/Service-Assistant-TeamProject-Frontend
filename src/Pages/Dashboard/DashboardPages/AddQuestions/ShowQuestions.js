@@ -38,27 +38,31 @@ const ShowQuestions = (props) => {
         })
     }, [props.flag,isDelete]);
        // delete questions and answer
-       const handleDelete = id => {
-        Swal.fire({
-            title: 'Are you sure you want to delete?',
-            showCancelButton: true,
-            confirmButtonColor: '#D11A2A ',
-            cancelButtonColor: '#BBBBBB',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
+   
+    const handleDelete = id =>{
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
                 const api = `https://dry-sea-00611.herokuapp.com/addquestions/${id}`
-                axios.delete(api).then(res => {
-                    setIsDelete(true)
-                    swal("Questions and answer is deleted!", {
-                        icon: "success",
-                    });
-
-                })
-                setIsDelete(false)
+                            axios.delete(api).then(res => {
+                                setIsDelete(true)
+                                swal("Questions and answer is deleted!", {
+                                    icon: "success",
+                                });
+            
+                            })
+                            setIsDelete(false)
+            } else {
+              swal("Your imaginary file is safe!");
             }
-        })
-    };
+          });
+    }
     const [questionId, setQuestionId] = useState('')
     const handleEdit = id =>{
         setQuestionId(id)
