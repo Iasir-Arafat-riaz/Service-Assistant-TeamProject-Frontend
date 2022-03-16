@@ -466,8 +466,8 @@ const Navigation = () => {
                       return (
                         <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
                           <Card sx={{
-                            borderBottom: '2px solid #ffb600',
-                            borderRight: '3px solid #ffb600'
+                            borderBottom: '1px solid #ffb600',
+                            borderRight: '2px solid #ffb600'
                           }}>
                             <CardActionArea
                               onClick={() =>

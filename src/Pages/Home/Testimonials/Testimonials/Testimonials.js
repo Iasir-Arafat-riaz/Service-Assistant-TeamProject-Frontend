@@ -9,9 +9,6 @@ import { allData, websiteReviews } from "../../../../redux/dataSlice/dataSlice";
 
 const Testimonials = () => {
 
-
-
-
     const dispatach = useDispatch();
     const { testimonials, testimonialLoading } = useSelector(allData);
 
@@ -59,7 +56,7 @@ const Testimonials = () => {
 
 
     return (
-        <Container sx={{ mb: 20 }}>
+        <Container sx={{ mb: 5 }}>
 
             {
                 testimonialLoading ?

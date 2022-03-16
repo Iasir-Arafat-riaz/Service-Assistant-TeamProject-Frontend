@@ -56,7 +56,6 @@ const ServiceCategory = ({ service }) => {
                     }
                 </Box>
                 :
-
                 <Paper
                     className="categoryBox"
                     elevation={3}
@@ -67,13 +66,13 @@ const ServiceCategory = ({ service }) => {
                         minWidth: '330px'
 
                     }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 2, mb: 3, }}>
+                    {/* <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 2, mb: 3, }}>
 
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2, color: '#fff' }} component="h2">
                             Order Here
                         </Typography>
 
-                    </Box>
+                    </Box> */}
                     <Typography
                         variant='h5'
                         sx={{
