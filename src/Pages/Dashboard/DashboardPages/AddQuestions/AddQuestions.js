@@ -11,8 +11,10 @@ const AddQuestions = () => {
     const [flag, setFlag] = useState(false)
     // React Hook form 
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    let allData;
     const onSubmit = data => {
         console.log(data)
+        // allData = [...data];
        
         const api = `https://dry-sea-00611.herokuapp.com/addquestions`
         axios.post(api, data).then((res) => {
@@ -26,7 +28,7 @@ const AddQuestions = () => {
         reset()
     };
   
-
+    console.log(allData, 'from add question ')
     return (
         <>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -39,12 +41,12 @@ const AddQuestions = () => {
     >
 
       <TextField {...register("question", { required: true })} id="standard-basic"  label="Add Question" variant="standard" />
-        <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
+     <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
      <Button variant="outlined"  type="submit"> {flag?<CircularProgress/>:'Add Question'}</Button>
      </Box>
    </form>
-   <ShowQuestions flag={flag}></ShowQuestions>
+   <ShowQuestions flag={flag} allData = {allData}></ShowQuestions>
         </>
     );
 };
