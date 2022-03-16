@@ -30,7 +30,6 @@ const AddQuestions = () => {
         <>
         <form onSubmit={handleSubmit(onSubmit)}>
          <Box
-      component="form"
       sx={{
         '& > :not(style)': { m: 1, width: '25ch' },
       }}
@@ -41,8 +40,8 @@ const AddQuestions = () => {
       <TextField {...register("question", { required: true })}id="standard-basic"  label="Add Question" variant="standard" />
         <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
   
-     </Box>
      <Button variant="outlined"  type="submit">Add Question</Button>
+     </Box>
    </form>
    <ShowQuestions flag={flag}></ShowQuestions>
         </>

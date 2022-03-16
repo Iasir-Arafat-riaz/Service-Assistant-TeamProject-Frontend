@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import axios from 'axios'
 
 function createData(name, calories, fat, carbs, protein) {
@@ -51,7 +52,7 @@ const ShowQuestions = (props) => {
                 {row.question}
               </TableCell>
               <TableCell align="right">{row.answer}</TableCell>
-              <TableCell align="right">{row.answer}</TableCell>
+              <TableCell align="right"><DeleteOutlineIcon/></TableCell>
             </TableRow>
           ))}
         </TableBody>
