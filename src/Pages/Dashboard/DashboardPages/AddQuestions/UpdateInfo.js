@@ -14,7 +14,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    // border: '2px solid #000',
     boxShadow: 24,
     p: 4,
   };
@@ -27,12 +27,11 @@ const UpdateInfo = (props) => {
     console.log(props.questionId, 'got id from update info')
     const onSubmit = data => {
         console.log(data)
-        const api = `http://localhost:5000/addquestions/${props.questionId}`
+        const api = `https://dry-sea-00611.herokuapp.com/addquestions/${props.questionId}`
         axios.put(api, data).then((res) => {
           console.log(res, "inside axios");
           if (res.status === 200) {
             props.flag?props.setFlag(false):props.setFlag(true)
-            console.log('update successful')
             reset();
             props.handleClose()
           }
@@ -57,11 +56,11 @@ const UpdateInfo = (props) => {
        
     
     >
-    <p>{props.questionId}</p>
-      <TextField {...register("question", { required: true })} id="standard-basic"  label="Add Question" variant="standard" />
-        <TextField {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
-  
-     <Button variant="outlined"  type="submit"> Update Question</Button>
+      <TextField sx={{width:"100%",m:1}} {...register("question", { required: true })} id="standard-basic"  label="Add Question" variant="standard" />
+       <br/>
+     <TextField sx={{width:"100%",m:1}} {...register("answer", { required: true })} id="standard-basic" label="Add Answer" variant="standard" />
+        <br/>
+     <Button sx={{width:"100%",m:1}} variant="outlined"  type="submit"> Update Question</Button>
      </Box>
    </form>
           </Box>

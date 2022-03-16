@@ -38,7 +38,6 @@ function Chatbot() {
         axios.get(`https://dry-sea-00611.herokuapp.com/addquestions}`)
             .then(res => {
               setQuestionAnswer(res.data)
-              console.log(res.data,'==got question and answer from chatbot')
             })
     }, [uid])
 
@@ -199,6 +198,7 @@ function Chatbot() {
                 break;
             }
         };
+
 
     }
     return (

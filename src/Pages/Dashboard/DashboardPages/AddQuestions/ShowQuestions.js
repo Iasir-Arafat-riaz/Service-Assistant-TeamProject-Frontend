@@ -2,6 +2,7 @@ import  React,{useState, useEffect} from 'react';
 import Table from '@mui/material/Table';
 import Box from '@mui/material/Box';
 import TableBody from '@mui/material/TableBody';
+import Button from '@mui/material/Button';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
@@ -72,8 +73,8 @@ const ShowQuestions = (props) => {
         <TableHead>
           <TableRow>
             <TableCell>Questions</TableCell>
-            <TableCell align="right">Answers</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell align="center">Answers</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -86,11 +87,11 @@ const ShowQuestions = (props) => {
                 {row.question}
               </TableCell>
               <TableCell align="right">{row.answer}</TableCell>
-              <Box>
-              <TableCell align="right" onClick={() => handleEdit(row._id)} style={{cursor: "pointer",outlineColor:"red"}} ><EditIcon/></TableCell>
-              <TableCell align="right" onClick={() => handleDelete(row._id)} style={{cursor: "pointer",outlineColor:"red"}} ><DeleteOutlineIcon/></TableCell>
+              <TableCell align="center" >
+              <Button sx={{mr:-2}} variant='text' onClick={() => handleEdit(row._id)} style={{cursor: "pointer"}} ><EditIcon/></Button>
+              <Button  variant='text'  onClick={() => handleDelete(row._id)} style={{cursor: "pointer"}} ><DeleteOutlineIcon/></Button>
            
-              </Box>
+              </TableCell >
             </TableRow>
           ))}
         </TableBody>
