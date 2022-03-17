@@ -45,6 +45,7 @@ import {
   setNotificationCount,
   updateMessageStatus,
 } from "../../../redux/dataSlice/dataSlice";
+import NotificationCard from './Component/NotificationCard'
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
@@ -89,7 +90,7 @@ const Navigation = () => {
 
   useEffect(() => {
     dispatch(getNotification(user));
-  }, [user, dispatch, isMessageSeen]);
+  }, [user, dispatch]);
 
   // let
   // let MessageSeen;
@@ -434,8 +435,8 @@ const Navigation = () => {
                   variant="standard"
                   value={note}
 
-                  
-                  
+
+
                 />
                 {/*------------------ Mic ---------------*/}
                 <Button
@@ -463,25 +464,25 @@ const Navigation = () => {
                 <Grid container spacing={3}>
                   {searchInput.length > 1
                     ? filteredResults.map((item) => {
-                        return (
-                          <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
-                            <Card>
-                              <CardActionArea
-                                onClick={() =>
-                                  handleCardClick(item.parentService)
-                                }
-                              >
-                                <CardContent>
-                                  <Typography>{item.Title}</Typography>
-                                </CardContent>
-                              </CardActionArea>
-                            </Card>
-                          </Grid>
-                        );
-                      })
+                      return (
+                        <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
+                          <Card>
+                            <CardActionArea
+                              onClick={() =>
+                                handleCardClick(item.parentService)
+                              }
+                            >
+                              <CardContent>
+                                <Typography>{item.Title}</Typography>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })
                     : APIData.map((item) => {
-                        return <Grid item md={12} xs={12}></Grid>;
-                      })}
+                      return <Grid item md={12} xs={12}></Grid>;
+                    })}
                 </Grid>
               </Box>
             </Modal>
@@ -528,34 +529,7 @@ const Navigation = () => {
                         p: 2,
                       }}
                     >
-                      {notifications.map((notification) => (
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            gap: 2,
-                            mb: 1,
-                            borderBottom: "2px solid #F4F5F8",
-                            pb: 1,
-                          }}
-                        >
-                          <Avatar
-                            alt="notification image"
-                            sx={{ borderRadius: 0, width: 60, height: 60 }}
-                            src={notification?.image}
-                          />
-
-                          <Box>
-                            <Typography variant="h6" sx={{ fontSize: 14 }}>
-                              {notification.message}
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontSize: 11 }}>
-                              Time: {notification.time}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      ))}
+                      {notifications.map((notification) => <NotificationCard notification={notification}></NotificationCard>)}
                     </Box>
                   </Popover>
                 </>

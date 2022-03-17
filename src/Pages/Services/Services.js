@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
+import { useNavigate, useLocation } from "react-router-dom";
+import { NavHashLink } from 'react-router-hash-link';
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Typography } from "@mui/material";
 import { Container } from "@mui/material";
@@ -14,6 +14,7 @@ import ServiceCard from "./Component/ServiceCard";
 import Navigation from "../SharedRoute/Navigation/Navigation";
 import { allData, loadServiceCategory, singleService } from "../../redux/dataSlice/dataSlice";
 import Loading from "../SharedRoute/Loader/Loading";
+import ServiceCardWrap from "./Component/ServiceCardWrap";
 
 const useStyles = makeStyles({
   drawerPaper: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles({
     boxShadow: "none",
   },
   subServices: {
-    paddingTop: "20px",
+    px: 2,
   },
   listBottomPadding: {
     marginBottom: "20px",
@@ -45,10 +46,9 @@ const Services = () => {
   const dispatch = useDispatch();
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
-  console.log(allServices);
+  const location = useLocation()
 
   const drawerWidth = 240;
-  console.log(allServices);
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
     console.log(url);
@@ -86,16 +86,16 @@ const Services = () => {
                         .join("")
                         .toLowerCase();
                       return (
-                        <ListItem key={item._id}>
-                          <ListItemButton>
-                            <ListItemText>
-                              <HashLink
-                                smooth
-                                to={`/services/#${ID}`}
-                                className={classes.linkClass}
-                              >
-                                {item.Category}
-                              </HashLink>
+                        <ListItem key={item._id} sx={{ pr: 0 }}>
+                          <ListItemButton
+                            component={NavHashLink}
+                            smooth
+                            className={location.hash === '#' + ID ? 'select-service' : ""}
+                            to={`/services/#${ID}`}
+                          >
+                            <ListItemText
+                            >
+                              {item.Category}
                             </ListItemText>
                           </ListItemButton>
                         </ListItem>
@@ -107,32 +107,7 @@ const Services = () => {
               <Grid>
                 {/* <Typography sx={{ textAlign: "center", fontWeight: 'bold' }} gutterBottom variant="h4" component="div">OUR ALL SERVICES</Typography> */}
                 <Grid>
-                  {allServices.map((service) => {
-                    const divID = service.Category?.split(" ")
-                      .join("")
-                      .toLowerCase();
-                    return (
-                      <div
-                        id={divID}
-                        key={`${service._id}${service.Category}`}
-                        className={classes.subServices}
-                      >
-                        <Typography sx={{ pb: 2 }} variant="h4" gutterBottom component="div">{service.Category}</Typography>
-
-                        <Grid
-                          container
-                          alignItems="stretch"
-                          className={classes.gridMargin}
-                          spacing={3}
-                        >
-
-                          {service.Services?.map((item) => (
-                            <ServiceCard key={item.Id} {...item} />
-                          ))}
-                        </Grid>
-                      </div>
-                    );
-                  })}
+                  {allServices.map((service) => <ServiceCardWrap service={service} classes={classes}></ServiceCardWrap>)}
                 </Grid>
               </Grid>
             </div>

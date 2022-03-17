@@ -68,13 +68,21 @@ const Testimonials = () => {
                 <Grid item xs={4} md={4} >
                     <Box sx={{ flexGrow: 0, height: '75vh', overflowY: 'scroll', px: 2 }} className='testimonials-userWrap'>
                         {
-                            testimonials.map((singleTestimonials, i) => <TestimonialUserCard {...singleTestimonials} value={value} index={i} handleClick={handleClick}></TestimonialUserCard>)
+                            testimonialLoading ? [...new Array(4)].map((ske, index) =>
+                                <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb: 2 }} height={80} />
+                            ) : testimonials.map((singleTestimonials, i) => <TestimonialUserCard {...singleTestimonials} value={value} index={i} handleClick={handleClick}></TestimonialUserCard>)
                         }
                     </Box>
                 </Grid>
                 <Grid item xs={8} md={8}>
                     {
-                        testimonials.map((singleTestimonials, i) => <TabPanel value={value} index={i}><Testimonial {...singleTestimonials} ></Testimonial></TabPanel>)
+                        testimonialLoading ? <Box>
+                            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb: 2 }} height={20} />
+                            <Skeleton width={250} sx={{ mb: 5 }} height={20} />
+                            {[...new Array(4)].map((ske, index) =>
+                                <Skeleton variant="rectangular" width='100%' sx={{ borderRadius: 1, mb: 2 }} height={20} />
+                            )}
+                        </Box> : testimonials.map((singleTestimonials, i) => <TabPanel value={value} index={i}><Testimonial {...singleTestimonials} ></Testimonial></TabPanel>)
                     }
                 </Grid>
 

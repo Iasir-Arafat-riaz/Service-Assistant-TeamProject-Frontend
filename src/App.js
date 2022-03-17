@@ -28,7 +28,7 @@ import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
 
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
 import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
@@ -49,7 +49,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 
-import {  newNotification } from "./redux/dataSlice/dataSlice";
+import { newNotification } from "./redux/dataSlice/dataSlice";
 
 
 
@@ -63,6 +63,7 @@ import AddNewServiceCategory from "./Pages/Dashboard/DashboardPages/AddNewServic
 
 
 import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
+import NotificationCard from "./Pages/SharedRoute/Navigation/Component/NotificationCard";
 
 
 
@@ -96,10 +97,21 @@ const App = () => {
       socket.emit('joinAll', user.email);
       console.log('send');
     }
+
+
   }, [user, socket]);
   useEffect(() => {
     socket.on("get-notification", message => {
       dispatch(newNotification(message))
+      toast(<NotificationCard notification={message}></NotificationCard >, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     });
   }, [])
 
@@ -134,7 +146,7 @@ const App = () => {
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
           />
-          <Route 
+          <Route
             path="/dashboard/pendingtestimonial"
             element={<PendingTestimonial />}
           />
