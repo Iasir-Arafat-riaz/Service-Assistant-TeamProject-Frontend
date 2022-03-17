@@ -21,9 +21,6 @@ const TrendingServices = () => {
         })
     }, []);
 
-    // const { slickSlider } = useSlick();
-
-
     return (
         <Container sx={{ mb: 8 }}  >
 

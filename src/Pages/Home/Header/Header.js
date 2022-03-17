@@ -4,24 +4,18 @@ import "slick-carousel/slick/slick-theme.css";
 import banner1 from "../../images/banner-1.jpg";
 import banner2 from "../../images/banner-2.jpg";
 import banner3 from "../../images/banner-3.jpg";
-import Slider from "react-slick";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "../../SharedRoute/ScrollTop/ScrollTop";
 import Contact from "../Contact/Contact";
 import { Box, Container, Typography } from "@mui/material";
 import "./Header.css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
+import 'swiper/css';
+import "swiper/css/navigation";
+import { Autoplay } from "swiper";
 const Header = (props) => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
   const [banners, setBanner] = useState([]);
   useEffect(() => {
     fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
@@ -31,38 +25,47 @@ const Header = (props) => {
   console.log(banners);
   return (
     <header>
-      <Slider {...settings} style={{ zIndex: "-1" }}>
+      <Swiper
+        modules={[Autoplay]}
+        speed={1000}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        style={{ zIndex: "-1" }}>
         {banners.map((banner) => (
-          <Box
-            sx={{
-              backgroundImage: `url(${banner.imageUrl})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-              height: "calc(100vh)",
-            }}
-            key={banner._id}
-            type="button"
-          >
-            {/* <img type="button" src={banner.imageUrl} alt="" /> */}
-            <Container
-              maxWidth="md"
-              sx={{ height: "100%", display: "flex", alignItems: "center" }}
+          <SwiperSlide>
+            <Box
+              sx={{
+                backgroundImage: `url(${banner.imageUrl})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                height: "calc(100vh)",
+              }}
+              key={banner._id}
+              type="button"
             >
-              <Box>
-                <Typography id="commonBannerText">
-                  <Typography variant="h6">
-                    Service Deliver with professionalism
+              {/* <img type="button" src={banner.imageUrl} alt="" /> */}
+              <Container
+                maxWidth="md"
+                sx={{ height: "100%", display: "flex", alignItems: "center" }}
+              >
+                <Box>
+                  <Typography id="commonBannerText">
+                    <Typography variant="h6">
+                      Service Deliver with professionalism
+                    </Typography>
                   </Typography>
-                </Typography>
-                <Typography class="text1" variant="h4">
-                  <b>{banner.bannerText}</b>
-                </Typography>
-                <Typography class="text1" variant="h4">
-                  <b>{banner.bannerTex2}</b>
-                </Typography>
-              </Box>
-            </Container>
-          </Box>
+                  <Typography class="text1" variant="h4">
+                    <b>{banner.bannerText}</b>
+                  </Typography>
+                  <Typography class="text1" variant="h4">
+                    <b>{banner.bannerTex2}</b>
+                  </Typography>
+                </Box>
+              </Container>
+            </Box>
+          </SwiperSlide>
         ))}
 
         {/* <article type="button">
@@ -76,7 +79,7 @@ const Header = (props) => {
                 <article >
                     <img type="button" src={banner3} alt="" />
                 </article> */}
-      </Slider>
+      </Swiper>
       <Contact />
 
       <ScrollTop {...props}>

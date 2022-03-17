@@ -5,7 +5,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 // import "swiper/swiper.min.css";
 import Testimonial from "../Testimonial/Testimonial";
-import Slider from "react-slick";
 import { useDispatch, useSelector } from "react-redux";
 import { allData, websiteReviews } from "../../../../redux/dataSlice/dataSlice";
 import PropTypes from 'prop-types';
