@@ -42,36 +42,6 @@ const MyOrdersTable = () => {
         return <Loading></Loading>
     };
 
-<<<<<<< HEAD
-    // let parentId; 
-
-    // comment-out from riaz for data undefined
-    // dispatch(reviewServiceIndex(index));
-    //comment for id
-    // dispatch(reviewServiceIndex(parseInt(index) + 1));
-    // const data = { selectServiceId, email: user.email };
-    // dispatch(parentServiceId(data));
-    // //console.log(index)
-    // const id = JSON?.parse(localStorage?.getItem("parentId"));
-    localStorage.setItem('parentId', JSON.stringify(id))
-    // parentId = selectServiceId
-
-    // const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(parentId));
-    // console.log(parentId)
-
-    // console.log(parentId)
-    // // dispatch(parentServiceId(parentId))
-    // const matchReviews = matchService?.Reviews?.find(review => review?.id == user.uid);
-    // console.log(matchReviews);
-    // console.log(singleServiceDetails);
-
-    // // //console.log(matchService.Reviews);
-    // console.log(matchReviews)
-    const handleOnload = id => {
-        const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
-        console.log(matchService)
-    }
-=======
     const handleRouteChange = (selectServiceId, index, service) => {
         navigate(`/dashboard/review/${selectServiceId}`);
         dispatch(reviewServiceIndex(parseInt(index) + 1));
@@ -80,7 +50,6 @@ const MyOrdersTable = () => {
     };
 
 
->>>>>>> remotes/origin/mahfujStore
 
     return (
         <>
@@ -88,10 +57,6 @@ const MyOrdersTable = () => {
 
 
                 {
-<<<<<<< HEAD
-                    savedService?.map((service, index) => <Grid item key={index} xs={12} md={6} lg={4}>
-                        <MyOrdersCard service={service}></MyOrdersCard>
-=======
                     savedService?.map((service, index) => <Grid item key={service._id} xs={12} md={6} lg={4}>
 
                         <Card sx={{ maxWidth: 345, mb: 4 }}>
@@ -151,7 +116,6 @@ const MyOrdersTable = () => {
                                 </CardContent>
                             </CardActionArea>
                         </Card>
->>>>>>> remotes/origin/mahfujStore
                     </Grid>
                     )
                 }

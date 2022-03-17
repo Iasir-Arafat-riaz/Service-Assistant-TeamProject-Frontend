@@ -49,12 +49,6 @@ const Services = (props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
-<<<<<<< HEAD
-  console.log(allServices);
-
-  const drawerWidth = 240;
-  console.log(allServices);
-=======
   //console.log(allServices);
   const { window } = props;
 
@@ -81,7 +75,6 @@ const Services = (props) => {
 
   const drawerWidth = 270;
   //console.log(allServices);
->>>>>>> remotes/origin/mahfujStore
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
     console.log(url);
@@ -95,88 +88,13 @@ const Services = (props) => {
 
   if (serviceIsLoading) {
     return <Loading />
-<<<<<<< HEAD
-  }
-=======
   };
 
 
->>>>>>> remotes/origin/mahfujStore
 
   return (
     <>
       <Navigation />
-<<<<<<< HEAD
-      <div style={{ marginTop: "80px" }}>
-        <Container>
-          <Grid container>
-            <div style={{ display: "flex" }}>
-              <Grid item>
-                <Drawer
-                  sx={{ width: drawerWidth }}
-                  variant="permanent"
-                  anchor="left"
-                  classes={{
-                    paper: classes.drawerPaper,
-                  }}
-                >
-                  <List className={classes.listBottomPadding}>
-                    {allServices.map((item) => {
-                      const ID = item?.Category?.split(" ")
-                        .join("")
-                        .toLowerCase();
-                      return (
-                        <ListItem key={item._id}>
-                          <ListItemButton>
-                            <ListItemText>
-                              <HashLink
-                                smooth
-                                to={`/services/#${ID}`}
-                                className={classes.linkClass}
-                              >
-                                {item.Category}
-                              </HashLink>
-                            </ListItemText>
-                          </ListItemButton>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </Drawer>
-              </Grid>
-              <Grid>
-                {/* <Typography sx={{ textAlign: "center", fontWeight: 'bold' }} gutterBottom variant="h4" component="div">OUR ALL SERVICES</Typography> */}
-                <Grid>
-                  {allServices.map((service) => {
-                    const divID = service.Category?.split(" ")
-                      .join("")
-                      .toLowerCase();
-                    return (
-                      <div
-                        id={divID}
-                        key={`${service._id}${service.Category}`}
-                        className={classes.subServices}
-                      >
-                        <Typography sx={{ pb: 2 }} variant="h4" gutterBottom component="div">{service.Category}</Typography>
-
-                        <Grid
-                          container
-                          alignItems="stretch"
-                          className={classes.gridMargin}
-                          spacing={3}
-                        >
-
-                          {service.Services?.map((item) => (
-                            <ServiceCard key={item.Id} {...item} />
-                          ))}
-                        </Grid>
-                      </div>
-                    );
-                  })}
-                </Grid>
-              </Grid>
-            </div>
-=======
 
       <Container sx={{ mt: 15 }}>
 
@@ -330,7 +248,6 @@ const Services = (props) => {
                 );
               })} */}
             </Grid>
->>>>>>> remotes/origin/mahfujStore
           </Grid>
           {/* </div> */}
         </Grid>

@@ -33,13 +33,13 @@ const initialState = {
     notifications: [],
     notificationLoading: true,
     notificationCount: 0,
-<<<<<<< HEAD
+
     orderChats: [],
     otherOrders: [],
-=======
+
     approvdedLoading: true,
     deleteLoading: true,
->>>>>>> remotes/origin/mahfujStore
+
 
 }
 
@@ -114,17 +114,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-<<<<<<< HEAD
-        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Deleted',
-                'This testimonial has been deleted',
-                'success'
-            )
-        })
-=======
-        const response = await axios.delete(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`)
->>>>>>> remotes/origin/mahfujStore
+        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 )
@@ -132,17 +122,7 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-<<<<<<< HEAD
-        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Approved!',
-                'This testimonial has been approved',
-                'success'
-            )
-        })
-=======
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`)
->>>>>>> remotes/origin/mahfujStore
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 );
@@ -206,18 +186,6 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
         const modifyInfo = { ...info, seen: false, time: new Date() }
         console.log(modifyInfo);
         const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
-<<<<<<< HEAD
-
-        return response.data;
-    }
-)
-export const getOtherOrders = createAsyncThunk(
-    "data/getOtherOrders",
-    async (info) => {
-        // console.log(info)
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
-=======
->>>>>>> remotes/origin/mahfujStore
         return response.data;
     }
 )
@@ -229,6 +197,17 @@ export const getProviderChatsDb = createAsyncThunk(
         return response.data;
     }
 )
+
+export const getOtherOrders = createAsyncThunk(
+    "data/getOtherOrders",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
+        return response.data;
+    }
+)
+
+
 export const getSingleOrdersChat = createAsyncThunk(
     "data/getSingleOrdersChat",
     async (info) => {
@@ -434,10 +413,6 @@ export const dataSlice = createSlice({
 })
 
 
-<<<<<<< HEAD
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
-=======
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails } = dataSlice.actions
->>>>>>> remotes/origin/mahfujStore
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails,addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

@@ -57,16 +57,11 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
     };
 
 
-<<<<<<< HEAD
-        axios.post('https://dry-sea-00611.herokuapp.com/addprovider', { offerService: offerService, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
-            reset();
-=======
     // add service 
     const addService = () => {
         setLoading(false)
-        axios.post(`http://localhost:5000/providerdetials/addservice/${user.email}`, category).then(res => {
+        axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addservice/${user.email}`, category).then(res => {
             setLoading(true);
->>>>>>> remotes/origin/mahfujStore
             handleCloseModal();
         });
     };

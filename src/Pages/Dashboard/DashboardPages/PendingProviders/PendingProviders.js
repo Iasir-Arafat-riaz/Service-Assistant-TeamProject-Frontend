@@ -44,20 +44,11 @@ const PendingProviders = () => {
 
     // approve provider 
     const ApproveProvider = (email, id, parentId) => {
-<<<<<<< HEAD
-        const matchUser = allUser.find(user => user.email === email);
-        setLoading(true);
-        axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
-            axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-            axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`);
-            setLoading(false)
-=======
 
         swal({
             text: "Are you sure want to approve this provider?",
             buttons: true,
             dangerMode: true,
->>>>>>> remotes/origin/mahfujStore
         })
             .then((willDelete) => {
                 if (willDelete) {
@@ -83,16 +74,10 @@ const PendingProviders = () => {
 
     // delete provider
     const deleteProvider = id => {
-<<<<<<< HEAD
-        setLoading(true);
-        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
-            setLoading(false);
-=======
         swal({
             text: "Are you sure you want to delete this request?",
             buttons: true,
             dangerMode: true,
->>>>>>> remotes/origin/mahfujStore
         })
             .then((willDelete) => {
                 if (willDelete) {

@@ -43,11 +43,7 @@ const OrdersTableRow = ({ data }) => {
             <TableCell component="th" scope="row">
                 {data?.Name.slice(0, 20)}
             </TableCell>
-<<<<<<< HEAD
-            <TableCell >{data?.providerEmail}</TableCell>
-=======
             <TableCell >{data?.provider?.name ? data?.provider.name : data?.provider?.displayName}</TableCell>
->>>>>>> remotes/origin/mahfujStore
             <TableCell >{data.orderInfo?.name}</TableCell>
             <TableCell >{data.Price}</TableCell>
             <TableCell sx={{ p: 0 }}>

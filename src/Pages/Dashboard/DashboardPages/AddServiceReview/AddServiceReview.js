@@ -60,14 +60,6 @@ const AddServiceReview = () => {
                 axios.post(`http://localhost:5000/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
             });
         } else {
-<<<<<<< HEAD
-            // //console.log(data);
-            // axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
-            //     reset();
-
-            // });
-=======
->>>>>>> remotes/origin/mahfujStore
             UpdateReview(data);
         }
     };

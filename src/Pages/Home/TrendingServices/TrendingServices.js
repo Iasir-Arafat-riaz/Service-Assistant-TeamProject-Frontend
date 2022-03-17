@@ -14,17 +14,9 @@ const TrendingServices = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-<<<<<<< HEAD
-        axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => {
-            setLoading(false);
-            setServices(res.data.reverse())
-        })
-    }, []);
-=======
         dispatch(loadServiceCategory());
     }, [dispatch]);
 
->>>>>>> remotes/origin/mahfujStore
 
     // const { slickSlider } = useSlick();
     // slick slider
@@ -61,13 +53,8 @@ const TrendingServices = () => {
             }
         ]
     };
-<<<<<<< HEAD
-console.log(services)
-// const servicesReverse = services.reverse()
-=======
 
     const trendServices = [...allServices].reverse();
->>>>>>> remotes/origin/mahfujStore
 
     return (
         <Container sx={{ mb: 8 }}>
@@ -95,11 +82,7 @@ console.log(services)
                     </Box>
                     : <Slider {...slickSlider}>
                         {
-<<<<<<< HEAD
-                            services?.map(service => <TrendingService sx={{}}
-=======
                             trendServices.map(service => <CommonService
->>>>>>> remotes/origin/mahfujStore
                                 key={service._id}
                                 service={service}
                             />)
