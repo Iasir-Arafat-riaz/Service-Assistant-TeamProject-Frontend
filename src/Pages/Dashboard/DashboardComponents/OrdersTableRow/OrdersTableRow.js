@@ -43,7 +43,7 @@ const OrdersTableRow = ({ data }) => {
             <TableCell component="th" scope="row">
                 {data?.Name.slice(0, 20)}
             </TableCell>
-            <TableCell >{data?.providerEmail}</TableCell>
+            <TableCell >{data?.provider?.name ? data?.provider.name : data?.provider?.displayName}</TableCell>
             <TableCell >{data.orderInfo?.name}</TableCell>
             <TableCell >{data.Price}</TableCell>
             <TableCell sx={{ p: 0 }}>

@@ -4,17 +4,17 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setItemInLocal } from '../../../utils/utils';
 
-const HomeService = ({ service }) => {
+const CommonService = ({ service }) => {
 
     const { Category, Img } = service;
-    const { Id } = service.Services[0];
+    // const { Id } = service?.Services[0];
 
     const navigate = useNavigate();
 
     const handleRouteChange = () => {
-        navigate(`/Home/service-details/${Id}`);
+        // navigate(`/Home/service-details/${Id}`);
         setItemInLocal({
-            ...service, Id
+            ...service,
         });
     };
     //console.log(service.Services[0])
@@ -32,4 +32,4 @@ const HomeService = ({ service }) => {
     );
 };
 
-export default HomeService;
+export default CommonService;

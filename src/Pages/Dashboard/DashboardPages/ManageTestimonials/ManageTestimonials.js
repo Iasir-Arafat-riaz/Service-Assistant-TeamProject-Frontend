@@ -10,7 +10,8 @@ import { Button } from '@mui/material';
 import Swal from 'sweetalert2';
 import DemoTestimonialModal from '../PendingTestimonial/DemoTestimonialModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { allData, approvedTestimonial, deleteTestimonial, websiteReviews } from '../../../../redux/dataSlice/dataSlice';
+import { allData, approvedTestimonial, deleteTestimonails, deleteTestimonial, remaingTestimonials, websiteReviews } from '../../../../redux/dataSlice/dataSlice';
+import swal from 'sweetalert';
 
 
 const ManageTestimonials = () => {
@@ -36,15 +37,15 @@ const ManageTestimonials = () => {
 
     // delete testimonial
     const handleDeleteTestimonial = id => {
-        Swal.fire({
-            title: 'Are you sure you want to delete?',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
+        swal({
+            text: "Are you sure?",
+            buttons: true,
+            icon: "warning",
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
                 dispatach(deleteTestimonial({ id }))
+                dispatach(deleteTestimonails(id));
             }
         })
     };
@@ -52,7 +53,20 @@ const ManageTestimonials = () => {
 
     // handle approve testimonial
     const handleApproveTestimonil = id => {
-        dispatach(approvedTestimonial({ id }))
+        // dispatach(approvedTestimonial({ id }))
+        swal({
+            text: "Are you sure? you want to approve this testomonial!",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    dispatach(remaingTestimonials(id));
+                    dispatach(approvedTestimonial({ id }))
+
+                }
+            });
+
     };
 
     if (testimonialLoading) {

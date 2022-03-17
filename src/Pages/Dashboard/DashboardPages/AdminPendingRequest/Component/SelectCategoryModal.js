@@ -28,7 +28,7 @@ const [servicesLoading, setServicesLoading] = useState(true);
 
 useEffect(() => {
 const fetchServices = async () => {
- const services = await  axios.get('https://fierce-meadow-12011.herokuapp.com/services').then(res => res.data)
+ const services = await  axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => res.data)
  
  setServicesCategory(services)
  setServicesLoading(false)

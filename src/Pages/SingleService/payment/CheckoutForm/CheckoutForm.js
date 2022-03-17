@@ -88,7 +88,6 @@ const CheckoutForm = () => {
             setSuccess("your payment is done");
             setProcessing(false);
             const date = new Date();
-
             const data = { ...selectedService, orderInfo: orderInfo, date: date };
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;

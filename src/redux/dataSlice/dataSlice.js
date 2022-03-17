@@ -29,12 +29,17 @@ const initialState = {
     orderInfo: {},
     selectedService: {},
     reviewIndex: 0,
-    id: [],
+    providerEmail: {},
     notifications: [],
     notificationLoading: true,
     notificationCount: 0,
+
     orderChats: [],
     otherOrders: [],
+
+    approvdedLoading: true,
+    deleteLoading: true,
+
 
 }
 
@@ -109,13 +114,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Deleted',
-                'This testimonial has been deleted',
-                'success'
-            )
-        })
+        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 )
@@ -123,13 +122,7 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Approved!',
-                'This testimonial has been approved',
-                'success'
-            )
-        })
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 );
@@ -193,15 +186,6 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
         const modifyInfo = { ...info, seen: false, time: new Date() }
         console.log(modifyInfo);
         const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
-
-        return response.data;
-    }
-)
-export const getOtherOrders = createAsyncThunk(
-    "data/getOtherOrders",
-    async (info) => {
-        // console.log(info)
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
         return response.data;
     }
 )
@@ -213,6 +197,17 @@ export const getProviderChatsDb = createAsyncThunk(
         return response.data;
     }
 )
+
+export const getOtherOrders = createAsyncThunk(
+    "data/getOtherOrders",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
+        return response.data;
+    }
+)
+
+
 export const getSingleOrdersChat = createAsyncThunk(
     "data/getSingleOrdersChat",
     async (info) => {
@@ -262,6 +257,12 @@ export const dataSlice = createSlice({
             // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
             saveService(state.cartItems);
         },
+        remaingTestimonials: (state, { payload }) => {
+            state.testimonials = state.testimonials.filter((item) => item._id !== payload)
+        },
+        deleteTestimonails: (state, { payload }) => {
+            state.testimonials = state.testimonials.filter((item) => item._id !== payload)
+        },
         addOrderInfo: (state, { payload }) => {
             state.orderInfo = payload;
         },
@@ -292,7 +293,7 @@ export const dataSlice = createSlice({
             state.reviewIndex = payload;
         },
         parentServiceId: (state, { payload }) => {
-            state.id.push(payload);
+            state.providerEmail = payload;
         },
 
         newNotification: (state, { payload }) => {
@@ -385,6 +386,18 @@ export const dataSlice = createSlice({
             .addCase(sendNotification.rejected, (state, { payload }) => {
                 console.log('rejected');
             })
+            .addCase(deleteTestimonial.pending, (state, { payload }) => {
+                state.deleteLoading = true;
+            })
+            .addCase(deleteTestimonial.fulfilled, (state, { payload }) => {
+                state.deleteLoading = false;
+            })
+            .addCase(approvedTestimonial.pending, (state, { payload }) => {
+                state.approvdedLoading = false;
+            })
+            .addCase(approvedTestimonial.fulfilled, (state, { payload }) => {
+                state.approvdedLoading = true;
+            })
 
             .addCase(getOtherOrders.fulfilled, (state, { payload }) => {
                 state.otherOrders = payload.reverse();
@@ -400,6 +413,6 @@ export const dataSlice = createSlice({
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails,addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer
