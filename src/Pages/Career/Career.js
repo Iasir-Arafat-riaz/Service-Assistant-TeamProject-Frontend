@@ -1,4 +1,4 @@
-import { Avatar, Box, Container, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, Button, Container, Grid, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
 import React from 'react';
 import Navigation from '../SharedRoute/Navigation/Navigation';
 import {
@@ -8,6 +8,8 @@ import {
 } from '@mui/material/styles';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import Footer from '../SharedRoute/Footer/Footer';
+import { Link } from 'react-router-dom';
+import SendIcon from '@mui/icons-material/Send';
 
 const Career = () => {
     const career = [
@@ -184,9 +186,19 @@ const Career = () => {
                                         Posted: {job?.Posted}
                                     </Typography>
 
+                                    <Link to='/Dashboard/becomeaprovider' style={{ textDecoration: "none" }}>
+                                    <Button
+                                        type="submit"
+                                        variant='contained'
+                                        sx={{ borderRadius: 28, }}
+                                        style={{ backgroundColor: "#FF5E14", }}
+                                    >Apply Now <SendIcon sx={{pl:1}}/>
+                                    </Button>
+                                </Link>
+
                                     <Typography
                                         variant="h5"
-                                        color="#FF5E14"
+                                        color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
                                     >About Service A2Z
                                     </Typography>
@@ -201,14 +213,14 @@ const Career = () => {
 
                                     <Typography
                                         variant="h5"
-                                        color="#FF5E14"
+                                        color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
                                     >Experience: <span>{job.Experience}</span>
                                     </Typography>
 
                                     <Typography
                                         variant="h5"
-                                        color="#FF5E14"
+                                        color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
                                     >What You Do
                                     </Typography>
@@ -221,21 +233,21 @@ const Career = () => {
 
                                     <Typography
                                         variant="h5"
-                                        color="#FF5E14"
+                                        color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
                                     >Category: <span style={{color:'#363636'}}>{job.Category}</span>
                                     </Typography>
 
                                     <Typography
                                         variant="h5"
-                                        color="#FF5E14"
+                                        color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
                                     >Service Type: <span style={{color:'#363636'}}>{job.ServiceType}</span>
                                     </Typography>
 
                                     <Typography
                                         variant="h5"
-                                        color="#FF5E14"
+                                        color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
                                     >Responsibility
                                     </Typography>

@@ -10,6 +10,7 @@ import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
 import SpaOutlinedIcon from '@mui/icons-material/SpaOutlined';
 
 import './ChooseUs.css';
+import { Link } from 'react-router-dom';
 const ChooseUs = () => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
@@ -32,7 +33,7 @@ const ChooseUs = () => {
                                         height: '100%',
                                         maxWidth: '100%',
                                         verticalAlign: 'middle'
-                                    }} 
+                                    }}
                                     src='https://i.ibb.co/cXBh9wv/shake-Hand.webp'
                                     alt='choose-us' />
                             </Box>
@@ -49,8 +50,8 @@ const ChooseUs = () => {
                                         fontWeight: 700,
                                     }}
                                 >CHOOSE US</Typography>
-                                <Typography 
-                                    sx={{color:'#022279'}}
+                                <Typography
+                                    sx={{ color: '#022279' }}
                                     variant='h3'
                                 >Upgrade Your Skills With Service A2Z</Typography>
 
@@ -59,36 +60,39 @@ const ChooseUs = () => {
                                         <ListItemIcon sx={{ color: '#FF5E14' }}>
                                             <PeopleAltOutlinedIcon fontSize="large" />
                                         </ListItemIcon>
-                                        <ListItemText sx={{ color: "" }} 
-                                        primaryTypographyProps={{fontSize: '22px'}} 
-                                        primary='Meet new customers' />
+                                        <ListItemText sx={{ color: "" }}
+                                            primaryTypographyProps={{ fontSize: '22px' }}
+                                            primary='Meet new customers' />
                                     </ListItem>
 
                                     <ListItem sx={{ paddingLeft: 0 }}>
                                         <ListItemIcon sx={{ color: '#FF5E14' }}>
                                             <AutoGraphOutlinedIcon fontSize="large" />
                                         </ListItemIcon>
-                                        <ListItemText sx={{ color: "" }} 
-                                          primaryTypographyProps={{fontSize: '22px'}} 
-                                        primary='Grow your revenue' />
+                                        <ListItemText sx={{ color: "" }}
+                                            primaryTypographyProps={{ fontSize: '22px' }}
+                                            primary='Grow your revenue' />
                                     </ListItem>
 
                                     <ListItem sx={{ paddingLeft: 0 }}>
                                         <ListItemIcon sx={{ color: '#FF5E14' }}>
                                             <SpaOutlinedIcon fontSize="large" />
                                         </ListItemIcon>
-                                        <ListItemText sx={{ color: "" }} 
-                                          primaryTypographyProps={{fontSize: '22px'}} 
-                                        primary='Build your online reputation' />
+                                        <ListItemText sx={{ color: "" }}
+                                            primaryTypographyProps={{ fontSize: '22px' }}
+                                            primary='Build your online reputation' />
                                     </ListItem>
                                 </List>
 
-                                <Button 
-                                type="submit" 
-                                variant= 'contained'  
-                                sx={ { borderRadius: 28, } }
-                                style={{ backgroundColor: "#FF5E14", }}
-                                >Choose Career</Button>
+                                <Link to='/career' style={{ textDecoration: "none" }}>
+                                    <Button
+                                        type="submit"
+                                        variant='contained'
+                                        sx={{ borderRadius: 28, }}
+                                        style={{ backgroundColor: "#FF5E14", }}
+                                    >Choose Career
+                                    </Button>
+                                </Link>
                             </Box>
                         </Grid>
                     </Grid>

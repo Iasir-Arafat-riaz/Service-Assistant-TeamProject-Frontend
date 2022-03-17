@@ -62,6 +62,7 @@ import AddNewServiceCategory from "./Pages/Dashboard/DashboardPages/AddNewServic
 
 
 import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
+import Career from "./Pages/Career/Career";
 
 
 
@@ -187,6 +188,7 @@ const App = () => {
         </Route>
 
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/career" element={<Career />} />
         <Route path="/providerProfile" element={<SingleProviderDetails />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
