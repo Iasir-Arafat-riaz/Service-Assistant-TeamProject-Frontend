@@ -434,8 +434,8 @@ const Navigation = () => {
                   variant="standard"
                   value={note}
 
-                  
-                  
+
+
                 />
                 {/*------------------ Mic ---------------*/}
                 <Button
@@ -463,25 +463,28 @@ const Navigation = () => {
                 <Grid container spacing={3}>
                   {searchInput.length > 1
                     ? filteredResults.map((item) => {
-                        return (
-                          <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
-                            <Card>
-                              <CardActionArea
-                                onClick={() =>
-                                  handleCardClick(item.parentService)
-                                }
-                              >
-                                <CardContent>
-                                  <Typography>{item.Title}</Typography>
-                                </CardContent>
-                              </CardActionArea>
-                            </Card>
-                          </Grid>
-                        );
-                      })
+                      return (
+                        <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
+                          <Card sx={{
+                            borderBottom: '1px solid #ffb600',
+                            borderRight: '2px solid #ffb600'
+                          }}>
+                            <CardActionArea
+                              onClick={() =>
+                                handleCardClick(item.parentService)
+                              }
+                            >
+                              <CardContent>
+                                <Typography>{item.Title}</Typography>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })
                     : APIData.map((item) => {
-                        return <Grid item md={12} xs={12}></Grid>;
-                      })}
+                      return <Grid item md={12} xs={12}></Grid>;
+                    })}
                 </Grid>
               </Box>
             </Modal>

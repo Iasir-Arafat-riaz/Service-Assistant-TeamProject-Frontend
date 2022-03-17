@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -9,6 +9,7 @@ import {
     ThemeProvider,
 } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     around: {
@@ -52,8 +53,8 @@ const useStyles = makeStyles({
     text2: {
 
         color: '#FF5E14',
-        textAlign: 'center', 
-        
+        textAlign: 'center',
+
     },
 
 });
@@ -66,15 +67,18 @@ const WorkFlow = () => {
     return (
         <ThemeProvider theme={theme}>
             <Box
+
                 sx={{
+
                     backgroundImage: "url('https://i.ibb.co/Y3z6YTs/bg-curve.png')",
                     backgroundSize: 'auto',
                     backgroundPosition: 'top',
                     backgroundRepeat: 'no-repeat',
-                    paddingBottom: '100px',
                     display: 'flex',
                     justifyContent: 'center',
-                    mb:3
+                    paddingBottom: '100px',
+                    mb: 3,
+                    xs: { backgroundImage: 'none' }
                 }}
             >
                 <Grid
@@ -84,20 +88,31 @@ const WorkFlow = () => {
                         item
                         xs={12}
                         md={4}>
-                        <Box className={classes.text}>
+                        <Box className={classes.text} >
                             <Typography
                                 sx={{
                                     fontWeight: 'bold',
                                     color: '#022279'
                                 }}> STEPS
                             </Typography>
-                            <Typography
+                            {/* <Typography
                                 variant='h4'
                                 sx={{
                                     fontWeight: 'bold',
                                     color: '#FF5E14'
                                 }}>How Service A2Z Works
-                            </Typography>
+                                style={{textDecoration:'none'}}
+                            </Typography> */}
+                            <Link to='/services' style={{ textDecoration: 'none' }}>
+                                <Typography
+                                    variant='h4'
+                                    sx={{
+                                        fontWeight: 'bold',
+                                        color: '#FF5E14',
+
+                                    }}>How Service A2Z Works
+                                </Typography>
+                            </Link>
                         </Box>
                     </Grid>
 
@@ -122,13 +137,13 @@ const WorkFlow = () => {
 
                         <Box className={classes.text2}>
                             <Typography
-                                sx={{ fontWeight: 'bold' }}>Describe Your Task
+                                sx={{ fontWeight: 'bold', p: 1 }}>Describe Your Task
                             </Typography>
                         </Box>
 
-                        <Typography>This helps us determine which Taskers are abest job.
+                        <Typography sx={{ p: 1, textAlign: 'center' }}>
+                            We explain to you how we serve your service. We Describe job responsibilities. Our professional representative will assist with the order procedure.
                         </Typography>
-
                     </Grid>
 
                     <Grid
@@ -153,8 +168,7 @@ const WorkFlow = () => {
                             <Typography
                                 sx={{ fontWeight: 'bold' }}>Choose a Tasker</Typography>
                         </Box>
-                        <Typography>This helps us determine which Taskers are abest job.
-
+                        <Typography sx={{ p: 1, textAlign: 'center' }}>Our representative will help you to choose a tasker or provider.  The provider will serve you your order.
                         </Typography>
                     </Grid>
 
@@ -178,8 +192,8 @@ const WorkFlow = () => {
                         </Box>
                         <Box className={classes.text2}>
                             <Typography sx={{ fontWeight: 'bold' }} >Live Smarter</Typography></Box>
-                        <Typography>This helps us determine which Taskers are abest job.
-
+                        <Typography sx={{ p: 1, textAlign: 'center' }}>
+                            Our chat system will help you to know your query in a short time. Our helpline executive will assist with your query and help you to choose a service.
                         </Typography>
                     </Grid>
                 </Grid>
