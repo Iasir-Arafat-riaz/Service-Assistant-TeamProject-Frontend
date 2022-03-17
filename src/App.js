@@ -62,6 +62,7 @@ import AddNewServiceCategory from "./Pages/Dashboard/DashboardPages/AddNewServic
 
 
 import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
+import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 
 
@@ -129,6 +130,7 @@ const App = () => {
             element={<Manageproducts />}
           />
           <Route path="/dashboard/myprofile" element={<MyProfile />} />
+          <Route path="/dashboard/addquestions" element={<AddQuestions />} />
           <Route
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
