@@ -1,10 +1,12 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
+import Swal from 'sweetalert2'
 import Box from '@mui/material/Box';
 import React, {useState} from 'react'
 import axios from 'axios'
 
 const AddNewServiceCategory = () => {
   const [serviceCategoryInfo, setServiceCategoryInfo] = useState({name:'', image: null, Services: []})
+  const [categoryLoading, setCategoryLoading] = useState(false)
 
   // handle input change
   const handleChange = (e) => {
@@ -24,10 +26,34 @@ const AddNewServiceCategory = () => {
     formData.append('Services', JSON.stringify(serviceCategoryInfo.Services))
 
     // API endpoint
-    const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-category';
+    // const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-category';
+    const url = 'http://localhost:5000/api/v1/add-service-category';
 
-    axios.post(url, formData, {headers: {'Content-Type':'multipart/form-data'}}).then(data => {}).catch(err => {
-      console.log(err)
+    axios.post(url, formData, {headers: {'Content-Type':'multipart/form-data'}}).then(data => {
+      console.log(data);
+      if (data.status === 201){
+        
+        Swal.fire(
+          {
+          title:'Congratulations',
+          text:'New Service Category Added',
+          icon:'success',
+          timer: 2000
+          }
+        )
+      }
+    }).catch(err => {
+      console.log(err);
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        timer: 1500
+      })
+    }).finally(() => {
+      setCategoryLoading(true);
+      setServiceCategoryInfo({name:'', image: null, Services: []})
     })
 
   }
@@ -46,6 +72,7 @@ const AddNewServiceCategory = () => {
               fullWidth
               name="name"
               onChange={handleChange}
+              value={serviceCategoryInfo.name}
             />
             </Grid>
               <Grid item xs={12} sm={12}>
