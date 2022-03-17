@@ -32,17 +32,14 @@ const ChooseUs = () => {
                                         height: '100%',
                                         maxWidth: '100%',
                                         verticalAlign: 'middle'
-                                    }} src='https://i.ibb.co/cXBh9wv/shake-Hand.webp'
+                                    }} 
+                                    src='https://i.ibb.co/cXBh9wv/shake-Hand.webp'
                                     alt='choose-us' />
                             </Box>
                         </Grid>
 
                         <Grid item xs={12} md={6}>
-                            <Box
-                                sx={{
-
-                                }}
-                            >
+                            <Box>
                                 <Typography
                                     sx={{
                                         color: '#FF5E14',
