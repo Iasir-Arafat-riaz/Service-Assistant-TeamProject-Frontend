@@ -10,6 +10,7 @@ import WorkFlow from '../../ProviderProfile/WorkFlow';
 
 import Footer from '../../SharedRoute/Footer/Footer';
 import Navigation from '../../SharedRoute/Navigation/Navigation';
+import ChooseUs from '../ChooseUs/ChooseUs';
 import Header from '../Header/Header';
 import HomeServices from '../HomeServices/HomeServices';
 import RecentlyViews from '../RecentlyViews/RecentlyViews';
@@ -31,13 +32,10 @@ const Home = () => {
             <HomeServices />
             <TrendingServices />
             <AllProvider></AllProvider>
-
-          
-          
-
             <Testimonials />
             <WorkFlow />
             <RequestService />
+            <ChooseUs />
             {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
