@@ -31,7 +31,7 @@ const SingleServiceHeader = ({ matchService }) => {
                     }}>
 
                     <Box
-                        sx={{ m: 4, display: 'flex', alignItems: 'center' }}
+                        sx={{ m: 4 }}
                     >
                         <Box>
                             <Typography variant='h4' sx={{ fontWeight: 'bold', color: '#fff', mb: 3 }}>{matchService?.Title}</Typography>

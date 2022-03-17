@@ -35,6 +35,7 @@ const Career = () => {
                 }
             ],
             "Experience": "3 years",
+            "Vacancies": 3,
             "WhatToDo": "You will work on a project under the guidance of Service A2Z. Doing service with quality and ensure all safety and others related"
         },
 
@@ -63,7 +64,7 @@ const Career = () => {
                 <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', color: "#113849", fontSize: '35px' }}>Choose Your Job</Typography>
 
                 <Typography variant='h6' sx={{ letterSpacing: 2, textAlign: 'center', color: "#707070", fontSize: '16px' }}>
-                    (16) Jobs and Vacancies</Typography>
+                    (3) Jobs and Vacancies</Typography>
 
                 {
                     career.map(job =>
