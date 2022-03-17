@@ -31,13 +31,15 @@ const SingleServiceHeader = ({ matchService }) => {
                     }}>
 
                     <Box
-                        sx={{ m: 4 }}
+                        sx={{ m: 4, display: 'flex', alignItems: 'center' }}
                     >
-                        <Typography variant='h4' sx={{ fontWeight: 'bold', color: '#fff', mb: 3 }}>{matchService?.Title}</Typography>
+                        <Box>
+                            <Typography variant='h4' sx={{ fontWeight: 'bold', color: '#fff', mb: 3 }}>{matchService?.Title}</Typography>
 
-                        <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 5, fontWeight: 500, color: "#fff" }}>
-                            <Link to="/home" style={{ textDecoration: 'none', color: "#fff", }}>Home</Link>  - <small style={{ color: '#FF5E14' }}>{matchService?.Title}</small>
-                        </span>
+                            <span style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 5, fontWeight: 500, color: "#fff" }}>
+                                <Link to="/home" style={{ textDecoration: 'none', color: "#fff", }}>Home</Link>  - <small style={{ color: '#FF5E14' }}>{matchService?.Title}</small>
+                            </span>
+                        </Box>
                     </Box>
 
 

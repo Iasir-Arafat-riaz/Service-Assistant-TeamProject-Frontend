@@ -3,22 +3,31 @@ import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import axios from 'axios';
 import useSlick from '../../../Hooks/useSlick';
 import Slider from 'react-slick';
-import TrendingService from './TrendingService';
 import { Link } from 'react-router-dom';
+import { allData, loadServiceCategory } from '../../../redux/dataSlice/dataSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import CommonService from '../HomeServices/CommonService';
 
 const TrendingServices = () => {
 
-    const [services, setServices] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const { allServices, serviceIsLoading } = useSelector(allData);
+    const dispatch = useDispatch();
 
     useEffect(() => {
+<<<<<<< HEAD
         axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => {
             setLoading(false);
             setServices(res.data.reverse())
         })
     }, []);
+=======
+        dispatch(loadServiceCategory());
+    }, [dispatch]);
+
+>>>>>>> remotes/origin/mahfujStore
 
     // const { slickSlider } = useSlick();
+    // slick slider
     const slickSlider = {
         dots: false,
         infinite: false,
@@ -52,14 +61,19 @@ const TrendingServices = () => {
             }
         ]
     };
+<<<<<<< HEAD
 console.log(services)
 // const servicesReverse = services.reverse()
+=======
+
+    const trendServices = [...allServices].reverse();
+>>>>>>> remotes/origin/mahfujStore
 
     return (
         <Container sx={{ mb: 8 }}>
 
             {
-                loading ?
+                serviceIsLoading ?
                     <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
                     :
                     <Box sx={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
@@ -70,7 +84,7 @@ console.log(services)
 
 
             {
-                loading ?
+                serviceIsLoading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
                         {[...new Array(4)].map((ske, index) => <Stack key={index} spacing={1} >
@@ -81,7 +95,11 @@ console.log(services)
                     </Box>
                     : <Slider {...slickSlider}>
                         {
+<<<<<<< HEAD
                             services?.map(service => <TrendingService sx={{}}
+=======
+                            trendServices.map(service => <CommonService
+>>>>>>> remotes/origin/mahfujStore
                                 key={service._id}
                                 service={service}
                             />)

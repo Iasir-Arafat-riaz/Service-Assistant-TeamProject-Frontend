@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography } from '@mui/material';
 import axios from 'axios';
-import HomeService from './HomeService';
+import CommonService from './CommonService';
 import Slider from 'react-slick';
 import { Box } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
@@ -82,7 +82,7 @@ const HomeServices = () => {
                     :
                     <Slider {...slickSlider}>
                         {
-                            allServices.slice(0, 8).map(service => <HomeService
+                            allServices.slice(0, 8).map(service => <CommonService
                                 key={service._id}
                                 service={service}
                             />)

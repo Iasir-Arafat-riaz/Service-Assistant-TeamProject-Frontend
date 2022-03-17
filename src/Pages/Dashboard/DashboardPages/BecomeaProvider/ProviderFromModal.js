@@ -3,26 +3,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { Avatar, Input, TextField } from '@mui/material';
+import { Avatar, Grid, IconButton, Input, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
-
-// modal style
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: { xs: '90%', md: 400 },
-    bgcolor: 'background.paper',
-    border: '2px solid #fff',
-    boxShadow: 24,
-    // p: 2
-};
+import { PhotoCamera } from '@mui/icons-material';
 
 const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, category }) => {
 
@@ -30,6 +17,23 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
     const { user } = useSelector(allData);
     const { register, handleSubmit, reset, watch, setValue } = useForm();
     const [imgLoading, setImgLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
+
+
+
+    // modal style
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: user.role !== 'provider' ? { xs: '90%', sm: '90%', md: '70%', lg: '60%', xl: '50%' } : { xs: '90%', sm: 400 },
+        bgcolor: 'background.paper',
+        border: '2px solid #fff',
+        boxShadow: 24,
+        // p: 2
+    };
+
 
     // input style
     const inputStyle = {
@@ -37,23 +41,39 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
         mb: 2,
     };
 
-    console.log(user.role)
 
 
     // submit form
     const onSubmit = data => {
-
-        const offerService = [category];
-
-        axios.post('https://dry-sea-00611.herokuapp.com/addprovider', { offerService: offerService, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
-            reset();
-            handleCloseModal();
-        })
+        console.log(data)
+        // setLoading(false)
+        if (user.role !== 'provider') {
+            axios.post('https://dry-sea-00611.herokuapp.com/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
+                reset();
+                handleCloseModal();
+                // setLoading(true);
+            });
+        };
     };
 
+
+<<<<<<< HEAD
+        axios.post('https://dry-sea-00611.herokuapp.com/addprovider', { offerService: offerService, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
+            reset();
+=======
+    // add service 
+    const addService = () => {
+        setLoading(false)
+        axios.post(`http://localhost:5000/providerdetials/addservice/${user.email}`, category).then(res => {
+            setLoading(true);
+>>>>>>> remotes/origin/mahfujStore
+            handleCloseModal();
+        });
+    };
+
+    // hosting image
     useEffect(() => {
         const file = watch('providerImage');
-        // console.log(file)
         if (file?.length) {
             let body = new FormData()
             body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
@@ -70,11 +90,13 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
         }
         else {
         }
-
     }, [watch('providerImage')]);
 
     return (
         <>
+
+
+
             <Modal
                 open={open}
                 aria-labelledby="modal-modal-title"
@@ -82,54 +104,117 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
             >
                 <Box sx={style}>
 
+
+
                     <Typography id="modal-modal-title" variant="h6" sx={{ mb: 0, boxShadow: 3, p: 1, textAlign: 'center' }} component="h2">
-                        Please give this information
+                        {user?.role !== 'provider' ? 'Please give this information' : 'Want to add this service ?'}
                     </Typography>
 
                     <Button onClick={handleCloseModal} sx={{ mt: -16, ml: -4 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
 
                     <Box sx={{ p: 2 }}>
+
                         <form onSubmit={handleSubmit(onSubmit)}>
 
-                            <label style={{ fontSize: 14, marginBottom: 3, display: 'block' }}>Provider Image *</label>
+                            <Grid container spacing={2}>
 
-                            <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" />
+                                {user.role !== 'provider' && <Grid item xs={12} sm={6} lg={6}>
 
-                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                                {
-                                    watch("travelImg") && <Box> <Avatar sx={{ width: 60, height: 60, mb: 1 }} alt="Remy Sharp" src={watch("travelImg")} /> </Box>
-                                }
-                            </Box>
+                                    {
+                                        user.role !== 'provider' && <Box>   <label style={{ fontSize: 14, marginBottom: 3, display: 'block' }}>Provider Image *</label>
 
-                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("providerName", { required: true })} />
+                                            {/* <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" /> */}
 
-                            <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
+                                            <label htmlFor="icon-button-file">
+                                                <Input style={{ marginBottom: 10 }} {...register("providerImage")} accept="image/*" id="icon-button-file" type="file" />
+                                                <IconButton color="primary" aria-label="upload picture" component="span">
+                                                    <PhotoCamera sx={{ color: "black" }} />
+                                                </IconButton>
+                                            </label>
 
-                            <TextField sx={inputStyle}
-                                {...register("email", { required: true })}
-                                id="outlined-error"
-                                label="Email"
-                                value={user.email}
-                            />
-                            <TextField sx={inputStyle}
-                                {...register("bio", { required: true })}
-                                label="Provider bio *"
-                            />
+                                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                                {
+                                                    watch("travelImg") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("travelImg")} /> </Box>
+                                                }
+                                            </Box>
+
+                                            <TextField sx={inputStyle} id="outlined-basic" label="User Name *" variant="outlined" {...register("userName", { required: true })} />
+
+                                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("providerName", { required: true })} />
+
+                                            <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
+
+                                        </Box>
+
+                                    }
+
+                                </Grid>}
+
+                                <Grid item xs={12} sm={user.role !== 'provider' ? 6 : 12}>
 
 
 
-
-                            <TextField sx={inputStyle} id="outlined-basic" label="Your address *" variant="outlined" {...register("address", { required: true })} />
-
-                            <TextField sx={inputStyle} id="outlined-multiline-static"
-                                label="Tell about your organization *"
-                                multiline
-                                rows={3} {...register("about", { required: true })} />
+                                    {user.role === 'provider' && <Box>
+                                        <Box sx={{ backgroundImage: `url(${category.Img})`, width: '100%', height: 220, objectFit: 'cover', backgroundSize: 'cover' }}></Box>
+                                        <Typography variant='h6' sx={{ my: 2, fontSize: 17 }}>Service Name:-  {category.Name}</Typography>
+                                    </Box>}
 
 
-                            {imgLoading ? <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>SUBMIT</Button> :
-                                <Button variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>Loading...</Button>}
+                                    <TextField sx={inputStyle}
+                                        {...register("email", { required: true })}
+                                        id="outlined-error"
+                                        label="Email"
+                                        value={user.email}
+                                    />
 
+                                    {user?.role !== 'provider' && <Box>
+
+                                        <TextField sx={inputStyle}
+                                            {...register("bio", { required: true })}
+                                            label="Provider bio *"
+                                        />
+
+                                        <TextField sx={inputStyle} id="outlined-basic" label="Your address *" variant="outlined" {...register("address", { required: true })} />
+
+                                        <TextField sx={inputStyle} id="outlined-multiline-static"
+                                            label="Tell about your organization *"
+                                            multiline
+                                            rows={3} {...register("about", { required: true })} />
+
+                                    </Box>
+                                    }
+
+                                    {
+                                        user.role === 'provider' ?
+                                            <Box>
+                                                {
+                                                    loading ?
+                                                        <Button type='submit' onClick={addService} variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>
+                                                            ADD+
+                                                        </Button>
+                                                        :
+                                                        <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>
+                                                            Loading...
+                                                        </Button>
+                                                }
+                                            </Box>
+                                            :
+                                            <Box>
+                                                {
+                                                    imgLoading
+                                                        ?
+                                                        <Button type='submit' variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>
+                                                            SUBMIT
+                                                        </Button>
+                                                        :
+                                                        <Button variant='outlined' sx={{ letterSpacing: 2, width: '100%' }}>Loading...</Button>
+                                                }
+                                            </Box>
+                                    }
+
+                                </Grid>
+
+                            </Grid>
                         </form>
 
                     </Box>

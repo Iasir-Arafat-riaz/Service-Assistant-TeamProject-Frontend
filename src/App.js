@@ -5,7 +5,6 @@ import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 
-import io from "socket.io-client";
 
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
@@ -194,7 +193,6 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
-
 
 
         <Route path="*" element={<Error />} />
