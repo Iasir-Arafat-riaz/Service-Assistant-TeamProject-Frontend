@@ -4,5 +4,5 @@
     background-image: linear-gradient(315deg, #eb7712 0%, #fe5f75 74%);
     /* background-color: #fc5296;
     background-image: linear-gradient(315deg, #fc5296 0%, #f67062 74%);  */
-
+    max-width: 100%;
 }

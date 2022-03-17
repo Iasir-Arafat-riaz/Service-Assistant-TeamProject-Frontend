@@ -63,7 +63,7 @@ const ServiceCategory = ({ service }) => {
                         py: 5,
                         px: 2,
                         top: '30%',
-                        minWidth: '330px',
+                        // minWidth: '330px',
 
                     }}>
                     {/* <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 2, mb: 3, }}>
