@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { allData, sendNotification, setNotificationCount } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
 import { current } from '@reduxjs/toolkit';
+import useSocket from '../../../../Hooks/useSocket';
 
 
 const CheckoutForm = () => {
@@ -17,7 +18,7 @@ const CheckoutForm = () => {
     const [process, setProcessing] = useState(false);
     const dispatch = useDispatch();
     const [clientSecret, setClientSecret] = useState("");
-
+    const { socket } = useSocket();
 
     const { selectedService, user, orderInfo } = useSelector(allData);
     const price = selectedService.Price;
@@ -89,10 +90,22 @@ const CheckoutForm = () => {
             setProcessing(false);
             const date = new Date();
             const data = { ...selectedService, orderInfo: orderInfo, date: date };
+            console.log(data);
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;
             axios.post('https://dry-sea-00611.herokuapp.com/myorder', data).then(() => {
-                dispatch(sendNotification({ message, image, email: user.email, }))
+                //send to myself
+                dispatch(sendNotification({ message, image, email: user.email, link: '/dashboard/myorders' }))
+                //
+                dispatch(sendNotification({ message: "You have new orders waiting for admin approve", image, email: data.providerEmail, link: '/dashboard/provider/appointment' }))
+                socket.emit('notification', {
+                    message: "You have new orders waiting for admin approve",
+                    image,
+                    email: data.providerEmail,
+                    link: '/dashboard/provider/appointment',
+                    time: new Date(),
+                    seen: false,
+                })
             });
         };
     };

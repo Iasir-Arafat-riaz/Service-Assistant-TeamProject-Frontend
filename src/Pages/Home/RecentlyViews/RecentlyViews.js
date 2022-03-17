@@ -4,8 +4,10 @@ import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { Box } from "@mui/system";
 import { initialRecent } from "../../../utils/utils";
-import Slider from "react-slick";
-import CommonService from "../HomeServices/CommonService";
+import CustomSlider from "../../SharedRoute/CustomSlider/CustomSlider";
+import RecentlyView from "./RecentlyView"
+
+import TrendingService from "../TrendingServices/TrendingService";
 
 const RecentlyViews = () => {
 
@@ -14,63 +16,9 @@ const RecentlyViews = () => {
   //console.log(recentIds);
 
   useEffect(() => {
-    // axios
-    //   .get("https://dry-sea-00611.herokuapp.com/services")
-    //   .then((res) => {
-    //     const service = [];
-    //     res.data.filter((item) => {
-    //       item.Services.forEach((ele) => {
-    //         // //console.log(recentIds.includes(ele.Id));
-    //         if (recentIds.includes(ele.Id)) {
-    //           service.push(ele);
-    //         }
-    //       });
-    //     });
-    //     // //console.log(recentService);
-    //     // setServices(res.data.slice(5, 9));
-    //     setServices(service);
-    //     setLoading(false);
-    //   });
     setServices(initialRecent())
-
-
   }, []);
 
-  // slick slider
-  const slickSlider = {
-    dots: false,
-    infinite: false,
-    speed: 2000,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: false,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 900,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
-  };
-  // console.log(services[]?.Services[0]?.Id)
   return (
     <Container sx={{ mb: 8 }}>
       {loading ? (
@@ -98,31 +46,11 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      )
-        :
-        services.length > 4 ?
-          <Slider {...slickSlider}>
-            {
-              services.map((service) => (
-                <CommonService
-                  key={service?._id}
-                  service={service}
-                />
-              ))
-            }
-          </Slider>
-          :
-          <Stack direction='row'>
-            {
-              services.map((service) => (
-                <CommonService
-                  key={service._id}
-                  service={service}
-                />
-              ))
-            }
-          </Stack>
-      }
+      ) : services.length > 4 ? <CustomSlider data={services} component={RecentlyView}></CustomSlider> : <Stack direction='row'>
+        {services.map((service) => (
+          <RecentlyView single key={service._id} {...service} />
+        ))}
+      </Stack>}
 
     </Container>
   );

@@ -7,8 +7,11 @@ import { setItemInLocal } from '../../../utils/utils';
 const CommonService = ({ service }) => {
 
     const { Category, Img } = service;
-    // const { Id } = service?.Services[0];
 
+   
+
+
+    // const { Id } = service?.Services[0];
     const navigate = useNavigate();
 
     const handleRouteChange = () => {

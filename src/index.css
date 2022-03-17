@@ -37,7 +37,20 @@ div::-webkit-scrollbar-thumb {
 div:hover::-webkit-scrollbar-thumb{
   background: #bebebe;  
 }
-
+.testimonials-userWrap::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 20px;  
+}
+.testimonials-userWrap:hover::-webkit-scrollbar-thumb{
+  background: #ffffff;  
+}
+.all-list::-webkit-scrollbar-thumb {
+  background: #ffffff; 
+  border-radius: 0px;  
+}
+.all-list:hover::-webkit-scrollbar-thumb{
+  background: #ffffff;  
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -62,4 +75,10 @@ color: black !important;
 
 .slick-prev.slick-disabled{
 display: none !important;
+}
+
+.select-service{
+  border-right: 4px solid #00a1ba !important;
+  background-color: #f4f5f8 !important; 
+  font-weight: 700;
 }

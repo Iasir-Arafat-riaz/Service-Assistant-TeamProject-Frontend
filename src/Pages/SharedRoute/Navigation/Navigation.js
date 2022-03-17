@@ -45,6 +45,7 @@ import {
   setNotificationCount,
   updateMessageStatus,
 } from "../../../redux/dataSlice/dataSlice";
+import NotificationCard from './Component/NotificationCard'
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
@@ -89,7 +90,7 @@ const Navigation = () => {
 
   useEffect(() => {
     dispatch(getNotification(user));
-  }, [user, dispatch, isMessageSeen]);
+  }, [user, dispatch]);
 
   // let
   // let MessageSeen;
@@ -531,34 +532,7 @@ const Navigation = () => {
                         p: 2,
                       }}
                     >
-                      {notifications.map((notification) => (
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            gap: 2,
-                            mb: 1,
-                            borderBottom: "2px solid #F4F5F8",
-                            pb: 1,
-                          }}
-                        >
-                          <Avatar
-                            alt="notification image"
-                            sx={{ borderRadius: 0, width: 60, height: 60 }}
-                            src={notification?.image}
-                          />
-
-                          <Box>
-                            <Typography variant="h6" sx={{ fontSize: 14 }}>
-                              {notification.message}
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontSize: 11 }}>
-                              Time: {notification.time}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      ))}
+                      {notifications.map((notification) => <NotificationCard notification={notification}></NotificationCard>)}
                     </Box>
                   </Popover>
                 </>

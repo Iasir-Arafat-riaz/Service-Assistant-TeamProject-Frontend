@@ -39,7 +39,7 @@ const Home = () => {
             {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }
-             
+
             <Footer />
         </>
     );

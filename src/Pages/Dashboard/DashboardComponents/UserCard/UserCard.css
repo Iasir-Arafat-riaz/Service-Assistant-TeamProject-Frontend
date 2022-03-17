@@ -13,12 +13,24 @@
     display: inline-block;
     font-weight: bold; 
     border-radius: 50px;
+    margin-bottom: 10px;
 } 
 .client-span{ 
     background: rgb(1,110,119);
     background: linear-gradient(90deg, rgba(1,110,119,0.8015581232492998) 0%, rgba(69,189,252,0.7819502801120448) 100%);
 
+    margin-bottom: 10px;
+    color: white;
+    padding: 4px 20px; 
+    display: inline-block;
+    font-weight: bold; 
+    border-radius: 50px;
+} 
+.provider-span{ 
+    background: rgb(1,110,119);
+    background: linear-gradient(49deg, rgba(4, 0, 0, 0.802) 0%, rgba(245, 61, 61, 0.782) 100%);
 
+    margin-bottom: 10px;
     color: white;
     padding: 4px 20px; 
     display: inline-block;
