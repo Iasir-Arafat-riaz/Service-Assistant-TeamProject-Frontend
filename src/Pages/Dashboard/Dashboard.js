@@ -106,7 +106,7 @@ const Dashboard = (props) => {
       <List>
         {
           loading ? [...new Array(8)].map((ske, index) =>
-            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2 }} sx={{ mb: 2 }} height={45} />
+            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb:2}}  height={45} />
           ) : <Box>
             {/* admin  */}
 
@@ -202,7 +202,7 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/pendingtestimonial`}
+              to={`/dashboard/pendingtestimonial`}
               button
               style={activeStyle}
             >
@@ -214,7 +214,7 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/managetestimonials`}
+              to={`/dashboard/managetestimonials`}
               button
               style={activeStyle}
             >
@@ -226,7 +226,7 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/pendingprovider`}
+              to={`/dashboard/pendingprovider`}
               button
               style={activeStyle}
             >
@@ -323,7 +323,7 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/addtestimonial`}
+              to={`/dashboard/addtestimonial`}
               button
               style={activeStyle}
             >
@@ -339,7 +339,7 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/savedservice`}
+              to={`/dashboard/savedservice`}
               button
               style={activeStyle}
             >
@@ -351,7 +351,7 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/becomeaprovider`}
+              to={`/dashboard/becomeaprovider`}
               button
               style={activeStyle}
             >
@@ -359,6 +359,17 @@ const Dashboard = (props) => {
                 <BeenhereIcon />
               </ListItemIcon>
               <ListItemText primary={"Become a provider "} />
+            </ListItem>
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/addquestions`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <BeenhereIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Questions "} />
             </ListItem>
 
 
