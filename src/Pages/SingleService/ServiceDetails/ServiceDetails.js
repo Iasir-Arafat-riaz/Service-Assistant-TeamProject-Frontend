@@ -30,11 +30,9 @@ const ServiceDetails = ({ matchService, question1, question2, question3, singleS
                 </Grid>
 
 
-               
+
 
                 <Grid item xs={12} md={6} lg={4}>
-
-
                     <ServiceCategory service={matchService} />
                 </Grid>
 
