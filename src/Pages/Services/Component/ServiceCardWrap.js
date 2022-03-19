@@ -1,10 +1,13 @@
 import { Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import ServiceCard from '../ServiceCard';
 
-const ServiceCardWrap = ({ service, classes }) => {
+const ServiceCardWrap = (props) => {
+    const { service, classes } = props;
+    console.log(window.innerWidth <= 500 ? .2 : 1);
     const [isVisible, setIsVisible] = useState(false);
     const divID = service.Category?.split(" ").join("").toLowerCase();
     const targetRef = useRef();
@@ -14,7 +17,7 @@ const ServiceCardWrap = ({ service, classes }) => {
         return {
             root: null,
             rootMargin: '0px',
-            threshold: 1
+            threshold: window.innerWidth <= 500 ? .3 : 1
         }
     }, [])
 
@@ -25,7 +28,6 @@ const ServiceCardWrap = ({ service, classes }) => {
         // creating observer
         const observer = new IntersectionObserver(entries => {
             const [entry] = entries;
-            console.log(entry);
             setIsVisible(entry.isIntersecting)
         }, options)
         //init observer
@@ -44,37 +46,38 @@ const ServiceCardWrap = ({ service, classes }) => {
     }, [isVisible, divID, navigate])
 
     return (
-        <div
-            id={divID}
-            ref={targetRef}
-            key={`${service._id}${service.Category}`}
-            className={classes.subServices}
-        >
-             <Typography
-                      sx={{
+        <Box sx={{ pl: { xs: 2, md: 0 } }}>
+            <div
+                id={divID}
+                ref={targetRef}
+                key={`${service._id}${service.Category}`}
+                className={classes.subServices}
+            >
+                <Typography
+                    sx={{
                         pb: 2,
                         fontSize: "24px",
                         color: "rgba(0,0,0,.8)",
                         fontWeight: 600,
-                      }}
-                      variant="h5"
-                      gutterBottom
-                      component="div"
-                    >
-                      {service.Category}
-                    </Typography>
-            <Grid
-                container
-                alignItems="stretch"
-                className={classes.gridMargin}
-                spacing={3}
-            >
+                    }}
+                    variant="h5"
+                    gutterBottom
+                    component="div"
+                >
+                    {service.Category}
+                </Typography>
+                <Grid
+                    container
+                    className={classes.gridMargin}
+                    spacing={3}
+                >
 
-                {service.Services?.map((item) => (
-                    <ServiceCard key={item.Id} {...item} />
-                ))}
-            </Grid>
-        </div>
+                    {service.Services?.map((item) => (
+                        <ServiceCard key={item.Id} {...item} />
+                    ))}
+                </Grid>
+            </div>
+        </Box>
     );
 };
 

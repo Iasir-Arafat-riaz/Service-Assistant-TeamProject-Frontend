@@ -43,7 +43,7 @@ const ServiceCard = ({ Name, Img, Id }) => {
           <Box
             sx={{
               backgroundImage: `url(${Img})`,
-              height: '150px', width: '250px',
+              height: '150px', width: { xs: '100%', md: '250px' },
               backgroundSize: 'cover',
               borderRadius: 2
             }}>

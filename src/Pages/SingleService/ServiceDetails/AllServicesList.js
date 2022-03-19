@@ -48,7 +48,7 @@ const AllServicesList = () => {
                     :
                     <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                            <Typography sx={{ fontSize: 22, fontWeight: 'bold' }}>Our all services</Typography>
+                            <Typography sx={{ fontSize: 22, fontWeight: 'bold', }}>Our all services</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             {allServices.map(service => <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center' }} key={service.Category}>

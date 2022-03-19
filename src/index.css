@@ -12,6 +12,9 @@ box-sizing: border-box;
 body,html{
   overflow-x: hidden !important;
 }
+*{
+  font-family: 'poppins'!important;
+}
 
 /* width */
 ::-webkit-scrollbar {

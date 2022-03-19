@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { NavHashLink } from "react-router-hash-link";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { Container } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -21,7 +21,8 @@ import Loading from "../SharedRoute/Loader/Loading";
 import "./Services.css";
 import { Box } from "@mui/system";
 import ServiceCardWrap from "./Component/ServiceCardWrap";
-
+import Button from '@mui/material/Button';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const useStyles = makeStyles({
   drawerPaper: {
     marginTop: "100px",
@@ -50,12 +51,10 @@ const useStyles = makeStyles({
 const Services = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [mobileOpen, setMobileOpen] = useState(false);
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
   const location = useLocation();
 
-  const drawerWidth = 240;
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
     console.log(url);
@@ -66,139 +65,67 @@ const Services = (props) => {
     dispatch(loadServiceCategory());
     dispatch(singleService());
   }, [dispatch]);
-
   if (serviceIsLoading) {
     return <Loading />;
   }
-
   return (
     <>
       <Navigation />
 
       <Container sx={{ mt: 15 }}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontSize: "32px",
-            fontWeight: 600,
-            color: "#323334",
-            mb: 3,
-            ml: 1.5,
-          }}
-        >
-          All Services
-        </Typography>
-
         <Grid container>
-          <Grid item lg={3}>
-            <Box className="sidebar" >
-              {allServices.map((item) => {
-                const ID = item.Category.split(" ").join("").toLowerCase();
-                return (
-                  // <a to={`/services/#${ID}`}>{item.Category}</a>
-                  <ListItem sx={{ p: 0 }} key={item._id}>
-                    <ListItemButton
-                      component={NavHashLink}
-                      smooth
-                      className={
-                        location.hash === "#" + ID ? "select-service" : ""
-                      }
-                      to={`/services/#${ID}`}
-                    >
-                      <ListItemText>{item.Category}</ListItemText>
-                    </ListItemButton>
+          <Grid item xs={4} md={3} lg={3} spacing={{ xs: 2, md: 3 }}>
+            <Box className="sidebar-wrap"
+              sx={{ position: { xs: 'fixed', md: 'fixed' }, }}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 600,
+                  color: "#323334",
+                  mb: 3,
+                  ml: 1.5,
+                  fontSize: '17px',
+                  display: { xs: 'none', md: 'block' }
 
-                    {/* <NavHashLink
+                }}
+              >
+                All Services
+              </Typography>
+
+              <Box className="sidebar"
+                sx={{ height: { xs: '80vh', md: '75vh' } }}
+              >
+                {allServices.map((item) => {
+                  const ID = item.Category.split(" ").join("").toLowerCase();
+                  return (
+                    <ListItem sx={{ p: 0 }} key={item._id}>
+                      <ListItemButton
+                        component={NavHashLink}
                         smooth
-                        className="list_item"
-                        tabIndex={4}
+                        className={
+                          location.hash === "#" + ID ? "select-service" : ""
+                        }
                         to={`/services/#${ID}`}
                       >
-                        {item.Category}
-                      </NavHashLink> */}
-
-                    {/* <NavL ink exact activeClassName="active" to={`/services/#${ID}`} >{item.Category}</NavLink> */}
-                  </ListItem>
-                );
-              })}
-            </Box>
-          </Grid>
-
-          <Grid item lg={9}>
-            <Box className="content" sx={{ mt: -2 }}>
-            {allServices.map((service) => <ServiceCardWrap service={service} classes={classes}></ServiceCardWrap>)}
-              
-            </Box>
-          </Grid>
-        </Grid>
-
-        <Grid container>
-          {/* <div style={{ display: "flex" }}> */}
-          <Grid item>
-            {/* <Drawer
-
-
-            >
-
-              <List className={classes.listBottomPadding} >
-                {allServices.map((item) => {
-                  const ID = item.Category.split(" ")
-                    .join("")
-                    .toLowerCase();
-                  return (
-                    <ListItem key={item._id}>
-                      <ListItemButton>
-                        <ListItemText>
-                          <HashLink
-                            id="sidenavlink"
-                            smooth
-                            tabIndex="42"
-                            to={`/services/#${ID}`}
-                            className={classes.linkClass}
-                          >
-                            {item.Category}
-                          </HashLink>
-                        </ListItemText>
+                        <ListItemText sx={{ display: { xs: 'none', md: 'block' }, px: { xs: 0, md: 1 } }}>{item.Category.length >= 25 ? item.Category.slice(0, 16) + '...' : item.Category}</ListItemText>
+                        <ListItemText sx={{ display: { xs: 'block', md: 'none ' }, px: { xs: 0, md: 1 } }} >{item.Category.split(' ')[0].length >= 10 ? item.Category.slice(0, 7) + '...' : item.Category.split(' ')[0]}</ListItemText>
                       </ListItemButton>
                     </ListItem>
                   );
                 })}
-              </List>
-            </Drawer> */}
+              </Box>
+            </Box>
           </Grid>
-          <Grid>
-            {/* <Typography sx={{ textAlign: "center", fontWeight: 'bold' }} gutterBottom variant="h4" component="div">OUR ALL SERVICES</Typography> */}
-            <Grid>
-              {/* {allServices.map((service) => {
-                const divID = service.Category.split(" ")
-                  .join("")
-                  .toLowerCase();
-                return (
-                  <div
-                    id={divID}
-                    key={`${service._id}${service.Category}`}
-                    className={classes.subServices}
-                  >
-                    <Typography sx={{ pb: 2 }} variant="h5" gutterBottom component="div">{service.Category}</Typography>
 
-                    <Grid
-                      container
-                      alignItems="stretch"
-                      className={classes.gridMargin}
-                      spacing={3}
-                    >
+          <Grid item xs={8} md={9} lg={9}>
+            <Box className="content" >
+              {allServices.map((service) => <ServiceCardWrap service={service} classes={classes}></ServiceCardWrap>)}
 
-                      {service.Services.map((item) => (
-                        <ServiceCard key={item.Id} {...item} />
-                      ))}
-                    </Grid>
-                  </div>
-                );
-              })} */}
-            </Grid>
+            </Box>
           </Grid>
-          {/* </div> */}
         </Grid>
+
       </Container>
     </>
   );
