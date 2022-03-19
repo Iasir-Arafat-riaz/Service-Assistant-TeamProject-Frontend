@@ -44,7 +44,7 @@ const AppointmentRequest = () => {
                                     <CardContent>
                                         <Typography className={classes.root}>Service Name: {appointment.Name}</Typography>
                                         <Typography className={classes.root}>Price: {appointment.Price} BDT</Typography>
-                                        <Typography className={classes.root}>Payment Status: {appointment.payment.toString()}</Typography>
+                                        <Typography className={classes.root}>Payment Status: {appointment.payment?.toString()}</Typography>
                                         {/* <Typography>Service Category:
                                             {appointment.parentService.Title}</Typography> */}
                                         <Typography className={classes.root}>Order Status: {appointment.status}</Typography>
