@@ -1,0 +1,123 @@
+.service-area{
+    background-image: url('https://i.ibb.co/Y3z6YTs/bg-curve.png');
+
+    background-size: auto;
+  
+    background-position: top;
+  
+    background-repeat: no-repeat;
+  
+    padding-top: 120px;
+  
+    padding-bottom: 100px;
+}
+
+.sub-title{
+    color: #022279;
+
+    text-transform: uppercase;
+  
+    letter-spacing: 4px;
+  
+    display: block;
+  
+    margin-bottom: 10px;
+  
+    font-weight:700;
+}
+
+.step-around{
+    display: block;
+
+  background-color: #ffb600;
+
+  width: 140px;
+
+  height: 140px;
+
+  border-radius: 50px;
+
+  line-height: 140px;
+
+  transform: rotate(135deg);
+
+  overflow:hidden;
+
+  -webkit-transition: all 0.5s ease;
+
+-moz-transition: all 0.5s ease;
+
+-ms-transition: all 0.5s ease;
+
+-o-transition: all 0.5s ease;
+
+transition: all 0.5s ease;
+}
+
+.step-around:hover {
+    border-radius:100px;
+
+  box-shadow: 0 0 0px 15px rgba(255, 182, 0, 0.17);
+}
+
+.icon-img{
+    transform: rotate(-135deg);
+}
+.img-rotate{
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  
+.step-section{
+    text-align: center;
+}
+.position-1 {
+    margin-top: 0px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.position-2{
+    margin-top: 60px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.position-3{
+    margin-top: 120px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+@media only screen and (max-width:991px) {
+    .service-area{
+        background-image: none;
+    }
+    .step-section{
+        padding: 0px 20px;
+    }
+
+    .position-1{
+        margin-top: 60px;
+    }
+
+    .position-2{
+        margin-top: 30px;
+    }
+
+    .position-3{
+        margin-top: 30px;
+    }
+
+   
+}
