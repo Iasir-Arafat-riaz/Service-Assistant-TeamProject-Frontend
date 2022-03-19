@@ -18,7 +18,7 @@ const Footer = () => {
 
                         <Box className="footer-social-icon">
                             <span className='hoverColor'>Follow us</span>
-                            <a target="_blank" href="https://www.facebook.com/Service-A2Z-101461739182775"><i className="fab fa-facebook-f facebook-bg footerIcon"></i></a>
+                            <a target="_blank" href="https://www.facebook.com/Service-A2Z-101461739182775"><i className="fab fa-facebook-f  facebook-bg footerIcon" aria-hidden="true"></i></a>
                             <a target="_blank" href="https://twitter.com/service_a2z_web"><i className="fab fa-twitter twitter-bg footerIcon"></i></a>
                             <a target="_blank" href="http://google.com/"><i className="fab fa-google-plus-g google-bg footerIcon"></i></a>
                             <a target="_blank" href="https://www.youtube.com/channel/UCRR0lgDJtkv7Hyikak8q01Q"><i class="fab fa-youtube youtube-bg footerIcon"></i></a>
