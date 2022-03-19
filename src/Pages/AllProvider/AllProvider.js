@@ -43,7 +43,7 @@ const AllProvider = () => {
                 <Box sx={{ width: { md: '70%', xs: "90", textAlign: 'center' } }}>
                     <Typography variant="h3" color='#363636' sx={{ fontWeight: 'bold', mb: 3 }}>Top Providers</Typography>
                     <Typography variant="body1" color='#363636' sx={{ mb: 3 }}>
-                        Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim adena minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</Typography>
+                        Our providers are committed to serving service with customer satisfaction. They always maintain all safety requirements and come with the necessary materials.</Typography>
                 </Box>
             </Stack>
             <Box
