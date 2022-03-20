@@ -27,6 +27,9 @@
   .google-bg{
     background: #DD4B39;
   }
+  .youtube-bg{
+    background-color: red;
+  }
 
   .useful-links a{
     display: block;
@@ -84,6 +87,21 @@ color: #7E7E7E;
   height: 2px;
   width: 50px;
   background: #ff5e14;
+}
+.footerIcon{
+  transition: transform .4s
+}
+.footerIcon:hover{
+  transform: scale(1.2)
+}
+
+.hoverColor:hover{
+  color:#ff5e14 ;
+}
+
+.footerInput:hover{
+  background-color: whitesmoke;
+  color: #DD4B39;
 }
 
 @media (max-width:600px) {
