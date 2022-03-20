@@ -1,45 +1,43 @@
 import React, { useEffect, useState } from "react";
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import axios from "axios";
 import Loading from "../../../SharedRoute/Loader/Loading";
 import TransitionsModal from "./Component/SelectCategoryModal";
 
-
 function createData(service) {
-
-  const newHistory = service.allServices.map(item => {
-    const newKey = item.Key.reduce((acc, ele) => {
-      return acc.concat({...ele, Title: item.Title});
-    }, [])
-    return newKey
-
-  }).reduce((acc, item) => {
-    acc = acc.concat(item);
-    return acc;
-  }, [])
-
+  const newHistory = service.allServices
+    .map((item) => {
+      const newKey = item.Key.reduce((acc, ele) => {
+        return acc.concat({ ...ele, Title: item.Title });
+      }, []);
+      return newKey;
+    })
+    .reduce((acc, item) => {
+      acc = acc.concat(item);
+      return acc;
+    }, []);
 
   return {
     id: service._id,
     image: service.Img,
     title: service.Title,
-    providerName:service.provider_info[0].displayName,
+    providerName: service.provider_info[0].displayName,
     providerEmail: service.provider_info[0].email,
     date: new Date(service.createdAt).toLocaleDateString(),
-    history2: newHistory     
+    history2: newHistory,
   };
 }
 
@@ -48,13 +46,13 @@ function Row(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleApprove = (id) => {
-    setServiceInfoId(id)
-    handleOpenModal()
-  }
+    setServiceInfoId(id);
+    handleOpenModal();
+  };
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -70,7 +68,16 @@ function Row(props) {
         <TableCell align="right">{row.providerName}</TableCell>
         <TableCell align="right">{row.providerEmail}</TableCell>
         <TableCell align="right">{row.date}</TableCell>
-        <TableCell align="right"><Button variant="outlined" onClick={() => handleApprove({Id: row.id, Name: row.title, Img: row.image})}>Approve</Button></TableCell>
+        <TableCell align="right">
+          <Button
+            variant="outlined"
+            onClick={() =>
+              handleApprove({ Id: row.id, Name: row.title, Img: row.image })
+            }
+          >
+            Approve
+          </Button>
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -116,64 +123,69 @@ export default function AdminPendingRequest() {
   const [openModal, setOpenModal] = React.useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
-  const [isPendingDataLoading, setIsPendingDataLoading] = useState(true)
-  const [pendingService, setPendingService] = useState([])
-  const [categoryId, setCategoryId] = useState(null)
-  const [serviceInfo, setServiceInfoId] = useState(null)
+  const [isPendingDataLoading, setIsPendingDataLoading] = useState(true);
+  const [pendingService, setPendingService] = useState([]);
+  const [categoryId, setCategoryId] = useState(null);
+  const [serviceInfo, setServiceInfoId] = useState(null);
 
   const handleSubmitCategory = async () => {
-const url = `https://dry-sea-00611.herokuapp.com/api/v1/service-category/${categoryId}`
-const res = await axios.patch(url, serviceInfo);
-console.log(res)
-  }
+    const url = `https://dry-sea-00611.herokuapp.com/api/v1/service-category/${categoryId}`;
+    const res = await axios.patch(url, serviceInfo);
+    console.log(res);
+    
+  };
 
-  
   let rows;
-  
+
   useEffect(() => {
-    const url = 'https://dry-sea-00611.herokuapp.com/api/v1/pending-services'
+    const url = "https://dry-sea-00611.herokuapp.com/api/v1/pending-services";
     const pendingService = async () => {
-      const service = await axios.get(url).then(res => res.data)
-      setPendingService(service.data)
-      setIsPendingDataLoading(false)
-    }
+      const service = await axios.get(url).then((res) => res.data);
+      setPendingService(service.data);
+      setIsPendingDataLoading(false);
+    };
 
-    pendingService()
+    pendingService();
   }, []);
-  
-  if (pendingService.length > 0){
 
-    rows = pendingService.map(ele => createData(ele));
+  if (pendingService.length > 0) {
+    rows = pendingService.map((ele) => createData(ele));
 
     return (
       <>
-      <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>Service Title</TableCell>
-              <TableCell align="right">Provider Name</TableCell>
-              <TableCell align="right">Provider Email</TableCell>
-              <TableCell align="right">Requested Date</TableCell>
-              <TableCell align="right">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row ,index) => (
-              <Row key={index} row={row} handleOpenModal={handleOpenModal} setServiceInfoId={setServiceInfoId}/>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-        <TransitionsModal handleCloseModal={handleCloseModal} openModal={openModal} category={setCategoryId} handleSubmitCategory={handleSubmitCategory}/>
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Service Title</TableCell>
+                <TableCell align="right">Provider Name</TableCell>
+                <TableCell align="right">Provider Email</TableCell>
+                <TableCell align="right">Requested Date</TableCell>
+                <TableCell align="right">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row, index) => (
+                <Row
+                  key={index}
+                  row={row}
+                  handleOpenModal={handleOpenModal}
+                  setServiceInfoId={setServiceInfoId}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TransitionsModal
+          handleCloseModal={handleCloseModal}
+          openModal={openModal}
+          category={setCategoryId}
+          handleSubmitCategory={handleSubmitCategory}
+        />
       </>
     );
   }
 
-
-  return ( 
-    <Loading />
-    
-  );
+  return <Loading />;
 }
