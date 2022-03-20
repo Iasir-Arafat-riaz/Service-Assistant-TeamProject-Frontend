@@ -29,10 +29,17 @@ const initialState = {
     orderInfo: {},
     selectedService: {},
     reviewIndex: 0,
-    id: [],
+    providerEmail: {},
     notifications: [],
     notificationLoading: true,
     notificationCount: 0,
+
+    orderChats: [],
+    otherOrders: [],
+
+    approvdedLoading: true,
+    deleteLoading: true,
+
 
 }
 
@@ -42,14 +49,14 @@ const initialState = {
 export const saveUserToDb = createAsyncThunk(
     'saveUserToDb/user',
     async (info) => {
-        const response = await axios.post(`https://fierce-meadow-12011.herokuapp.com/users/register`, info);
+        const response = await axios.post(`https://dry-sea-00611.herokuapp.com/users/register`, info);
         return response.data
     }
 )
 export const putUserToDb = createAsyncThunk(
     'data/putUserToDb',
     async (info) => {
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/users/register `, info);
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/users/register `, info);
         return response.data
     }
 )
@@ -57,21 +64,21 @@ export const makeAdmin = createAsyncThunk(
     'data/makeAdmin',
     async (info) => {
         //console.log(info);
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/admin/makeadmin/${info.email} `, info);
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/admin/makeadmin/${info.email} `, info);
         return response.data
     }
 )
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/admin/checkadmin/${info.email}`);
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
 export const getAllUser = createAsyncThunk(
     'data/getAllUser',
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/users/allusers`);
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/users/allusers`);
         return response.data
     }
 )
@@ -81,7 +88,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "https://fierce-meadow-12011.herokuapp.com/services"
+            "https://dry-sea-00611.herokuapp.com/services"
         ).then((res) => res.json());
         return response;
     }
@@ -90,7 +97,7 @@ export const loadServiceCategory = createAsyncThunk(
 export const singleService = createAsyncThunk(
     "singleService/details",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/singleservice")
+        const response = await axios.get("https://dry-sea-00611.herokuapp.com/singleservice")
         return response.data;
     }
 );
@@ -98,7 +105,7 @@ export const singleService = createAsyncThunk(
 export const websiteReviews = createAsyncThunk(
     "testimonials/data",
     async () => {
-        const response = await axios.get("https://fierce-meadow-12011.herokuapp.com/reviews")
+        const response = await axios.get("https://dry-sea-00611.herokuapp.com/reviews")
         return response.data;
     }
 )
@@ -107,13 +114,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-        const response = await axios.delete(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Deleted',
-                'This testimonial has been deleted',
-                'success'
-            )
-        })
+        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 )
@@ -121,13 +122,7 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-        const response = await axios.put(`https://fierce-meadow-12011.herokuapp.com/reviews/${info.id}`).then(() => {
-            Swal.fire(
-                'Approved!',
-                'This testimonial has been approved',
-                'success'
-            )
-        })
+        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
         return response.data;
     }
 );
@@ -135,7 +130,7 @@ export const approvedTestimonial = createAsyncThunk(
 export const serviceProviders = createAsyncThunk(
     "providers/service",
     async () => {
-        const response = await axios.get('https://fierce-meadow-12011.herokuapp.com/users/finding/ids', {
+        const response = await axios.get('https://dry-sea-00611.herokuapp.com/users/finding/ids', {
             params: {
                 data: [
                     "62121eb1cef8c7b4915a6923",
@@ -149,14 +144,14 @@ export const serviceProviders = createAsyncThunk(
 export const postChat = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.post('https://fierce-meadow-12011.herokuapp.com/chat', info)
+        const response = await axios.post('https://dry-sea-00611.herokuapp.com/chat', info)
         return response.data;
     }
 );
 export const getChatFromDb = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.get(`https://fierce-meadow-12011.herokuapp.com/chat`);
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat`);
         return response.data;
     }
 );
@@ -166,7 +161,7 @@ export const saveService = createAsyncThunk(
     "service/save",
     async (info) => {
         //console.log(info)
-        const response = await axios.post('https://fierce-meadow-12011.herokuapp.com/saveservice', info)
+        const response = await axios.post('https://dry-sea-00611.herokuapp.com/saveservice', info)
         return response.data;
     }
 );
@@ -194,7 +189,34 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
         return response.data;
     }
 )
+export const getProviderChatsDb = createAsyncThunk(
+    "data/getProviderChatsDb",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/provider/${info.email}`)
+        return response.data;
+    }
+)
 
+export const getOtherOrders = createAsyncThunk(
+    "data/getOtherOrders",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
+        return response.data;
+    }
+)
+
+
+export const getSingleOrdersChat = createAsyncThunk(
+    "data/getSingleOrdersChat",
+    async (info) => {
+        // console.log(info)
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/singleOrder/${info.id}`)
+
+        return response.data;
+    }
+)
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -203,7 +225,7 @@ export const dataSlice = createSlice({
             state.user = action.payload
         },
         logout: (state, action) => {
-            state.user = null
+            state.user = {}
         },
         changeRole: (state, { payload }) => {
             const email = payload.email;
@@ -235,6 +257,12 @@ export const dataSlice = createSlice({
             // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
             saveService(state.cartItems);
         },
+        remaingTestimonials: (state, { payload }) => {
+            state.testimonials = state.testimonials.filter((item) => item._id !== payload)
+        },
+        deleteTestimonails: (state, { payload }) => {
+            state.testimonials = state.testimonials.filter((item) => item._id !== payload)
+        },
         addOrderInfo: (state, { payload }) => {
             state.orderInfo = payload;
         },
@@ -244,6 +272,9 @@ export const dataSlice = createSlice({
         addChat: (state, { payload }) => {
             state.allChat = [...state.allChat, payload];
         },
+        addOrderChat: (state, { payload }) => {
+            state.orderChats = [...state.orderChats, payload];
+        },
         changeUserPosition: (state, { payload }) => {
             //console.log(payload);
             const uid = payload?.uid;
@@ -251,16 +282,24 @@ export const dataSlice = createSlice({
             const withoutUser = state.allUser.filter(user => user.uid !== uid);
             state.allUser = [getUser, ...withoutUser]
         },
+        changeOtherOrdersPosition: (state, { payload }) => {
+            //console.log(payload);
+            const id = payload?.id;
+            const getUser = state.otherOrders.filter(order => order._id === id)[0];
+            const withoutUser = state.otherOrders.filter(order => order._id !== id);
+            state.otherOrders = [getUser, ...withoutUser]
+        },
         reviewServiceIndex: (state, { payload }) => {
             state.reviewIndex = payload;
         },
         parentServiceId: (state, { payload }) => {
-            state.id.push(payload);
+            state.providerEmail = payload;
         },
 
         newNotification: (state, { payload }) => {
             state.notifications = [payload, ...state.notifications]
         },
+
 
 
     },
@@ -347,11 +386,33 @@ export const dataSlice = createSlice({
             .addCase(sendNotification.rejected, (state, { payload }) => {
                 console.log('rejected');
             })
+            .addCase(deleteTestimonial.pending, (state, { payload }) => {
+                state.deleteLoading = true;
+            })
+            .addCase(deleteTestimonial.fulfilled, (state, { payload }) => {
+                state.deleteLoading = false;
+            })
+            .addCase(approvedTestimonial.pending, (state, { payload }) => {
+                state.approvdedLoading = false;
+            })
+            .addCase(approvedTestimonial.fulfilled, (state, { payload }) => {
+                state.approvdedLoading = true;
+            })
+
+            .addCase(getOtherOrders.fulfilled, (state, { payload }) => {
+                state.otherOrders = payload.reverse();
+            })
+            .addCase(getProviderChatsDb.fulfilled, (state, { payload }) => {
+                state.orderChats = payload;
+            })
+            .addCase(getSingleOrdersChat.fulfilled, (state, { payload }) => {
+                state.orderChats = payload;
+            })
 
     },
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails,addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

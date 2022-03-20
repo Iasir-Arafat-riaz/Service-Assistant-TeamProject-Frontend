@@ -17,11 +17,11 @@ const ServiceCategory = ({ service }) => {
     const [selectService, setSelectService] = useState({});
     // const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
     const matchService = singleServiceDetails?.find(service => {
-        if (serviceId.length > 4){
+        if (serviceId.length > 4) {
             return service._id == serviceId;
-          }else {
+        } else {
             return parseInt(service.parentService) === parseInt(serviceId)
-          }
+        }
     });
 
     // open modal
@@ -56,18 +56,21 @@ const ServiceCategory = ({ service }) => {
                     }
                 </Box>
                 :
-
                 <Paper
                     className="categoryBox"
                     elevation={3}
                     sx={{
                         py: 5,
                         px: 2,
-                        mr: 5,
-                        top: '30%',
-                        minWidth: '345px'
 
                     }}>
+                    {/* <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 2, mb: 3, }}>
+
+                        <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2, color: '#fff' }} component="h2">
+                            Order Here
+                        </Typography>
+
+                    </Box> */}
                     <Typography
                         variant='h5'
                         sx={{
@@ -90,19 +93,27 @@ const ServiceCategory = ({ service }) => {
                     </Button>
 
 
-                    {
-                        matchService?.allServices?.map((service, index) => <Box
-                            onClick={() => handleOpenModal(index, service)}
-                            sx={box} key={index}>
-                            {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
-                            <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
-                            <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />
-                        </Box>)
+                    {matchService?.allServices?.map((service, index) => <Box
+                        onClick={() => handleOpenModal(index, service)}
+                        sx={box} key={index}>
+                        {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
+                        <Box sx={{ display: 'flex', justifyContent: 'center', mr: 1 }}>
+                            <img
+                                src={service.Image}
+                                alt='service-Img'
+                                style={{ borderRadius: '30%', width: '40px', height: '40px' }}
+                            />
+                        </Box>
+
+                        <Typography variant="h6" sx={{ fontSize: 18, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
+                        <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />
+                    </Box>)
                     }
 
                 </Paper>
             }
             {/* Modal */}
+
             <CategoryModal
                 selectServiceId={matchService.parentService}
                 index={index}

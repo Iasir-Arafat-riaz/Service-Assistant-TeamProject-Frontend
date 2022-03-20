@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography } from "@mui/material";
-import axios from "axios";
-import RecentlyView from "./RecentlyView";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import { Box } from "@mui/system";
 import { initialRecent } from "../../../utils/utils";
-import Slider from "react-slick";
+import CustomSlider from "../../SharedRoute/CustomSlider/CustomSlider";
+import RecentlyView from "./RecentlyView"
+
+import TrendingService from "../TrendingServices/TrendingService";
+import CommonService from "../HomeServices/CommonService";
 
 const RecentlyViews = () => {
 
@@ -15,62 +17,8 @@ const RecentlyViews = () => {
   //console.log(recentIds);
 
   useEffect(() => {
-    // axios
-    //   .get("https://fierce-meadow-12011.herokuapp.com/services")
-    //   .then((res) => {
-    //     const service = [];
-    //     res.data.filter((item) => {
-    //       item.Services.forEach((ele) => {
-    //         // //console.log(recentIds.includes(ele.Id));
-    //         if (recentIds.includes(ele.Id)) {
-    //           service.push(ele);
-    //         }
-    //       });
-    //     });
-    //     // //console.log(recentService);
-    //     // setServices(res.data.slice(5, 9));
-    //     setServices(service);
-    //     setLoading(false);
-    //   });
     setServices(initialRecent())
-
-
   }, []);
-
-  // slick slider
-  const slickSlider = {
-    dots: false,
-    infinite: false,
-    speed: 2000,
-    slidesToShow: 4,
-    slidesToScroll: 3,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: false,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 900,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 1
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
-  };
 
   return (
     <Container sx={{ mb: 8 }}>
@@ -89,7 +37,7 @@ const RecentlyViews = () => {
       )}
 
       {loading ? (
-        <Box sx={{ display: "flex", gap: 5 }}>
+        <Box >
           {[...new Array(4)].map(() => (
             <Stack spacing={1}>
               <Skeleton
@@ -99,13 +47,9 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : services.length > 4 ? <Slider {...slickSlider}>
+      ) : services.length > 4 ? <CustomSlider data={services} component={CommonService}></CustomSlider> : <Stack direction='row' >
         {services.map((service) => (
-          <RecentlyView key={service._id} {...service} />
-        ))}
-      </Slider> : <Stack direction='row'>
-        {services.map((service) => (
-          <RecentlyView key={service._id} {...service} />
+          <CommonService single key={service._id} service={service} />
         ))}
       </Stack>}
 

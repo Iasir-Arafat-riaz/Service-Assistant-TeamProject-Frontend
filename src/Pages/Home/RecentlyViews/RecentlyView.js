@@ -2,13 +2,14 @@ import { Box, Paper, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom"
 
-const RecentlyView = ({ Category, Img, Id }) => {
+const RecentlyView = (props) => {
+  const { Category, Img, Id } = props
   const navigate = useNavigate()
   const handleRouteChange = () => {
     navigate(`/Home/service-details/${Id}`)
   };
   return (
-    <Box onClick={handleRouteChange} sx={{ width: 250, p: 0, borderRadius: 3, mb: 1, mr: 3 }}>
+    <Box onClick={handleRouteChange} sx={{ width: 250, p: 0, borderRadius: 3, mb: 1, mr: props.single ? 3 : 0, m: props.single ? 3 : '0 auto' }}>
       <Paper
         elevation={2}
         sx={{
@@ -23,7 +24,7 @@ const RecentlyView = ({ Category, Img, Id }) => {
         variant="h6"
         sx={{ fontSize: 18, fontWeight: "bold", textAlign: "center", mt: 1 }}
       >
-        {Category}
+        {props?.service?.Category}
       </Typography>
     </Box>
   );

@@ -190,7 +190,7 @@ export default function AdminPendingRequest() {
     );
   } else {
     return (
-      <Typography variant="h2" gutterBottom component="div">
+      <Typography variant="h6" gutterBottom component="div">
         {" "}
         There is no pending services at this moment.
       </Typography>

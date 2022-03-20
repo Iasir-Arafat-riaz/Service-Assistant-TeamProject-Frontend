@@ -16,7 +16,7 @@ import OrderInfo from '../OrderInfo/OrderInfo';
 import { useNavigate } from 'react-router-dom';
 
 
-
+// modal style
 const style = {
     position: 'absolute',
     top: '50%',
@@ -158,12 +158,15 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
 
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
+
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
-                            AC servicing
+                        {matchService?.Title}
                         </Typography>
+
                     </Box>
 
                     <Button onClick={handleCloseModal} sx={{ mt: -20, ml: -1 }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button>
+
                     <Grid container spacing={0}>
 
                         <Box sx={{ width: '100%' }}>
@@ -270,7 +273,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                             {
                                 activeStep === 0 || activeStep === 1 || activeStep === 2 || activeStep === 3 ? <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-                                    <img style={{ margin: '75px 0' }} src="https://i.ibb.co/gzTXmwt/Screenshot-15.png" alt="cartImagw" />
+                                    <img style={{ margin: '75px 0' }} src="https://i.ibb.co/gzTXmwt/Screenshot-15.png" alt="cartImage" />
 
                                 </Box>
                                     :

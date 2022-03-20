@@ -36,7 +36,7 @@ const AddBannerSection = ({ banner }) => {
     // data._id = banner._id;
     //console.log(data);
     // reset();
-    axios.put("https://fierce-meadow-12011.herokuapp.com/headerBanners", data).then((response) => {
+    axios.put("https://dry-sea-00611.herokuapp.com/headerBanners", data).then((response) => {
       if (response.status == 200) {
         Swal.fire({
           position: "center",
@@ -55,7 +55,7 @@ const AddBannerSection = ({ banner }) => {
   const [load, setLoad] = useState(true);
   useEffect(() => {
     setLoad(true);
-    fetch("https://fierce-meadow-12011.herokuapp.com/headerBanners")
+    fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
       .then((res) => res.json())
       .then((data) => {
         setBanner(data);

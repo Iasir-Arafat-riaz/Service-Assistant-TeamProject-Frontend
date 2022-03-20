@@ -53,7 +53,7 @@ const RequestService = () => {
 
     const onSubmit = data => {
 
-        axios.post('https://fierce-meadow-12011.herokuapp.com/serviceReqEmail', data)
+        axios.post('https://dry-sea-00611.herokuapp.com/serviceReqEmail', data)
             .then(function (response) {
                 console.log(response);
                 console.log(data)
@@ -184,10 +184,10 @@ const RequestService = () => {
                             </Box>
 
                             <Box sx={{ display: 'flex ', justifyContent: 'center' }}>
-                                        
+
                                 <TextField
                                     {...register("name")}
-                                    sx={{ width: '40%', mb: 2 , mr: 1}}
+                                    sx={{ width: '40%', mb: 2, mr: 1 }}
                                     id="outlined-basic"
                                     label="Your Name"
                                     variant="outlined"

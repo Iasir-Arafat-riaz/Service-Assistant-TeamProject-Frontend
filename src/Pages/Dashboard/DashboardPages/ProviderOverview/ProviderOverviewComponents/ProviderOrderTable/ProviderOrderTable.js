@@ -11,18 +11,8 @@ import { Typography } from '@mui/material'
 import ProviderTableRow from './ProviderTableRow/ProviderTableRow';
 
 
-const ProviderOrderTable = () => {
-    function createData(name, phone, address, quantity, status) {
-        return { name, phone, address, quantity, status };
-    }
-    const rows = [
-        createData('Iasir Arafat Riaz', "01654214564", "south mugdha", 1, 'incomplete'),
-        createData('Md Sagar Ali', "016456814564", 'kalabagan', 2, 'incomplete'),
-        createData('Naimur Rahman ', '01554214564', 'jatrabari', 1, 'incomplete'),
-        createData('Mahfujur Rahman', '01954245542', 'malibag', 2, 'complete'),
-        createData(' Rakibul hoque', "01854214564", 'dhanmondhi', 3, 'complete'),
-        createData('Kawser Ali', '01475865658', 'demra', 2, 'incomplete'),
-    ];
+const ProviderOrderTable = ({ data }) => {
+
     // //console.log(rows)
     return (
         < >
@@ -33,12 +23,12 @@ const ProviderOrderTable = () => {
                             <TableCell>User</TableCell>
                             <TableCell>Phone</TableCell>
                             <TableCell>Address</TableCell>
-                            <TableCell>Quantity</TableCell>
+                            <TableCell>Service Name</TableCell>
                             <TableCell>Status</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                       {rows.map((row,index)=><ProviderTableRow key={index} row={row} />)}
+                        {data.map((row) => <ProviderTableRow key={row._id} row={row} />)}
                     </TableBody>
                 </Table>
             </TableContainer>

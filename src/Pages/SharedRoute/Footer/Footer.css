@@ -6,6 +6,13 @@
     font-family: 'Poppins', sans-serif;
     margin-bottom: 10px;
   }
+  .facebook{
+    font-size: 36px;
+    background-color: #ebf4fc;
+    color: #3B5998;
+    border-radius: 50px;
+    border: 0px;
+  }
   .footer-social-icon a {
     color: #fff;
     font-size: 16px;
@@ -26,6 +33,9 @@
   }
   .google-bg{
     background: #DD4B39;
+  }
+  .youtube-bg{
+    background-color: red;
   }
 
   .useful-links a{
@@ -84,6 +94,21 @@ color: #7E7E7E;
   height: 2px;
   width: 50px;
   background: #ff5e14;
+}
+.footerIcon{
+  transition: transform .4s
+}
+.footerIcon:hover{
+  transform: scale(1.2)
+}
+
+.hoverColor:hover{
+  color:#ff5e14 ;
+}
+
+.footerInput:hover{
+  background-color: whitesmoke;
+  color: #DD4B39;
 }
 
 @media (max-width:600px) {

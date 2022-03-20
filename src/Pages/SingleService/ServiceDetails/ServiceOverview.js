@@ -88,7 +88,7 @@ const ServiceOverview = ({ matchService, question1,
                         <Typography variant="h6">
                             <ul>
                                 <li>Checked Health condition of service specialist</li>
-                                <li>Ensuring use of masks, hand sanitisers, gloves, etc</li>
+                                <li>Ensuring use of masks, hand Sanitizers, gloves, etc</li>
                                 <li>Disinfecting equipments before and after the work</li>
                                 <li>Maintaining social distancing</li>
                             </ul>

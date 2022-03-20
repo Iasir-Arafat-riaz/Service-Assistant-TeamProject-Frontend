@@ -32,8 +32,8 @@ const UserCard = props => {
 
     const open = Boolean(anchorEl);
     return (
-        <Grid item xs={12} md={4}>
-            <Paper component={Stack} direction='row' justifyContent='space-between' elevation={2}>
+        <Grid item xs={12} lg={4} md={6}>
+            <Paper component={Stack} sx={{ height: 'auto' }} direction='row' justifyContent='space-between' elevation={2}>
                 <Stack direction='row'>
                     <Box  >
                         <img className='user-img' src={photoURL} alt={displayName} />
@@ -42,7 +42,7 @@ const UserCard = props => {
                         <Typography variant='h6'>{displayName}</Typography>
                         <Typography variant='small' component={'h5'} gutterBottom>{email}</Typography>
                         {
-                            role === 'admin' ? <span className='admin-span'>Admin</span> : <span className='client-span'> User</span>
+                            role === 'admin' ? <span className='admin-span'>Admin</span> : role === 'provider' ? <span className='provider-span'> Provider</span> : <span className='client-span'> User</span>
                         }
                     </Box>
                 </Stack>

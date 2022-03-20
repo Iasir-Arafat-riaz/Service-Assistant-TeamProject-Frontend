@@ -15,10 +15,12 @@ const BecomeaProvider = () => {
         dispatch(loadServiceCategory());
     }, [dispatch]);
 
-
+    if (serviceIsLoading) {
+        return <Typography variant='h6'>Loading...</Typography>
+    }
 
     return (
-        <div>
+        <>
 
 
             {
@@ -49,7 +51,7 @@ const BecomeaProvider = () => {
 
 
 
-        </div>
+        </>
     );
 };
 

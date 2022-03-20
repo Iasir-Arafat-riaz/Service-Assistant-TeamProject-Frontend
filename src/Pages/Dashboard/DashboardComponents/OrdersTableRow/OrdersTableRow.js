@@ -26,11 +26,27 @@ const OrdersTableRow = ({ data }) => {
                     image: data?.parentService?.Image,
                     email: data.email,
                 }))
+                // send notification to user 
                 socket.emit('notification', {
                     message: `your order for ${data.Name} is now on the way `,
                     image: data?.parentService?.Image,
                     email: data.email,
                     seen: false,
+                })
+                //send to provider
+                dispatch(sendNotification({
+                    message: `your appointment ${data.Name} is approve by admin `,
+                    image: data?.parentService?.Image,
+                    email: data.providerEmail,
+                    link: '/dashboard/provider/appointment'
+                }))
+                socket.emit('notification', {
+                    message: `your appointment  ${data.Name} is approve by admin `,
+                    image: data?.parentService?.Image,
+                    email: data.providerEmail,
+                    link: '/dashboard/provider/appointment',
+                    seen: false,
+                    time: new Date(),
                 })
             })
     }
@@ -43,7 +59,7 @@ const OrdersTableRow = ({ data }) => {
             <TableCell component="th" scope="row">
                 {data?.Name.slice(0, 20)}
             </TableCell>
-            <TableCell >{data?.provider.name ? data?.provider.name : data?.provider?.displayName}</TableCell>
+            <TableCell >{data?.provider?.name ? data?.provider.name : data?.provider?.displayName}</TableCell>
             <TableCell >{data.orderInfo?.name}</TableCell>
             <TableCell >{data.Price}</TableCell>
             <TableCell sx={{ p: 0 }}>

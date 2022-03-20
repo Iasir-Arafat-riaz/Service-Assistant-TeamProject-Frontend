@@ -26,15 +26,17 @@ import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
 import logo from "../images/web-logo.png";
-
+import PersonIcon from '@mui/icons-material/Person';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import AnchorIcon from '@mui/icons-material/Anchor';
-
+import BeenhereIcon from '@mui/icons-material/Beenhere';
 import { useSelector } from "react-redux";
 import { allData } from "../../redux/dataSlice/dataSlice";
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import Skeleton from '@mui/material/Skeleton';
 
 
 
@@ -51,27 +53,44 @@ const Dashboard = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const { user } = useSelector(allData)
-
+  const { user, loading } = useSelector(allData)
+  const activeStyle = ({ isActive }) => {
+    return {
+      borderRight: isActive ? "4px solid #00a1ba" : "4px solid transparent",
+      backgroundColor: isActive ? "#f4f5f8" : 'white'
+    };
+  }
   const drawer = (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          mt: 2,
-        }}
-      >
-        <Avatar
-          sx={{ width: 70, height: 70 }}
-          src={user.photoURL}
-          alt='admin img'
-        />
-        <Typography variant="h6" gutterBottom mt={1}>
-          {user.displayName}
-        </Typography>
-      </Box>
+      {
+        loading ? <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            mt: 2,
+          }}
+        >
+          <Skeleton variant="circular" width={80} height={80} />
+          <Skeleton variant="text" width={200} />
+        </Box> : <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            mt: 2,
+          }}
+        >
+          <Avatar
+            sx={{ width: 70, height: 70 }}
+            src={user?.photoURL}
+            alt='admin img'
+          />
+          <Typography variant="h6" gutterBottom mt={1}>
+            {user?.displayName}
+          </Typography>
+        </Box>
+      }
       <Box sx={{ display: { xs: "block", md: "none" } }}>
         <NavLink style={{ textDecoration: "none", color: "gray" }} to="/home">
           <Button color="inherit">Home</Button>
@@ -86,11 +105,16 @@ const Dashboard = (props) => {
       <Divider />
       <List>
         {
-          <Box>
+          loading ? [...new Array(8)].map((ske, index) =>
+            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb:2}}  height={45} />
+          ) : <Box>
+            {/* admin  */}
+
             <ListItem
               component={NavLink}
               to={`/dashboard/overview`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <ManageSearchIcon />
@@ -98,31 +122,25 @@ const Dashboard = (props) => {
               <ListItemText primary={"Over view"} />
             </ListItem>
             {/* Service Provider Overview */}
-            <ListItem
-              component={NavLink}
-              to={`/dashboard/providerOverview`}
-              button
-            >
-              <ListItemIcon>
-                <AnchorIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Provider Overview"} />
-            </ListItem>
+
 
             <ListItem
               component={NavLink}
               to={`/dashboard/manageAllOrders`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <RateReviewIcon />
               </ListItemIcon>
               <ListItemText primary={"Manage all orders"} />
             </ListItem>
+
             <ListItem
               component={NavLink}
               to={`/dashboard/adminChat`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <ContactSupportIcon />
@@ -132,33 +150,9 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/dashboard/manageproducts`}
-              button
-            >
-              <ListItemIcon>
-                <HandymanIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Manage Products"} />
-            </ListItem>
-
-
-            <ListItem
-              component={NavLink}
-              to={`/dashboard/addproduct`}
-              button
-            >
-              <ListItemIcon>
-                <RateReviewIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Add Products"} />
-            </ListItem>
-
-
-            <ListItem
-
-              component={NavLink}
               to={`/dashboard/addBanner`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <AddPhotoAlternateIcon />
@@ -166,27 +160,15 @@ const Dashboard = (props) => {
               <ListItemText primary={"Add Banner"} />
             </ListItem>
 
-
-            {/* service request dashbord menu item - by sagar */}
-            <ListItem
-              component={NavLink}
-              to={`/dashboard/make-service-request`}
-              button
-            >
-              <ListItemIcon>
-                <RateReviewIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Make Service Request"} />
-            </ListItem>
-
             {/* see all the pending reqest menu item - by sagar */}
             <ListItem
               component={NavLink}
               to={`/dashboard/all-pending-services`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
-                <RateReviewIcon />
+                <HourglassTopIcon />
               </ListItemIcon>
               <ListItemText primary={"Pending Service Request"} />
             </ListItem>
@@ -197,6 +179,7 @@ const Dashboard = (props) => {
               component={NavLink}
               to={`/dashboard/add-service-category`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <RateReviewIcon />
@@ -204,11 +187,108 @@ const Dashboard = (props) => {
               <ListItemText primary={"Add Service Category"} />
             </ListItem>
 
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/makeAdmin`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <AdminPanelSettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Admin"} />
+            </ListItem>
+
+
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/pendingtestimonial`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <AutorenewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Pending Testimonial"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/managetestimonials`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <ManageSearchIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Manage Testimonial"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/pendingprovider`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <SavedSearchOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Pending Providers"} />
+            </ListItem>
+
+
+
+            {/* admin end  */}
+
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/providerOverview`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <AnchorIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Provider Overview"} />
+            </ListItem>
+
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/ordersChat`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <ContactSupportIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Orders Chat"} />
+            </ListItem>
+
+
+
+
+
+            {/* service request dashbord menu item - by sagar */}
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/make-service-request`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <RateReviewIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Make Service Request"} />
+            </ListItem>
+
+
+
 
             <ListItem
               component={NavLink}
               to={`/dashboard/provider/appointment`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <AnchorIcon />
@@ -216,20 +296,12 @@ const Dashboard = (props) => {
               <ListItemText primary={"Appointment"} />
             </ListItem>
 
-            <ListItem
-              component={NavLink}
-              to={`/dashboard/makeAdmin`}
-              button
-            >
-              <ListItemIcon>
-                <AdminPanelSettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Add Admin"} />
-            </ListItem>
+
             <ListItem
               component={NavLink}
               to={`/dashboard/myorders`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <ShoppingCartIcon />
@@ -241,6 +313,7 @@ const Dashboard = (props) => {
               component={NavLink}
               to={`/dashboard/servicerequest`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <DoneAllIcon />
@@ -250,8 +323,9 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/addtestimonial`}
+              to={`/dashboard/addtestimonial`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <ReviewsIcon />
@@ -259,32 +333,15 @@ const Dashboard = (props) => {
               <ListItemText primary={"Add Testimonial"} />
             </ListItem>
 
-            <ListItem
-              component={NavLink}
-              to={`/Dashboard/pendingtestimonial`}
-              button
-            >
-              <ListItemIcon>
-                <AutorenewIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Pending Testimonial"} />
-            </ListItem>
+
+
+
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/managetestimonials`}
+              to={`/dashboard/savedservice`}
               button
-            >
-              <ListItemIcon>
-                <ManageSearchIcon />
-              </ListItemIcon>
-              <ListItemText primary={"Manage Testimonial"} />
-            </ListItem>
-
-            <ListItem
-              component={NavLink}
-              to={`/Dashboard/savedservice`}
-              button
+              style={activeStyle}
             >
               <ListItemIcon>
                 <SavedSearchOutlinedIcon />
@@ -294,14 +351,28 @@ const Dashboard = (props) => {
 
             <ListItem
               component={NavLink}
-              to={`/Dashboard/becomeaprovider`}
+              to={`/dashboard/becomeaprovider`}
               button
+              style={activeStyle}
             >
               <ListItemIcon>
-                <SavedSearchOutlinedIcon />
+                <BeenhereIcon />
               </ListItemIcon>
-              <ListItemText primary={"Become a provider ?"} />
+              <ListItemText primary={"Become a provider "} />
             </ListItem>
+            <ListItem
+              component={NavLink}
+              to={`/dashboard/addquestions`}
+              button
+              style={activeStyle}
+            >
+              <ListItemIcon>
+                <BeenhereIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Add Questions "} />
+            </ListItem>
+
+
 
 
           </Box>

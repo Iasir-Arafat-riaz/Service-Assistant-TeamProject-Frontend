@@ -1,6 +1,6 @@
 
 import { io } from 'socket.io-client';
-const socket = io("https://fierce-meadow-12011.herokuapp.com/");
+const socket = io("https://dry-sea-00611.herokuapp.com/");
 const useSocket = () => {
     // common function 
     const jsParse = data => {

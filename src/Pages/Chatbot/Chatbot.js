@@ -11,6 +11,8 @@ import axios from 'axios';
 // import monsterImgUrl from '../../images/banner-1.jpg'
 
 function Chatbot() {
+    const [questionAnswer, setQuestionAnswer] = useState({})
+    const [qna, setQna] = useState([]);
     const { socket } = useSocket();
     const { user, loading } = useSelector(allData);
     const dispatch = useDispatch()
@@ -23,9 +25,15 @@ function Chatbot() {
         isOpen: false,
         fileUpload: true,
     });
+    useEffect(() => {
+        axios.get('https://dry-sea-00611.herokuapp.com/addquestions')
+            .then(res => {
+                setQna(res.data);
+            })
+    }, [])
 
     useEffect(() => {
-        axios.get(`https://fierce-meadow-12011.herokuapp.com/chat/${uid}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/chat/${uid}`)
             .then(res => {
                 setState(state => ({
                     ...state,
@@ -151,30 +159,6 @@ function Chatbot() {
             isOpen: !state.isOpen,
         }));
     }
-    //console.log(newMessagesCount);
-    const qna = [
-        {
-            discount: 'we dont provide any discount '
-        },
-        {
-            "about provider": "Our providers are so well be heavier and have enough skill to make your work done  "
-        },
-        {
-            "how to be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
-        },
-        {
-            "can i be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
-        },
-        {
-            "be a provider": 'To be a provider just go to the bottom side on our home page and find "Be a Provider" section and there you go'
-        },
-        {
-            "orders": 'click here https://service-assistant-a2z.web.app/dashboard/myorders'
-        },
-        {
-            "my orders": 'click here https://service-assistant-a2z.web.app/dashboard/myorders'
-        },
-    ]
 
     const autoReplay = ({ data: { text } }) => {
         if (state.messageList?.length === 0) {
@@ -185,12 +169,13 @@ function Chatbot() {
             const question = Object.keys(element)
             const ans = Object.values(element)
             //console.log(question);
-            if (text.toLowerCase().includes(question[0])) {
+            if (text.toLowerCase().includes(element.question)) {
                 //console.log('in', element);
-                sendMessage(ans[0] + ' replay.bot ');
+                sendMessage(element.answer + ' replay.bot ');
                 break;
             }
         };
+
 
     }
     return (
