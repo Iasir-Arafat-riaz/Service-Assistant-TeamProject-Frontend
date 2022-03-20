@@ -4,6 +4,8 @@ import logo from '../../images/footer-logo.png';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
+
+
 const Footer = () => {
     return (
         <footer style={{ background: "#151414", height: 'auto', padding: 100, }}>
@@ -14,14 +16,21 @@ const Footer = () => {
 
                         <img className='footerIcon'  width="120" style={{ marginTop: 3 }} src={logo} alt="logo" />
 
-                        <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 2 }}>ServiceA2Z provide the service needs that you come across in everyday life. 150+ services in total, all in one app. Avail experienced & verified service provide</Typography>
+                        <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 2 }}>ServiceA2Z provide the service needs that you come across in everyday life. 150+ services in total, all in one app. Avail experienced  verified service provide</Typography>
 
                         <Box className="footer-social-icon">
                             <span className='hoverColor'>Follow us</span>
-                            <a target="_blank" href="https://www.facebook.com/Service-A2Z-101461739182775"><i className="fab fa-facebook-f  facebook-bg footerIcon" aria-hidden="true"></i></a>
-                            <a target="_blank" href="https://twitter.com/service_a2z_web"><i className="fab fa-twitter twitter-bg footerIcon"></i></a>
-                            <a target="_blank" href="http://google.com/"><i className="fab fa-google-plus-g google-bg footerIcon"></i></a>
-                            <a target="_blank" href="https://www.youtube.com/channel/UCRR0lgDJtkv7Hyikak8q01Q"><i class="fab fa-youtube youtube-bg footerIcon"></i></a>
+
+                            {/* <a href="#"><BsFacebook className="facebook"/></a>
+                            <a href="#"><i className="fab fa-twitter twitter-bg"></i></a>
+                            <a href="#"><i className="fab fa-google-plus-g google-bg"></i></a> */}
+
+                           <a  href="https://www.facebook.com/Service-A2Z-101461739182775"><i className="fab fa-facebook-f  facebook-bg footerIcon"></i></a>
+                            <a  href="https://twitter.com/service_a2z_web"><i className="fab fa-twitter twitter-bg footerIcon"></i></a>
+                            <a  href="http://google.com/"><i className="fab fa-google-plus-g google-bg footerIcon"></i></a>
+                            <a  href="https://www.youtube.com/channel/UCRR0lgDJtkv7Hyikak8q01Q"><i className="fab fa-youtube youtube-bg footerIcon"></i></a>
+
+                            
                         </Box>
 
                     </Grid>

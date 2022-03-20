@@ -57,7 +57,7 @@ const AddServiceReview = () => {
                 setAlert(true);
                 setLoading(true);
                 const { user, review, rating, date, uid, userPhoto } = data;
-                axios.post(`http://localhost:5000/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
+                axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
             });
         } else {
             UpdateReview(data);

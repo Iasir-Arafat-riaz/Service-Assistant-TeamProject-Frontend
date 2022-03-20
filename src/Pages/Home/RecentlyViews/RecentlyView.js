@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"
 
 const RecentlyView = (props) => {
-  const { Category, Img, Id } = props.service
+  const { Img, Id } = props?.service
   const navigate = useNavigate()
   const handleRouteChange = () => {
     navigate(`/Home/service-details/${Id}`)
@@ -24,7 +24,7 @@ const RecentlyView = (props) => {
         variant="h6"
         sx={{ fontSize: 18, fontWeight: "bold", textAlign: "center", mt: 1 }}
       >
-        {Category}
+        {props?.service?.Category}
       </Typography>
     </Box>
   );

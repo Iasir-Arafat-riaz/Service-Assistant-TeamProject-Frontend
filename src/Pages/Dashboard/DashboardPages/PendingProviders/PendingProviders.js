@@ -37,7 +37,7 @@ const PendingProviders = () => {
 
     // load provider by email
     useEffect(() => {
-        axios.get(`http://localhost:5000/users/${user.email}`).then(res => setProvider(res.data))
+        axios.get(`https://dry-sea-00611.herokuapp.com/users/${user.email}`).then(res => setProvider(res.data))
     }, [provider, user])
 
     // console.log(provider._id);
@@ -54,12 +54,12 @@ const PendingProviders = () => {
                 if (willDelete) {
                     const matchUser = allUser.find(user => user.email === email);
                     setLoading(true);
-                    axios.put(`http://localhost:5000/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
-                        axios.post(`http://localhost:5000/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-                        axios.delete(`http://localhost:5000/addprovider/deleteprovider/${id}`).then(res => {
+                    axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
+                        axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
+                        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
                             const { Id, Img, Name, backgroundImage, data, date, rating, reviewUser } = pendingProviders.find(provider => provider.data.email === email);
                             const offerService = [{ Id, Img, Name }];
-                            axios.post('http://localhost:5000/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data, providerId: provider._id })
+                            axios.post('https://dry-sea-00611.herokuapp.com/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data, providerId: provider._id })
                             swal("Provider has been approved!", {
                                 icon: "success",
                             });

@@ -20,7 +20,7 @@ const AppointmentRequest = () => {
     const { user } = useSelector(allData)
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/provider/appointment/${user.email}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${user.email}`)
             .then(res => {
                 setProviderEmail(res.data)
                 console.log("provider email", res.data)
