@@ -132,7 +132,6 @@ export default function AdminPendingRequest() {
     const url = `https://dry-sea-00611.herokuapp.com/api/v1/service-category/${categoryId}`;
     const res = await axios.patch(url, serviceInfo);
     console.log(res);
-    
   };
 
   let rows;
@@ -147,6 +146,10 @@ export default function AdminPendingRequest() {
 
     pendingService();
   }, []);
+
+  if (isPendingDataLoading) {
+    return <Loading />;
+  }
 
   if (pendingService.length > 0) {
     rows = pendingService.map((ele) => createData(ele));
@@ -185,7 +188,12 @@ export default function AdminPendingRequest() {
         />
       </>
     );
+  } else {
+    return (
+      <Typography variant="h2" gutterBottom component="div">
+        {" "}
+        There is no pending services at this moment.
+      </Typography>
+    );
   }
-
-  return <Loading />;
 }
