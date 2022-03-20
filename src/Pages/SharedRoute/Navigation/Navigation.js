@@ -49,13 +49,18 @@ import NotificationCard from './Component/NotificationCard'
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
-const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
-const mic = new SpeechRecognition();
+const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
+console.log(SpeechRecognition);
+let mic;
+if (SpeechRecognition) {
+  mic = new SpeechRecognition()
+  mic.continuous = true;
+  mic.interimResults = true;
+  mic.lang = "en-US";
+}
 
-mic.continuous = true;
-mic.interimResults = true;
-mic.lang = "en-US";
+
+
 
 const Navigation = () => {
   const navRef = useRef(null);
@@ -278,7 +283,10 @@ const Navigation = () => {
   const [savedNotes, setSavedNotes] = useState([]);
 
   useEffect(() => {
-    handleListen();
+    if (mic) {
+      handleListen();
+
+    }
   }, [isListening]);
 
   const handleListen = () => {
@@ -425,36 +433,42 @@ const Navigation = () => {
                   overflow: "scroll",
                 }}
               >
-                <TextField
-                  icon="search"
-                  placeholder="Search Services..."
-                  onChange={(e) => searchItems(e.target.value)}
-                  sx={{ width: "80%", left: "5%", mb: 3 }}
-                  id="standard-search"
-                  type="search"
-                  variant="standard"
-                  value={note}
+                <Grid container spacing={2}>
+                  <Grid item xs={9} >
+                    <TextField
+                      icon="search"
+                      placeholder="Search Services..."
+                      onChange={(e) => searchItems(e.target.value)}
+                      sx={{ width: "100%", mb: 3 }}
+                      id="standard-search"
+                      type="search"
+                      variant="standard"
+                      value={note}
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Button
+                      onClick={() => setIsListening((prevState) => !prevState)}
+                      sx={{ zIndex: "1000" }}
+                      variant="contained"
+                      disabled={mic ? false : true}
+                      sx={{ m: 1 }}
+                    >
+                      🛑🎙️
+                    </Button>
+                    <Button
+                      onClick={handleSaveNote}
+                      disabled={!note}
+                      sx={{ zIndex: "1000" }}
+                      variant="contained"
+                    >
+                      Remove
+                    </Button>
+                  </Grid>
+                </Grid>
 
-
-
-                />
                 {/*------------------ Mic ---------------*/}
-                <Button
-                  onClick={() => setIsListening((prevState) => !prevState)}
-                  sx={{ zIndex: "1000" }}
-                  variant="contained"
-                  sx={{ m: 1 }}
-                >
-                  🛑🎙️
-                </Button>
-                <Button
-                  onClick={handleSaveNote}
-                  disabled={!note}
-                  sx={{ zIndex: "1000" }}
-                  variant="contained"
-                >
-                  Remove
-                </Button>
+
 
                 {/* <Box className="box">
                   {savedNotes.map((n) => (
@@ -603,13 +617,13 @@ const Navigation = () => {
             )}
           </Box>
         </Toolbar>
-      </AppBar>
+      </AppBar >
       <React.Fragment>
         <Drawer open={state} onClose={() => setState(false)}>
           {list}
         </Drawer>
       </React.Fragment>
-    </Container>
+    </Container >
   );
 };
 export default Navigation;

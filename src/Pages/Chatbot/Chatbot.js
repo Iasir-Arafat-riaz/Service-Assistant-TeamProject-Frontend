@@ -26,10 +26,9 @@ function Chatbot() {
         fileUpload: true,
     });
     useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/addquestions`)
+        axios.get('https://dry-sea-00611.herokuapp.com/addquestions')
             .then(res => {
                 setQna(res.data);
-                console.log(res.data, 'ddddddddddddalkdfjlkfjsdalkfjaslkfjsdal;kfjdslk;fjdkl;f');
             })
     }, [])
 
@@ -40,12 +39,6 @@ function Chatbot() {
                     ...state,
                     messageList: [...state.messageList, ...res.data]
                 }));
-            })
-    }, [uid])
-    useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/addquestions}`)
-            .then(res => {
-                setQuestionAnswer(res.data)
             })
     }, [uid])
 

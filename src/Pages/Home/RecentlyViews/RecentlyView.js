@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"
 
 const RecentlyView = (props) => {
-  const { Img, Id } = props?.service
+  const { Category, Img, Id } = props
   const navigate = useNavigate()
   const handleRouteChange = () => {
     navigate(`/Home/service-details/${Id}`)
