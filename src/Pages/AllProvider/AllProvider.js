@@ -77,7 +77,6 @@ const AllProvider = () => {
                     grabCursor={true}
                     onSlideChange={(ev) => {
                         set_my_swiper(ev)
-                        console.log(ev);
                         set_my_swiper_status({
                             isBeginning: ev.isBeginning,
                             isEnd: ev.isEnd,

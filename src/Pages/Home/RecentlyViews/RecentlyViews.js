@@ -8,6 +8,7 @@ import CustomSlider from "../../SharedRoute/CustomSlider/CustomSlider";
 import RecentlyView from "./RecentlyView"
 
 import TrendingService from "../TrendingServices/TrendingService";
+import CommonService from "../HomeServices/CommonService";
 
 const RecentlyViews = () => {
 
@@ -36,7 +37,7 @@ const RecentlyViews = () => {
       )}
 
       {loading ? (
-        <Box sx={{ display: "flex", gap: 5 }}>
+        <Box >
           {[...new Array(4)].map(() => (
             <Stack spacing={1}>
               <Skeleton
@@ -46,9 +47,9 @@ const RecentlyViews = () => {
             </Stack>
           ))}
         </Box>
-      ) : services.length > 4 ? <CustomSlider data={services} component={RecentlyView}></CustomSlider> : <Stack direction='row'>
+      ) : services.length > 4 ? <CustomSlider data={services} component={CommonService}></CustomSlider> : <Stack direction='row' >
         {services.map((service) => (
-          <RecentlyView single key={service._id} {...service} />
+          <CommonService single key={service._id} service={service} />
         ))}
       </Stack>}
 

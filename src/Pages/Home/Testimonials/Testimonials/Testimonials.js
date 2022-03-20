@@ -79,7 +79,7 @@ const Testimonials = () => {
                             <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb: 2 }} height={20} />
                             <Skeleton width={250} sx={{ mb: 5 }} height={20} />
                             {[...new Array(4)].map((ske, index) =>
-                                <Skeleton variant="rectangular" width='100%' sx={{ borderRadius: 1, mb: 2 }} height={20} />
+                                <Skeleton variant="rectangular" key={index} width='100%' sx={{ borderRadius: 1, mb: 2 }} height={20} />
                             )}
                         </Box> : testimonials.map((singleTestimonials, i) => <TabPanel value={value} index={i}><Testimonial {...singleTestimonials} ></Testimonial></TabPanel>)
                     }
