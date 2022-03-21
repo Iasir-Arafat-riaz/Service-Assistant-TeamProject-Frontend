@@ -184,10 +184,10 @@ const RequestService = () => {
                             </Box>
 
                             <Box sx={{ display: 'flex ', justifyContent: 'center' }}>
-                                        
+
                                 <TextField
                                     {...register("name")}
-                                    sx={{ width: '40%', mb: 2 , mr: 1}}
+                                    sx={{ width: '40%', mb: 2, mr: 1 }}
                                     id="outlined-basic"
                                     label="Your Name"
                                     variant="outlined"
