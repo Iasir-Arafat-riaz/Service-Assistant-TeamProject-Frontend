@@ -1,6 +1,7 @@
 import { async } from '@firebase/util';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import Swal from 'sweetalert2';
 import firebaseInit from "./../../firebase/firebase.init";
@@ -236,26 +237,32 @@ export const dataSlice = createSlice({
             state.loading = action.payload;
         },
         addToCart(state, { payload }) {
-            state.cartItems.push(payload);
+            // state.cartItems.push(payload);
             // //We need item id for find index effectively. Need modify API
-            // const itemIndex = state.cartItems.findIndex((item) => item.Price === action.payload.Price);
+            const itemIndex = state.cartItems.findIndex((item) => item.subId === payload.subId);
 
-            // if (itemIndex >= 0) {
-            //     state.cartItems[itemIndex].cartQuantity += 1;
-            //     toast.info(`Increased ${state.cartItems[itemIndex].Name} Quantity`, {
-            //         position: "bottom-left"
-            //     })
-            // }
-            // else {
-            //     const tempService = { ...action.payload, cartQuantity: 1 }
-            //     // state.cartItems.push(action.payload)
-            //     state.cartItems.push(tempService)
-            //     toast.success(`${action.payload.Name} Added to Cart`, {
-            //         position: "bottom-left"
-            //     });
-            // }
-            // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-            saveService(state.cartItems);
+            if (itemIndex >= 0) {
+
+                state.cartItems[itemIndex].cartQuantity += 1;
+                toast.info(`Increased ${state.cartItems[itemIndex].Name} Quantity`, {
+                    position: "bottom-left"
+                })
+            }
+            else {
+                const tempService = { ...payload, cartQuantity: 1 }
+                // state.cartItems.push(action.payload)
+                state.cartItems.push(tempService)
+                toast.success(`${payload.Name} Added to Cart`, {
+                    position: "bottom-left"
+                });
+            }
+            const getItems = JSON.parse(localStorage.getItem('cartItems'));
+            if (getItems) {
+                localStorage.setItem("cartItems", JSON.stringify([payload, ...getItems]))
+            } else {
+                // localStorage.setItem("cartItems")
+                localStorage.setItem("cartItems", JSON.stringify([payload]))
+            }
         },
         remaingTestimonials: (state, { payload }) => {
             state.testimonials = state.testimonials.filter((item) => item._id !== payload)
