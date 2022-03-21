@@ -137,16 +137,18 @@ const RequestService = () => {
                             width: '70%',
                             bgcolor: '#F4F5F8',
                             boxShadow: 24,
-                            p: 4,
+                            pb: 4,
                             borderRadius: 5
                         }}
                     >
-                        <Box
-                            sx={{ borderRadius: 2, border: '1px solid #F4F5F8', boxShadow: 5, py: 1, mb: 4 }}
-                        >
-                            <Typography
-                                sx={{ fontWeight: 'bold', textAlign: 'center' }}>Request for service</Typography>
+                        
+                        <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
+
+                            <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
+                                Request for service
+                            </Typography>
                         </Box>
+
                         <form onSubmit={handleSubmit(onSubmit)}>
 
                             <Box sx={{ display: 'flex ', justifyContent: 'center' }}>

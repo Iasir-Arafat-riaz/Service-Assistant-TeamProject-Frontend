@@ -29,35 +29,35 @@
 .step-around{
     display: block;
 
-  background-color: #ffb600;
+    background-color: #ffb600;
 
-  width: 140px;
+    width: 140px;
 
-  height: 140px;
+    height: 140px;
 
-  border-radius: 50px;
+    border-radius: 50px;
+    
+    line-height: 140px;
+    
+    transform: rotate(135deg);
+    
+    overflow:hidden;
 
-  line-height: 140px;
+    -webkit-transition: all 0.5s ease;
 
-  transform: rotate(135deg);
+    -moz-transition: all 0.5s ease;
 
-  overflow:hidden;
+    -ms-transition: all 0.5s ease;
 
-  -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
 
--moz-transition: all 0.5s ease;
-
--ms-transition: all 0.5s ease;
-
--o-transition: all 0.5s ease;
-
-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    animation: rotation 3s infinite linear;
 }
 
 .step-around:hover {
     border-radius:100px;
-
-  box-shadow: 0 0 0px 15px rgba(255, 182, 0, 0.17);
+    box-shadow: 0 0 0px 15px rgba(255, 182, 0, 0.17);
 }
 
 .icon-img{
