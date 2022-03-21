@@ -27,7 +27,7 @@ const UpdateInfo = (props) => {
   console.log(props.questionId, 'got id from update info')
   const onSubmit = data => {
     console.log(data)
-    const api = `http://localhost:5000/addquestions/${props.questionId}`
+    const api = `https://dry-sea-00611.herokuapp.com/addquestions/${props.questionId}`
     axios.put(api, data).then((res) => {
       console.log(res, "inside axios");
       if (res.status === 200) {

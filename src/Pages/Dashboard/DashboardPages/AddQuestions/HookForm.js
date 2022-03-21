@@ -16,7 +16,7 @@ const HookForm = ({ flag, setFlag }) => {
     console.log(data)
     // allData = [...data];
 
-    const api = `http://localhost:5000/addquestions`
+    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
     axios.post(api, data).then((res) => {
       console.log(res, "inside axios");
       if (res.data.insertedId) {

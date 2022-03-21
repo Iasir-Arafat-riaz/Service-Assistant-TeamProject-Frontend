@@ -31,7 +31,7 @@ const ShowQuestions = (props) => {
 
   useEffect(() => {
 
-    const api = `http://localhost:5000/addquestions`
+    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
     axios.get(api).then(res => {
       setQuestionsAnswers(res.data)
       console.log(res.data, "== got provider")
@@ -49,7 +49,7 @@ const ShowQuestions = (props) => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          const api = `http://localhost:5000/addquestions/${id}`
+          const api = `https://dry-sea-00611.herokuapp.com/addquestions/${id}`
           axios.delete(api).then(res => {
             setIsDelete(true)
             swal("Questions and answer is deleted!", {

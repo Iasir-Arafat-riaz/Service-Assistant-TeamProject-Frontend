@@ -13,7 +13,7 @@ const HomeServices = () => {
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get('http://localhost:5000/api/v1/for-your-home')
+        axios.get('https://dry-sea-00611.herokuapp.com/api/v1/for-your-home')
             .then(res => {
                 setServices(res.data);
                 console.log(res.data, 'dkjfdkljflkfjadlkfjdsalkfjasdlkfjdslk;fjsadlk;fjsdalkfjlkjsdlkfjsdkl;fjdskl;j');

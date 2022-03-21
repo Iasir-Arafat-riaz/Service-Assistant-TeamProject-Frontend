@@ -87,7 +87,7 @@ const Navigation = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/singleservice`)
+      .get(`https://dry-sea-00611.herokuapp.com/singleservice`)
       .then((response) => {
         setAPIData(response.data);
       });

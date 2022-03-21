@@ -36,7 +36,7 @@ const AddBannerSection = ({ banner }) => {
     // data._id = banner._id;
     //console.log(data);
     // reset();
-    axios.put("http://localhost:5000/headerBanners", data).then((response) => {
+    axios.put("https://dry-sea-00611.herokuapp.com/headerBanners", data).then((response) => {
       if (response.status == 200) {
         Swal.fire({
           position: "center",
@@ -55,7 +55,7 @@ const AddBannerSection = ({ banner }) => {
   const [load, setLoad] = useState(true);
   useEffect(() => {
     setLoad(true);
-    fetch("http://localhost:5000/headerBanners")
+    fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
       .then((res) => res.json())
       .then((data) => {
         setBanner(data);

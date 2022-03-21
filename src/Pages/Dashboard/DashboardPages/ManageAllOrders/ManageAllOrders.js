@@ -7,7 +7,7 @@ const ManageAllOrders = () => {
     const [loading, setLoading] = useState(true);
     useEffect(() => {
         setLoading(true);
-        axios.get('http://localhost:5000/orders/all/pending')
+        axios.get('https://dry-sea-00611.herokuapp.com/orders/all/pending')
             .then(res => setAllOrders(res.data))
             .finally(() => setLoading(false));
     }, []);

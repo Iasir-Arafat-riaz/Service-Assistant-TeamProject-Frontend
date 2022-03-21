@@ -12,7 +12,7 @@ const stripePromise = loadStripe('pk_test_51K93ltBcGooWtax9JKsV2tP7uqmbQYtdpRXFr
 const Payment = () => {
 
     // const { cartItems, user } = useSelector(allData);
-    // axios.get('http://localhost:5000/myorder').then(res => //console.log(res.data))
+    // axios.get('https://dry-sea-00611.herokuapp.com/myorder').then(res => //console.log(res.data))
     // //console.log(cartItems[0].price)
     return (
 

@@ -26,14 +26,14 @@ function Chatbot() {
         fileUpload: true,
     });
     useEffect(() => {
-        axios.get('http://localhost:5000/addquestions')
+        axios.get('https://dry-sea-00611.herokuapp.com/addquestions')
             .then(res => {
                 setQna(res.data);
             })
     }, [])
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/chat/${uid}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/chat/${uid}`)
             .then(res => {
                 setState(state => ({
                     ...state,

@@ -15,7 +15,7 @@ import { Autoplay } from "swiper";
 const Header = (props) => {
   const [banners, setBanner] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/headerBanners")
+    fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
       .then((res) => res.json())
       .then((data) => setBanner(data));
   }, []);
