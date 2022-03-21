@@ -84,7 +84,7 @@ const ChooseUs = () => {
                                     </ListItem>
                                 </List>
 
-                                <Link to='/services' style={{ textDecoration: "none" }}>
+                                <Link to='/Dashboard/becomeaprovider' style={{ textDecoration: "none" }}>
                                     <Button
                                         type="submit"
                                         variant='contained'
