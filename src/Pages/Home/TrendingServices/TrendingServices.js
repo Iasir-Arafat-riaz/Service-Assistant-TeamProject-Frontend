@@ -18,17 +18,21 @@ const TrendingServices = () => {
             const fullData = res.data;
             let mainData = [];
             fullData.forEach(element => {
-                const createData = {
-                    Category: element.serviceInfo[0].Title,
-                    Id: element.serviceInfo[0]._id,
-                    Img: element.serviceInfo[0].Img
+                if (element.serviceInfo.length) {
+                    const createData = {
+                        Category: element.serviceInfo[0].Title,
+                        Id: element.serviceInfo[0]._id,
+                        Img: element.serviceInfo[0].Img
+                    }
+                    mainData = [...mainData, createData]
+                    console.log('mia', mainData);
                 }
-                mainData = [...mainData, createData]
+
 
             });
             setServices(mainData)
-            setLoading(false)
-        })
+
+        }).finally(setLoading(false));
     }, []);
 
 
