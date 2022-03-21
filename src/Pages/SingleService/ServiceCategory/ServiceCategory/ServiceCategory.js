@@ -1,29 +1,16 @@
 import { Paper, Typography, Button, Box, Skeleton } from '@mui/material';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useParams } from 'react-router-dom';
 import CategoryModal from '../CategoryModal/CategoryModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { allData, singleService } from '../../../../redux/dataSlice/dataSlice';
+import { useSelector } from 'react-redux';
+import { allData, } from '../../../../redux/dataSlice/dataSlice';
 import './serviceCategory.css';
 
 const ServiceCategory = ({ service }) => {
-
-    const { serviceId } = useParams();
     const [index, setIndex] = useState(0);
     const [open, setOpen] = React.useState(false);
-    const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
+    const { singleServiceDetail, singleServiceLoading } = useSelector(allData);
     const [selectService, setSelectService] = useState({});
-    // const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
-    const matchService = singleServiceDetails?.find(service => {
-        if (serviceId.length > 4) {
-            return service._id == serviceId;
-        } else {
-            return parseInt(service.parentService) === parseInt(serviceId)
-        }
-    });
-
     // open modal
     const handleOpenModal = (index, service) => {
         setOpen(true);
@@ -46,6 +33,7 @@ const ServiceCategory = ({ service }) => {
         borderRadius: 2,
         p: 2
     };
+    console.log(singleServiceDetail);
 
     return (
         <>
@@ -64,13 +52,6 @@ const ServiceCategory = ({ service }) => {
                         px: 2,
 
                     }}>
-                    {/* <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 2, mb: 3, }}>
-
-                        <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2, color: '#fff' }} component="h2">
-                            Order Here
-                        </Typography>
-
-                    </Box> */}
                     <Typography
                         variant='h5'
                         sx={{
@@ -93,7 +74,7 @@ const ServiceCategory = ({ service }) => {
                     </Button>
 
 
-                    {matchService?.allServices?.map((service, index) => <Box
+                    {singleServiceDetail?.allServices?.map((service, index) => <Box
                         onClick={() => handleOpenModal(index, service)}
                         sx={box} key={index}>
                         {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
@@ -115,11 +96,11 @@ const ServiceCategory = ({ service }) => {
             {/* Modal */}
 
             <CategoryModal
-                selectServiceId={matchService.parentService}
+                selectServiceId={singleServiceDetail?.parentService}
                 index={index}
                 selectService={selectService}
                 open={open}
-                service={matchService}
+                service={singleServiceDetail}
                 handleClose={handleClose}
                 handleOpen={handleOpenModal}
             />

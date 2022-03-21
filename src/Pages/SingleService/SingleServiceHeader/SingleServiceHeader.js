@@ -13,7 +13,7 @@ import { Container, Grid, Paper, Typography } from '@mui/material';
 const SingleServiceHeader = ({ matchService }) => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
-    //console.log(matchService.mainFeatures)
+    console.log(matchService)
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -27,7 +27,7 @@ const SingleServiceHeader = ({ matchService }) => {
                         display: 'flex',
                         justifyContent: 'center',
                         backgroundAttachment: 'fixed',
-                        height : { xs: '40vh', md : '50vh'}
+                        height: { xs: '40vh', md: '50vh' }
                     }}>
 
                     <Box
@@ -49,7 +49,7 @@ const SingleServiceHeader = ({ matchService }) => {
                         <Paper elevation={0} sx={{ p: 2, backgroundColor: 'transparent' }}>
                             <Typography sx={{ fontSize: 20, mb: 1, fontWeight: 'bold', color: 'white' }} variant="h6">Main feature</Typography>
                             {
-                                matchService.mainFeatures.map((text, index) => (
+                                matchService.mainFeatures?.map((text, index) => (
                                     <Typography sx={{ color: 'white' }} variant="h6"><li>{text}</li></Typography>
                                 ))
                             }

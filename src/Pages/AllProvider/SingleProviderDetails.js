@@ -24,10 +24,10 @@ const SingleProviderDetails = () => {
     // const textStyle = {
     //     color: '#707070',
     // }
-    // https://dry-sea-00611.herokuapp.com/provider/myServices/622ad1cbe7526bcaad7bceed
+    // http://localhost:5000/provider/myServices/622ad1cbe7526bcaad7bceed
     //Provider Data Load by Email
     useEffect(() => {
-        axios.get('https://dry-sea-00611.herokuapp.com/providerdetials/provider?email=samir@gmail.com')
+        axios.get('http://localhost:5000/providerdetials/provider?email=samir@gmail.com')
             .then(data => {
                 setProviderProfiles(data.data);
                 console.log('p.data', data);
@@ -35,7 +35,7 @@ const SingleProviderDetails = () => {
     }, [])
 
     useEffect(() => {
-        axios.get('https://dry-sea-00611.herokuapp.com/provider/myServices/622ad1cbe7526bcaad7bceed')
+        axios.get('http://localhost:5000/provider/myServices/622ad1cbe7526bcaad7bceed')
             .then(data => {
                 setProviderServiceInfo(data.data);
                 console.log('p.info', data);

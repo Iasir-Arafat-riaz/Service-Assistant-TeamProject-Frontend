@@ -73,14 +73,6 @@ import Career from "./Pages/Career/Career";
 
 
 const App = () => {
-  // const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -118,7 +110,6 @@ const App = () => {
       })
     });
   }, [])
-
 
   return (
     <BrowserRouter>

@@ -7,10 +7,6 @@ import { setItemInLocal } from '../../../utils/utils';
 const CommonService = ({ service, single }) => {
 
     const { Category, Img } = service;
-
-    console.log(service);
-
-
     const { Id } = service;
     const navigate = useNavigate();
 
@@ -25,7 +21,6 @@ const CommonService = ({ service, single }) => {
     return (
 
         <Box onClick={handleRouteChange} sx={{ width: 250, p: 0, borderRadius: 3, mb: 1, m: single ? '0' : '0 auto' }}>
-
             <Paper elevation={2} sx={{ backgroundImage: `url(${Img})`, height: 185, backgroundSize: 'cover', borderRadius: 3 }}>
             </Paper>
 

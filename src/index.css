@@ -80,8 +80,8 @@ color: black !important;
 display: none !important;
 }
 
-.select-service{
+a.select-service{
   border-right: 4px solid #00a1ba !important;
   background-color: #f4f5f8 !important; 
-  font-weight: 700;
+  font-weight: bold!important;
 }

@@ -7,7 +7,7 @@ const AddBanner = () => {
   // const [load, setLoad] = useState(true);
   // useEffect(() => {
   //   setLoad(true);
-  //   fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
+  //   fetch("http://localhost:5000/headerBanners")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setBanner(data);

@@ -22,7 +22,7 @@ function createData(service) {
 
   const newHistory = service.allServices.map(item => {
     const newKey = item.Key.reduce((acc, ele) => {
-      return acc.concat({...ele, Title: item.Title});
+      return acc.concat({ ...ele, Title: item.Title });
     }, [])
     return newKey
 
@@ -36,10 +36,10 @@ function createData(service) {
     id: service._id,
     image: service.Img,
     title: service.Title,
-    providerName:service.provider_info[0].displayName,
+    providerName: service.provider_info[0].displayName,
     providerEmail: service.provider_info[0].email,
     date: new Date(service.createdAt).toLocaleDateString(),
-    history2: newHistory     
+    history2: newHistory
   };
 }
 
@@ -70,7 +70,7 @@ function Row(props) {
         <TableCell align="right">{row.providerName}</TableCell>
         <TableCell align="right">{row.providerEmail}</TableCell>
         <TableCell align="right">{row.date}</TableCell>
-        <TableCell align="right"><Button variant="outlined" onClick={() => handleApprove({Id: row.id, Name: row.title, Img: row.image})}>Approve</Button></TableCell>
+        <TableCell align="right"><Button variant="outlined" onClick={() => handleApprove({ Id: row.id, Name: row.title, Img: row.image })}>Approve</Button></TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -122,16 +122,16 @@ export default function AdminPendingRequest() {
   const [serviceInfo, setServiceInfoId] = useState(null)
 
   const handleSubmitCategory = async () => {
-const url = `https://dry-sea-00611.herokuapp.com/api/v1/service-category/${categoryId}`
-const res = await axios.patch(url, serviceInfo);
-console.log(res)
+    const url = `http://localhost:5000/api/v1/service-category/${categoryId}`
+    const res = await axios.patch(url, serviceInfo);
+    console.log(res)
   }
 
-  
+
   let rows;
-  
+
   useEffect(() => {
-    const url = 'https://dry-sea-00611.herokuapp.com/api/v1/pending-services'
+    const url = 'http://localhost:5000/api/v1/pending-services'
     const pendingService = async () => {
       const service = await axios.get(url).then(res => res.data)
       setPendingService(service.data)
@@ -140,40 +140,40 @@ console.log(res)
 
     pendingService()
   }, []);
-  
-  if (pendingService.length > 0){
+
+  if (pendingService.length > 0) {
 
     rows = pendingService.map(ele => createData(ele));
 
     return (
       <>
-      <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>Service Title</TableCell>
-              <TableCell align="right">Provider Name</TableCell>
-              <TableCell align="right">Provider Email</TableCell>
-              <TableCell align="right">Requested Date</TableCell>
-              <TableCell align="right">Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row ,index) => (
-              <Row key={index} row={row} handleOpenModal={handleOpenModal} setServiceInfoId={setServiceInfoId}/>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-        <TransitionsModal handleCloseModal={handleCloseModal} openModal={openModal} category={setCategoryId} handleSubmitCategory={handleSubmitCategory}/>
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                <TableCell>Service Title</TableCell>
+                <TableCell align="right">Provider Name</TableCell>
+                <TableCell align="right">Provider Email</TableCell>
+                <TableCell align="right">Requested Date</TableCell>
+                <TableCell align="right">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row, index) => (
+                <Row key={index} row={row} handleOpenModal={handleOpenModal} setServiceInfoId={setServiceInfoId} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TransitionsModal handleCloseModal={handleCloseModal} openModal={openModal} category={setCategoryId} handleSubmitCategory={handleSubmitCategory} />
       </>
     );
   }
 
 
-  return ( 
+  return (
     <Loading />
-    
+
   );
 }

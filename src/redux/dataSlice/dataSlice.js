@@ -20,7 +20,7 @@ const initialState = {
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
     singleServiceLoading: true,
-    singleServiceDetails: [],
+    singleServiceDetail: {},
     testimonials: [],
     testimonialLoading: true,
     providers: [],
@@ -49,14 +49,14 @@ const initialState = {
 export const saveUserToDb = createAsyncThunk(
     'saveUserToDb/user',
     async (info) => {
-        const response = await axios.post(`https://dry-sea-00611.herokuapp.com/users/register`, info);
+        const response = await axios.post(`http://localhost:5000/users/register`, info);
         return response.data
     }
 )
 export const putUserToDb = createAsyncThunk(
     'data/putUserToDb',
     async (info) => {
-        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/users/register `, info);
+        const response = await axios.put(`http://localhost:5000/users/register `, info);
         return response.data
     }
 )
@@ -64,21 +64,21 @@ export const makeAdmin = createAsyncThunk(
     'data/makeAdmin',
     async (info) => {
         //console.log(info);
-        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/admin/makeadmin/${info.email} `, info);
+        const response = await axios.put(`http://localhost:5000/admin/makeadmin/${info.email} `, info);
         return response.data
     }
 )
 export const isAdmin = createAsyncThunk(
     'data/isAdmin',
     async (info) => {
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/admin/checkadmin/${info.email}`);
+        const response = await axios.get(`http://localhost:5000/admin/checkadmin/${info.email}`);
         return response.data
     }
 )
 export const getAllUser = createAsyncThunk(
     'data/getAllUser',
     async (info) => {
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/users/allusers`);
+        const response = await axios.get(`http://localhost:5000/users/allusers`);
         return response.data
     }
 )
@@ -88,7 +88,7 @@ export const loadServiceCategory = createAsyncThunk(
     "loadServiceCategory/data",
     async () => {
         const response = await fetch(
-            "https://dry-sea-00611.herokuapp.com/services"
+            "http://localhost:5000/services"
         ).then((res) => res.json());
         return response;
     }
@@ -96,8 +96,8 @@ export const loadServiceCategory = createAsyncThunk(
 
 export const singleService = createAsyncThunk(
     "singleService/details",
-    async () => {
-        const response = await axios.get("https://dry-sea-00611.herokuapp.com/singleservice")
+    async (info) => {
+        const response = await axios.get(`http://localhost:5000/singleservice/${info}`)
         return response.data;
     }
 );
@@ -105,7 +105,7 @@ export const singleService = createAsyncThunk(
 export const websiteReviews = createAsyncThunk(
     "testimonials/data",
     async () => {
-        const response = await axios.get("https://dry-sea-00611.herokuapp.com/reviews")
+        const response = await axios.get("http://localhost:5000/reviews")
         return response.data;
     }
 )
@@ -114,7 +114,7 @@ export const deleteTestimonial = createAsyncThunk(
     "testimonial/delete",
 
     async (info) => {
-        const response = await axios.delete(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
+        const response = await axios.delete(`http://localhost:5000/reviews/${info.id}`)
         return response.data;
     }
 )
@@ -122,20 +122,17 @@ export const deleteTestimonial = createAsyncThunk(
 export const approvedTestimonial = createAsyncThunk(
     "approvetestimonial/approved",
     async (info) => {
-        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/reviews/${info.id}`)
+        const response = await axios.put(`http://localhost:5000/reviews/${info.id}`)
         return response.data;
     }
 );
 
 export const serviceProviders = createAsyncThunk(
     "providers/service",
-    async () => {
-        const response = await axios.get('https://dry-sea-00611.herokuapp.com/users/finding/ids', {
+    async (info) => {
+        const response = await axios.get('http://localhost:5000/users/finding/ids', {
             params: {
-                data: [
-                    "62121eb1cef8c7b4915a6923",
-                    "6211cbf6bb809e9e3edb1859"
-                ]
+                data: info
             }
         })
         return response.data;
@@ -144,14 +141,14 @@ export const serviceProviders = createAsyncThunk(
 export const postChat = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.post('https://dry-sea-00611.herokuapp.com/chat', info)
+        const response = await axios.post('http://localhost:5000/chat', info)
         return response.data;
     }
 );
 export const getChatFromDb = createAsyncThunk(
     "chat/postChat",
     async (info) => {
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat`);
+        const response = await axios.get(`http://localhost:5000/chat`);
         return response.data;
     }
 );
@@ -161,7 +158,7 @@ export const saveService = createAsyncThunk(
     "service/save",
     async (info) => {
         //console.log(info)
-        const response = await axios.post('https://dry-sea-00611.herokuapp.com/saveservice', info)
+        const response = await axios.post('http://localhost:5000/saveservice', info)
         return response.data;
     }
 );
@@ -170,14 +167,14 @@ export const getNotification = createAsyncThunk(
     "get/notification",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/notification/getnotification?email=${info.email}`)
+        const response = await axios.get(`http://localhost:5000/notification/getnotification?email=${info.email}`)
         return response.data;
     }
 )
 
 export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
     async (info) => {
-        const response = await axios.put(`https://dry-sea-00611.herokuapp.com/notification/statuschange/${info.email}`)
+        const response = await axios.put(`http://localhost:5000/notification/statuschange/${info.email}`)
         return response.data;
     }
 )
@@ -185,7 +182,7 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
     async (info) => {
         const modifyInfo = { ...info, seen: false, time: new Date() }
         console.log(modifyInfo);
-        const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
+        const response = await axios.post(`http://localhost:5000/notification`, modifyInfo)
         return response.data;
     }
 )
@@ -193,7 +190,7 @@ export const getProviderChatsDb = createAsyncThunk(
     "data/getProviderChatsDb",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/provider/${info.email}`)
+        const response = await axios.get(`http://localhost:5000/chat/provider/${info.email}`)
         return response.data;
     }
 )
@@ -202,7 +199,7 @@ export const getOtherOrders = createAsyncThunk(
     "data/getOtherOrders",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
+        const response = await axios.get(`http://localhost:5000/provider/appointment/${info.email}`)
         return response.data;
     }
 )
@@ -212,7 +209,7 @@ export const getSingleOrdersChat = createAsyncThunk(
     "data/getSingleOrdersChat",
     async (info) => {
         // console.log(info)
-        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/singleOrder/${info.id}`)
+        const response = await axios.get(`http://localhost:5000/chat/singleOrder/${info.id}`)
 
         return response.data;
     }
@@ -331,10 +328,11 @@ export const dataSlice = createSlice({
             })
             .addCase(singleService.pending, (state, action) => {
                 state.singleServiceLoading = true;
+                console.log('making true');
             })
             .addCase(singleService.fulfilled, (state, { payload }) => {
+                state.singleServiceDetail = payload;
                 state.singleServiceLoading = false;
-                state.singleServiceDetails = payload;
             })
             .addCase(websiteReviews.pending, (state, action) => {
                 state.testimonialLoading = true;
@@ -413,6 +411,6 @@ export const dataSlice = createSlice({
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails,addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails, addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

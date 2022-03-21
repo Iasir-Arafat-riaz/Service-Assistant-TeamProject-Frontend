@@ -60,7 +60,7 @@ const CustomSlider = props => {
                         }}
                     >
                         {
-                            data?.map(service => <SwiperSlide key={service._id}><Component service={service} /></SwiperSlide>)
+                            data?.map((service, i) => <SwiperSlide key={i}><Component service={service} /></SwiperSlide>)
                         }
                     </Swiper>
                 </Box>

@@ -8,7 +8,7 @@
   }
   .facebook{
     font-size: 36px;
-    background-color: #ebf4fc;
+    background-color: #ffffff;
     color: #3B5998;
     border-radius: 50px;
     border: 0px;
@@ -18,25 +18,17 @@
     font-size: 16px;
     margin-right: 15px;
   }
-  .footer-social-icon i {
-    height: 40px;
-    width: 40px;
+  .footer-social-icon svg  {
+    height: 30px;
+    width: 30px;
     text-align: center;
     line-height: 38px;
     border-radius: 50%;
-  }
-  .facebook-bg{
-    background: #3B5998;
-  }
-  .twitter-bg{
-    background: #55ACEE;
-  }
-  .google-bg{
-    background: #DD4B39;
-  }
-  .youtube-bg{
-    background-color: red;
-  }
+    transition: .3s all;
+  } 
+  .footer-social-icon svg:hover  {
+    color:#ff5e14
+  } 
 
   .useful-links a{
     display: block;
@@ -71,11 +63,9 @@ color: #7E7E7E;
     border: 1px solid #ff5e14;
     top: 0;
 }
-.subscribe-form button i {
+.subscribe-form button svg {
   color: #fff;
-  font-size: 22px;
-  transform: rotate(-6deg);
-  
+  font-size: 22px; 
 }
 
 

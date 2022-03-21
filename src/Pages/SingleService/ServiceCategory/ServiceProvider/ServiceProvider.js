@@ -7,11 +7,13 @@ import { addToCart, allData, selectedServiceAndProvider, serviceProviders } from
 const ServiceProvider = ({ handleNext, category, parentService, selectServiceId, selectService }) => {
 
     const dispatch = useDispatch();
-    const { providers, serviceProviderLoading, user } = useSelector(allData);
-
+    const { providers, serviceProviderLoading, singleServiceDetail, user } = useSelector(allData);
+    console.log(singleServiceDetail.serviceProvider);
     useEffect(() => {
-        dispatch(serviceProviders());
-    }, [dispatch])
+        if (singleServiceDetail._id) {
+            dispatch(serviceProviders(singleServiceDetail.serviceProvider));
+        }
+    }, [dispatch, singleServiceDetail])
 
     console.log(parentService)
     // style

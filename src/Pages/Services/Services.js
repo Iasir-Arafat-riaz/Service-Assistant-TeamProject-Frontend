@@ -63,7 +63,6 @@ const Services = (props) => {
 
   useEffect(() => {
     dispatch(loadServiceCategory());
-    dispatch(singleService());
   }, [dispatch]);
   if (serviceIsLoading) {
     return <Loading />;

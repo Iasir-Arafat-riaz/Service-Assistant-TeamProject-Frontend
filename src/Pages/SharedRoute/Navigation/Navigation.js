@@ -87,7 +87,7 @@ const Navigation = () => {
 
   useEffect(() => {
     axios
-      .get(`https://dry-sea-00611.herokuapp.com/singleservice`)
+      .get(`http://localhost:5000/singleservice`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -324,9 +324,6 @@ const Navigation = () => {
     setNote("");
   };
 
-  console.log(note)
-
-  const [value, setValue] = React.useState();
   return (
     <Container id="back-to-top-anchor">
       <AppBar
@@ -477,9 +474,9 @@ const Navigation = () => {
                 </Box> */}
                 <Grid container spacing={3}>
                   {searchInput.length > 1
-                    ? filteredResults.map((item) => {
+                    ? filteredResults.map((item, i) => {
                       return (
-                        <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
+                        <Grid key={i} item md={5.5} xs={10} sx={{ mr: 2 }}>
                           <Card sx={{
                             borderBottom: '1px solid #ffb600',
                             borderRight: '2px solid #ffb600'

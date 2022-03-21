@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import banner1 from "../../images/banner-1.jpg";
-import banner2 from "../../images/banner-2.jpg";
-import banner3 from "../../images/banner-3.jpg";
 import Fab from "@mui/material/Fab";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "../../SharedRoute/ScrollTop/ScrollTop";
@@ -18,7 +15,7 @@ import { Autoplay } from "swiper";
 const Header = (props) => {
   const [banners, setBanner] = useState([]);
   useEffect(() => {
-    fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
+    fetch("http://localhost:5000/headerBanners")
       .then((res) => res.json())
       .then((data) => setBanner(data));
   }, []);
@@ -34,7 +31,7 @@ const Header = (props) => {
         }}
         style={{ zIndex: "-1" }}>
         {banners.map((banner) => (
-          <SwiperSlide>
+          <SwiperSlide key={banner._id}>
             <Box
               sx={{
                 backgroundImage: `url(${banner.imageUrl})`,
@@ -51,34 +48,22 @@ const Header = (props) => {
                 sx={{ height: "100%", display: "flex", alignItems: "center" }}
               >
                 <Box>
-                  <Typography id="commonBannerText">
+                  <Box id="commonBannerText">
                     <Typography variant="h6">
                       Service Deliver with professionalism
                     </Typography>
-                  </Typography>
+                  </Box>
+                  <Box class="text1" variant="h4">
+                    <span>{banner.bannerText}</span>
+                  </Box>
                   <Typography class="text1" variant="h4">
-                    <b>{banner.bannerText}</b>
-                  </Typography>
-                  <Typography class="text1" variant="h4">
-                    <b>{banner.bannerTex2}</b>
+                    <span>{banner.bannerTex2}</span>
                   </Typography>
                 </Box>
               </Container>
             </Box>
           </SwiperSlide>
         ))}
-
-        {/* <article type="button">
-                    <img type="button" src={banner1} alt="" />
-                </article>
-
-                <article>
-                    <img type="button" src={banner2} alt="" />
-                </article>
-
-                <article >
-                    <img type="button" src={banner3} alt="" />
-                </article> */}
       </Swiper>
       <Contact />
 

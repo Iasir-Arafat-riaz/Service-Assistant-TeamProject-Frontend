@@ -205,7 +205,7 @@ const AddServiceRequest = () => {
 
     // make service request API endpoint
     const url =
-      "https://dry-sea-00611.herokuapp.com/api/v1/add-service-request";
+      "http://localhost:5000/api/v1/add-service-request";
 
     // sending HTTP request to the server
     axios
