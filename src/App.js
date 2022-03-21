@@ -67,9 +67,9 @@ import NotificationCard from "./Pages/SharedRoute/Navigation/Component/Notificat
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 import Career from "./Pages/Career/Career";
-
-
-
+// import AOS from 'aos'
+// import 'aos/dist/aos.css';
+// AOS.init();
 
 
 const App = () => {

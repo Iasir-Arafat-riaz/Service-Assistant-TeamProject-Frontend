@@ -20,11 +20,6 @@ const SingleProviderDetails = () => {
     const [providerProfiles, setProviderProfiles] = useState({});
     const [providerServiceInfo, setProviderServiceInfo] = useState([]);
     const { user, id } = useSelector(allData);
-    // const { allServices, serviceIsLoading } = useSelector(allData);
-    // const textStyle = {
-    //     color: '#707070',
-    // }
-    // https://dry-sea-00611.herokuapp.com/provider/myServices/622ad1cbe7526bcaad7bceed
     //Provider Data Load by Email
     useEffect(() => {
         axios.get('https://dry-sea-00611.herokuapp.com/providerdetials/provider?email=samir@gmail.com')

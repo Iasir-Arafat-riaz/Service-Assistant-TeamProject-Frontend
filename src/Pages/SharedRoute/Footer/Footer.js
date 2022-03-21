@@ -1,6 +1,5 @@
 import { Container, Grid, Typography, Box } from '@mui/material';
 import React from 'react';
-import logo from '../../images/footer-logo.png';
 import { Link } from 'react-router-dom';
 import './Footer.css';
 
@@ -17,7 +16,7 @@ const Footer = () => {
 
                     <Grid item xs={6} md={4}>
 
-                        <img className='footerIcon' width="120" style={{ marginTop: 3 }} src={logo} alt="logo" />
+                        <img className='footerIcon' width="120" style={{ marginTop: 3 }} src='https://i.ibb.co/1vb2mDB/footer-logo.png' alt="logo" />
 
                         <Typography variant="body2" sx={{ color: "#7E7E7E", lineHeight: 2, mb: 2, mt: 2 }}>ServiceA2Z provide the service needs that you come across in everyday life. 150+ services in total, all in one app. Avail experienced  verified service provide</Typography>
 

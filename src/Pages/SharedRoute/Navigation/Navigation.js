@@ -34,7 +34,6 @@ import { useTheme } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
-import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
@@ -355,7 +354,7 @@ const Navigation = () => {
             <img
               onClick={goHome}
               className={navLogo}
-              src={logo}
+              src={'https://i.ibb.co/n8Wp01q/web-logo.png'}
               width="120"
               alt="weblogo"
             />
@@ -494,8 +493,8 @@ const Navigation = () => {
                         </Grid>
                       );
                     })
-                    : APIData.map((item) => {
-                      return <Grid item md={12} xs={12}></Grid>;
+                    : APIData.map((item, i) => {
+                      return <Grid key={i} item md={12} xs={12}></Grid>;
                     })}
                 </Grid>
               </Box>

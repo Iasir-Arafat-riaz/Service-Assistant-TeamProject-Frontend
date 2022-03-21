@@ -25,7 +25,6 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import Avatar from "@mui/material/Avatar";
 import { Outlet } from "react-router-dom";
-import logo from "../images/web-logo.png";
 import PersonIcon from '@mui/icons-material/Person';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -106,7 +105,7 @@ const Dashboard = (props) => {
       <List>
         {
           loading ? [...new Array(8)].map((ske, index) =>
-            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb:2}}  height={45} />
+            <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb: 2 }} height={45} />
           ) : <Box>
             {/* admin  */}
 
@@ -408,7 +407,7 @@ const Dashboard = (props) => {
       >
         <Toolbar>
           <Box sx={{ flexGrow: 1 }}>
-            <img onClick={goHome} src={logo} width="120" alt="weblogo" />
+            <img onClick={goHome} src="https://i.ibb.co/fN13HF9/logo.png" width="120" alt="weblogo" />
           </Box>
           <Typography sx={{ display: { xs: "none", md: "block" } }}>
             <NavLink
