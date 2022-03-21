@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { Alert, CircularProgress, Paper } from '@mui/material';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import Alert from '@mui/material/Alert';
-import { CircularProgress, Paper } from '@mui/material';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { allData, sendNotification } from '../../../../redux/dataSlice/dataSlice';
-import axios from 'axios';
 
 
-const CheckoutForm = () => {
+
+
+const PaymentServiceCard = ({ orderService, handleNextStep }) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -17,15 +18,17 @@ const CheckoutForm = () => {
     const dispatch = useDispatch();
     const [clientSecret, setClientSecret] = useState("");
 
+    let price;
+    const { user } = useSelector(allData);
+    // const price = orderService.Price;
+    for (const order of orderService) {
+        price = order.Price + order.Price;
+    }
 
-    const { selectedService, user, orderInfo } = useSelector(allData);
-    const price = selectedService.Price;
-
-
-    // current time
+    // console.log(orderService[0].parentService.Image)
 
     useEffect(() => {
-        fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
+        fetch('http://localhost:5000/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -83,22 +86,24 @@ const CheckoutForm = () => {
             setError('');
             setSuccess("your payment is done");
             setProcessing(false);
-            const date = new Date();
-            const data = { ...selectedService, orderInfo: orderInfo, date: date };
-            const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
-            const image = selectedService?.parentService?.Image;
-            axios.post('https://dry-sea-00611.herokuapp.com/myorder', data).then(() => {
-                dispatch(sendNotification({ message, image, email: user.email, }))
+            for (const order of orderService) {
+                const message = `Your payment for ${order?.parentService?.Title} has been completed`;
+                dispatch(sendNotification({ message, email: user.email, image: order?.parentService?.Image }))
+            }
+            axios.post('http://localhost:5000/saveservice/addonorderscollection', orderService).then(() => {
+                handleNextStep();
             });
         };
     };
 
 
+
     return (
-        < >
+
+        <>
             <form onSubmit={handlePayAmount} className="payment-form" >
                 <Paper elevation={1}
-                    sx={{ background: "#fff", mt: 5, p: 4, width: '80%', mb: 2, ml: 2 }}
+                    sx={{ background: "#fff", mt: 5, p: 4, width: { lg: '50%', xs: "70%", xl: '40%' }, mb: 2, ml: 2 }}
                 >
                     <CardElement
 
@@ -127,9 +132,8 @@ const CheckoutForm = () => {
                     }
                 </Paper>
             </form>
-
         </>
     );
 };
 
-export default CheckoutForm;
+export default PaymentServiceCard;

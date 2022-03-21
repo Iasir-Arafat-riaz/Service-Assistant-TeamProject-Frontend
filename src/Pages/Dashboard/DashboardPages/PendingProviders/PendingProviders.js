@@ -32,13 +32,13 @@ const PendingProviders = () => {
             setDataLoad(false);
         })
         dispatch(getAllUser());
-    }, [dispatch, loading]);
+    }, [dispatch,]);
 
 
     // load provider by email
     useEffect(() => {
         axios.get(`http://localhost:5000/users/${user.email}`).then(res => setProvider(res.data))
-    }, [provider, user])
+    }, [user])
 
     // console.log(provider._id);
 

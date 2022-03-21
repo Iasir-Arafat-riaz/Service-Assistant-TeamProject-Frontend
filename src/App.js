@@ -41,8 +41,20 @@ import { allData } from "./redux/dataSlice/dataSlice";
 import PendingProviders from "./Pages/Dashboard/DashboardPages/PendingProviders/PendingProviders";
 
 import useSocket from "./Hooks/useSocket";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+
+
 import { newNotification } from "./redux/dataSlice/dataSlice";
+
+
+
+
+// import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
+// import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
+// import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
+
+
 
 
 
@@ -139,12 +151,23 @@ const App = () => {
             element={<AppointmentRequest />}
           />
 
-          {/* add service request from service provider */}
+          {/* add service request from service provider - by sagar */}
           <Route
             path="/dashboard/make-service-request"
             element={<AddServiceRequest />}
           ></Route>
+
+
+
+          {/* all the pending request list route - by sagar */}
+
+          {/* add new service category for admin - by sagar */}
+
+
+
+
         </Route>
+
         <Route path="/contact" element={<ContactUs />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route

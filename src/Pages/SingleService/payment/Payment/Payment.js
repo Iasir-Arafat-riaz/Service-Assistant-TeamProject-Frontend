@@ -18,12 +18,9 @@ const Payment = () => {
 
         <>
 
-            {
-                <Elements stripe={stripePromise}>
-                    <CheckoutForm />
-                </Elements>
-            }
-
+            <Elements stripe={stripePromise}>
+                <CheckoutForm />
+            </Elements>
         </>
     );
 };
