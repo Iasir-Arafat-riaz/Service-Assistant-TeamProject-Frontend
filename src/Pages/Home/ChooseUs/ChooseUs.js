@@ -19,7 +19,7 @@ const ChooseUs = () => {
         <ThemeProvider theme={theme}>
             <Box
                 sx={{
-                    backgroundColor: '#f8f5ff',
+                    backgroundColor: '#fff',
                     padding: '80px 0px'
                 }}
             >
@@ -84,7 +84,7 @@ const ChooseUs = () => {
                                     </ListItem>
                                 </List>
 
-                                <Link to='/career' style={{ textDecoration: "none" }}>
+                                <Link to='/services' style={{ textDecoration: "none" }}>
                                     <Button
                                         type="submit"
                                         variant='contained'

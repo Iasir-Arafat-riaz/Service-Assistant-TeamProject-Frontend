@@ -61,12 +61,12 @@ const RequestService = () => {
     };
 
     return (
-        <Container >
+        < >
             <Paper elevation={2} sx={{
                 borderRadius: 2,
-                mb: 5,
                 px: 3
             }} >
+                <Container>
                 <Grid container>
                     <Grid
                         item
@@ -118,6 +118,7 @@ const RequestService = () => {
                         </Stack>
                     </Grid>
                 </Grid>
+                </Container>
             </Paper>
 
 
@@ -141,7 +142,7 @@ const RequestService = () => {
                             borderRadius: 5
                         }}
                     >
-                        
+
                         <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
 
                             <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
@@ -219,7 +220,7 @@ const RequestService = () => {
                 </Container>
 
             </Modal>
-        </Container>
+        </>
     );
 };
 
