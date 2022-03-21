@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActionArea, CardContent, CardHeader, Divider, Grid, Typography } from '@mui/material';
+import { Avatar, Button, Card, CardActionArea, CardContent, CardHeader, Divider, Grid, Typography, Box, Chip } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
@@ -8,8 +8,10 @@ import { allData, getAllUser } from '../../../../../redux/dataSlice/dataSlice';
 import SendIcon from '@mui/icons-material/Send';
 const useStyles = makeStyles({
     root: {
-        fontWeight: 600
+        fontWeight: 600,
+        marginBottom: '7px'
     },
+
 });
 
 const AppointmentRequest = () => {
@@ -20,7 +22,7 @@ const AppointmentRequest = () => {
     const { user } = useSelector(allData)
 
     useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${user.email}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/naimurrhman53@gmail.com`)
             .then(res => {
                 setProviderEmail(res.data)
                 console.log("provider email", res.data)
@@ -38,26 +40,32 @@ const AppointmentRequest = () => {
                         // >
 
                         // </AppointmentDetails>
-                        <Grid item md={6}>
-                            <Card>
+                        <Grid item xs={12} md={4} lg={4}>
+                            <Card sx={{mb: 3}}>
+                                <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, }}>
+
+                                    <Typography variant="h6" sx={{ fontSize: 16, fontWeight: 'bold', p: 1 }}>
+                                        Service Information
+                                    </Typography>
+                                </Box>
+
                                 <CardActionArea>
                                     <CardContent>
                                         <Typography className={classes.root}>Service Name: {appointment.Name}</Typography>
-                                        <Typography className={classes.root}>Price: {appointment.Price} BDT</Typography>
-                                        <Typography className={classes.root}>Payment Status: {appointment.payment?.toString()}</Typography>
+                                        <Typography className={classes.root}>Price:  <Chip label={appointment.Price} size="small" variant="outlined" /></Typography>
+                                        <Typography className={classes.root}>Payment Status: <Chip label={appointment.payment?.toString()} size="small" variant="outlined" /></Typography>
                                         {/* <Typography>Service Category:
                                             {appointment.parentService.Title}</Typography> */}
-                                        <Typography className={classes.root}>Order Status: {appointment.status}</Typography>
+                                        <Typography className={classes.root}>Order Status: <Chip label={appointment.status} size="small" variant="outlined" /></Typography>
                                         <Divider />
-                                        <Typography className={classes.root}>Customer Information:</Typography>
-                                        <Typography className={classes.root}>Customer Name: {appointment.orderInfo.name}</Typography>
-                                        <Typography className={classes.root}>Contact: {appointment.orderInfo.number}</Typography>
-                                        <Typography className={classes.root}>Address: {appointment.orderInfo.address}</Typography>
+                                        <Typography className={classes.root} sx={{ textAlign: 'center' }}>Customer Information</Typography>
+                                        <Typography className={classes.root}>Customer: <span>{appointment.orderInfo.name}</span></Typography>
+                                        <Typography className={classes.root}>Contact:  <Chip label={appointment.orderInfo.number} size="small" variant="outlined" /></Typography>
+                                        <Typography className={classes.root}>Address: <span>{appointment.orderInfo.address}</span></Typography>
                                     </CardContent>
                                 </CardActionArea>
                             </Card>
                         </Grid>
-
                     )
                 }
             </Grid>
