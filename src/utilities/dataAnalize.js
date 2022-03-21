@@ -12,21 +12,21 @@ export const recentMoment = (data) => {
         last7DaysData.push(createData)
         return d
     })
-    console.log(data);
+    
     for (const element of data) {
         const orderDate = onlyDate(element.date);
-        //console.log(element);
+        //
         for (const singleLast7Date of last7Dates) {
             const singleDate = onlyDate(singleLast7Date);
             if (parseInt(singleDate) === parseInt(orderDate)) {
                 const index = last7DaysData.findIndex(everyData => everyData.date === singleDate)
                 last7DaysData[index].price = last7DaysData[index]?.price + element.Price
-                //console.log(last7DaysData[index]);
+                //
                 break;
             }
         }
     }
-    //console.log(last7DaysData); 
+    //
     return last7DaysData.reverse();
 }
 export const totalEarning = (data) => {

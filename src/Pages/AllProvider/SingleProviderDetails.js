@@ -20,17 +20,12 @@ const SingleProviderDetails = () => {
     const [providerProfiles, setProviderProfiles] = useState({});
     const [providerServiceInfo, setProviderServiceInfo] = useState([]);
     const { user, id } = useSelector(allData);
-    // const { allServices, serviceIsLoading } = useSelector(allData);
-    // const textStyle = {
-    //     color: '#707070',
-    // }
-    // https://dry-sea-00611.herokuapp.com/provider/myServices/622ad1cbe7526bcaad7bceed
     //Provider Data Load by Email
     useEffect(() => {
         axios.get('https://dry-sea-00611.herokuapp.com/providerdetials/provider?email=samir@gmail.com')
             .then(data => {
                 setProviderProfiles(data.data);
-                console.log('p.data', data);
+                
             })
     }, [])
 
@@ -38,7 +33,7 @@ const SingleProviderDetails = () => {
         axios.get('https://dry-sea-00611.herokuapp.com/provider/myServices/622ad1cbe7526bcaad7bceed')
             .then(data => {
                 setProviderServiceInfo(data.data);
-                console.log('p.info', data);
+                
             })
     }, [])
     const [expanded, setExpanded] = useState(false);
@@ -47,8 +42,8 @@ const SingleProviderDetails = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    console.log('p.profile Id', providerProfiles._id);
-    console.log('p.profile allServices', providerServiceInfo);
+    
+    
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
 

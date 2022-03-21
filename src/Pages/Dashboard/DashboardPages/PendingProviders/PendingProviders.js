@@ -40,7 +40,7 @@ const PendingProviders = () => {
         axios.get(`https://dry-sea-00611.herokuapp.com/users/${user.email}`).then(res => setProvider(res.data))
     }, [user])
 
-    // console.log(provider._id);
+    // 
 
     // approve provider 
     const ApproveProvider = (email, id, parentId) => {

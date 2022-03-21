@@ -6,9 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import OrderStepper from './OrderStepper';
 import ServiceReviews from './ServiceReviews';
 
-const ServiceOverview = ({ matchService, question1,
-    question2,
-    question3 }) => {
+const ServiceOverview = ({ matchService }) => {
 
     // list item style
     const listItem = {
@@ -28,28 +26,11 @@ const ServiceOverview = ({ matchService, question1,
             <Box className="service_overview">
                 <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 4 }}>Overview of {matchService?.Title}</Typography>
 
-                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1}</Typography> */}
-
                 {
                     Object?.values(matchService?.overview[0])[0]?.map((text, index) => <ListItem key={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
-
-                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography> */}
-                {/* {
-                    Object?.values(matchService?.overview[1])[0]?.map((text, index) => <ListItem key={index}>
-                        <li style={listItem}>{text}</li>
-                    </ListItem>)
-                }  */}
-
-                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography> */}
-
-                {/* {
-                    Object?.values(matchService?.overview[2])[0]?.map((text, index) => <ListItem kwy={index}>
-                        <li style={listItem}>{text}</li>
-                    </ListItem>)
-                }  */}
                 <Typography variant='h4' sx={{ mt: 3, mb: 3 }}>FAQ</Typography>
 
                 {/* FAQ */}

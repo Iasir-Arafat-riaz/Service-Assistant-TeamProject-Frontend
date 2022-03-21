@@ -57,13 +57,12 @@ const Services = (props) => {
 
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
-    console.log(url);
+    
     navigate(url);
   };
 
   useEffect(() => {
     dispatch(loadServiceCategory());
-    dispatch(singleService());
   }, [dispatch]);
   if (serviceIsLoading) {
     return <Loading />;

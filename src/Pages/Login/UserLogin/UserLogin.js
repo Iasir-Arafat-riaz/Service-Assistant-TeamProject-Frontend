@@ -64,7 +64,7 @@ const UserLogin = () => {
 		});
 	}, [])
 	const handleSignUp = () => {
-		//console.log(watch('signupEmail'));
+		//
 		if (watch('signupEmail').length && watch('name').length && watch('signupPass').length >= 6) {
 			signUpWithEmail({ name: watch('name'), email: watch('signupEmail'), password: watch('signupPass'), location, navigate })
 		}

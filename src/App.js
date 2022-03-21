@@ -69,9 +69,9 @@ import NotificationCard from "./Pages/SharedRoute/Navigation/Component/Notificat
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 import Career from "./Pages/Career/Career";
-
-
-
+// import AOS from 'aos'
+// import 'aos/dist/aos.css';
+// AOS.init();
 
 
 // import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
@@ -84,14 +84,6 @@ import Career from "./Pages/Career/Career";
 
 
 const App = () => {
-  // const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -110,7 +102,7 @@ const App = () => {
   useEffect(() => {
     if (user.email) {
       socket.emit('joinAll', user.email);
-      console.log('send');
+      
     }
 
 
@@ -129,7 +121,6 @@ const App = () => {
       })
     });
   }, [])
-
 
   return (
     <BrowserRouter>

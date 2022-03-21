@@ -5,7 +5,7 @@ import React from 'react';
 import './ChatBoxHeader.css';
 import ChatIcon from '@mui/icons-material/Chat';
 const ChatBoxHeader = props => {
-    //console.log(props.user);
+    //
     const { uid, avatar, photoURL, displayName, email } = props?.user;
     return (
         <Stack direction='row' px={2} py={1} justifyContent='space-between' alignItems='center' sx={{

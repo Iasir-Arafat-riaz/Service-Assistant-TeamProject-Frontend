@@ -25,7 +25,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
         price = order.Price + order.Price;
     }
 
-    // console.log(orderService[0].parentService.Image)
+    // 
 
     useEffect(() => {
         fetch('http://localhost:5000/myorder/createpaymentstatus', {

@@ -131,7 +131,7 @@ export default function AdminPendingRequest() {
   const handleSubmitCategory = async () => {
     const url = `https://dry-sea-00611.herokuapp.com/api/v1/service-category/${categoryId}`;
     const res = await axios.patch(url, serviceInfo);
-    console.log(res);
+    
   };
 
   let rows;
@@ -147,9 +147,9 @@ export default function AdminPendingRequest() {
     pendingService();
   }, []);
 
-  if (isPendingDataLoading) {
-    return <Loading />;
-  }
+  // if (isPendingDataLoading) {
+  //   return <Loading />;
+  // }
 
   if (pendingService.length > 0) {
     rows = pendingService.map((ele) => createData(ele));

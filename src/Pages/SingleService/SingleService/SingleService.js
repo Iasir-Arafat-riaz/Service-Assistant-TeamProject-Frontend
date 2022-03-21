@@ -13,46 +13,20 @@ import { allData, singleService } from "../../../redux/dataSlice/dataSlice";
 import Footer from '../../SharedRoute/Footer/Footer';
 const SingleService = () => {
   const { serviceId } = useParams();
-
-
+  const { singleServiceDetail, singleServiceLoading } = useSelector(allData)
 
   const dispatch = useDispatch();
   useEffect(() => {
 
-    dispatch(singleService());
-  }, [dispatch])
+    dispatch(singleService(serviceId));
+    
+  }, [serviceId, dispatch])
+  
 
-
-  const { singleServiceDetails, singleServiceLoading } = useSelector(allData)
 
   if (singleServiceLoading) {
     return <Loading />;
   }
-
-  // const matchService = singleServiceDetails?.find(
-  //   (service) => parseInt(service.parentService) === parseInt(serviceId)
-  // );
-
-  console.log(singleServiceDetails);
-
-  const matchService = singleServiceDetails?.find(
-    (service) => {
-      console.log(service._id, serviceId);
-      if (serviceId.length > 4){
-        return service._id == serviceId;
-      }else {
-        return parseInt(service.parentService) === parseInt(serviceId)
-      }
-    }
-  );
-  console.log(matchService);
-
-  // //console.log(matchService)
-
-  const question1 = Object?.keys(matchService?.overview[0]);
-  // const question2 = Object?.keys(matchService?.overview[1]);
-  // const question3 = Object?.keys(matchService?.overview[2]);
-
   return (
     <>
       <Navigation />
@@ -61,12 +35,10 @@ const SingleService = () => {
       ) : (
         <Box>
           <Navigation />
-          <SingleServiceHeader matchService={matchService} />
+          <SingleServiceHeader matchService={singleServiceDetail} />
           <ServiceDetails
             singleServiceLoading={singleServiceLoading}
-            question1={question1}
-            // question2={question2}
-            matchService={matchService}
+            matchService={singleServiceDetail}
           />
 
         </Box>

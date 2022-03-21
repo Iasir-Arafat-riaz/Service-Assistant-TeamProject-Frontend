@@ -12,7 +12,7 @@ import React from "react";
 const PreviewHeader = ({ bannerInfo, banner }) => {
   const { imageUrl, bannerText, bannerNumber, id, bannerTex2 } = bannerInfo;
 
-  // //console.log("this is banners datas",banner)
+  // //
 
   if (!imageUrl) {
     return (

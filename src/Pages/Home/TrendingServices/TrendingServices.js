@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import axios from 'axios';
-import TrendingService from './TrendingService';
+import CommonService from '../HomeServices/CommonService'
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CustomSlider from '../../SharedRoute/CustomSlider/CustomSlider';
-import { useDispatch, useSelector } from 'react-redux';
-import { allData, loadServiceCategory } from '../../../redux/dataSlice/dataSlice';
-import Services from '../../Services/Services';
-
 const TrendingServices = () => {
 
-
-
-    const { allServices, serviceIsLoading } = useSelector(allData);
-    const dispatch = useDispatch();
-
+    const [loading, setLoading] = useState(true);
+    const [services, setServices] = useState([]);
 
     useEffect(() => {
-        dispatch(loadServiceCategory());
-    }, [dispatch]);
+        setLoading(true)
+        axios.get('https://dry-sea-00611.herokuapp.com/api/v1/trending').then(res => {
+            const fullData = res.data;
+            let mainData = [];
+            fullData.forEach(element => {
+                if (element.serviceInfo.length) {
+                    const createData = {
+                        Category: element.serviceInfo[0].Title,
+                        Id: element.serviceInfo[0]._id,
+                        Img: element.serviceInfo[0].Img
+                    }
+                    mainData = [...mainData, createData]
+                    
+                }
+
+
+            });
+            setServices(mainData)
+
+        }).finally(setLoading(false));
+    }, []);
 
 
     return (
         <Container sx={{ mb: 8 }}  >
 
             {
-                serviceIsLoading ?
+                loading ?
                     <Skeleton animation="wave" variant="rectangular" width={'50%'} sx={{ mb: 2 }} height={30} />
                     :
                     <Box sx={{ display: 'flex', alignItems: "center", justifyContent: 'space-between' }}>
@@ -39,7 +51,7 @@ const TrendingServices = () => {
 
 
             {
-                serviceIsLoading ?
+                loading ?
                     <Box sx={{ display: 'flex', gap: 5 }}>
 
                         {[...new Array(4)].map((ske, index) => <Stack key={index} spacing={1} >
@@ -48,7 +60,7 @@ const TrendingServices = () => {
                         )}
 
                     </Box>
-                    : <CustomSlider data={allServices} component={TrendingService}></CustomSlider>
+                    : <CustomSlider data={services} component={CommonService}></CustomSlider>
 
             }
 

@@ -8,7 +8,7 @@ export const getItemFromLocal = () => {
 };
 
 export const setItemInLocal = (data) => {
-  console.log(data);
+  
   const exist = getItemFromLocal();
   if (!exist) {
     localStorage.setItem("recentView", JSON.stringify([data]));

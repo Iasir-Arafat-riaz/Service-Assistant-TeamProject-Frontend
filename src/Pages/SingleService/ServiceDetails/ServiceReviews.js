@@ -7,7 +7,7 @@ import { faker } from '@faker-js/faker';
 const ServiceReviews = ({ service }) => {
 
 
-    console.log(service);
+    
 
     return (
 

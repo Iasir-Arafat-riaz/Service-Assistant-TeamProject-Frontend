@@ -1,7 +1,4 @@
 import React from 'react';
-import emailicon from '../../Pages/images/emailicon.png';
-import phoneicon from '../../Pages/images/phoneicon.png';
-import mapicon from '../../Pages/images/mapicon.png';
 import { Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -9,19 +6,19 @@ const ContactInfo = () => {
 
     const contactInfo = [
         {
-            "icon": mapicon,
+            "icon": 'https://i.ibb.co/6HTPC31/mapicon.png',
             "name": "Mailing Address",
             "desc": "121 King Street, Melbourne Victoria 3000 Aushtralia",
             "id": 1
         },
         {
-            "icon": emailicon,
+            "icon": ' https://i.ibb.co/kBVvKKG/emailicon.png',
             "name": "Email Info",
             "desc": "servicea2zweb@gmail.com",
             "id": 2
         },
         {
-            "icon": phoneicon,
+            "icon": "https://i.ibb.co/JC6CwVT/phoneicon.png",
             "name": "Phone Number",
             "desc": "+8801907851900",
             "id": 3

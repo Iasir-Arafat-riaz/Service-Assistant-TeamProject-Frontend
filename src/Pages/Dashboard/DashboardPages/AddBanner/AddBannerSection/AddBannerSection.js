@@ -30,11 +30,11 @@ const AddBannerSection = ({ banner }) => {
     bannerNumber: watch("bannerNumber"),
   };
 
-  //console.log(bannerInfo);
+  //
 
   const onSubmit = (data) => {
     // data._id = banner._id;
-    //console.log(data);
+    //
     // reset();
     axios.put("https://dry-sea-00611.herokuapp.com/headerBanners", data).then((response) => {
       if (response.status == 200) {
@@ -62,7 +62,7 @@ const AddBannerSection = ({ banner }) => {
         setLoad(false);
       });
   }, []);
-  // //console.log(banners);
+  // //
   if (load) {
     return (
       <Stack justifyContent="center" alignItems="center">

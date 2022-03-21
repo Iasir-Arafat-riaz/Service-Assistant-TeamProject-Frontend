@@ -1,62 +1,62 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const UpdateMyProfile = (props) => {
 
-    const [serviceName, setServiceName] = useState("");
-    const [textArea, setTextArea] = useState("");
-    const [image, setImage] = useState(null);
-    const [flag, setFlag] = useState(true);
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const [serviceName, setServiceName] = useState("");
+  const [textArea, setTextArea] = useState("");
+  const [image, setImage] = useState(null);
+  const [flag, setFlag] = useState(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        if (!image) {
-            return;
-          }
-          const formData = new FormData();
-          formData.append("image", image);
-     
-          formData.append("textArea", textArea);
-          formData.append("serviceName", serviceName);
-
-          const api = `https://dry-sea-00611.herokuapp.com/users/updateinfo/${props.email}`;
-
-          fetch(api, {
-            method: "PUT",
-            body: formData,
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.insertedId) {
-                console.log(data);
-                console.log("Data inserted  Successfull");
-                setFlag(!flag);
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-            });
+    if (!image) {
+      return;
     }
-   
-    return (
-        <form onSubmit={handleSubmit}>
+    const formData = new FormData();
+    formData.append("image", image);
+
+    formData.append("textArea", textArea);
+    formData.append("serviceName", serviceName);
+
+    const api = `https://dry-sea-00611.herokuapp.com/users/updateinfo/${props.email}`;
+
+    fetch(api, {
+      method: "PUT",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
           
-        <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1, width: '100%' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField
-       id="standard-basic"
-        label="Your Service Name"
-        onChange={(e) => setServiceName(e.target.value)}
-        variant="standard" />
-      <TextField
+          
+          setFlag(!flag);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '100%' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="standard-basic"
+          label="Your Service Name"
+          onChange={(e) => setServiceName(e.target.value)}
+          variant="standard" />
+        <TextField
           id="filled-textarea"
           label="Details about you and your service"
           placeholder="Placeholder"
@@ -64,24 +64,24 @@ const UpdateMyProfile = (props) => {
           variant="standard"
           onChange={(e) => setTextArea(e.target.value)}
         />
-          <TextField
-              id="serviceImage"
-              label="Your Profile Background Image"
-              variant="standard"
-              fullWidth
-              type="file"
-              name="image"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              onChange={(e) => setImage(e.target.files[0])}
-            />
-    </Box>
-    <Button variant="outlined" sx={{w:100}} type="submit">
-          Update Info
-        </Button>
+        <TextField
+          id="serviceImage"
+          label="Your Profile Background Image"
+          variant="standard"
+          fullWidth
+          type="file"
+          name="image"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          onChange={(e) => setImage(e.target.files[0])}
+        />
+      </Box>
+      <Button variant="outlined" sx={{ w: 100 }} type="submit">
+        Update Info
+      </Button>
     </form>
-    );
+  );
 };
 
 export default UpdateMyProfile;
@@ -150,8 +150,8 @@ const AdvocateRegister = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data.insertedId) {
-                console.log(data);
-                console.log("Registration Successfull");
+                
+                
                 setFlag(!flag);
               }
             })
@@ -167,7 +167,7 @@ const AdvocateRegister = () => {
         })
         .catch((error) => {
           const errorMessage = error.message;
-          console.log(errorMessage);
+          
           setErrorMessage(errorMessage);
           setShow(true);
         });

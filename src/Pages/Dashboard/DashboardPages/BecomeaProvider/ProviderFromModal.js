@@ -79,7 +79,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                 url: 'https://api.imgbb.com/1/upload',
                 data: body
             }).then(res => {
-                console.log(res)
+                
                 setValue('providerImg', res.data?.data?.url)
             }).finally(() => setImgLoading(true))
         }
