@@ -57,7 +57,7 @@ const Services = (props) => {
 
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
-    
+
     navigate(url);
   };
 

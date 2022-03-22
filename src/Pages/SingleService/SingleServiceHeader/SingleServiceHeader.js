@@ -45,7 +45,7 @@ const SingleServiceHeader = ({ matchService }) => {
 
                 </Box>
                 <Container>
-                    <Grid sx={{ mt: -25, }} item xs={12} md={5}>
+                    <Grid sx={{ mt: -25, }} item xs={12} md={7}>
                         <Paper elevation={0} sx={{ p: 2, backgroundColor: 'transparent' }}>
                             <Typography sx={{ fontSize: 20, mb: 1, fontWeight: 'bold', color: 'white' }} variant="h6">Main feature</Typography>
                             {
