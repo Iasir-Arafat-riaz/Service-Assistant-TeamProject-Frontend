@@ -51,8 +51,8 @@ const ChooseUs = () => {
                                     }}
                                 >CHOOSE US</Typography>
                                 <Typography
-                                    sx={{ color: '#022279' }}
-                                    variant='h3'
+                                    sx={{ color: '#022279', letterSpacing:  2 }}
+                                    variant='h4'
                                 >Upgrade Your Skills With Service A2Z</Typography>
 
                                 <List>
