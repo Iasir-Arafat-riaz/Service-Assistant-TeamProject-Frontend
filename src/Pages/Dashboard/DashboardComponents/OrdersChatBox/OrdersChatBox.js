@@ -16,10 +16,10 @@ const OrdersChatBox = ({ id, client }) => {
     const [messages, setMessages] = useState([]);
     const { register, reset, handleSubmit, watch, formState: { errors } } = useForm();
     const { photoURL, displayName, email, provider } = client;
-    console.log('client', provider, client);
+    
     const onSubmit = data => {
         const mainData = { sender: user?.email, photoURL: user.photoURL, data, id, buyerEmail: email, provider, time: `${new Date()}`, }
-        console.log('main data', mainData);
+        
         // send data
         dispatch(postChat(mainData));
         dispatch(addOrderChat(mainData))

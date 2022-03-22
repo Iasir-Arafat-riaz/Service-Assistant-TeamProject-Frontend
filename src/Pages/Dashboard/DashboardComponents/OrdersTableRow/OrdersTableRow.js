@@ -15,9 +15,9 @@ const OrdersTableRow = ({ data }) => {
         setStatus(e.target.value);
         const updateStatus = e.target.value;
         UpdateStatus(updateStatus);
-        console.log(updateStatus);
+        
     };
-    console.log(data);
+    
     const UpdateStatus = updateStatus => {
         axios.put(`https://dry-sea-00611.herokuapp.com/orders/changestatus/${data._id}`, { updateStatus })
             .then(res => {

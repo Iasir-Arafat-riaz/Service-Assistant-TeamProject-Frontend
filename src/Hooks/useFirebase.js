@@ -5,23 +5,9 @@ import { useDispatch } from 'react-redux'
 import { isAdmin, login, logout, putUserToDb, saveUserToDb, setLoading } from "../redux/dataSlice/dataSlice";
 
 const useFirebase = () => {
-    // const [loading, setLoading] = useState(true);
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
     const dispatch = useDispatch();
-
-    // const saveUser = (user, method) => {
-    //     fetch('https://serene-temple-54072.herokuapp.com/users', {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => res.json())
-    //         .then(res => 
-
-    // }
 
     const googleSignIn = (location, navigate) => {
         signInWithPopup(auth, googleProvider)

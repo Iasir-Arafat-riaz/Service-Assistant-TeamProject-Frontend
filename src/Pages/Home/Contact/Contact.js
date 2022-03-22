@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import logo from "../../images/logo.png";
 import React, { useEffect, useState } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import { VscCallOutgoing } from "react-icons/vsc";
@@ -99,7 +98,7 @@ const Contact = () => {
 
           <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center' }} >
             <Box sx={{ display: 'flex', alignItems: "center", gap: 1 }}>
-              <img width={60} src={logo} alt="" />
+              <img width={60} src='https://i.ibb.co/fN13HF9/logo.png' alt="" />
               <span>
 
                 <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Dhaka,Banladesh</Typography>

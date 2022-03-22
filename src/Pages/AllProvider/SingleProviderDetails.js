@@ -36,7 +36,7 @@ const SingleProviderDetails = () => {
         axios.get('http://localhost:5000/providerdetials/provider?email=samir@gmail.com')
             .then(data => {
                 setProviderProfiles(data.data);
-                console.log('p.data', data);
+                
             })
     }, [])
 
@@ -44,7 +44,7 @@ const SingleProviderDetails = () => {
         axios.get('http://localhost:5000/provider/myServices/622ad1cbe7526bcaad7bceed')
             .then(data => {
                 setProviderServiceInfo(data.data);
-                console.log('p.info', data);
+                
             })
     }, [])
     const [expanded, setExpanded] = useState(false);
@@ -53,8 +53,8 @@ const SingleProviderDetails = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    console.log('p.profile Id', providerProfiles._id);
-    console.log('p.profile allServices', providerServiceInfo);
+    
+    
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
 

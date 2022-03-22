@@ -34,7 +34,6 @@ import { useTheme } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
-import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +49,7 @@ import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
 const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
-console.log(SpeechRecognition);
+
 let mic;
 if (SpeechRecognition) {
   mic = new SpeechRecognition()
@@ -103,7 +102,7 @@ const Navigation = () => {
     const filterMessage = notifications.filter(
       (notification) => notification.seen === false
     );
-    console.log(filterMessage);
+    
     setMessageSeen(filterMessage.length);
   }, [notifications, user]);
 
@@ -128,7 +127,7 @@ const Navigation = () => {
   };
 
   const handleCardClick = (id) => {
-    //console.log("card clicked");
+    //
     navigate(`/Home/service-details/${id}`);
   };
 
@@ -293,17 +292,17 @@ const Navigation = () => {
     if (isListening) {
       mic.start();
       mic.onend = () => {
-        console.log("continue..");
+        
         mic.start();
       };
     } else {
       mic.stop();
       mic.onend = () => {
-        console.log("Stopped Mic on Click");
+        
       };
     }
     mic.onstart = () => {
-      console.log("Mics on");
+      
     };
 
     mic.onresult = (event) => {
@@ -311,10 +310,10 @@ const Navigation = () => {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join("");
-      console.log(transcript);
+      
       setNote(transcript);
       mic.onerror = (event) => {
-        console.log(event.error);
+        
       };
     };
   };
@@ -324,9 +323,6 @@ const Navigation = () => {
     setNote("");
   };
 
-  console.log(note)
-
-  const [value, setValue] = React.useState();
   return (
     <Container id="back-to-top-anchor">
       <AppBar
@@ -358,7 +354,7 @@ const Navigation = () => {
             <img
               onClick={goHome}
               className={navLogo}
-              src={logo}
+              src={'https://i.ibb.co/n8Wp01q/web-logo.png'}
               width="120"
               alt="weblogo"
             />
@@ -477,9 +473,9 @@ const Navigation = () => {
                 </Box> */}
                 <Grid container spacing={3}>
                   {searchInput.length > 1
-                    ? filteredResults.map((item) => {
+                    ? filteredResults.map((item, i) => {
                       return (
-                        <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
+                        <Grid key={i} item md={5.5} xs={10} sx={{ mr: 2 }}>
                           <Card sx={{
                             borderBottom: '1px solid #ffb600',
                             borderRight: '2px solid #ffb600'
@@ -497,8 +493,8 @@ const Navigation = () => {
                         </Grid>
                       );
                     })
-                    : APIData.map((item) => {
-                      return <Grid item md={12} xs={12}></Grid>;
+                    : APIData.map((item, i) => {
+                      return <Grid key={i} item md={12} xs={12}></Grid>;
                     })}
                 </Grid>
               </Box>

@@ -7,7 +7,7 @@ import ServiceCard from '../ServiceCard';
 
 const ServiceCardWrap = (props) => {
     const { service, classes } = props;
-    console.log(window.innerWidth <= 500 ? .2 : 1);
+    
     const [isVisible, setIsVisible] = useState(false);
     const divID = service.Category?.split(" ").join("").toLowerCase();
     const targetRef = useRef();

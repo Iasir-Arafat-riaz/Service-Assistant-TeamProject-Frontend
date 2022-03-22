@@ -66,7 +66,7 @@ const AddServiceReview = () => {
 
     // 
 
-    // //console.log(user);
+    // //
     const handleEditService = () => {
         setAlert(false);
         setOpenBox(true);
@@ -76,7 +76,7 @@ const AddServiceReview = () => {
     // handle delete review;
 
 
-    // //console.log('first');
+    // //
     const UpdateReview = (data) => {
         setUpdateing(true);
         // useEffect(() => {
@@ -114,7 +114,7 @@ const AddServiceReview = () => {
         // }, [])
 
     }
-    // //console.log(matchService?.allServices)
+    // //
 
     return (
         <>

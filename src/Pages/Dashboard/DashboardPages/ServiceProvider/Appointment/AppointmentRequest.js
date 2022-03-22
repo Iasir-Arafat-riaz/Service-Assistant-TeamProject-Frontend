@@ -25,7 +25,7 @@ const AppointmentRequest = () => {
         axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/naimurrhman53@gmail.com`)
             .then(res => {
                 setProviderEmail(res.data)
-                console.log("provider email", res.data)
+                
             })
     }, []);
 

@@ -19,9 +19,9 @@ const AdminChat = () => {
 
     useEffect(() => {
         socket.on('user', user => {
-            //console.log(user);
+            //
             const getClients = saveUser(user);
-            //console.log('get Clients', getClients);
+            //
             if (getClients) {
                 setAllClientLocal(getClients);
             }

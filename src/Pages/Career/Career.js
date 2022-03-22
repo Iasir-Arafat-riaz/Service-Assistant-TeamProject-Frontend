@@ -47,19 +47,8 @@ const Career = () => {
     return (
         <ThemeProvider theme={theme}>
             <Navigation />
-            {/* 
-            <Box
-                sx={{
-                    backgroundImage: `url(https://i.ibb.co/WvLPqPH/service-provider-career.png)`,
-                    height: '50vh',
-                    objectFit: 'cover',
-                    backgroundSize: 'cover',
-                    mt: 10
-                }}
-            >
-            </Box> */}
 
-            <Container sx={{ mt: 12,mb: 5 }}>
+            <Container sx={{ mt: 12, mb: 5 }}>
 
                 <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', color: "#113849", fontSize: '35px' }}>Choose Your Job</Typography>
 
@@ -188,14 +177,14 @@ const Career = () => {
                                     </Typography>
 
                                     <Link to='/Dashboard/becomeaprovider' style={{ textDecoration: "none" }}>
-                                    <Button
-                                        type="submit"
-                                        variant='contained'
-                                        sx={{ borderRadius: 28, }}
-                                        style={{ backgroundColor: "#FF5E14", }}
-                                    >Apply Now <SendIcon sx={{pl:1}}/>
-                                    </Button>
-                                </Link>
+                                        <Button
+                                            type="submit"
+                                            variant='contained'
+                                            sx={{ borderRadius: 28, }}
+                                            style={{ backgroundColor: "#FF5E14", }}
+                                        >Apply Now <SendIcon sx={{ pl: 1 }} />
+                                        </Button>
+                                    </Link>
 
                                     <Typography
                                         variant="h5"
@@ -236,14 +225,14 @@ const Career = () => {
                                         variant="h5"
                                         color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
-                                    >Category: <span style={{color:'#363636'}}>{job.Category}</span>
+                                    >Category: <span style={{ color: '#363636' }}>{job.Category}</span>
                                     </Typography>
 
                                     <Typography
                                         variant="h5"
                                         color="#707070"
                                         sx={{ fontWeight: 'bold', mt: 3 }}
-                                    >Service Type: <span style={{color:'#363636'}}>{job.ServiceType}</span>
+                                    >Service Type: <span style={{ color: '#363636' }}>{job.ServiceType}</span>
                                     </Typography>
 
                                     <Typography
@@ -255,7 +244,7 @@ const Career = () => {
                                     {
                                         job.Responsibility.map(resp =>
                                             <List>
-                                                <ListItemText sx={{color:'#363636'}}><AdjustIcon fontSize="small" /> {resp.res}</ListItemText>
+                                                <ListItemText sx={{ color: '#363636' }}><AdjustIcon fontSize="small" /> {resp.res}</ListItemText>
                                             </List>
                                         )
                                     }

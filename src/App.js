@@ -45,8 +45,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
+
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
+
 
 import { newNotification } from "./redux/dataSlice/dataSlice";
 
@@ -67,20 +69,21 @@ import NotificationCard from "./Pages/SharedRoute/Navigation/Component/Notificat
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 import Career from "./Pages/Career/Career";
+// import AOS from 'aos'
+// import 'aos/dist/aos.css';
+// AOS.init();
+
+
+// import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
+// import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
+// import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
+
 
 
 
 
 
 const App = () => {
-  // const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -99,7 +102,7 @@ const App = () => {
   useEffect(() => {
     if (user.email) {
       socket.emit('joinAll', user.email);
-      console.log('send');
+      
     }
 
 
@@ -118,7 +121,6 @@ const App = () => {
       })
     });
   }, [])
-
 
   return (
     <BrowserRouter>
@@ -183,6 +185,7 @@ const App = () => {
             element={<AddServiceRequest />}
           ></Route>
 
+
           <Route
             path="/dashboard/ordersChat"
             element={<OrdersChat />}
@@ -200,6 +203,11 @@ const App = () => {
 
           <Route path="/dashboard/add-service-category" element={<AddNewServiceCategory />}></Route>
 
+
+
+          {/* all the pending request list route - by sagar */}
+
+          {/* add new service category for admin - by sagar */}
 
 
         </Route>

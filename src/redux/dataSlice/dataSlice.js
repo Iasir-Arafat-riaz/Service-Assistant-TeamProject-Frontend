@@ -1,6 +1,7 @@
 import { async } from '@firebase/util';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import Swal from 'sweetalert2';
 import firebaseInit from "./../../firebase/firebase.init";
@@ -20,7 +21,7 @@ const initialState = {
     cartTotalQuantity: 0,
     cartTotalAmount: 0,
     singleServiceLoading: true,
-    singleServiceDetails: [],
+    singleServiceDetail: {},
     testimonials: [],
     testimonialLoading: true,
     providers: [],
@@ -63,7 +64,7 @@ export const putUserToDb = createAsyncThunk(
 export const makeAdmin = createAsyncThunk(
     'data/makeAdmin',
     async (info) => {
-        //console.log(info);
+        //
         const response = await axios.put(`https://dry-sea-00611.herokuapp.com/admin/makeadmin/${info.email} `, info);
         return response.data
     }
@@ -96,8 +97,8 @@ export const loadServiceCategory = createAsyncThunk(
 
 export const singleService = createAsyncThunk(
     "singleService/details",
-    async () => {
-        const response = await axios.get("https://dry-sea-00611.herokuapp.com/singleservice")
+    async (info) => {
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/singleservice/${info}`)
         return response.data;
     }
 );
@@ -129,13 +130,10 @@ export const approvedTestimonial = createAsyncThunk(
 
 export const serviceProviders = createAsyncThunk(
     "providers/service",
-    async () => {
+    async (info) => {
         const response = await axios.get('https://dry-sea-00611.herokuapp.com/users/finding/ids', {
             params: {
-                data: [
-                    "62121eb1cef8c7b4915a6923",
-                    "6211cbf6bb809e9e3edb1859"
-                ]
+                data: info
             }
         })
         return response.data;
@@ -160,7 +158,7 @@ export const getChatFromDb = createAsyncThunk(
 export const saveService = createAsyncThunk(
     "service/save",
     async (info) => {
-        //console.log(info)
+        //
         const response = await axios.post('https://dry-sea-00611.herokuapp.com/saveservice', info)
         return response.data;
     }
@@ -169,7 +167,7 @@ export const saveService = createAsyncThunk(
 export const getNotification = createAsyncThunk(
     "get/notification",
     async (info) => {
-        // console.log(info)
+        // 
         const response = await axios.get(`https://dry-sea-00611.herokuapp.com/notification/getnotification?email=${info.email}`)
         return response.data;
     }
@@ -184,7 +182,7 @@ export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
 export const sendNotification = createAsyncThunk("sendNotification/notification",
     async (info) => {
         const modifyInfo = { ...info, seen: false, time: new Date() }
-        console.log(modifyInfo);
+        
         const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
         return response.data;
     }
@@ -192,7 +190,7 @@ export const sendNotification = createAsyncThunk("sendNotification/notification"
 export const getProviderChatsDb = createAsyncThunk(
     "data/getProviderChatsDb",
     async (info) => {
-        // console.log(info)
+        // 
         const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/provider/${info.email}`)
         return response.data;
     }
@@ -201,7 +199,7 @@ export const getProviderChatsDb = createAsyncThunk(
 export const getOtherOrders = createAsyncThunk(
     "data/getOtherOrders",
     async (info) => {
-        // console.log(info)
+        // 
         const response = await axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/${info.email}`)
         return response.data;
     }
@@ -211,7 +209,7 @@ export const getOtherOrders = createAsyncThunk(
 export const getSingleOrdersChat = createAsyncThunk(
     "data/getSingleOrdersChat",
     async (info) => {
-        // console.log(info)
+        // 
         const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/singleOrder/${info.id}`)
 
         return response.data;
@@ -236,26 +234,32 @@ export const dataSlice = createSlice({
             state.loading = action.payload;
         },
         addToCart(state, { payload }) {
-            state.cartItems.push(payload);
+            // state.cartItems.push(payload);
             // //We need item id for find index effectively. Need modify API
-            // const itemIndex = state.cartItems.findIndex((item) => item.Price === action.payload.Price);
+            const itemIndex = state.cartItems.findIndex((item) => item.subId === payload.subId);
 
-            // if (itemIndex >= 0) {
-            //     state.cartItems[itemIndex].cartQuantity += 1;
-            //     toast.info(`Increased ${state.cartItems[itemIndex].Name} Quantity`, {
-            //         position: "bottom-left"
-            //     })
-            // }
-            // else {
-            //     const tempService = { ...action.payload, cartQuantity: 1 }
-            //     // state.cartItems.push(action.payload)
-            //     state.cartItems.push(tempService)
-            //     toast.success(`${action.payload.Name} Added to Cart`, {
-            //         position: "bottom-left"
-            //     });
-            // }
-            // localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
-            saveService(state.cartItems);
+            if (itemIndex >= 0) {
+
+                state.cartItems[itemIndex].cartQuantity += 1;
+                toast.info(`Increased ${state.cartItems[itemIndex].Name} Quantity`, {
+                    position: "bottom-left"
+                })
+            }
+            else {
+                const tempService = { ...payload, cartQuantity: 1 }
+                // state.cartItems.push(action.payload)
+                state.cartItems.push(tempService)
+                toast.success(`${payload.Name} Added to Cart`, {
+                    position: "bottom-left"
+                });
+            }
+            const getItems = JSON.parse(localStorage.getItem('cartItems'));
+            if (getItems) {
+                localStorage.setItem("cartItems", JSON.stringify([payload, ...getItems]))
+            } else {
+                // localStorage.setItem("cartItems")
+                localStorage.setItem("cartItems", JSON.stringify([payload]))
+            }
         },
         remaingTestimonials: (state, { payload }) => {
             state.testimonials = state.testimonials.filter((item) => item._id !== payload)
@@ -276,14 +280,14 @@ export const dataSlice = createSlice({
             state.orderChats = [...state.orderChats, payload];
         },
         changeUserPosition: (state, { payload }) => {
-            //console.log(payload);
+            //
             const uid = payload?.uid;
             const getUser = state.allUser.filter(user => user.uid === uid)[0];
             const withoutUser = state.allUser.filter(user => user.uid !== uid);
             state.allUser = [getUser, ...withoutUser]
         },
         changeOtherOrdersPosition: (state, { payload }) => {
-            //console.log(payload);
+            //
             const id = payload?.id;
             const getUser = state.otherOrders.filter(order => order._id === id)[0];
             const withoutUser = state.otherOrders.filter(order => order._id !== id);
@@ -306,13 +310,13 @@ export const dataSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(makeAdmin.fulfilled, (state, action) => {
-                //console.log('doen');
+                //
             })
             .addCase(isAdmin.pending, (state, action) => {
                 state.loading = true;
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
-                console.log(action.payload);
+                
                 state.user.role = action.payload.role
                 state.loading = false;
             })
@@ -327,14 +331,15 @@ export const dataSlice = createSlice({
                 state.allServices = payload;
             })
             .addCase(loadServiceCategory.rejected, (state, { payload }) => {
-                //console.log(payload);
+                //
             })
             .addCase(singleService.pending, (state, action) => {
                 state.singleServiceLoading = true;
+                
             })
             .addCase(singleService.fulfilled, (state, { payload }) => {
+                state.singleServiceDetail = payload;
                 state.singleServiceLoading = false;
-                state.singleServiceDetails = payload;
             })
             .addCase(websiteReviews.pending, (state, action) => {
                 state.testimonialLoading = true;
@@ -374,17 +379,17 @@ export const dataSlice = createSlice({
                 state.notificationLoading = false;
             })
             .addCase(sendNotification.fulfilled, (state, { payload }) => {
-                console.log('done');
-                console.log(payload);
+                
+                
                 if (state.user.email === payload.email) {
                     state.notifications.push(payload)
                 }
             })
             .addCase(sendNotification.pending, (state, { payload }) => {
-                console.log('pending');
+                
             })
             .addCase(sendNotification.rejected, (state, { payload }) => {
-                console.log('rejected');
+                
             })
             .addCase(deleteTestimonial.pending, (state, { payload }) => {
                 state.deleteLoading = true;
@@ -413,6 +418,6 @@ export const dataSlice = createSlice({
 })
 
 
-export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails,addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
+export const { login, logout, setLoading, addToCart, addOrderInfo, changeRole, selectedServiceAndProvider, reviewServiceIndex, parentServiceId, addChat, changeUserPosition, setNotificationCount, newNotification, remaingTestimonials, deleteTestimonails, addOrderChat, changeOtherOrdersPosition } = dataSlice.actions
 export const allData = (state) => state.data;
 export default dataSlice.reducer

@@ -5,11 +5,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { Avatar, Grid, IconButton, Input, TextField } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { PhotoCamera } from '@mui/icons-material';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { allData } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
-import { PhotoCamera } from '@mui/icons-material';
 
 const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, category }) => {
 
@@ -45,7 +45,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // submit form
     const onSubmit = data => {
-        console.log(data)
+        data.email = user?.email;
         // setLoading(false)
         if (user.role !== 'provider') {
             axios.post('https://dry-sea-00611.herokuapp.com/addprovider', { ...category, data, date: new Date(), rating: 0, reviewUser: 0, backgroundImage: 'https://i.ibb.co/RjGqhfx/photo-1524334228333-0f6db392f8a1-1.webp' }).then(() => {
@@ -79,8 +79,8 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                 url: 'https://api.imgbb.com/1/upload',
                 data: body
             }).then(res => {
-                console.log(res)
-                setValue('travelImg', res.data?.data?.url)
+                
+                setValue('providerImg', res.data?.data?.url)
             }).finally(() => setImgLoading(true))
         }
         else {
@@ -129,7 +129,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
                                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                 {
-                                                    watch("travelImg") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("travelImg")} /> </Box>
+                                                    watch("providerImg") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("providerImg")} /> </Box>
                                                 }
                                             </Box>
 
@@ -156,7 +156,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
 
                                     <TextField sx={inputStyle}
-                                        {...register("email", { required: true })}
+                                        // {...register("email", { required: true })}
                                         id="outlined-error"
                                         label="Email"
                                         value={user.email}

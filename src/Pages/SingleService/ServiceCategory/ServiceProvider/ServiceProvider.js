@@ -8,15 +8,17 @@ import StarIcon from '@mui/icons-material/Star';
 const ServiceProvider = ({ handleNext, category, parentService, selectServiceId, selectService }) => {
 
     const dispatch = useDispatch();
-    const { providers, serviceProviderLoading, user } = useSelector(allData);
-
+    const { providers, serviceProviderLoading, singleServiceDetail, user } = useSelector(allData);
+    
     useEffect(() => {
-        dispatch(serviceProviders());
-    }, [dispatch])
+        if (singleServiceDetail._id) {
+            dispatch(serviceProviders(singleServiceDetail.serviceProvider));
+        }
+    }, [dispatch, singleServiceDetail])
 
-    console.log(parentService)
+    
     // style
-    // console.log(parentService)
+    // 
 
     const serviceProvider = {
         mb: 3,
@@ -26,7 +28,7 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
         pb: 1,
         px: 2
     };
-    // //console.log(parentService)
+    // //
 
     const selectServiceProvider = provider => {
         // dispatch(addToCart({ ...category, email: user.email, payment: true, provider: provider }))
