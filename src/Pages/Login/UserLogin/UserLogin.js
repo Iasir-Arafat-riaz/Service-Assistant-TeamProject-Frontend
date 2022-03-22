@@ -1,3 +1,25 @@
+// import React from 'react';
+
+// const UserLogin = () => {
+// 	return (
+// 		<div>
+// 			h
+// 		</div>
+// 	);
+// };
+
+// export default UserLogin;
+
+
+
+
+
+
+
+
+
+
+
 import { Box, Paper, Typography } from "@mui/material";
 import React, { useEffect, } from "react";
 import useFirebase from "../../../Hooks/useFirebase";
@@ -5,7 +27,6 @@ import Navigation from "../../SharedRoute/Navigation/Navigation";
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import "./UserLogin.css";
-
 
 const UserLogin = () => {
 	const { googleSignIn, logInWithEmail, signUpWithEmail } = useFirebase();
@@ -43,7 +64,7 @@ const UserLogin = () => {
 		});
 	}, [])
 	const handleSignUp = () => {
-		//console.log(watch('signupEmail'));
+		//
 		if (watch('signupEmail').length && watch('name').length && watch('signupPass').length >= 6) {
 			signUpWithEmail({ name: watch('name'), email: watch('signupEmail'), password: watch('signupPass'), location, navigate })
 		}

@@ -4,7 +4,6 @@ import Card from "@mui/material/Card";
 import Rating from "@mui/material/Rating";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, CardHeader } from "@mui/material";
@@ -43,18 +42,17 @@ const AllProviderChild = (props) => {
       "https://i.ibb.co/Zhy4K3M/1613631861-Veneer-with-polish.jpg",
       "https://i.ibb.co/PCT5Mmp/manSalon.jpg",
     ];
-    const i = Math.floor(Math.random()*5)
+    const i = Math.floor(Math.random() * 5)
     return urls[i]
   };
   return (
     <Card sx={{ ml: 2 }} style={{ border: "none", boxShadow: "none" }}>
       <Box
         sx={{
-          backgroundImage: `url(${
-            image
-              ? image
-              : randomImage()
-          })`,
+          backgroundImage: `url(${image
+            ? image
+            : randomImage()
+            })`,
           width: "100%",
           height: "200px",
           backgroundSize: "cover",
@@ -80,16 +78,16 @@ const AllProviderChild = (props) => {
         />
       </Box>
 
-      <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          {displayName}
-        </Typography>
+      <CardContent sx={{ pt: 0 }}>
+
         <Typography gutterBottom variant="p" component="div">
           <span
             style={{
               backgroundColor: "#ff7043",
               padding: "2px 5px",
               color: "white",
+              fontSize: '12px'
+
             }}
           >
             Featured
@@ -100,40 +98,37 @@ const AllProviderChild = (props) => {
               padding: "2px 5px",
               color: "white",
               marginLeft: "7px",
+              fontSize: '12px'
+
             }}
           >
             Verified
           </span>
         </Typography>
         <Typography gutterBottom variant="p" component="div">
-          <Rating name="read-only" value={rating} readOnly />
+          <Rating name="read-only" value={parseFloat(rating)} readOnly />
         </Typography>
-        <Typography variant="h6" color="#363636" component="div">
-          A Place Where We .....
+        <Typography variant="h6" color="#363636" fontSize={16} component="div">
+          Let’s Make Your Event Great
         </Typography>
+        <Typography variant="p" color="#363636" fontSize={16} component="div">
+          by <span style={{ color: '#55acee' }}>{displayName}</span>
+        </Typography>
+
       </CardContent>
-
-      <>
-        <div></div>
-      </>
-
       <Link
         to={`/dashboard/allprovider/${_id}`}
         title={`Click to view more details about ${displayName}`}
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", padding: 0 }}
       >
-        <div style={{ display: "flex", justifyContent: "space-around", alignItems:"center" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2 }}>
           <div>Manchester, UK</div>
           <div>
-            <CardHeader
-              action={
-                <IconButton aria-label="settings">
-                  <MoreVertIcon onClick={handleClick}></MoreVertIcon>
-                </IconButton>
-              }
-            />
+            <IconButton aria-label="settings">
+              <MoreVertIcon ></MoreVertIcon>
+            </IconButton>
           </div>
-        </div>
+        </Box>
       </Link>
     </Card>
   );

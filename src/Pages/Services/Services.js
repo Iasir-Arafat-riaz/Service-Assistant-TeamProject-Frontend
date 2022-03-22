@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { HashLink } from "react-router-hash-link";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { NavHashLink } from "react-router-hash-link";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { Container } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -10,11 +10,19 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 import { makeStyles } from "@mui/styles";
-import ServiceCard from "./Component/ServiceCard";
+import ServiceCard from "./ServiceCard";
 import Navigation from "../SharedRoute/Navigation/Navigation";
-import { allData, loadServiceCategory, singleService } from "../../redux/dataSlice/dataSlice";
+import {
+  allData,
+  loadServiceCategory,
+  singleService,
+} from "../../redux/dataSlice/dataSlice";
 import Loading from "../SharedRoute/Loader/Loading";
-
+import "./Services.css";
+import { Box } from "@mui/system";
+import ServiceCardWrap from "./Component/ServiceCardWrap";
+import Button from '@mui/material/Button';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const useStyles = makeStyles({
   drawerPaper: {
     marginTop: "100px",
@@ -29,7 +37,7 @@ const useStyles = makeStyles({
     boxShadow: "none",
   },
   subServices: {
-    paddingTop: "20px",
+    px: 2,
   },
   listBottomPadding: {
     marginBottom: "20px",
@@ -40,105 +48,84 @@ const useStyles = makeStyles({
   },
 });
 
-const Services = () => {
+const Services = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
-  console.log(allServices);
+  const location = useLocation();
 
-  const drawerWidth = 240;
-  console.log(allServices);
   const handleNavClick = (id) => {
     const url = `/SERVICES/#${id}`;
-    console.log(url);
+    
     navigate(url);
   };
 
   useEffect(() => {
     dispatch(loadServiceCategory());
-    dispatch(singleService());
-  }, []);
-
+  }, [dispatch]);
   if (serviceIsLoading) {
-    return <Loading />
+    return <Loading />;
   }
-
   return (
     <>
       <Navigation />
-      <div style={{ marginTop: "80px" }}>
-        <Container>
-          <Grid container>
-            <div style={{ display: "flex" }}>
-              <Grid item>
-                <Drawer
-                  sx={{ width: drawerWidth }}
-                  variant="permanent"
-                  anchor="left"
-                  classes={{
-                    paper: classes.drawerPaper,
-                  }}
-                >
-                  <List className={classes.listBottomPadding}>
-                    {allServices.map((item) => {
-                      const ID = item?.Category?.split(" ")
-                        .join("")
-                        .toLowerCase();
-                      return (
-                        <ListItem key={item._id}>
-                          <ListItemButton>
-                            <ListItemText>
-                              <HashLink
-                                smooth
-                                to={`/services/#${ID}`}
-                                className={classes.linkClass}
-                              >
-                                {item.Category}
-                              </HashLink>
-                            </ListItemText>
-                          </ListItemButton>
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </Drawer>
-              </Grid>
-              <Grid>
-                {/* <Typography sx={{ textAlign: "center", fontWeight: 'bold' }} gutterBottom variant="h4" component="div">OUR ALL SERVICES</Typography> */}
-                <Grid>
-                  {allServices.map((service) => {
-                    const divID = service.Category?.split(" ")
-                      .join("")
-                      .toLowerCase();
-                    return (
-                      <div
-                        id={divID}
-                        key={`${service._id}${service.Category}`}
-                        className={classes.subServices}
+
+      <Container sx={{ mt: 15 }}>
+        <Grid container>
+          <Grid item xs={4} md={3} lg={3} spacing={{ xs: 2, md: 3 }}>
+            <Box className="sidebar-wrap"
+              sx={{ position: { xs: 'fixed', md: 'fixed' }, }}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 600,
+                  color: "#323334",
+                  mb: 3,
+                  ml: 1.5,
+                  fontSize: '17px',
+                  display: { xs: 'none', md: 'block' }
+
+                }}
+              >
+                All Services
+              </Typography>
+
+              <Box className="sidebar"
+                sx={{ height: { xs: '80vh', md: '75vh' } }}
+              >
+                {allServices.map((item) => {
+                  const ID = item.Category.split(" ").join("").toLowerCase();
+                  return (
+                    <ListItem sx={{ p: 0 }} key={item._id}>
+                      <ListItemButton
+                        component={NavHashLink}
+                        smooth
+                        className={
+                          location.hash === "#" + ID ? "select-service" : ""
+                        }
+                        to={`/services/#${ID}`}
                       >
-                        <Typography sx={{ pb: 2 }} variant="h4" gutterBottom component="div">{service.Category}</Typography>
-
-                        <Grid
-                          container
-                          alignItems="stretch"
-                          className={classes.gridMargin}
-                          spacing={3}
-                        >
-
-                          {service.Services?.map((item) => (
-                            <ServiceCard key={item.Id} {...item} />
-                          ))}
-                        </Grid>
-                      </div>
-                    );
-                  })}
-                </Grid>
-              </Grid>
-            </div>
+                        <ListItemText sx={{ display: { xs: 'none', md: 'block' }, px: { xs: 0, md: 1 } }}>{item.Category.length >= 25 ? item.Category.slice(0, 16) + '...' : item.Category}</ListItemText>
+                        <ListItemText sx={{ display: { xs: 'block', md: 'none ' }, px: { xs: 0, md: 1 } }} >{item.Category.split(' ')[0].length >= 10 ? item.Category.slice(0, 7) + '...' : item.Category.split(' ')[0]}</ListItemText>
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </Box>
+            </Box>
           </Grid>
-        </Container>
-      </div>
+
+          <Grid item xs={8} md={9} lg={9}>
+            <Box className="content" >
+              {allServices.map((service) => <ServiceCardWrap service={service} classes={classes}></ServiceCardWrap>)}
+
+            </Box>
+          </Grid>
+        </Grid>
+
+      </Container>
     </>
   );
 };

@@ -9,7 +9,8 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import { Grid } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { allData, saveService } from '../../../../redux/dataSlice/dataSlice';
+import { addToCart, allData, saveService } from '../../../../redux/dataSlice/dataSlice';
+import './CategoryModal.css';
 import ServiceProvider from '../ServiceProvider/ServiceProvider';
 import Payment from '../../payment/Payment/Payment';
 import OrderInfo from '../OrderInfo/OrderInfo';
@@ -58,8 +59,10 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
 
     const { user } = useSelector(allData);
     const navigate = useNavigate();
+    const [category, steCategory] = React.useState({});
     // stpper function
     const [activeStep, setActiveStep] = React.useState(0);
+    const [isAdded, setIsAdded] = React.useState(0);
     const [completed, setCompleted] = React.useState({});
 
     const totalSteps = () => {
@@ -81,8 +84,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
     const handleNext = () => {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
-                ? // It's the last step, but not all steps have been completed,
-                // find the first step that has been completed
+                ?
                 steps.findIndex((step, i) => !(i in completed))
                 : activeStep + 1;
         setActiveStep(newActiveStep);
@@ -90,17 +92,6 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleStep = (step) => () => {
-        setActiveStep(step);
-    };
-
-    const handleComplete = () => {
-        const newCompleted = completed;
-        newCompleted[activeStep] = true;
-        setCompleted(newCompleted);
-        handleNext();
     };
 
     const handleReset = () => {
@@ -112,10 +103,11 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
     const matchService = service?.allServices[index];
 
     const dispatch = useDispatch();
-    const handleAddToCart = (service) => {
+
+    const handleSaveService = (service, id) => {
+        setIsAdded(id);
         if (user.email) {
-            dispatch(saveService({ ...service, email: user.email, parentService: selectService }));
-            // //console.log({ idToken: localStorage.getItem('idToken') })
+            dispatch(addToCart({ ...service, email: user.email, parentService: selectService, selectServiceId: selectServiceId }));
         } else {
             navigate('/login')
         }
@@ -126,12 +118,6 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
         handleReset();
     };
 
-
-
-
-
-
-    const [category, steCategory] = React.useState({});
 
     const handleStpperNext = category => {
         handleNext();
@@ -145,6 +131,25 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
         color: "#FF5E14",
         marginRight: '15px'
     };
+
+    // increase and decrease function
+    function increaseValue(service, id) {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+        handleSaveService(service, id);
+    }
+
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        // value < 1 ? value = 1 : '';
+        if (value > 1) {
+            value--;
+        }
+        document.getElementById('number').value = value;
+    }
 
     return (
 
@@ -160,7 +165,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                     <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
 
                         <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
-                            AC servicing
+                        {matchService?.Title}
                         </Typography>
 
                     </Box>
@@ -182,18 +187,6 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                             <div>
                                 <React.Fragment>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                        {/* <Button
-                                            color="inherit"
-                                            disabled={activeStep === 0}
-                                            onClick={handleBack}
-                                            sx={{ mr: 1 }}
-                                        >
-                                            Back
-                                        </Button> */}
-                                        {/* <Box sx={{ flex: '1 1 auto' }} /> */}
-                                        {/* <Button onClick={handleNext} sx={{ mr: 1 }}>
-                                            Next
-                                        </Button> */}
 
                                     </Box>
                                 </React.Fragment>
@@ -201,69 +194,83 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                         </Box>
 
 
-                        {activeStep === 0 ? <Grid item xs={12} md={12} lg={7}>
+                        {
+                            activeStep === 0 ? <Grid item xs={12} md={12} lg={7}>
 
-                            <Box sx={box}>
+                                <Box sx={box}>
 
-                                <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2, letterSpacing: 1 }} component="h2">
-                                    {matchService?.Title}
-                                </Typography>
+                                    <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2, letterSpacing: 1 }} component="h2">
+                                        {matchService?.Title}
+                                    </Typography>
 
-                                <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2, letterSpacing: 1 }} component="h2">
-                                    {matchService?.Key.length} Options Avilable
-                                </Typography>
+                                    <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 16, mb: 2, letterSpacing: 1 }} component="h2">
+                                        {matchService?.Key.length} Options Avilable
+                                    </Typography>
 
-                            </Box>
+                                </Box>
 
-                            {
-                                matchService?.Key.map((service, index) => <Box key={index} sx={serviceOption}>
+                                {
+                                    matchService?.Key.map((service, index) => <Box key={service._id} sx={serviceOption}>
 
-                                    <Box>
+                                        <Box>
 
-                                        <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{service?.Name}</Typography>
+                                            <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{service?.Name}</Typography>
 
-                                        <Typography variant='body2' sx={{ fontSize: 15 }}>{service?.Price}Tk</Typography>
+                                            <Typography variant='body2' sx={{ fontSize: 15 }}>{service?.Price}Tk</Typography>
 
-                                    </Box>
+                                        </Box>
 
-                                    <Box>
-                                        <Button
-                                            onClick={() => handleAddToCart(service)}
-                                            style={button} variant='outlined'>
-                                            SAVE
-                                        </Button>
-                                        <Button style={button} variant='outlined' onClick={() => handleStpperNext(service)}
-                                        >
-                                            NEXT
-                                        </Button>
-                                    </Box>
+                                        <Box>
 
-                                </Box>)
-                            }
+                                            {
+                                                isAdded !== service.subId ? <Button
+                                                    onClick={() => handleSaveService(service, service.subId)}
+                                                    style={button} variant='outlined'>
+                                                    SAVE
+                                                </Button>
 
-                        </Grid>
-                            :
-                            activeStep === 1 ?
-                                <Grid item xs={12} md={12} lg={7}>
-                                    <ServiceProvider
-                                        selectServiceId={selectServiceId}
-                                        selectService={selectService}
-                                        category={category}
-                                        handleNext={handleNext}
-                                    />
-                                </Grid>
+                                                    :
+
+                                                    <form className='quatntity-button '>
+                                                        <div class="value-button" id="decrease" onClick={decreaseValue} value="Decrease Value">-</div>
+                                                        <input type="number" id="number" value="1" />
+                                                        <div class="value-button" id="increase" onClick={() => increaseValue(service, service.subId)} value="Increase Value">+</div>
+                                                    </form>
+                                            }
+
+                                            <Button style={button} variant='outlined' onClick={() => handleStpperNext(service)}
+                                            >
+                                                NEXT
+                                            </Button>
+
+                                        </Box>
+
+                                    </Box>)
+                                }
+
+                            </Grid>
                                 :
-                                activeStep === 3
-                                    ?
+                                activeStep === 1 ?
                                     <Grid item xs={12} md={12} lg={7}>
-                                        <Payment />
+                                        <ServiceProvider
+                                            selectServiceId={selectServiceId}
+                                            selectService={selectService}
+                                            category={category}
+                                            handleNext={handleNext}
+                                        />
                                     </Grid>
-                                    : activeStep === 2
+                                    :
+                                    activeStep === 3
                                         ?
                                         <Grid item xs={12} md={12} lg={7}>
-                                            <OrderInfo handleNext={handleNext} />
+                                            <Payment />
                                         </Grid>
-                                        : ''
+                                        : activeStep === 2
+                                            ?
+                                            <Grid item xs={12} md={12} lg={7}>
+                                                <OrderInfo handleNext={handleNext} />
+                                            </Grid>
+                                            : ''
                         }
 
 
@@ -279,41 +286,12 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                                     :
                                     <Box>
 
-                                        {/* <Typography variant='h6' sx={{
-                                            p: 2,
-                                            fontSize: 16, letterSpacing: 1
-                                        }}>Selected Service category</Typography>
-
-                                        <Box sx={{ px: 2 }}>
-                                            <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold', borderBottom: '2px solid #F4F5F8' }}>{cartItems[0].Name}</Typography>
-
-                                            <Typography variant='body2' sx={{ fontSize: 15 }}>{cartItems[0]?.Price}Tk</Typography>
-                                        </Box> */}
-
-
-                                        {/* 
-                                        <Box>
-
-                                            <Typography variant='h6' sx={{
-                                                p: 2,
-                                                fontSize: 16, letterSpacing: 1
-                                            }}>Service provider</Typography>
-
-                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, borderBottom: '2px solid #F4F5F8', px: 2, pb: 2 }}>
-                                                <Avatar sx={{ width: 50, height: 50 }} alt="Cindy Baker" src={cartItems[0]?.provider.photoURL} />
-                                                <Box>
-                                                    <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{cartItems[0]?.provider?.displayName}</Typography>
-
-                                                    <Typography variant='body2' sx={{ fontSize: 15 }}>{cartItems[0]?.provider?.email}</Typography>
-                                                </Box>
-
-                                            </Box>
-                                        </Box> */}
-
                                     </Box>
                             }
 
-                            {activeStep > 0 && <Button onClick={handleBack} style={{ letterSpacing: 2, width: '100%', padding: 6, background: "#fc7c41e0", borderRadius: 0, color: "#fff" }}>back</Button>}
+                            {
+                                activeStep > 0 && <Button onClick={handleBack} style={{ letterSpacing: 2, width: '100%', padding: 6, background: "#fc7c41e0", borderRadius: 0, color: "#fff" }}>back</Button>
+                            }
 
 
 

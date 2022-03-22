@@ -3,6 +3,14 @@ import { Typography, TextField, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import ServiceOptionsRow from "./ServiceOptionsRow";
 
+const subButton = {
+  backgroundColor: "#FF5E14",
+  // width: "90%",
+  margin: "15px 0 25px 0",
+  color: "#fff",
+  letterSpacing: "2px",
+};
+
 const ServiceDetailsForm = ({
   handleAddMoreDetails,
   totalRow,
@@ -13,14 +21,14 @@ const ServiceDetailsForm = ({
 }) => {
   // const optionRow = Array.from({ length: totalRow }, (v, i) => i);
   const optionRow = serviceOption.Key;
-  //console.log(serviceOption);
+  //
   return (
     <Grid container spacing={2}>
       <Typography
-        variant="subtitle2"
-        component="div"
+        variant="h6"
         gutterBottom
-        sx={{ marginTop: "15px", paddingLeft: "10px" }}
+        component="div"
+        sx={{ marginTop: "30px", paddingLeft: "10px" }}
       >
         {`Service ${pos + 1}`}
       </Typography>
@@ -59,9 +67,10 @@ const ServiceDetailsForm = ({
         />
       ))}
       <Button
-        variant="outlined"
+        variant="contained"
         sx={{ marginTop: "15px", marginLeft: "10px", marginBottom: "20px" }}
         onClick={() => handleAddMoreDetails(pos)}
+        style={subButton}
       >
         Add More Service Details
       </Button>

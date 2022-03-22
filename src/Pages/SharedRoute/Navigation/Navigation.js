@@ -34,7 +34,6 @@ import { useTheme } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { AiOutlineHome } from "react-icons/ai";
-import logo from "../../images/web-logo.png";
 import { MdOutlineDashboard } from "react-icons/md";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom";
@@ -45,16 +44,22 @@ import {
   setNotificationCount,
   updateMessageStatus,
 } from "../../../redux/dataSlice/dataSlice";
+import NotificationCard from './Component/NotificationCard'
 import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
-const SpeechRecognition =
-  window.SpeechRecognition || window.webkitSpeechRecognition;
-const mic = new SpeechRecognition();
+const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
 
-mic.continuous = true;
-mic.interimResults = true;
-mic.lang = "en-US";
+let mic;
+if (SpeechRecognition) {
+  mic = new SpeechRecognition()
+  mic.continuous = true;
+  mic.interimResults = true;
+  mic.lang = "en-US";
+}
+
+
+
 
 const Navigation = () => {
   const navRef = useRef(null);
@@ -89,7 +94,7 @@ const Navigation = () => {
 
   useEffect(() => {
     dispatch(getNotification(user));
-  }, [user, dispatch, isMessageSeen]);
+  }, [user, dispatch]);
 
   // let
   // let MessageSeen;
@@ -97,7 +102,7 @@ const Navigation = () => {
     const filterMessage = notifications.filter(
       (notification) => notification.seen === false
     );
-    console.log(filterMessage);
+    
     setMessageSeen(filterMessage.length);
   }, [notifications, user]);
 
@@ -122,7 +127,7 @@ const Navigation = () => {
   };
 
   const handleCardClick = (id) => {
-    //console.log("card clicked");
+    //
     navigate(`/Home/service-details/${id}`);
   };
 
@@ -277,24 +282,27 @@ const Navigation = () => {
   const [savedNotes, setSavedNotes] = useState([]);
 
   useEffect(() => {
-    handleListen();
+    if (mic) {
+      handleListen();
+
+    }
   }, [isListening]);
 
   const handleListen = () => {
     if (isListening) {
       mic.start();
       mic.onend = () => {
-        console.log("continue..");
+        
         mic.start();
       };
     } else {
       mic.stop();
       mic.onend = () => {
-        console.log("Stopped Mic on Click");
+        
       };
     }
     mic.onstart = () => {
-      console.log("Mics on");
+      
     };
 
     mic.onresult = (event) => {
@@ -302,10 +310,10 @@ const Navigation = () => {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join("");
-      console.log(transcript);
+      
       setNote(transcript);
       mic.onerror = (event) => {
-        console.log(event.error);
+        
       };
     };
   };
@@ -315,9 +323,6 @@ const Navigation = () => {
     setNote("");
   };
 
-  console.log(note)
-
-  const [value, setValue] = React.useState();
   return (
     <Container id="back-to-top-anchor">
       <AppBar
@@ -349,7 +354,7 @@ const Navigation = () => {
             <img
               onClick={goHome}
               className={navLogo}
-              src={logo}
+              src={'https://i.ibb.co/n8Wp01q/web-logo.png'}
               width="120"
               alt="weblogo"
             />
@@ -424,36 +429,42 @@ const Navigation = () => {
                   overflow: "scroll",
                 }}
               >
-                <TextField
-                  icon="search"
-                  placeholder="Search Services..."
-                  onChange={(e) => searchItems(e.target.value)}
-                  sx={{ width: "80%", left: "5%", mb: 3 }}
-                  id="standard-search"
-                  type="search"
-                  variant="standard"
-                  value={note}
+                <Grid container spacing={2}>
+                  <Grid item xs={9} >
+                    <TextField
+                      icon="search"
+                      placeholder="Search Services..."
+                      onChange={(e) => searchItems(e.target.value)}
+                      sx={{ width: "100%", mb: 3 }}
+                      id="standard-search"
+                      type="search"
+                      variant="standard"
+                      value={note}
+                    />
+                  </Grid>
+                  <Grid item xs={3}>
+                    <Button
+                      onClick={() => setIsListening((prevState) => !prevState)}
+                      sx={{ zIndex: "1000" }}
+                      variant="contained"
+                      disabled={mic ? false : true}
+                      sx={{ m: 1 }}
+                    >
+                      🛑🎙️
+                    </Button>
+                    <Button
+                      onClick={handleSaveNote}
+                      disabled={!note}
+                      sx={{ zIndex: "1000" }}
+                      variant="contained"
+                    >
+                      Remove
+                    </Button>
+                  </Grid>
+                </Grid>
 
-                  
-                  
-                />
                 {/*------------------ Mic ---------------*/}
-                <Button
-                  onClick={() => setIsListening((prevState) => !prevState)}
-                  sx={{ zIndex: "1000" }}
-                  variant="contained"
-                  sx={{ m: 1 }}
-                >
-                  🛑🎙️
-                </Button>
-                <Button
-                  onClick={handleSaveNote}
-                  disabled={!note}
-                  sx={{ zIndex: "1000" }}
-                  variant="contained"
-                >
-                  Remove
-                </Button>
+
 
                 {/* <Box className="box">
                   {savedNotes.map((n) => (
@@ -462,26 +473,29 @@ const Navigation = () => {
                 </Box> */}
                 <Grid container spacing={3}>
                   {searchInput.length > 1
-                    ? filteredResults.map((item) => {
-                        return (
-                          <Grid item md={5.5} xs={10} sx={{ mr: 2 }}>
-                            <Card>
-                              <CardActionArea
-                                onClick={() =>
-                                  handleCardClick(item.parentService)
-                                }
-                              >
-                                <CardContent>
-                                  <Typography>{item.Title}</Typography>
-                                </CardContent>
-                              </CardActionArea>
-                            </Card>
-                          </Grid>
-                        );
-                      })
-                    : APIData.map((item) => {
-                        return <Grid item md={12} xs={12}></Grid>;
-                      })}
+                    ? filteredResults.map((item, i) => {
+                      return (
+                        <Grid key={i} item md={5.5} xs={10} sx={{ mr: 2 }}>
+                          <Card sx={{
+                            borderBottom: '1px solid #ffb600',
+                            borderRight: '2px solid #ffb600'
+                          }}>
+                            <CardActionArea
+                              onClick={() =>
+                                handleCardClick(item.parentService)
+                              }
+                            >
+                              <CardContent>
+                                <Typography>{item.Title}</Typography>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                        </Grid>
+                      );
+                    })
+                    : APIData.map((item, i) => {
+                      return <Grid key={i} item md={12} xs={12}></Grid>;
+                    })}
                 </Grid>
               </Box>
             </Modal>
@@ -528,34 +542,7 @@ const Navigation = () => {
                         p: 2,
                       }}
                     >
-                      {notifications.map((notification) => (
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            gap: 2,
-                            mb: 1,
-                            borderBottom: "2px solid #F4F5F8",
-                            pb: 1,
-                          }}
-                        >
-                          <Avatar
-                            alt="notification image"
-                            sx={{ borderRadius: 0, width: 60, height: 60 }}
-                            src={notification?.image}
-                          />
-
-                          <Box>
-                            <Typography variant="h6" sx={{ fontSize: 14 }}>
-                              {notification.message}
-                            </Typography>
-                            <Typography variant="h6" sx={{ fontSize: 11 }}>
-                              Time: {notification.time}
-                            </Typography>
-                          </Box>
-                        </Box>
-                      ))}
+                      {notifications.map((notification) => <NotificationCard notification={notification}></NotificationCard>)}
                     </Box>
                   </Popover>
                 </>
@@ -626,13 +613,13 @@ const Navigation = () => {
             )}
           </Box>
         </Toolbar>
-      </AppBar>
+      </AppBar >
       <React.Fragment>
         <Drawer open={state} onClose={() => setState(false)}>
           {list}
         </Drawer>
       </React.Fragment>
-    </Container>
+    </Container >
   );
 };
 export default Navigation;

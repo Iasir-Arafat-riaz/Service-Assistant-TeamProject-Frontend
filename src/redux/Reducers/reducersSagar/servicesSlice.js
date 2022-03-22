@@ -13,7 +13,7 @@ export const loadServiceCategory = createAsyncThunk(
     const response = await fetch(
       "https://dry-sea-00611.herokuapp.com/services"
     ).then((res) => res.json());
-    //console.log(response);
+    //
     return response;
   }
 );
@@ -35,7 +35,7 @@ const serviceCategorySlice = createSlice({
       state.allServices = payload;
     },
     [loadServiceCategory.rejected]: (state, { payload }) => {
-      //console.log(payload);
+      //
     },
   },
 });

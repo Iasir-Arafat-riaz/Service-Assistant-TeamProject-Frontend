@@ -5,7 +5,7 @@ import { allData } from '../../redux/dataSlice/dataSlice';
 
 const ProviderRoute = ({ children, ...rest }) => {
     const { allUser, user } = useSelector(allData);
-    console.log("user role", user.role);
+    
     const location = useLocation();
 
     if (user?.email && allUser.filter((user) => user?.role === "provider")) {

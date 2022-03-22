@@ -1,6 +1,14 @@
 import React from "react";
 import { Typography, Box, TextField, Grid, Input } from "@mui/material";
 
+const subButton = {
+  backgroundColor: "#FF5E14",
+  width: "90%",
+  margin: "15px 0 25px 0",
+  color: "#fff",
+  letterSpacing: "2px",
+};
+
 const ServiceOptionsRow = ({
   serviceOptionsName,
   serviceOptionsPrice,
@@ -9,7 +17,7 @@ const ServiceOptionsRow = ({
   optionKeyId,
   pos,
 }) => {
-  //console.log(serviceOptionsName);
+  //
   return (
     <Grid item container spacing={2}>
       <Grid item xs={6} sm={6} md={4}>

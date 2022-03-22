@@ -2,7 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Avatar, Paper, Rating } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { Avatar, Button, Paper, Rating } from '@mui/material';
 import { RiDoubleQuotesL } from 'react-icons/ri';
 
 const style = {
@@ -11,11 +12,11 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #fff',
+    bgcolor: '#F4F5F8',
+    // border: '2px solid #sfff',
     boxShadow: 24,
-    p: 2,
     display: 'flex',
+    borderRadius: 2,
     justifyContent: 'center',
 };
 
@@ -24,7 +25,7 @@ const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, ind
     // const { name, profession, description, rating } = testimonials[index];
 
     return (
-        <div>
+        <>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -33,7 +34,18 @@ const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, ind
             >
                 <Box sx={style}>
 
-                    <Paper elevation={3} sx={{ p: 3, width: 300, m: 1, borderRadius: 2 }}>
+                    <Button sx={{ mt: '-8%', ml: '-95%', position: 'absolute' }}>
+                        <CloseIcon onClick={handleClose}
+                            sx={{
+                                boxShadow: 3, fontSize: 26,
+                                p: 1, borderRadius: '50%',
+                                backgroundColor: 'white',
+                                color: 'black'
+                            }}
+                        />
+                    </Button>
+
+                    <Paper elevation={0} sx={{ py: 3, width: 300, borderRadius: 2, background: "#F4F5F8" }}>
 
                         <RiDoubleQuotesL style={{ display: 'block', fontSize: 22, color: "#FF5E14" }} />
 
@@ -59,7 +71,7 @@ const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, ind
 
                 </Box>
             </Modal>
-        </div>
+        </>
     );
 };
 

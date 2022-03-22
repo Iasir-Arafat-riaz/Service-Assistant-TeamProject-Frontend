@@ -1,0 +1,19 @@
+/* .save_service .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
+    color: #FF5E14 !important;
+    padding: 5px !important
+}; */
+
+.selected_step {
+    background-color: #F4F5F8;
+border-radius: 2px 0 0 2px;
+padding: 5px !important;
+    /* border-right: 3px solid #FF5E14; */
+}
+.selected_step .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
+    color: #FF5E14 !important;
+}
+.selected_step .step_text{
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    color: #323334;
+}

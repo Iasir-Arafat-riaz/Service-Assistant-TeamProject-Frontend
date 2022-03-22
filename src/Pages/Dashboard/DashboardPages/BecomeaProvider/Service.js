@@ -1,5 +1,7 @@
 import { Button, Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { allData } from '../../../../redux/dataSlice/dataSlice';
 import ProviderFromModal from './ProviderFromModal';
 
 
@@ -7,6 +9,7 @@ const Service = ({ category }) => {
 
     const [open, setOpen] = React.useState(false);
     const [id, setId] = useState(0);
+    const { user } = useSelector(allData);
 
     const handleOpenModal = (id) => {
         setOpen(true);
@@ -28,7 +31,9 @@ const Service = ({ category }) => {
                             </Typography>
                         </CardContent>
 
-                        <Button onClick={() => handleOpenModal(category.Id)} variant="outlined" sx={{ mb: 2, ml: 2 }}>Become a provider</Button>
+                        <Button onClick={() => handleOpenModal(category.Id)} variant="outlined" sx={{ mb: 2, ml: 2 }}>
+                            {user?.role !== 'provider' ? 'Become a provider' : 'Add this service'}
+                        </Button>
                         <Button variant="outlined" sx={{ mb: 2, ml: 2 }}>See Details</Button>
 
                     </CardActionArea>

@@ -1,62 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Skeleton, Stack, Typography } from '@mui/material';
 import axios from 'axios';
-import useSlick from '../../../Hooks/useSlick';
-import Slider from 'react-slick';
-import TrendingService from './TrendingService';
+import CommonService from '../HomeServices/CommonService'
 import { Link } from 'react-router-dom';
-
+import 'swiper/css';
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import CustomSlider from '../../SharedRoute/CustomSlider/CustomSlider';
 const TrendingServices = () => {
 
-    const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [services, setServices] = useState([]);
 
     useEffect(() => {
-        axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => {
-            setLoading(false);
-            setServices(res.data.reverse())
-        })
+        setLoading(true)
+        axios.get('https://dry-sea-00611.herokuapp.com/api/v1/trending').then(res => {
+            const fullData = res.data;
+            let mainData = [];
+            fullData.forEach(element => {
+                if (element.serviceInfo.length) {
+                    const createData = {
+                        Category: element.serviceInfo[0].Title,
+                        Id: element.serviceInfo[0]._id,
+                        Img: element.serviceInfo[0].Img
+                    }
+                    mainData = [...mainData, createData]
+                    
+                }
+
+
+            });
+            setServices(mainData)
+
+        }).finally(setLoading(false));
     }, []);
 
-    // const { slickSlider } = useSlick();
-    const slickSlider = {
-        dots: false,
-        infinite: false,
-        speed: 2000,
-        slidesToShow: 4,
-        slidesToScroll: 3,
-        autoplaySpeed: 2000,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 900,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                }
-            }
-        ]
-    };
-console.log(services)
-// const servicesReverse = services.reverse()
 
     return (
-        <Container sx={{ mb: 8 }}>
+        <Container sx={{ mb: 8 }}  >
 
             {
                 loading ?
@@ -79,14 +60,7 @@ console.log(services)
                         )}
 
                     </Box>
-                    : <Slider {...slickSlider}>
-                        {
-                            services?.map(service => <TrendingService sx={{}}
-                                key={service._id}
-                                service={service}
-                            />)
-                        }
-                    </Slider>
+                    : <CustomSlider data={services} component={CommonService}></CustomSlider>
 
             }
 

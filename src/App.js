@@ -5,7 +5,6 @@ import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 
-import io from "socket.io-client";
 
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
@@ -28,7 +27,7 @@ import AdminChat from "./Pages/Dashboard/DashboardPages/AdminChat/AdminChat";
 
 import AddBanner from "./Pages/Dashboard/DashboardPages/AddBanner/AddBanner";
 
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProviderOverview from "./Pages/Dashboard/DashboardPages/ProviderOverview/ProviderOverview";
 import SavedServices from "./Pages/Dashboard/SavedServices/SavedServices";
@@ -46,10 +45,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
+
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
 
-import {  newNotification } from "./redux/dataSlice/dataSlice";
+
+import { newNotification } from "./redux/dataSlice/dataSlice";
 
 
 
@@ -63,20 +64,26 @@ import AddNewServiceCategory from "./Pages/Dashboard/DashboardPages/AddNewServic
 
 
 import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
+import NotificationCard from "./Pages/SharedRoute/Navigation/Component/NotificationCard";
+
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
+
+import Career from "./Pages/Career/Career";
+// import AOS from 'aos'
+// import 'aos/dist/aos.css';
+// AOS.init();
+
+
+// import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
+// import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
+// import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
+
+
 
 
 
 
 const App = () => {
-  // const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -95,15 +102,25 @@ const App = () => {
   useEffect(() => {
     if (user.email) {
       socket.emit('joinAll', user.email);
-      console.log('send');
+      
     }
+
+
   }, [user, socket]);
   useEffect(() => {
     socket.on("get-notification", message => {
       dispatch(newNotification(message))
+      toast(<NotificationCard notification={message}></NotificationCard >, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     });
   }, [])
-
 
   return (
     <BrowserRouter>
@@ -136,7 +153,7 @@ const App = () => {
             path="/dashboard/addtestimonial"
             element={<AddTestimonial />}
           />
-          <Route 
+          <Route
             path="/dashboard/pendingtestimonial"
             element={<PendingTestimonial />}
           />
@@ -168,6 +185,7 @@ const App = () => {
             element={<AddServiceRequest />}
           ></Route>
 
+
           <Route
             path="/dashboard/ordersChat"
             element={<OrdersChat />}
@@ -187,16 +205,21 @@ const App = () => {
 
 
 
+          {/* all the pending request list route - by sagar */}
+
+          {/* add new service category for admin - by sagar */}
+
+
         </Route>
 
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/career" element={<Career />} />
         <Route path="/providerProfile" element={<SingleProviderDetails />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
-
 
 
         <Route path="*" element={<Error />} />

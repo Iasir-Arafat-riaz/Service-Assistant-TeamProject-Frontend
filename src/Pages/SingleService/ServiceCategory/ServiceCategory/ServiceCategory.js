@@ -1,29 +1,16 @@
 import { Paper, Typography, Button, Box, Skeleton } from '@mui/material';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useParams } from 'react-router-dom';
 import CategoryModal from '../CategoryModal/CategoryModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { allData, singleService } from '../../../../redux/dataSlice/dataSlice';
+import { useSelector } from 'react-redux';
+import { allData, } from '../../../../redux/dataSlice/dataSlice';
 import './serviceCategory.css';
 
 const ServiceCategory = ({ service }) => {
-
-    const { serviceId } = useParams();
     const [index, setIndex] = useState(0);
     const [open, setOpen] = React.useState(false);
-    const { singleServiceDetails, singleServiceLoading } = useSelector(allData);
+    const { singleServiceDetail, singleServiceLoading } = useSelector(allData);
     const [selectService, setSelectService] = useState({});
-    // const matchService = singleServiceDetails?.find(service => service.parentService == serviceId);
-    const matchService = singleServiceDetails?.find(service => {
-        if (serviceId.length > 4){
-            return service._id == serviceId;
-          }else {
-            return parseInt(service.parentService) === parseInt(serviceId)
-          }
-    });
-
     // open modal
     const handleOpenModal = (index, service) => {
         setOpen(true);
@@ -46,6 +33,7 @@ const ServiceCategory = ({ service }) => {
         borderRadius: 2,
         p: 2
     };
+    
 
     return (
         <>
@@ -56,27 +44,14 @@ const ServiceCategory = ({ service }) => {
                     }
                 </Box>
                 :
-
                 <Paper
                     className="categoryBox"
                     elevation={3}
                     sx={{
                         py: 5,
                         px: 2,
-                        mr: 5,
-                        top: '30%',
-                        minWidth: '345px'
 
                     }}>
-                       <Typography
-                        variant='h5'
-                        sx={{
-                            fontWeight: "bold",
-                            color: 'darkblue',
-                            marginBottom:"10px"
-                        }}>
-                        For Order Click Below
-                    </Typography>
                     <Typography
                         variant='h5'
                         sx={{
@@ -99,27 +74,33 @@ const ServiceCategory = ({ service }) => {
                     </Button>
 
 
-                    {
-                        matchService?.allServices?.map((service, index) => <Box
-                            onClick={() => handleOpenModal(index, service)}
-                            sx={box} key={index}>
-                            {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
-                            
-                            <Typography variant="h6" sx={{ fontSize: 15, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
-                            <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />
-                        </Box>)
+                    {singleServiceDetail?.allServices?.map((service, index) => <Box
+                        onClick={() => handleOpenModal(index, service)}
+                        sx={box} key={index}>
+                        {/* <img type="button" src={service.Image} width="60" alt={service.Title} /> */}
+                        <Box sx={{ display: 'flex', justifyContent: 'center', mr: 1 }}>
+                            <img
+                                src={service.Image}
+                                alt='service-Img'
+                                style={{ borderRadius: '30%', width: '40px', height: '40px' }}
+                            />
+                        </Box>
+
+                        <Typography variant="h6" sx={{ fontSize: 18, fontWeight: 'bold', color: "black" }}>{service.Title}</Typography>
+                        <ArrowForwardIosIcon sx={{ fontSize: 16, mr: 2 }} />
+                    </Box>)
                     }
 
                 </Paper>
             }
             {/* Modal */}
-            
+
             <CategoryModal
-                selectServiceId={matchService.parentService}
+                selectServiceId={singleServiceDetail?.parentService}
                 index={index}
                 selectService={selectService}
                 open={open}
-                service={matchService}
+                service={singleServiceDetail}
                 handleClose={handleClose}
                 handleOpen={handleOpenModal}
             />

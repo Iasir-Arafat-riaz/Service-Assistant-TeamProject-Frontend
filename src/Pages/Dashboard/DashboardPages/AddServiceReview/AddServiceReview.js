@@ -14,7 +14,7 @@ const AddServiceReview = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { singleServiceDetails, user, reviewIndex } = useSelector(allData);
+    const { singleServiceDetails, user, reviewIndex, providerEmail } = useSelector(allData);
     const [value, setValue] = React.useState(0);
     const [openBox, setOpenBox] = useState(false);
     const [alert, setAlert] = useState(false);
@@ -26,7 +26,7 @@ const AddServiceReview = () => {
 
     useEffect(() => {
         dispatch(singleService());
-    }, [dispatch, loading, updating, deleting, alert]);
+    }, [dispatch, loading, updating, deleting, alert, reviewIndex]);
 
 
     // input style
@@ -35,9 +35,7 @@ const AddServiceReview = () => {
         mb: 3,
     };
 
-    // useEffect(() => {
-    //     dispatch(parentServiceId(id));
-    // }, [id])
+
 
     // add review to user 
 
@@ -50,6 +48,7 @@ const AddServiceReview = () => {
     const onSubmit = data => {
 
         // setLoading(false);
+        data.userPhoto = user.photoURL;
 
         if (!matchReviews) {
             setLoading(false);
@@ -57,21 +56,17 @@ const AddServiceReview = () => {
                 reset();
                 setAlert(true);
                 setLoading(true);
+                const { user, review, rating, date, uid, userPhoto } = data;
+                axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
             });
         } else {
-            // //console.log(data);
-            // axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
-            //     reset();
-
-            // });
             UpdateReview(data);
         }
     };
 
     // 
 
-
-    // //console.log(user);
+    // //
     const handleEditService = () => {
         setAlert(false);
         setOpenBox(true);
@@ -81,7 +76,7 @@ const AddServiceReview = () => {
     // handle delete review;
 
 
-    // //console.log('first');
+    // //
     const UpdateReview = (data) => {
         setUpdateing(true);
         // useEffect(() => {
@@ -119,7 +114,7 @@ const AddServiceReview = () => {
         // }, [])
 
     }
-    // //console.log(matchService?.allServices)
+    // //
 
     return (
         <>
@@ -184,7 +179,7 @@ const AddServiceReview = () => {
                     {
                         matchReviews && <Paper sx={{ p: 2, mb: 3, width: { xs: 300, lg: 400 } }} elevation={2}>
 
-                            <Typography variant='h6'>Name:- {matchReviews.name}</Typography>
+                            <Typography variant='h6'>Name:- {matchReviews?.user}</Typography>
                             <Typography variant='body2' sx={{ mt: 1 }}>Review:- {matchReviews.review}</Typography>
 
                             <Typography variant='body2' sx={{ mt: 1, display: 'flex', alignItems: 'center' }}>

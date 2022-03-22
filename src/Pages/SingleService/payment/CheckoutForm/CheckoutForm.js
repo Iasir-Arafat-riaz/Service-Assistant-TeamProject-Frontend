@@ -3,9 +3,12 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import Alert from '@mui/material/Alert';
 import { CircularProgress, Paper } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { allData, sendNotification, setNotificationCount } from '../../../../redux/dataSlice/dataSlice';
+import { allData, sendNotification } from '../../../../redux/dataSlice/dataSlice';
 import axios from 'axios';
+
 import { current } from '@reduxjs/toolkit';
+import useSocket from '../../../../Hooks/useSocket';
+
 
 
 const CheckoutForm = () => {
@@ -17,16 +20,13 @@ const CheckoutForm = () => {
     const [process, setProcessing] = useState(false);
     const dispatch = useDispatch();
     const [clientSecret, setClientSecret] = useState("");
+    const { socket } = useSocket();
 
-
-    const { selectedService, user, orderInfo } = useSelector(allData);
+    const { selectedService, singleServiceDetail, user, orderInfo } = useSelector(allData);
     const price = selectedService.Price;
 
-    console.log(selectedService)
 
     // current time
-    const today = new Date();
-    const time = today.getHours() + ":" + today.getMinutes();
 
     useEffect(() => {
         fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
@@ -88,12 +88,23 @@ const CheckoutForm = () => {
             setSuccess("your payment is done");
             setProcessing(false);
             const date = new Date();
-
-            const data = { ...selectedService, orderInfo: orderInfo, date: date };
+            const data = { ...selectedService, mainId: singleServiceDetail._id, orderInfo: orderInfo, date: date };
+            
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;
             axios.post('https://dry-sea-00611.herokuapp.com/myorder', data).then(() => {
-                dispatch(sendNotification({ message, image, email: user.email, }))
+                //send to myself
+                dispatch(sendNotification({ message, image, email: user.email, link: '/dashboard/myorders' }))
+                //
+                dispatch(sendNotification({ message: "You have new orders waiting for admin approve", image, email: data.providerEmail, link: '/dashboard/provider/appointment' }))
+                socket.emit('notification', {
+                    message: "You have new orders waiting for admin approve",
+                    image,
+                    email: data.providerEmail,
+                    link: '/dashboard/provider/appointment',
+                    time: new Date(),
+                    seen: false,
+                })
             });
         };
     };
