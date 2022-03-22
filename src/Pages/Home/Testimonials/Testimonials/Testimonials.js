@@ -55,7 +55,7 @@ const Testimonials = () => {
         setValue(i);
     }
     return (
-        <Container sx={{ mb: 20, mt: 10 }}>
+        <Container sx={{mb:2, mt: 10 }}>
 
             {
                 testimonialLoading ?

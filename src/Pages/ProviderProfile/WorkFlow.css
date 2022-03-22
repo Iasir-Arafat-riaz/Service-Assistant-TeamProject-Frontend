@@ -60,12 +60,12 @@
     box-shadow: 0 0 0px 15px rgba(255, 182, 0, 0.17);
 }
 
-.icon-img{
+/* .icon-img{
     transform: rotate(-135deg);
-}
-.img-rotate{
+} */
+/* .img-rotate{
     animation: rotation 2s infinite linear;
-}
+} */
 
 @keyframes rotation {
     from {
