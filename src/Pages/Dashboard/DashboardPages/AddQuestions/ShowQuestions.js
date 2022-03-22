@@ -93,7 +93,7 @@ const ShowQuestions = (props) => {
               <TableCell align="right">{row.answer}</TableCell>
               <TableCell align="center" >
               <Button sx={{mr:-2}} variant='text' onClick={() => handleEdit(row._id)} style={{cursor: "pointer"}} ><EditIcon/></Button>
-              <Button  variant='text'  onClick={() => handleDelete(row._id)} style={{cursor: "pointer"}} ><DeleteOutlineIcon/></Button>
+              <Button  variant='text'  onClick={() => handleDelete(row._id)} style={{cursor: "pointer",outlineColor:"red"}} ><DeleteOutlineIcon/></Button>
            
               </TableCell >
             </TableRow>
