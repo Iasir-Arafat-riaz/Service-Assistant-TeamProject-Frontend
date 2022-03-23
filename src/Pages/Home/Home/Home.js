@@ -9,7 +9,6 @@ import WorkFlow from '../../ProviderProfile/WorkFlow';
 
 import Footer from '../../SharedRoute/Footer/Footer';
 import Navigation from '../../SharedRoute/Navigation/Navigation';
-import ChooseUs from '../ChooseUs/ChooseUs';
 import Header from '../Header/Header';
 import HomeServices from '../HomeServices/HomeServices';
 import LastBanner from '../LastBanner/LastBanner';
@@ -32,7 +31,6 @@ const Home = () => {
             <AllProvider></AllProvider>
             <Testimonials />
             <WorkFlow />
-            {/* <ChooseUs /> */}
             <LastBanner></LastBanner>
             <RequestService />
             {
