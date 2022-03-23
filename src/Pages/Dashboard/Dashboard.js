@@ -52,7 +52,8 @@ const Dashboard = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const { user, loading } = useSelector(allData)
+  const { user, loading } = useSelector(allData) 
+  console.log("all user data ==",user)
   const activeStyle = ({ isActive }) => {
     return {
       borderRight: isActive ? "4px solid #00a1ba" : "4px solid transparent",
@@ -99,7 +100,7 @@ const Dashboard = (props) => {
           to="/services"
         >
           <Button color="inherit">SERVICES</Button>
-        </NavLink>
+        </NavLink> 
       </Box>
       <Divider />
       <List>

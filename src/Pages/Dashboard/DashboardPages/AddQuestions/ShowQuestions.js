@@ -12,15 +12,17 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import UpdateInfo from './UpdateInfo'
 import axios from 'axios'
-import Swal from 'sweetalert2';
 import swal from 'sweetalert';
+// redux toolkit 
+import { useDispatch, useSelector } from 'react-redux';
+import { AddQuestionAnswer } from './../../../../redux/dataSlice/dataSlice';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 
 const ShowQuestions = (props) => {
+
+  // from redux toolkit 
+  const dispatch = useDispatch()
   
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -30,13 +32,9 @@ const ShowQuestions = (props) => {
   const [isDelete, setIsDelete] = useState(false)
 
   useEffect(() => {
-
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
-    axios.get(api).then(res => {
-      setQuestionsAnswers(res.data)
-      
-    })
+    dispatch(AddQuestionAnswer())
   }, [props.flag, isDelete]);
+  const allQuestionsAnswers = useSelector(state => state.data.AddQuestionAnswer)
   // delete questions and answer
 
   const handleDelete = id => {
@@ -82,7 +80,7 @@ const ShowQuestions = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {questionsAnswers.map((row) => (
+          {allQuestionsAnswers.map((row) => (
             <TableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

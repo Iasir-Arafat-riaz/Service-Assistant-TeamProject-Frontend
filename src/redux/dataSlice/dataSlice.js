@@ -40,6 +40,7 @@ const initialState = {
 
     approvdedLoading: true,
     deleteLoading: true,
+    AddQuestionAnswer:[],
 
 
 }
@@ -215,6 +216,15 @@ export const getSingleOrdersChat = createAsyncThunk(
         return response.data;
     }
 )
+//  kawsar
+export const AddQuestionAnswer = createAsyncThunk(
+        'data/AddQuestionAnswer',
+        async () => {
+            const response = await axios.get(`https://dry-sea-00611.herokuapp.com/addquestions`)
+            console.log("got question and answer==",response)
+            return response.data;
+        }
+    )
 export const dataSlice = createSlice({
     name: 'data',
     initialState,
@@ -226,6 +236,7 @@ export const dataSlice = createSlice({
             state.user = {}
         },
         changeRole: (state, { payload }) => {
+            // console.log(payload)
             const email = payload.email;
             const role = payload.role;
             state.allUser.find(data => data.email === email)['role'] = role;
@@ -413,6 +424,14 @@ export const dataSlice = createSlice({
             .addCase(getSingleOrdersChat.fulfilled, (state, { payload }) => {
                 state.orderChats = payload;
             })
+            // kawsar 
+            .addCase(AddQuestionAnswer.fulfilled, (state, action) => {
+                state.AddQuestionAnswer = action.payload;
+                state.status = 'success'
+              })
+            .addCase(AddQuestionAnswer.pending, (state, action) => {
+                  state.status = 'pending';
+              })
 
     },
 })
