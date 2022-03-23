@@ -8,14 +8,15 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
 
     const dispatch = useDispatch();
     const { providers, serviceProviderLoading, singleServiceDetail, user } = useSelector(allData);
-    
+
     useEffect(() => {
         if (singleServiceDetail._id) {
             dispatch(serviceProviders(singleServiceDetail.serviceProvider));
         }
     }, [dispatch, singleServiceDetail])
 
-    
+
+
     // style
     // 
 

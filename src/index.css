@@ -95,3 +95,14 @@ a.select-service{
   font-weight:bold!important;
   font-size: 3em!important;
 }
+/* chart bot */
+.sc-launcher .sc-closed-icon{
+  background-color: #FF5E14 !important;
+  border-radius: 50% !important;
+}
+.sc-header{
+  background-color: #FF5E14 !important;
+}
+.sc-header--close-button{
+  background-color: #FF5E14 !important;
+}

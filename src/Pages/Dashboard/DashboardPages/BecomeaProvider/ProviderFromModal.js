@@ -68,7 +68,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
     // hosting image
     useEffect(() => {
-        const file = watch('providerImage');
+        const file = watch('Logo');
         if (file?.length) {
             let body = new FormData()
             body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
@@ -79,13 +79,12 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                 url: 'https://api.imgbb.com/1/upload',
                 data: body
             }).then(res => {
-                
-                setValue('providerImg', res.data?.data?.url)
+                setValue('Logo', res.data?.data?.url)
             }).finally(() => setImgLoading(true))
         }
         else {
         }
-    }, [watch('providerImage')]);
+    }, [watch('Logo')]);
 
     return (
         <>
@@ -121,7 +120,7 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
                                             {/* <input id="travelPhoto" accept='image/*' style={{ width: '100%', marginBottom: 10 }} {...register("providerImage")} className='hidden' type="file" /> */}
 
                                             <label htmlFor="icon-button-file">
-                                                <Input style={{ marginBottom: 10 }} {...register("providerImage")} accept="image/*" id="icon-button-file" type="file" />
+                                                <Input style={{ marginBottom: 10 }} {...register("Logo")} accept="image/*" id="icon-button-file" type="file" />
                                                 <IconButton color="primary" aria-label="upload picture" component="span">
                                                     <PhotoCamera sx={{ color: "black" }} />
                                                 </IconButton>
@@ -129,13 +128,13 @@ const ProviderFromModal = ({ handleOpenModal, open, handleCloseModal, id, catego
 
                                             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                                                 {
-                                                    watch("providerImg") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("providerImg")} /> </Box>
+                                                    watch("Logo") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("Logo")} /> </Box>
                                                 }
                                             </Box>
 
                                             <TextField sx={inputStyle} id="outlined-basic" label="User Name *" variant="outlined" {...register("userName", { required: true })} />
 
-                                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("providerName", { required: true })} />
+                                            <TextField sx={inputStyle} id="outlined-basic" label="Provider Name *" variant="outlined" {...register("ShopName", { required: true })} />
 
                                             <TextField type="number" sx={inputStyle} id="outlined-basic" label="Phone number *" variant="outlined" {...register("number", { required: true })} />
 

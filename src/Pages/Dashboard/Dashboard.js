@@ -40,7 +40,7 @@ import Skeleton from '@mui/material/Skeleton';
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 260
 const Dashboard = (props) => {
   const navigate = useNavigate();
   const { window } = props;

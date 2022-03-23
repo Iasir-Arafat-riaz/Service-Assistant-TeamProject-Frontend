@@ -17,7 +17,7 @@ const Header = (props) => {
       .then((res) => res.json())
       .then((data) => setBanner(data));
   }, []);
-  
+
 
   return (
     <header>
@@ -38,7 +38,7 @@ const Header = (props) => {
       <Contact />
 
       <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
+        <Fab style={{ color: "white", background: "#FF5E14" }} size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
