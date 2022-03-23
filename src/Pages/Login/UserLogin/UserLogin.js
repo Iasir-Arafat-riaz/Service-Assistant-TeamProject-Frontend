@@ -1,59 +1,143 @@
-import { Box, Button, FormControl, Grid, InputLabel, Item, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  Input,
+  InputLabel,
+  Item,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
+import useFirebase from "../../../Hooks/useFirebase";
 import Navigation from "../../SharedRoute/Navigation/Navigation";
+import SendIcon from "@mui/icons-material/Send";
 
 const UserLogin = () => {
-  const { register, handleSubmit, reset, watch } = useForm();
+  const { googleSignIn, logInWithEmail} = useFirebase();
+
+  const {register, watch, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+  };
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleRegister = () => {
+    navigate("/register");
+  };
   return (
-    <Box sx={{height: "calc(100vh)"}}>
+    <Box sx={{ height: "calc(100vh)" }}>
       <Navigation />
-    <Box sx={{ pt: "100px"}}>
-    <Grid container spacing={2}>
-        <Grid item xs={12} md={4} sx={{backgroundColor:"gray",height: "calc(100vh)"}}>
-          <Box sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-            {" "}
-            <Box>
-            <Typography sx={{color:"#FF5E14"}} variant="h4">Please Login</Typography>
-            <form onSubmit={handleSubmit(onSubmit)}>
+      <Box sx={{ pt: "90px" }}>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            sx={{ backgroundColor: "transparent", height: "calc(100vh)" }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mt: 5,
+                pt: 3,
+              }}
+            >
+              {" "}
+              <Box>
+                <Typography sx={{ color: "#FF5E14", mb: 4 }} variant="h4">
+                  <b>Please Login</b>
+                </Typography>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <Stack direction="column">
+                    <Input
+                      placeholder="Enter Your Email"
+                      required
+                      type="email"
+                      sx={{ mb: 3 }}
+                      {...register("email")}
+                      label="Enter image url"
+                      variant="outlined"
+                    />
 
-              <Stack direction="column">
-
-                <TextField
-                  required
-                  type="text"
-                  sx={{ mb: 3 }}
-                  {...register("imageUrl")}
-                  label="Enter image url"
-                  variant="outlined"
-                />
-
-                <TextField
-                  required
-                  type="text"
-                  sx={{ mb: 3 }}
-                  {...register("bannerText")}
-                  label="Write Banner text"
-                  variant="outlined"
-                />
-             <Button variant='outlined' type="submit" sx={{ letterSpacing: 2, px: 3, mb: 3, border: '2px solid #C2C8D7', color: 'black',backgroundColor: "#FF5E14" }}>Login</Button>
-                {/* <Button sx={{ borderRadius: 0, p: 1, mt: 3 }} type="submit" variant="contained">
+                    <Input
+                      placeholder="Enter Your Password"
+                      required
+                      type="password"
+                      sx={{ mb: 3 }}
+                      {...register("password")}
+                      label="Write Banner text"
+                      variant="outlined"
+                    />
+                    <Button
+                  
+                      variant="outlined"
+                      type="submit"
+                      sx={{
+                        letterSpacing: 2,
+                        px: 3,
+                        mb: 3,
+                        color: "black",
+                        backgroundColor: "#FF5E14",
+                      }}
+                    >
+                      <b>Login</b>
+                    </Button>
+                    {/* <Button sx={{ borderRadius: 0, p: 1, mt: 3 }} type="submit" variant="contained">
                   Add Banner
                 </Button> */}
-              </Stack>
-            </form>
+                    <Button
+                      onClick={() => googleSignIn(location, navigate)}
+                      sx={{
+                        borderRadius: 0,
+                        p: 1,
+                        mt: 3,
+                        letterSpacing: 2,
+                        backgroundColor: "black",
+                      }}
+                      variant="contained"
+                    >
+                      Google Signin
+                    </Button>
+                  </Stack>
+                </form>
+                <Typography variant="h6">
+                  New User?{" "}
+                  <Button
+                  
+                  endIcon={<SendIcon />}
+                    sx={{ p: 2, color: "#FF5E14" }}
+                    onClick={handleRegister}
+                  >
+                    Register
+                  </Button>
+                </Typography>
+              </Box>
             </Box>
-          </Box>
+          </Grid>
+          <Grid
+            className="loginBanner"
+            item
+            xs={12}
+            md={8}
+            sx={{
+              backgroundImage:
+                "url(https://i.ibb.co/W6jPsvh/managed-services-1-1.png)",
+              height: "calc(100vh)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          ></Grid>
         </Grid>
-        <Grid item xs={12} md={8} sx={{backgroundImage:"url(https://i.ibb.co/W6jPsvh/managed-services-1-1.png)",height: "calc(100vh)",backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",}}>
-         
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
     </Box>
   );
 };

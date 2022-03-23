@@ -1,0 +1,42 @@
+.nestedBanner{
+    
+
+}
+.innerBanner{
+    width:100%;
+    height:100%;
+    transition-property: clip-path,background-position-x ,background-position-y;
+    transition-duration: 1s,1s,4s;
+    transition-delay: 0s,0s,1s;
+    position: relative;
+    z-index: 10;
+    background-position-x: 0%;
+    background-position-y:0%;
+    clip-path: circle(29.3% at 85% 34%); 
+    background: url('https://i.ibb.co/10wMBYk/istockphoto-1272432175-170667a.jpg ');
+    animation: animate 10s ease-in 0s infinite alternate-reverse ;
+
+}
+@keyframes animate{
+    from{
+        background-position-y: 0%;
+    }
+    to{
+        background-position-y: 100%;
+    }
+}
+.innerBanner:hover{
+    clip-path: circle(85.4% at 61% 53%);
+    background-position-x: 100%; 
+}
+.innerTitle{
+    position: absolute;
+    bottom: -800px;
+    transition: bottom;
+    transition-duration: 1s;
+    transition-delay: 1s; 
+}
+.innerBanner:hover .innerTitle{
+    bottom: 0px;
+
+}
