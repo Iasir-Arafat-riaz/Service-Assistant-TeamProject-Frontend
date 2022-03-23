@@ -55,8 +55,8 @@ const RequestService = () => {
 
         axios.post('https://dry-sea-00611.herokuapp.com/serviceReqEmail', data)
             .then(function (response) {
-                
-                
+
+
             })
     };
 
@@ -67,57 +67,58 @@ const RequestService = () => {
                 px: 3
             }} >
                 <Container>
-                <Grid container>
-                    <Grid
-                        item
-                        md={4}
-                        sx={{ mt: -15, }}
-                        style={{ zIndex: '+1' }}>
-                        <img
-                            style={{ paddingLeft: '20px' }}
-                            width="70%"
-                            height='100%'
-                            src='https://i.ibb.co/PzqvrVR/cus-removebg-preview-1.png' alt='customer'
-                        />
-                    </Grid>
-                    <Grid item
-                        md={8}
-                        sx={{ py: 2 }}>
-                        <Typography
-                            sx={{
-                                fontWeight: 'bold',
-                                fontSize: 25,
-                                my: 2
-                            }}>
-                            Can't find your desired service? Let us know 24/7 in 47952
-                        </Typography>
-                        <Stack spacing={2} direction="row">
-                            <Button
-                                onClick={handleOpen}
-                                style={{ backgroundColor: "#FF5E14", }}
+                    <Grid container>
+                        <Grid
+                            item
+                            md={4}
+                            sx={{ mt: -15, }}
+                            style={{ zIndex: '+1' }}>
+                            <img
+                                style={{ paddingLeft: '20px' }}
+                                width="70%"
+                                height='100%'
+                                src='https://i.ibb.co/PzqvrVR/cus-removebg-preview-1.png' alt='customer'
+                            />
+                        </Grid>
+                        <Grid item
+                            md={8}
+                            sx={{ py: 2 }}>
+                            <Typography
                                 sx={{
-                                    borderRadius: 2,
-                                    p: 2,
                                     fontWeight: 'bold',
-                                    me: 5
-                                }}
-                                variant='contained'>
-                                Request for Service
-                            </Button>
-                            <Button
-                                style={{ borderColor: "#FF5E14", }}
-                                sx={{
-                                    borderRadius: 2,
-                                    py: 2,
-                                    px: 5,
-                                    fontWeight: 'bold'
-                                }}
-                                variant='outlined'>
-                                <CallIcon sx={{ pr: 1 }} /> 47952
-                            </Button>
-                        </Stack>
+                                    fontSize: 25,
+                                    my: 2
+                                }}>
+                                Can't find your desired service? Let us know 24/7 in 47952
+                            </Typography>
+                            <Stack spacing={2} direction="row">
+                                <Button
+                                    onClick={handleOpen}
+                                    style={{ backgroundColor: "#FF5E14", }}
+                                    sx={{
+                                        borderRadius: 2,
+                                        p: 2,
+                                        fontWeight: 'bold',
+                                        me: 5
+                                    }}
+                                    variant='contained'>
+                                    Request for Service
+                                </Button>
+                                <Button
+                                    style={{ borderColor: "#FF5E14", }}
+                                    href='tel:+8801308979234'
+                                    sx={{
+                                        borderRadius: 2,
+                                        py: 2,
+                                        px: 5,
+                                        fontWeight: 'bold'
+                                    }}
+                                    variant='outlined'>
+                                    <CallIcon sx={{ pr: 1 }} /> 47952
+                                </Button>
+                            </Stack>
+                        </Grid>
                     </Grid>
-                </Grid>
                 </Container>
             </Paper>
 

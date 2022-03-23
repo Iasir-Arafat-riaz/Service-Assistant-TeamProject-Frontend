@@ -12,6 +12,7 @@ import Navigation from '../../SharedRoute/Navigation/Navigation';
 import ChooseUs from '../ChooseUs/ChooseUs';
 import Header from '../Header/Header';
 import HomeServices from '../HomeServices/HomeServices';
+import LastBanner from '../LastBanner/LastBanner';
 import RecentlyViews from '../RecentlyViews/RecentlyViews';
 import RequestService from '../RequestService/RequestService';
 import Testimonials from '../Testimonials/Testimonials/Testimonials';
@@ -32,7 +33,8 @@ const Home = () => {
             <Testimonials />
             <WorkFlow />
             <RequestService />
-            <ChooseUs />
+            {/* <ChooseUs /> */}
+            <LastBanner></LastBanner>
             {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }

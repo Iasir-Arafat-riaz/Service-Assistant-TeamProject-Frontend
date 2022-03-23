@@ -9,25 +9,42 @@
   
     padding-top: 120px;
   
-    padding-bottom: 100px;
+    padding-bottom: 100px; 
+    position: relative;
 }
+.grayBox{
+    position: absolute;
+    inset: 0; 
+    background:rgb(255, 255, 255);
+    mix-blend-mode: color;
+    animation-name: example;
+
+    animation-duration: 20s; 
+    animation-iteration-count: infinite;
+    left:0;
+}
+@keyframes example {
+    0% {left: 0;}
+    25% {left:40%;}
+    50% {left:55%;}
+    75% {left:72%;}
+    100% {left:100%;}
+  }
+
+
 
 .sub-title{
-    color: #022279;
-
-    text-transform: uppercase;
-  
-    letter-spacing: 4px;
-  
-    display: block;
-  
-    margin-bottom: 10px;
-  
+    color: #022279; 
+    text-transform: uppercase; 
+    letter-spacing: 4px; 
+    display: block; 
+    margin-bottom: 10px; 
     font-weight:700;
 }
 
 .step-around{
     display: block;
+    position: absolute;
 
     background-color: #ffb600;
 
@@ -61,10 +78,10 @@
 }
 
 .icon-img{
-    transform: rotate(-135deg);
+    /* transform: rotate(-135deg); */
 }
 .img-rotate{
-    animation: rotation 2s infinite linear;
+    /* animation: rotation 2s infinite linear; */
 }
 
 @keyframes rotation {
@@ -75,28 +92,149 @@
       transform: rotate(359deg);
     }
   }
+
+
+  /* step animation  */
   
 .step-section{
-    text-align: center;
+    /* text-align: center;  */
+}
+
+.step-1,.step-2,.step-3{
+    border-radius: 10px;
+
+}
+.step-1{
+    animation-name:highlight-1; 
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+
+}
+.step-2{
+    animation-name:highlight-2; 
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+
+}
+.step-3{
+    animation-name:highlight-3; 
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+
+}
+@keyframes highlight-1{
+    0% { 
+     }
+    2% {
+        
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+     }
+    40% {
+        
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+     }
+   42% { 
+    -webkit-box-shadow:none; 
+    box-shadow: none;
+    }
+   44% { 
+    -webkit-box-shadow:none; 
+    box-shadow: none;
+    }  
+    75% { 
+
+    }
+    100% { 
+
+    } 
+}
+@keyframes highlight-2{
+    0% {
+        
+     }
+    40% { 
+        -webkit-box-shadow:none; 
+        box-shadow: none;
+    }
+    42% { 
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+    }
+    48% { 
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+    }
+    60% { 
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+    }
+    65% { 
+        -webkit-box-shadow:none; 
+        box-shadow: none;
+    }
+    66% { 
+        -webkit-box-shadow:none; 
+        box-shadow: none;
+    }
+    100% { 
+
+    } 
+}
+@keyframes highlight-3{
+    0% {
+        
+     } 
+     65%{
+        -webkit-box-shadow:none; 
+        box-shadow: none;
+     }
+    66% { 
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+
+    }
+    95% { 
+        -webkit-box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%); 
+        box-shadow: 5px 7px 36px 1px rgb(0 0 0 / 14%);
+
+    }
+    100% { 
+        -webkit-box-shadow:none; 
+        box-shadow: none;
+
+    } 
 }
 .position-1 {
     margin-top: 0px;
     margin-bottom: 30px;
+    width: 140px; 
+    height: 140px;
     display: flex;
     justify-content: center;
-}
+    align-items: center;
+    position: relative;
+} 
 
 .position-2{
+    width: 140px;
+
+    height: 140px;
     margin-top: 60px;
     margin-bottom: 30px;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
 .position-3{
-    margin-top: 120px;
+    width: 140px; 
+    height: 140px;
+    margin-top: 105px;
     margin-bottom: 30px;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 @media only screen and (max-width:991px) {
