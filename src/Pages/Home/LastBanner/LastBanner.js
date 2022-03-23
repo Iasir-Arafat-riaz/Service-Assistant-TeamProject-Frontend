@@ -45,8 +45,7 @@ const LastBanner = () => {
                                 <Grid item md={6} xs={12}>
                                     <Box
                                         sx={{
-                                            background: 'rgb(0 0 0 / 40%)',
-                                            backdropFilter: "blur(1px)",
+                                            background: 'rgb(255 0 0 / 45%)',
                                             px: 1
                                         }}
                                     >
