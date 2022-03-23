@@ -32,9 +32,9 @@ const Home = () => {
             <AllProvider></AllProvider>
             <Testimonials />
             <WorkFlow />
-            <RequestService />
             {/* <ChooseUs /> */}
             <LastBanner></LastBanner>
+            <RequestService />
             {
                 !loading && user?.email ? user.role === 'admin' ? <></> : <Chatbot></Chatbot> : <Chatbot></Chatbot>
             }

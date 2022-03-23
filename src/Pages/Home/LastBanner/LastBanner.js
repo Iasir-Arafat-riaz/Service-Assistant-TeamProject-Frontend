@@ -6,7 +6,7 @@ import './LastBanner.css'
 
 const LastBanner = () => {
     return (
-        <Box sx={{ height: '80vh', py: 2, }}>
+        <Box sx={{ height: '80vh', }}>
             <Container sx={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
                 <Grid container spacing={4} sx={{ height: '100%' }} alignItems='center'>
                     <Grid item md={6} xs={12}>
@@ -45,12 +45,13 @@ const LastBanner = () => {
                                 <Grid item md={6} xs={12}>
                                     <Box
                                         sx={{
-                                            background: 'rgb(255 0 0 / 45%)',
-                                            px: 1
+                                            background: 'rgb(17 17 17 / 75%)',
+                                            px: 1,
+                                            borderRadius: 2,
                                         }}
                                     >
                                         <Typography color="#ffffffed" gutterBottom variant='h4' sx={{ fontWeight: '900' }}>Let's be a provider</Typography>
-                                        <Typography color='#ffffffed' gutterBottom variant='body1' sx={{}}>We have most hard working and honest provider who are got more than 4.5 star review from our customer . It easy to be a provider and get paid after your appointment done. Joint with us</Typography>
+                                        <Typography color='#ffffffed' variant='body1' sx={{}}>We have most hard working and honest provider who are got more than 4.5 star review from our customer . It easy to be a provider and get paid after your appointment done. Joint with us</Typography>
 
                                     </Box>
                                 </Grid>

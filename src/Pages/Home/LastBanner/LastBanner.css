@@ -14,7 +14,7 @@
     background-position-y:0%;
     clip-path: circle(29.3% at 85% 34%); 
     background: url('https://i.ibb.co/10wMBYk/istockphoto-1272432175-170667a.jpg ');
-    animation: animate 5s ease 0s infinite alternate-reverse ;
+    animation: animate 10s ease-in 0s infinite alternate-reverse ;
 
 }
 @keyframes animate{
@@ -33,8 +33,8 @@
     position: absolute;
     bottom: -800px;
     transition: bottom;
-    transition-duration: 2s;
-    transition-delay: 1s;
+    transition-duration: 1s;
+    transition-delay: 1s; 
 }
 .innerBanner:hover .innerTitle{
     bottom: 0px;

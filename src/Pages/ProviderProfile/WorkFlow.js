@@ -154,7 +154,9 @@ const WorkFlow = () => {
                             <Typography sx={{ p: 1, }}>
                                 Chose your needed service and then go to details page on left side you will find category by choosing your category a modal will open
                             </Typography>
+                            <Box className='front'>
 
+                            </Box>
                         </Box>
                     </Grid>
 
