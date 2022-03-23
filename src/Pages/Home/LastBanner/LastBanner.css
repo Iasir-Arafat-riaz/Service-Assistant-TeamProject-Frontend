@@ -14,10 +14,29 @@
     background-position-y:0%;
     clip-path: circle(29.3% at 85% 34%); 
     background: url('https://i.ibb.co/6b62nfq/mosaic-positive-happy-multiracial-millennials-portraits-different-colorful-studio-backgrounds-smilin.jpg');
+    animation: animate 5s ease 0s infinite alternate-reverse ;
 
+}
+@keyframes animate{
+    from{
+        background-position-y: 0%;
+    }
+    to{
+        background-position-y: 100%;
+    }
 }
 .innerBanner:hover{
     clip-path: circle(85.4% at 61% 53%);
-    background-position-x: 100%;
-    background-position-y:100%;
+    background-position-x: 100%; 
+}
+.innerTitle{
+    position: absolute;
+    bottom: -800px;
+    transition: bottom;
+    transition-duration: 2s;
+    transition-delay: 2.5s;
+}
+.innerBanner:hover .innerTitle{
+    bottom: 0px;
+
 }

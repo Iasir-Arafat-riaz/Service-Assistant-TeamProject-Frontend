@@ -38,7 +38,7 @@
     text-transform: uppercase; 
     letter-spacing: 4px; 
     display: block; 
-    margin-bottom: 10px; 
+    margin-bottom: 30px; 
     font-weight:700;
 }
 
@@ -76,13 +76,7 @@
     border-radius:100px;
     box-shadow: 0 0 0px 15px rgba(255, 182, 0, 0.17);
 }
-
-.icon-img{
-    /* transform: rotate(-135deg); */
-}
-.img-rotate{
-    /* animation: rotation 2s infinite linear; */
-}
+ 
 
 @keyframes rotation {
     from {
@@ -95,11 +89,7 @@
 
 
   /* step animation  */
-  
-.step-section{
-    /* text-align: center;  */
-}
-
+   
 .step-1,.step-2,.step-3{
     border-radius: 10px;
 

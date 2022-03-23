@@ -6,7 +6,7 @@ import './LastBanner.css'
 
 const LastBanner = () => {
     return (
-        <Box sx={{ height: '80vh', py: 2 }}>
+        <Box sx={{ height: '80vh', py: 2, }}>
             <Container sx={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
                 <Grid container spacing={4} sx={{ height: '100%' }} alignItems='center'>
                     <Grid item md={6} xs={12}>
@@ -35,39 +35,28 @@ const LastBanner = () => {
                     sx={{
                         position: 'absolute',
                         inset: 1,
+                        display: { xs: 'none', md: 'block' }
                     }}
                     className='nestedBanner'
                 >
-                    <Box className='innerBanner'>
-                        <Grid container spacing={4} sx={{ height: '100%' }} alignItems='center'>
-                            <Grid item md={6} xs={12}>
-                                <Box
-                                    sx={{
-                                        background: '#ffffff5c',
-                                        backdropFilter: "blur(5px)",
-                                        px: 1
-                                    }}
-                                >
-                                    <Typography color="#2d3e50" gutterBottom variant='h3' sx={{ fontWeight: '900' }}>Let's grow together.</Typography>
-                                    <Typography gutterBottom variant='body1' sx={{}}>We have most hard working and honest provider who are got more than 4.5 star review from our customer . It easy to be a provider and get paid after your appointment done. Joint with use</Typography>
-                                    <Button
-                                        component={NavLink}
-                                        to='/dashboard/becomeaprovider'
-                                        style={{ backgroundColor: "#FF5E14", }}
+                    <Box className='innerBanner' >
+                        <Box className='innerTitle'  >
+                            <Grid container spacing={4} sx={{ height: '100%' }} alignItems='center'>
+                                <Grid item md={6} xs={12}>
+                                    <Box
                                         sx={{
-                                            borderRadius: 1,
-                                            p: 2,
-                                            fontWeight: 'bold',
-                                            me: 5,
-                                            mt: 2,
+                                            background: 'rgb(0 0 0 / 40%)',
+                                            backdropFilter: "blur(1px)",
+                                            px: 1
                                         }}
-                                        variant='contained'>
-                                        Join with them
-                                    </Button>
+                                    >
+                                        <Typography color="#ffffffed" gutterBottom variant='h4' sx={{ fontWeight: '900' }}>Let's be a provider</Typography>
+                                        <Typography color='#ffffffed' gutterBottom variant='body1' sx={{}}>We have most hard working and honest provider who are got more than 4.5 star review from our customer . It easy to be a provider and get paid after your appointment done. Joint with us</Typography>
 
-                                </Box>
+                                    </Box>
+                                </Grid>
                             </Grid>
-                        </Grid>
+                        </Box>
 
                     </Box>
 
