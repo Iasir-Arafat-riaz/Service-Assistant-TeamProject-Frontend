@@ -94,7 +94,7 @@ const RequestService = () => {
                         <Stack spacing={2} direction="row">
                             <Button
                                 onClick={handleOpen}
-                                style={{ backgroundColor: "#FF5E14", }}
+                                style={{ backgroundColor: "#FF5E14" }}
                                 sx={{
                                     borderRadius: 2,
                                     p: 2,

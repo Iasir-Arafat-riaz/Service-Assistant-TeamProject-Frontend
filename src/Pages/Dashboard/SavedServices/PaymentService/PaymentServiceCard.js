@@ -28,7 +28,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
     // 
 
     useEffect(() => {
-        fetch('http://localhost:5000/myorder/createpaymentstatus', {
+        fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -90,7 +90,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                 const message = `Your payment for ${order?.parentService?.Title} has been completed`;
                 dispatch(sendNotification({ message, email: user.email, image: order?.parentService?.Image }))
             }
-            axios.post('http://localhost:5000/saveservice/addonorderscollection', orderService).then(() => {
+            axios.post('https://dry-sea-00611.herokuapp.com/saveservice/addonorderscollection', orderService).then(() => {
                 handleNextStep();
             });
         };
