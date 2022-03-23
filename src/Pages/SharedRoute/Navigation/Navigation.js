@@ -445,10 +445,9 @@ const Navigation = () => {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => setIsListening((prevState) => !prevState)}
-                      sx={{ zIndex: "1000" }}
+                      sx={{ zIndex: "1000",m: 1  }}
                       variant="contained"
                       disabled={mic ? false : true}
-                      sx={{ m: 1 }}
                     >
                       🛑🎙️
                     </Button>
@@ -482,7 +481,7 @@ const Navigation = () => {
                           }}>
                             <CardActionArea
                               onClick={() =>
-                                handleCardClick(item.parentService)
+                                handleCardClick(item._id)
                               }
                             >
                               <CardContent>
