@@ -376,8 +376,8 @@ const SingleProviderDetails = () => {
 
                                         <Stack direction="row" spacing={1}>
                                             {
-                                                providerProfiles?.offerService?.map((service) =>
-                                                    <Chip variant="outlined" label={service?.Name} />
+                                                providerProfiles?.offerService?.map((service, index) =>
+                                                    <Chip variant="outlined" key={index} label={service?.Name} />
                                                 )
                                             }
 
@@ -473,10 +473,10 @@ const SingleProviderDetails = () => {
                                         <Box
                                             sx={{ mx: 5, my: 1, }}
                                         >
-                                            <Button
+                                            {/* <Button
                                                 style={{ borderColor: "#FF5E14", color: '#707070' }}
                                                 variant="outlined">Contact Provider
-                                            </Button>
+                                            </Button> */}
                                         </Box>
 
 
@@ -504,7 +504,7 @@ const SingleProviderDetails = () => {
 
                             <Grid container spacing={2} sx={{ my: 3 }}>
                                 <Grid item md={3}>
-                                    <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 3, color: '#363636', textAlign: 'center' }}>FAQ</Typography>
+                                    {/* <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 3, color: '#363636', textAlign: 'center' }}>FAQ</Typography> */}
                                     {providerServiceInfo?.map((service) => {
                                         return (
                                             < >
@@ -543,90 +543,73 @@ const SingleProviderDetails = () => {
 
 
                                 <Grid item md={9}>
+
                                     <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, color: '#363636' }}>Offered Services</Typography>
-                                    {providerServiceInfo.map((service) => {
-                                        return (
-                                            < >
-                                                <Grid container spacing={2}>
 
-                                                    {service.allServices?.map((item, index) => (
-                                                        <Grid item md={3} xs={12} key={index}>
-                                                            <Card sx={{ width: '100%', height: '100%' }}>
-                                                                <CardActionArea>
+                                    <Grid container spacing={2}>
+                                        {
+                                            providerProfiles?.offerService?.map((service) => <Grid item md={3} lg={3} sm={3} xs={6} key={service.Id}>
+                                                <Card sx={{ width: '100%', height: '100%' }}>
+                                                    <CardActionArea>
 
-                                                                    <CardMedia
-                                                                        component="img"
-                                                                        height="140"
-                                                                        image={item.Image}
-                                                                        alt="service sub category"
-                                                                    />
+                                                        <CardMedia
+                                                            component="img"
+                                                            height="140"
+                                                            image={service.Img}
+                                                            alt="service sub category"
+                                                        />
 
-                                                                    <CardContent >
-                                                                        <Tooltip title={item.Title}>
+                                                        <CardContent >
+                                                            <Tooltip title={service.Name}>
 
-                                                                            <Typography gutterBottom variant="h6" component="div"
-                                                                                sx={{ color: "#707070" }}
-                                                                            >
-                                                                                {item.Title.substring(0, 12)}...
+                                                                <Typography variant="h6"
+                                                                    sx={{ fontWeight: 'bold' }}
+                                                                >
+                                                                    {service?.Name}
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        </CardContent>
 
-                                                                            </Typography>
-                                                                        </Tooltip>
-                                                                    </CardContent>
+                                                    </CardActionArea>
+                                                </Card>
 
-                                                                </CardActionArea>
-                                                            </Card>
-                                                        </Grid>
-                                                    ))}
 
-                                                </Grid>
-                                            </>
-                                        );
-                                    })}
+                                            </Grid>
+                                            )
+                                        }
+                                    </Grid>
 
                                     <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Experience</Typography>
-                                    {providerServiceInfo.map((service) => {
-                                        return (
-                                            < >
-                                                <Grid container spacing={2}>
-                                                    {service.allServices?.map((item) => {
-                                                        return (
-                                                            <>
-                                                                {item.Key?.slice(1, 2).map((name, index) => {
-                                                                    return (
-                                                                        <>
-                                                                            <Grid item md={6} xs={12}>
-                                                                                <Paper elevation={3}
-                                                                                    key={index}
-                                                                                    sx={{
-                                                                                        p: 1,
-                                                                                        borderBottom: '2px solid #ffb600',
-                                                                                        borderRight: '3px solid #ffb600'
-                                                                                    }}
-                                                                                >
-                                                                                    <Tooltip title={name.Name}>
 
-                                                                                        <Typography gutterBottom variant="h6" component="div"
-                                                                                            sx={{ color: "#707070" }}
-                                                                                        >
-                                                                                            {name.Name.substring(0, 35)}...
+                                    <Grid container spacing={2}>
 
-                                                                                        </Typography>
-                                                                                    </Tooltip>
-                                                                                </Paper>
+                                        {
+                                            providerProfiles.offerService.map(service => <Grid item sm={6} xs={12}>
+                                                <Paper elevation={3}
+                                                    key={service.Id}
+                                                    sx={{
+                                                        p: 1,
+                                                        borderBottom: '2px solid #ffb600',
+                                                        borderRight: '3px solid #ffb600'
+                                                    }}
+                                                >
+                                                    <Tooltip title={service.Name}>
 
-                                                                            </Grid>
-                                                                        </>
-                                                                    )
-                                                                })}
-                                                            </>
-                                                        )
-                                                    })}
-                                                </Grid>
-                                            </>
-                                        );
-                                    })}
+                                                        <Typography gutterBottom variant="h6" component="div"
+                                                            sx={{ color: "#707070" }}
+                                                        >
+                                                            {/* {name.Name.substring(0, 35)}... */}
+                                                            {service.Name}
+                                                        </Typography>
+                                                    </Tooltip>
+                                                </Paper>
+
+                                            </Grid>)
+                                        }
+                                    </Grid>
 
                                     <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Customer Reviews</Typography>
+
                                     <Grid container sx={{ my: 2 }}>
                                         <Grid item xs={2.5} md={1.25}>
                                             <Box
@@ -758,6 +741,8 @@ const SingleProviderDetails = () => {
                                     </Grid>
                                 </Grid>
                             </Grid>
+
+
                         </Container>
 
                     </>
