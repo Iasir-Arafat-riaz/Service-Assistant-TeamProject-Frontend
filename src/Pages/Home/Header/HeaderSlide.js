@@ -17,8 +17,8 @@ const HeaderSlide = ({ banner }) => {
         // creating observer
         const observer = new IntersectionObserver(entries => {
             const [entry] = entries;
-            
-            
+
+
             setIsVisible(entry.isIntersecting)
         }, options)
         //init observer
@@ -66,7 +66,7 @@ const HeaderSlide = ({ banner }) => {
                         className={isVisible ? 'aos-init aos-animate text1' : 'aos-init text1'}
 
                     >
-                        <span>{banner.bannerText}</span>
+                        <Typography variant='h3'>{banner.bannerText}</Typography>
                     </Box>
                     <Box
                         data-aos="fade-left"
@@ -76,7 +76,7 @@ const HeaderSlide = ({ banner }) => {
                         className={isVisible ? 'aos-init aos-animate text1' : 'aos-init text1'}
 
                     >
-                        <span>{banner.bannerTex2}</span>
+                        <Typography variant='h3'>{banner.bannerTex2}</Typography>
                     </Box>
                 </Box>
             </Container>

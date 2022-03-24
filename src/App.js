@@ -69,6 +69,7 @@ import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuest
 
 import Career from "./Pages/Career/Career";
 import Loading from "./Pages/SharedRoute/Loader/Loading";
+import Register from "./Pages/Login/UserLogin/Register/Register";
 // import AOS from 'aos'
 // import 'aos/dist/aos.css';
 // AOS.init();
@@ -219,7 +220,7 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
-
+        <Route path="/register" element={<Register />} />
 
         <Route path="*" element={<Error />} />
       </Routes>

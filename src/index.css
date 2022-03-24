@@ -91,10 +91,7 @@ a.select-service{
  
 }
 
-.text1{
-  font-weight:bold!important;
-  font-size: 3em!important;
-}
+
 .sc-launcher{
-  z-index: 99;
+  z-index: 999;
 }
