@@ -102,7 +102,7 @@ const Navigation = () => {
     const filterMessage = notifications.filter(
       (notification) => notification.seen === false
     );
-    
+
     setMessageSeen(filterMessage.length);
   }, [notifications, user]);
 
@@ -292,17 +292,17 @@ const Navigation = () => {
     if (isListening) {
       mic.start();
       mic.onend = () => {
-        
+
         mic.start();
       };
     } else {
       mic.stop();
       mic.onend = () => {
-        
+
       };
     }
     mic.onstart = () => {
-      
+
     };
 
     mic.onresult = (event) => {
@@ -310,10 +310,10 @@ const Navigation = () => {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join("");
-      
+
       setNote(transcript);
       mic.onerror = (event) => {
-        
+
       };
     };
   };
@@ -445,10 +445,9 @@ const Navigation = () => {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => setIsListening((prevState) => !prevState)}
-                      sx={{ zIndex: "1000" }}
+                      sx={{ zIndex: "1000", m: 1 }}
                       variant="contained"
                       disabled={mic ? false : true}
-                      sx={{ m: 1 }}
                     >
                       🛑🎙️
                     </Button>
@@ -482,7 +481,7 @@ const Navigation = () => {
                           }}>
                             <CardActionArea
                               onClick={() =>
-                                handleCardClick(item.parentService)
+                                handleCardClick(item._id)
                               }
                             >
                               <CardContent>

@@ -50,20 +50,20 @@ const DemoTestimonialModal = ({ handleOpen, handleClose, open, testimonials, ind
                         <RiDoubleQuotesL style={{ display: 'block', fontSize: 22, color: "#FF5E14" }} />
 
                         <Typography variant='body' sx={{ fontWeight: 400, color: "#7E7E7E", lineHeight: 1.5 }} >
-                            {testimonials[index].description}
+                            {testimonials[index]?.description}
                         </Typography><br />
 
                         <Rating name="read-only" sx={{ fontSize: 17, mt: 1 }} value={testimonials[index].rating} readOnly />
 
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <Avatar alt={testimonials[index].name} src={testimonials[index].image} sx={{ width: 70, height: 70, border: '2px solid #C7C7C7' }} />
+                            <Avatar alt={testimonials[index].name} src={testimonials[index]?.image} sx={{ width: 70, height: 70, border: '2px solid #C7C7C7' }} />
                         </Box>
 
                         <Box sx={{ display: 'grid', justifyContent: 'center', }}>
 
-                            <Typography variant='h6' sx={{ fontSize: 18, fontWeight: 'bold' }}>{testimonials[index].name}</Typography>
+                            <Typography variant='h6' sx={{ fontSize: 18, fontWeight: 'bold' }}>{testimonials[index]?.name}</Typography>
 
-                            <Typography sx={{ color: "#64748B", fontSize: 14 }} variant='body2'>{testimonials[index].profession}</Typography>
+                            <Typography sx={{ color: "#64748B", fontSize: 14 }} variant='body2'>{testimonials[index]?.profession}</Typography>
 
                         </Box>
 

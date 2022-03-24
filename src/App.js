@@ -102,7 +102,7 @@ const App = () => {
   useEffect(() => {
     if (user.email) {
       socket.emit('joinAll', user.email);
-      
+
     }
 
 
@@ -214,7 +214,7 @@ const App = () => {
 
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/career" element={<Career />} />
-        <Route path="/providerProfile" element={<SingleProviderDetails />} />
+        <Route path="/home/providerProfile/:providerId" element={<SingleProviderDetails />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
           path="home/service-details/:serviceId"

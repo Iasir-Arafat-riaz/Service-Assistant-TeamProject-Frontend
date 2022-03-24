@@ -14,11 +14,13 @@ import { Stack, Grid, IconButton } from "@mui/material";
 import { Container, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import AllProviderChild from './AllProviderChild';
+
 const AllProvider = () => {
+
     const [providers, setProviders] = useState([])
 
     useEffect(() => {
-        const api = `https://dry-sea-00611.herokuapp.com/users/providers`
+        const api = `http://localhost:5000/providerdetials`
         axios.get(api).then(res => {
             setProviders(res.data)
         })
@@ -37,6 +39,9 @@ const AllProvider = () => {
         zIndex: '999'
 
     }
+
+
+
     return (
         <Container>
             <Stack justifyContent='center' alignItems='center' >
@@ -92,6 +97,7 @@ const AllProvider = () => {
                 </Swiper>
                 <Stack justifyContent='space-between' direction='row'
                     sx={{
+                        pointerEvents: 'none',
                         width: '100%',
                         height: '100%',
                         position: 'absolute',
