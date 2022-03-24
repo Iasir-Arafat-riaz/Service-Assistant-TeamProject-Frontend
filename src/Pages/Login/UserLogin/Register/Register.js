@@ -143,7 +143,7 @@ const Register = () => {
             md={8}
             sx={{
               backgroundImage:
-                "url(https://i.ibb.co/W6jPsvh/managed-services-1-1.png)",
+                "url(https://i.ibb.co/WpnLfT6/Gray-Desktop-Image.jpg)",
               height: "calc(100vh)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
