@@ -59,7 +59,7 @@ const Footer = () => {
                         <Box className="subscribe-form">
                             <form method="post" target="_blank" action="https://www.youtube.com/channel/UCRR0lgDJtkv7Hyikak8q01Q">
                                 <input className='footerInput' type="text" placeholder="Email Address" />
-                                <button><SendIcon /></button>
+                                <button ><span ><SendIcon className='footerIcon'/></span></button>
                             </form>
                         </Box>
                     </Grid>

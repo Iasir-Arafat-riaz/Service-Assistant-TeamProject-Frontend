@@ -63,6 +63,11 @@ color: #7E7E7E;
     border: 1px solid #ff5e14;
     top: 0;
 }
+
+.subscribe-form button:hover{
+  background-color: #4e73c4;
+}
+
 .subscribe-form button svg {
   color: #fff;
   font-size: 22px; 
