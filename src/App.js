@@ -223,7 +223,7 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
-<Route path="/register" element={<Register/>}/>
+        <Route path="/register" element={<Register />} />
 
         <Route path="*" element={<Error />} />
       </Routes>
