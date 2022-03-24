@@ -10,8 +10,20 @@ const Register = () => {
     const { googleSignIn, signUpWithEmail } = useFirebase();
 
   const { register, watch, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+
+
+  const handleSignUp = () => {
+    	
+    		if (watch('signupEmail').length && watch('name').length && watch('signupPass').length >= 6) {
+    			signUpWithEmail({ name: watch('name'), email: watch('signupEmail'), password: watch('signupPass'), location, navigate })
+    		}
+    		else {
+    			alert('Wrong input ')
+    		}
+    	}
+
+  const onSubmit = () => {
+  
   };
   const location =useLocation()
   const navigate = useNavigate();
@@ -59,7 +71,7 @@ const Register = () => {
                       required
                       type="email"
                       sx={{ mb: 3 }}
-                      {...register("email")}
+                      {...register("signupEmail")}
                       label="Enter image url"
                       variant="outlined"
                     />
@@ -69,7 +81,7 @@ const Register = () => {
                       required
                       type="password"
                       sx={{ mb: 3 }}
-                      {...register("password")}
+                      {...register("signupPass")}
                       label="Write Banner text"
                       variant="outlined"
                     />
@@ -85,6 +97,7 @@ const Register = () => {
                     <Button
                       variant="outlined"
                       type="submit"
+                      onClick={handleSignUp}
                       sx={{
                         letterSpacing: 2,
                         px: 3,
@@ -93,7 +106,7 @@ const Register = () => {
                         backgroundColor: "#FF5E14",
                       }}
                     >
-                      <b>Login</b>
+                      Register
                     </Button>
                     <Button
                     onClick={() => googleSignIn(location, navigate)}
