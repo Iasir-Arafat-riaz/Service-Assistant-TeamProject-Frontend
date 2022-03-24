@@ -14,6 +14,7 @@ import swal from 'sweetalert';
 
 
 
+
 const steps = [
     {
         label: 'Select Service',
@@ -33,7 +34,7 @@ const steps = [
     },
     {
         label: 'Payment',
-        step: 'Five'
+        step: 'Fifth'
     },
 ];
 
@@ -135,6 +136,8 @@ const SavedServices = () => {
         color: "#FF5E14",
         borderRadius: 0,
     };
+
+
 
     return (
         <>

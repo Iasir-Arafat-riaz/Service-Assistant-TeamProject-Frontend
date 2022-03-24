@@ -1,8 +1,9 @@
-import { Avatar, Button, Skeleton, Typography } from '@mui/material';
+import { Avatar, Button, Rating, Skeleton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, allData, selectedServiceAndProvider, serviceProviders } from '../../../../redux/dataSlice/dataSlice';
+import StarIcon from '@mui/icons-material/Star';
 
 const ServiceProvider = ({ handleNext, category, parentService, selectServiceId, selectService }) => {
 
@@ -70,11 +71,25 @@ const ServiceProvider = ({ handleNext, category, parentService, selectServiceId,
                                     <Box>
                                         <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{provider?.displayName}</Typography>
 
-                                        <Typography variant='body2' sx={{ fontSize: 15 }}>{provider?.email}</Typography>
+                                        <Rating
+                                        name="text-feedback"
+                                        value={provider?.rating}
+                                        readOnly
+                                        precision={0.5}
+                                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                    />
                                     </Box>
 
                                 </Box>
-                                <Button onClick={() => selectServiceProvider(provider)} sx={{ borderColor: "#FF5E14", color: "#FF5E14" }} variant='outlined' >NEXT</Button>
+                                <Button
+                                    size="small"
+                                    onClick={() => selectServiceProvider(provider)} 
+                                    sx={{
+                                        borderColor: "#FF5E14",
+                                        color: "#FF5E14",
+                                        my:'auto'
+                                    }}
+                                    variant='outlined' >NEXT</Button>
                             </Box>
                             )
                         }

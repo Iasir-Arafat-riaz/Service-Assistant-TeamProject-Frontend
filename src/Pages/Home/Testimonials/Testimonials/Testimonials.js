@@ -18,7 +18,8 @@ const Testimonials = () => {
     useEffect(() => {
         dispatch(websiteReviews());
     }, [dispatch]);
-
+ 
+    
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
 

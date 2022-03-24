@@ -1,12 +1,10 @@
 import React from 'react';
 import './LoginPopup.css';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
 import Modal from '@mui/material/Modal';
 import useFirebase from '../../../Hooks/useFirebase';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 // 
 const style = {
@@ -14,9 +12,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '550',
+    width: {xs:'90%', md:'50%'},
     bgcolor: 'background.paper',
-    // border: '2px solid #000',
     boxShadow: 24,
     borderRadius: 2
 };
@@ -45,8 +42,6 @@ const LoginPopup = ({ handleOpen, open, handleClose }) => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-
-                {/* <Button onClick={handleClose} sx={{ mt: -5, position: 'absolute', zIndex: 999, }}><CloseIcon sx={{ boxShadow: 3, fontSize: 26, p: 1, borderRadius: '50%', backgroundColor: 'white', color: 'black' }} /></Button> */}
 
                 <Box className="session login-popup">
                     <Box className="left">

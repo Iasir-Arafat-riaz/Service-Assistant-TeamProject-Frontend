@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardActionArea, CardContent, CardMedia, Chip, Container, Grid, List, ListItem, ListItemIcon, ListItemText, Paper, Rating, Stack, Tooltip, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardActionArea, CardContent, CardMedia, Chip, Container, Grid, List, ListItem, ListItemIcon, ListItemText, Paper, Rating, Stack, Tooltip, Typography, TextareaAutosize } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { allData } from '../../redux/dataSlice/dataSlice';
@@ -14,15 +14,26 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useForm } from 'react-hook-form';
+import { Avatar, IconButton, Input, TextField } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { PhotoCamera } from '@mui/icons-material';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 const SingleProviderDetails = () => {
 
     const [providerProfiles, setProviderProfiles] = useState({});
     const [providerServiceInfo, setProviderServiceInfo] = useState([]);
+    const [openBox, setOpenBox] = useState(false);
     const { user, id } = useSelector(allData);
+    // const { allServices, serviceIsLoading } = useSelector(allData);
+    // const textStyle = {
+    //     color: '#707070',
+    // }
+    // http://localhost:5000/provider/myServices/622ad1cbe7526bcaad7bceed
     //Provider Data Load by Email
     useEffect(() => {
-        axios.get('https://dry-sea-00611.herokuapp.com/providerdetials/provider?email=samir@gmail.com')
+        axios.get('http://localhost:5000/providerdetials/provider?email=samir@gmail.com')
             .then(data => {
                 setProviderProfiles(data.data);
                 
@@ -30,7 +41,7 @@ const SingleProviderDetails = () => {
     }, [])
 
     useEffect(() => {
-        axios.get('https://dry-sea-00611.herokuapp.com/provider/myServices/622ad1cbe7526bcaad7bceed')
+        axios.get('http://localhost:5000/provider/myServices/622ad1cbe7526bcaad7bceed')
             .then(data => {
                 setProviderServiceInfo(data.data);
                 
@@ -47,30 +58,171 @@ const SingleProviderDetails = () => {
     let theme = createTheme();
     theme = responsiveFontSizes(theme);
 
+    const { register, handleSubmit, reset, watch, setValue } = useForm();
+    const [imgLoading, setImgLoading] = useState(true);
+
+    const onSubmit = data => {
+
+    }
+
+    // hosting image
+    useEffect(() => {
+        const file = watch('providerImage');
+        if (file?.length) {
+            let body = new FormData()
+            body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
+            body.append('image', file[0])
+            setImgLoading(false);
+            axios({
+                method: 'post',
+                url: 'https://api.imgbb.com/1/upload',
+                data: body
+            }).then(res => {
+                console.log(res)
+                setValue('providerImg', res.data?.data?.url)
+            }).finally(() => setImgLoading(true))
+        }
+        else {
+        }
+    }, [watch('providerImage')]);
+
+    useEffect(() => {
+        const file = watch('backgroundImage');
+        if (file?.length) {
+            let body = new FormData()
+            body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
+            body.append('image', file[0])
+            setImgLoading(false);
+            axios({
+                method: 'post',
+                url: 'https://api.imgbb.com/1/upload',
+                data: body
+            }).then(res => {
+                console.log(res)
+                setValue('backgroundImage', res.data?.data?.url)
+            }).finally(() => setImgLoading(true))
+        }
+        else {
+        }
+    }, [watch('backgroundImage')]);
+
+    const updateLogo = () => {
+
+    }
+
     return (
         <ThemeProvider theme={theme}>
-            <Box
-                sx={{
-                    backgroundImage: `url(${providerProfiles.backgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                    width: '100%',
-                    height: '60vh'
-                }}
-            >
-            </Box>
+            {
+                !watch("backgroundImage") ?
+                    <>
+                        {
+                            openBox ?
+
+                                <>
+                                    <Box
+                                        sx={{
+                                            backgroundImage: `url(${providerProfiles.backgroundImage})`,
+                                            backgroundSize: 'cover',
+                                            backgroundRepeat: 'no-repeat',
+                                            backgroundPosition: 'center',
+                                            width: '100%',
+                                            height: '60vh'
+                                        }}
+                                    >
+                                        <Box sx={{ display: 'flex', justifyContent: 'center', pt: 30 }}>
+                                            <Input style={{ marginBottom: 10, width: 105, }} {...register("backgroundImage")} accept="image/*" id="icon-button-file" type="file" />
+                                        </Box>
+                                    </Box>
+
+                                </>
+                                :
+                                <Box
+                                    sx={{
+                                        backgroundImage: `url(${providerProfiles.backgroundImage})`,
+                                        backgroundSize: 'cover',
+                                        backgroundRepeat: 'no-repeat',
+                                        backgroundPosition: 'center',
+                                        width: '100%',
+                                        height: '60vh'
+                                    }}
+                                >
+                                </Box>
+                        }
+                    </>
+                    :
+                    <Box>
+                        {
+                            watch("backgroundImage") && <Box
+
+                                sx={{
+                                    backgroundImage: `url(${watch("backgroundImage")})`,
+                                    backgroundSize: 'cover',
+                                    backgroundRepeat: 'no-repeat',
+                                    backgroundPosition: 'center',
+                                    width: '100%',
+                                    height: '60vh'
+                                }}
+                            />
+
+                        }
+                    </Box>
+            }
+
+
+
+
+            {/* <label htmlFor="icon-button-file">
+                <Input style={{ marginBottom: 10, width: 80 }} {...register("providerImage")} accept="image/*" id="icon-button-file" type="file" />
+                <IconButton color="primary" aria-label="upload picture" component="span">
+                    
+                    <PhotoCamera sx={{ color: "black" }} />
+                </IconButton>
+            </label> */}
+
+            {/* {
+                watch("providerImg") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("providerImg")} /> </Box>
+            } */}
+            <SettingsOutlinedIcon
+                onClick={() => setOpenBox(true)}
+            />
 
             <Container sx={{ mt: -10, mb: 5 }} style={{ zIndex: '+9999' }}>
                 <Paper elevation={5} sx={{ p: 4 }} style={{ zIndex: '' }}>
                     <Grid container spacing={2} style={{ zIndex: '' }} >
                         <Grid item xs={12} md={1.5}>
                             <Box sx={{ my: 2, display: 'flex', justifyContent: 'center' }}>
-                                <img
-                                    src={providerProfiles.Logo}
-                                    alt='Provider-logo'
-                                    style={{ borderRadius: '50%', width: '100px', }}
-                                />
+
+                                {!watch("providerImg") ?
+
+                                    <Box>
+                                        {
+                                            openBox ?
+                                                <>
+                                                    <img
+                                                        src={providerProfiles.Logo}
+                                                        alt='Provider-logo'
+                                                        style={{ borderRadius: '50%', width: '100px', }}
+                                                    />
+
+                                                    <Input style={{ marginBottom: 10, width: 105 }} {...register("providerImage")} accept="image/*" id="icon-button-file" type="file" />
+                                                </>
+
+                                                :
+                                                <img
+                                                    src={providerProfiles.Logo}
+                                                    alt='Provider-logo'
+                                                    style={{ borderRadius: '50%', width: '100px', }}
+                                                />
+                                        }
+                                    </Box>
+                                    :
+                                    <Box>
+                                        {
+                                            watch("providerImg") && <Box> <Avatar sx={{ width: 110, height: 110, mb: 1 }} alt="Remy Sharp" src={watch("providerImg")} /> </Box>
+                                        }
+                                    </Box>
+                                }
+
                             </Box>
 
                         </Grid>
@@ -80,21 +232,43 @@ const SingleProviderDetails = () => {
                                 <Chip label="Verified" sx={{ backgroundColor: "#66BB6A", color: "#FFFF" }} />
                             </Stack>
                             <Box sx={{ mb: 1 }}>
-                                <Typography
-                                    variant='h6'
-                                    sx={{
-                                        fontWeight: 'bold',
-                                        color: '#FF5E14'
-                                    }}
-                                >{providerProfiles.ShopName}</Typography>
-                                <Typography
-                                    variant='h5'
-                                    sx={{
-                                        fontWeight: 'bold',
-                                        color: ''
-                                    }}
-                                >{providerProfiles.bio}
-                                </Typography>
+
+                                {
+                                    openBox ?
+                                        <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexWrap: 'wrap', }}>
+                                            <TextField {...register("ShopName", { required: false })} id="standard-basic" variant="standard" label="Update Your Shop Name" helperText={providerProfiles.ShopName} />
+
+                                            <Button type='submit' size="small" sx={{ borderRadius: 2, letterSpacing: 1, my: 'auto', ml: 1 }} variant='outlined'>UPDATE</Button>
+                                        </form>
+                                        :
+                                        <Typography
+                                            variant='h6'
+                                            sx={{
+                                                fontWeight: 'bold',
+                                                color: '#FF5E14'
+                                            }}
+                                        >{providerProfiles.ShopName}
+                                        </Typography>
+                                }
+
+                                {
+                                    openBox ?
+                                        <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexWrap: 'wrap', }}>
+                                            <TextField {...register("bio", { required: false })} id="standard-basic" variant="standard" label="Update Your Shop Bio" helperText={providerProfiles.bio} />
+
+                                            <Button type='submit' size="small" sx={{ borderRadius: 2, letterSpacing: 1, my: 'auto', ml: 1 }} variant='outlined'>UPDATE</Button>
+                                        </form>
+                                        :
+                                        <Typography
+                                            variant='h5'
+                                            sx={{
+                                                fontWeight: 'bold',
+                                                color: ''
+                                            }}
+                                        >{providerProfiles.bio}
+                                        </Typography>
+                                }
+
 
                             </Box>
 
@@ -114,7 +288,17 @@ const SingleProviderDetails = () => {
 
                             }}>
 
-                                <Typography sx={{ fontWeight: 'bold' }}>Location: <em>{providerProfiles?.address}</em></Typography>
+                                {
+                                    openBox ?
+                                        <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexWrap: 'wrap', }}>
+                                            <TextField {...register("address", { required: false })} id="standard-basic" variant="standard" label="Update Your Location" helperText={providerProfiles.address} />
+
+                                            <Button type='submit' size="small" sx={{ borderRadius: 2, letterSpacing: 1, my: 'auto', ml: 1 }} variant='outlined'>UPDATE</Button>
+                                        </form>
+                                        :
+                                        <Typography sx={{ fontWeight: 'bold' }}>Location: <em>{providerProfiles?.address}</em></Typography>
+                                }
+
                                 <Box
                                     sx={{
 
@@ -188,7 +372,20 @@ const SingleProviderDetails = () => {
                     </Grid>
                     <Grid item md={9}>
                         <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 1, color: '#363636' }}>About {providerProfiles.ShopName}</Typography>
-                        <Typography sx={{ mb: 1, textAlign: 'justify', color: '#727272' }}>{providerProfiles.about}</Typography>
+
+                        {
+                            openBox ?
+                                <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexWrap: 'wrap', }}>
+                                    <TextareaAutosize {...register("about", { required: false })} maxRows={8} id="standard-basic" variant="standard" style={{ width: '80%' }} defaultValue={providerProfiles.about} />
+
+                                    <Button type='submit' size="small" sx={{ borderRadius: 2, letterSpacing: 1, m: 'auto' }} variant='outlined'>UPDATE</Button>
+                                </form>
+                                :
+                                <>
+                                    <Typography sx={{ mb: 1, textAlign: 'justify', color: '#727272' }}>{providerProfiles.about}</Typography>
+                                </>
+                        }
+
 
                     </Grid>
                 </Grid>
@@ -449,6 +646,9 @@ const SingleProviderDetails = () => {
                     </Grid>
                 </Grid>
             </Container>
+
+
+
         </ThemeProvider >
     );
 };

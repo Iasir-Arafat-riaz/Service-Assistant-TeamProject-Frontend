@@ -10,13 +10,13 @@ import Typography from '@mui/material/Typography';
 
 const steps = [
     {
-        label: 'Select service',
+        label: 'Choose service',
         description: `From the category, select the service you are looking for.`,
     },
     {
-        label: 'Book your schedule',
+        label: 'Select',
         description:
-            'Select your convenient time slot.',
+            'Select provider and purchase service',
     },
     {
         label: 'Place order',

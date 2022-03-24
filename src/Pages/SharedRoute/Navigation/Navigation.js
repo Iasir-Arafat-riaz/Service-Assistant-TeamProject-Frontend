@@ -481,7 +481,7 @@ const Navigation = () => {
                           }}>
                             <CardActionArea
                               onClick={() =>
-                                handleCardClick(item.parentService)
+                                handleCardClick(item._id)
                               }
                             >
                               <CardContent>
