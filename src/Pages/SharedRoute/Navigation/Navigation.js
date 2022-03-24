@@ -275,7 +275,6 @@ const Navigation = () => {
       </List>
     </Box>
   );
-
   // for voice command
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState(null);
