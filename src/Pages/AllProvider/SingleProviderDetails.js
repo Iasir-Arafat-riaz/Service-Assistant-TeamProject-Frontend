@@ -132,7 +132,7 @@ const SingleProviderDetails = () => {
                 setValue('providerImg', res.data?.data?.url)
                 const Logo = res.data?.data?.url;
                 axios.put(`http://localhost:5000/providerdetials/updateLogo/${providerProfiles.email}`, { Logo }).then(res => {
-                    toast.info(`BackgroundImage updated successfully`, {
+                    toast.info(`Logo updated successfully`, {
                         position: "bottom-left"
                     })
                 })
@@ -157,7 +157,7 @@ const SingleProviderDetails = () => {
                 setValue('backgroundImg', res.data?.data?.url)
                 const backgroundImage = res.data?.data?.url;
                 axios.put(`http://localhost:5000/providerdetials/updateBackgroundimage/${providerProfiles.email}`, { backgroundImage }).then(res => {
-                    toast.info(`Logo updated successfully`, {
+                    toast.info(`BackgroundImage updated successfully`, {
                         position: "bottom-left"
                     })
                 })
