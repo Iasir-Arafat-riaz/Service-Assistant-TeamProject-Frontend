@@ -41,7 +41,7 @@ import useFirebase from "../../Hooks/useFirebase";
 
 
 
-const drawerWidth = 240;
+const drawerWidth = 260
 const Dashboard = (props) => {
   const navigate = useNavigate();
   const { handleSignOut } = useFirebase()

@@ -8,19 +8,23 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, CardHeader } from "@mui/material";
 import "./AllProvider.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AllProviderChild = (props) => {
   const {
     displayName,
     email,
     image,
+    bio,
+    address,
+    backgroundImage,
     photoURL,
     role,
     rating,
     createdAt,
     uid,
     _id,
+    Logo
   } = props.provider;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -45,14 +49,18 @@ const AllProviderChild = (props) => {
     const i = Math.floor(Math.random() * 5)
     return urls[i]
   };
+
+  const navigate = useNavigate();
+
+  const handleSeeDetails = id => {
+    navigate(`/home/providerProfile/${id}`)
+  };
+
   return (
-    <Card sx={{ ml: 2 }} style={{ border: "none", boxShadow: "none" }}>
+    <Card sx={{ ml: 2 }} onClick={() => handleSeeDetails(_id)} style={{ border: "none", boxShadow: "none" }}>
       <Box
         sx={{
-          backgroundImage: `url(${image
-            ? image
-            : randomImage()
-            })`,
+          backgroundImage: `url(${backgroundImage})`,
           width: "100%",
           height: "200px",
           backgroundSize: "cover",
@@ -72,7 +80,7 @@ const AllProviderChild = (props) => {
         }}
       >
         <img
-          src={photoURL}
+          src={Logo}
           style={{ borderRadius: "50%", height: 50, width: 50 }}
           alt="prvodierImage"
         />
@@ -109,27 +117,19 @@ const AllProviderChild = (props) => {
           <Rating name="read-only" value={parseFloat(rating)} readOnly />
         </Typography>
         <Typography variant="h6" color="#363636" fontSize={16} component="div">
-          Let’s Make Your Event Great
+          {bio}
         </Typography>
         <Typography variant="p" color="#363636" fontSize={16} component="div">
           by <span style={{ color: '#55acee' }}>{displayName}</span>
         </Typography>
 
       </CardContent>
-      <Link
-        to={`/dashboard/allprovider/${_id}`}
-        title={`Click to view more details about ${displayName}`}
-        style={{ textDecoration: "none", padding: 0 }}
-      >
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2 }}>
-          <div>Manchester, UK</div>
-          <div>
-            <IconButton aria-label="settings">
-              <MoreVertIcon ></MoreVertIcon>
-            </IconButton>
-          </div>
-        </Box>
-      </Link>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2 }}>
+        <div>{address}</div>
+      </Box>
+      {/* <IconButton aria-label="settings">
+          <MoreVertIcon ></MoreVertIcon>
+        </IconButton> */}
     </Card>
   );
 };

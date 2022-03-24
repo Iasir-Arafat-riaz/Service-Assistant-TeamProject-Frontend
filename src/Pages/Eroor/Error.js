@@ -8,13 +8,8 @@ const Error = () => {
         <Box >
             <Navigation/>
            
-            <Box sx={{
-              backgroundImage:
-                "url(https://i.ibb.co/2Pyfkp7/Free-Download-Gray-Wallpaper-Computer-1.png)",
-              height: "calc(100vh)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-            }}>
+            <Box>
+              
 
             </Box>
             <Footer/>

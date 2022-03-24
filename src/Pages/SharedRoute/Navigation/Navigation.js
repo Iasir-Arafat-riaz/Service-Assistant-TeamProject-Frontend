@@ -102,7 +102,7 @@ const Navigation = () => {
     const filterMessage = notifications.filter(
       (notification) => notification.seen === false
     );
-    console.log(filterMessage);
+
     setMessageSeen(filterMessage.length);
   }, [notifications, user]);
 
@@ -235,7 +235,7 @@ const Navigation = () => {
           </ListItem>
         </Link>
         <Divider sx={{ color: "#98a1bc" }} />
-        <Link to="/cycles" style={{ textDecoration: "none", color: "black" }}>
+        <Link to="/services" style={{ textDecoration: "none", color: "black" }}>
           <ListItem button>
             <ListItemText>
               {/* <BsBicycle />    CYCLES */}
@@ -245,7 +245,7 @@ const Navigation = () => {
         </Link>
         <Divider sx={{ color: "#98a1bc" }} />
         <Link
-          to="/dashboards"
+          to="/dashboard"
           style={{ textDecoration: "none", color: "black" }}
         >
           <ListItem button>
@@ -291,17 +291,17 @@ const Navigation = () => {
     if (isListening) {
       mic.start();
       mic.onend = () => {
-        console.log("continue..");
+
         mic.start();
       };
     } else {
       mic.stop();
       mic.onend = () => {
-        console.log("Stopped Mic on Click");
+
       };
     }
     mic.onstart = () => {
-      console.log("Mics on");
+
     };
 
     mic.onresult = (event) => {
@@ -309,10 +309,10 @@ const Navigation = () => {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join("");
-      console.log(transcript);
+
       setNote(transcript);
       mic.onerror = (event) => {
-        console.log(event.error);
+
       };
     };
   };
@@ -444,10 +444,9 @@ const Navigation = () => {
                   <Grid item xs={3}>
                     <Button
                       onClick={() => setIsListening((prevState) => !prevState)}
-                      sx={{ zIndex: "1000", m: "1" }}
+                      sx={{ zIndex: "1000", m: 1 }}
                       variant="contained"
                       disabled={mic ? false : true}
-                     
                     >
                       🛑🎙️
                     </Button>

@@ -41,7 +41,7 @@ const steps = [
 
 const SavedServices = () => {
 
-    const { providers, orderInfo } = useSelector(allData);
+    const { providers, singleServiceDetail, orderInfo } = useSelector(allData);
     const [selectedService, setSelectedService] = useState([]);
     const [cartItems, setCartItems] = useState([]);
     const [count, setCount] = useState(0);
@@ -49,7 +49,13 @@ const SavedServices = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const dispatch = useDispatch();
 
+    // const { providers, serviceProviderLoading, singleServiceDetail, user } = useSelector(allData);
 
+    useEffect(() => {
+        if (singleServiceDetail._id) {
+            dispatch(serviceProviders(singleServiceDetail.serviceProvider));
+        }
+    }, [dispatch, singleServiceDetail])
 
 
     const handleNextStep = () => {
