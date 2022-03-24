@@ -7,7 +7,7 @@ const Error = () => {
     return (
         <Box >
             <Navigation/>
-            <h1>Error......Page Not Found 404</h1>
+           
             <Box sx={{
               backgroundImage:
                 "url(https://i.ibb.co/2Pyfkp7/Free-Download-Gray-Wallpaper-Computer-1.png)",
