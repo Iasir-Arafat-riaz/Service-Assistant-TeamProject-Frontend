@@ -1,14 +1,12 @@
 import React from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Grid, ListItem, ListItemText, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-
+import '../SingleService.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import OrderStepper from './OrderStepper';
 import ServiceReviews from './ServiceReviews';
 
-const ServiceOverview = ({ matchService, question1,
-    question2,
-    question3 }) => {
+const ServiceOverview = ({ matchService }) => {
 
     // list item style
     const listItem = {
@@ -25,31 +23,14 @@ const ServiceOverview = ({ matchService, question1,
         <>
 
 
-            <Box >
+            <Box className="service_overview">
                 <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 4 }}>Overview of {matchService?.Title}</Typography>
-
-                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question1}</Typography> */}
 
                 {
                     Object?.values(matchService?.overview[0])[0]?.map((text, index) => <ListItem key={index}>
                         <li style={listItem}>{text}</li>
                     </ListItem>)
                 }
-
-                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question2}</Typography> */}
-                {/* {
-                    Object?.values(matchService?.overview[1])[0]?.map((text, index) => <ListItem key={index}>
-                        <li style={listItem}>{text}</li>
-                    </ListItem>)
-                }  */}
-
-                {/* <Typography variant='h6' sx={{ fontWeight: 'bold', mt: 2, fontSize: 18 }}>{question3}</Typography> */}
-
-                {/* {
-                    Object?.values(matchService?.overview[2])[0]?.map((text, index) => <ListItem kwy={index}>
-                        <li style={listItem}>{text}</li>
-                    </ListItem>)
-                }  */}
                 <Typography variant='h4' sx={{ mt: 3, mb: 3 }}>FAQ</Typography>
 
                 {/* FAQ */}
@@ -58,7 +39,7 @@ const ServiceOverview = ({ matchService, question1,
                         <Accordion
                             expanded={expanded === index}
                             onChange={handleChange(index)}
-                            
+
                             key={index}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon sx={{ backgroundColor: '#FD7A3E', color: '#fff', borderRadius: '50%' }} />}
@@ -83,7 +64,7 @@ const ServiceOverview = ({ matchService, question1,
                 <Grid container>
                     <Grid>
                         <Typography variant="h5" sx={{ fontWeight: 'bold', mt: 5 }}>Preparations against COVID-19</Typography>
-                        <img sx={{width: '30%'}} src="https://i.ibb.co/JBDm0Sw/safety.png" alt="safety"/>
+                        <img sx={{ width: '30%' }} src="https://i.ibb.co/JBDm0Sw/safety.png" alt="safety" />
                         <Typography variant="h5">We are well-equipped and well-prepared to protect your health and hygiene while serve you. Our preparations include-</Typography>
                         <Typography variant="h6">
                             <ul>

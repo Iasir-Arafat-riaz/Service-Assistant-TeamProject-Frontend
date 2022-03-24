@@ -109,7 +109,7 @@ const AddServiceRequest = () => {
   };
 
   const handleAddMoreDetails = (index) => {
-    //console.log("add more details clicked", index);
+    //
 
     const newServiceArr = serviceOptions.map((item) => {
       if (item.optionId === index) {
@@ -224,7 +224,7 @@ const AddServiceRequest = () => {
             icon: "success",
             timer: 1500,
           });
-          console.log("service request added to DB");
+          
           handleNext();
         }
       })
@@ -235,7 +235,7 @@ const AddServiceRequest = () => {
           text: "Something went wrong!",
           timer: 1500,
         });
-        console.log("error sagar", err);
+        
       })
       .finally(() => {
         setFormLoading(false);
@@ -243,7 +243,7 @@ const AddServiceRequest = () => {
   };
 
   useEffect(() => {
-    //console.log(serviceOptions);
+    //
   });
   return (
     // <>

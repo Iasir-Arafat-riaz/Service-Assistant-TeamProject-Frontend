@@ -1,0 +1,62 @@
+.quatntity-button {
+    width: auto;
+    margin: 0 auto;
+    display: inline;
+    margin-right: 15px;
+    text-align: center;
+    /* padding-top: 50px; */
+  }
+  
+  .value-button {
+    display: inline-block;
+    border: 1px solid #ddd;
+    margin: 0px;
+    width: 30px;
+    height: 31px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 2px;
+    /* padding: 11px 0; */
+    background: #eee;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .value-button:hover {
+    cursor: pointer;
+  }
+  
+  .quatntity-button #decrease {
+    margin-right: -4px;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  .quatntity-button #increase {
+    margin-left: -4px;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .quatntity-button #input-wrap {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  .quatntity-button input#number {
+    text-align: center;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 30px;
+  }
+  
+  .quatntity-button input[type=number]::-webkit-inner-spin-button,
+  .quatntity-button  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }

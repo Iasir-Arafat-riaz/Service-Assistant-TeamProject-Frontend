@@ -246,3 +246,14 @@
   visibility: visible;
   -webkit-transition: all 0.3s ease;
 }
+
+.loginForm {
+  text-decoration: none;
+}
+
+@media only screen and (max-width:600px) {
+  .loginBanner{
+    display: none;
+    visibility: hidden;
+  }
+}

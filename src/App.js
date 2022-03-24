@@ -18,7 +18,6 @@ import SingleService from "./Pages/SingleService/SingleService/SingleService";
 import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddTestimonial";
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
-import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
 import useFirebase from "../src/Hooks/useFirebase";
 
 import AddServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/AddServiceRequest";
@@ -45,8 +44,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
+
 import SingleProviderDetails from "./Pages/AllProvider/SingleProviderDetails";
 import MyProfile from "./Pages/Dashboard/MyProfile/MyProfile";
+
 
 import { newNotification } from "./redux/dataSlice/dataSlice";
 
@@ -67,20 +68,22 @@ import NotificationCard from "./Pages/SharedRoute/Navigation/Component/Notificat
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 import Career from "./Pages/Career/Career";
+import Register from "./Pages/Login/UserLogin/Register/Register";
+// import AOS from 'aos'
+// import 'aos/dist/aos.css';
+// AOS.init();
+
+
+// import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
+// import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
+// import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
+
 
 
 
 
 
 const App = () => {
-  // const { } = useFirebase();
-  // const { socket } = useSocket();
-  // useEffect(() => {
-  //   socket.on("get-message", message => {
-  //     console.log(message, 'homoe')
-  //   });
-  //   socket.emit('message', { data: 'datahome ' })
-  // }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -99,7 +102,7 @@ const App = () => {
   useEffect(() => {
     if (user.email) {
       socket.emit('joinAll', user.email);
-      console.log('send');
+
     }
 
 
@@ -118,7 +121,6 @@ const App = () => {
       })
     });
   }, [])
-
 
   return (
     <BrowserRouter>
@@ -159,10 +161,6 @@ const App = () => {
             path="/dashboard/managetestimonials"
             element={<ManageTestimonials />}
           />
-          <Route
-            path="/dashboard/servicerequest"
-            element={<ServiceRequest />}
-          />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
           <Route path="/dashboard/savedservice" element={<SavedServices />} />
           <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
@@ -183,6 +181,7 @@ const App = () => {
             element={<AddServiceRequest />}
           ></Route>
 
+
           <Route
             path="/dashboard/ordersChat"
             element={<OrdersChat />}
@@ -202,6 +201,11 @@ const App = () => {
 
 
 
+          {/* all the pending request list route - by sagar */}
+
+          {/* add new service category for admin - by sagar */}
+
+
         </Route>
 
         <Route path="/contact" element={<ContactUs />} />
@@ -212,7 +216,7 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
-
+<Route path="/register" element={<Register/>}/>
 
         <Route path="*" element={<Error />} />
       </Routes>

@@ -30,7 +30,7 @@ const LoginPopup = ({ handleOpen, open, handleClose }) => {
     const navigate = useNavigate()
 
     const onSubmit = data => {
-        console.log(data)
+        
         const info = { ...data, navigate: navigate, location: location, handleClose: handleClose }
         logInWithEmail(info);
     };

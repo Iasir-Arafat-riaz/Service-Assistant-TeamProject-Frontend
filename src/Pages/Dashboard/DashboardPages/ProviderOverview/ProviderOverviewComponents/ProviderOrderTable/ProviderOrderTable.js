@@ -13,7 +13,7 @@ import ProviderTableRow from './ProviderTableRow/ProviderTableRow';
 
 const ProviderOrderTable = ({ data }) => {
 
-    // //console.log(rows)
+    // //
     return (
         < >
             <TableContainer sx={{ width: { xs: "90vw", md: '100%' }, height: '100%', overflow: 'scroll' }} component={Paper}>

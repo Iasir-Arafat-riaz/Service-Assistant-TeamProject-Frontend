@@ -55,69 +55,73 @@ const RequestService = () => {
 
         axios.post('https://dry-sea-00611.herokuapp.com/serviceReqEmail', data)
             .then(function (response) {
-                console.log(response);
-                console.log(data)
+
+
             })
     };
 
     return (
-        <Container >
+        < >
             <Paper elevation={2} sx={{
                 borderRadius: 2,
-                mb: 5,
-                px: 3
+                px: 3,
+                mt: 10,
+                pt: 5,
             }} >
-                <Grid container>
-                    <Grid
-                        item
-                        md={4}
-                        sx={{ mt: -15, }}
-                        style={{ zIndex: '+1' }}>
-                        <img
-                            style={{ paddingLeft: '20px' }}
-                            width="70%"
-                            height='100%'
-                            src='https://i.ibb.co/PzqvrVR/cus-removebg-preview-1.png' alt='customer'
-                        />
-                    </Grid>
-                    <Grid item
-                        md={8}
-                        sx={{ py: 2 }}>
-                        <Typography
-                            sx={{
-                                fontWeight: 'bold',
-                                fontSize: 25,
-                                my: 2
-                            }}>
-                            Can't find your desired service? Let us know 24/7 in 47952
-                        </Typography>
-                        <Stack spacing={2} direction="row">
-                            <Button
-                                onClick={handleOpen}
-                                style={{ backgroundColor: "#FF5E14", }}
+                <Container>
+                    <Grid container>
+                        <Grid
+                            item
+                            md={4}
+                            sx={{ mt: -15, }}
+                            style={{ zIndex: '+1' }}>
+                            <img
+                                style={{ paddingLeft: '20px' }}
+                                width="70%"
+                                height='100%'
+                                src='https://i.ibb.co/PzqvrVR/cus-removebg-preview-1.png' alt='customer'
+                            />
+                        </Grid>
+                        <Grid item
+                            md={8}
+                            sx={{ py: 2 }}>
+                            <Typography
                                 sx={{
-                                    borderRadius: 2,
-                                    p: 2,
                                     fontWeight: 'bold',
-                                    me: 5
-                                }}
-                                variant='contained'>
-                                Request for Service
-                            </Button>
-                            <Button
-                                style={{ borderColor: "#FF5E14", }}
-                                sx={{
-                                    borderRadius: 2,
-                                    py: 2,
-                                    px: 5,
-                                    fontWeight: 'bold'
-                                }}
-                                variant='outlined'>
-                                <CallIcon sx={{ pr: 1 }} /> 47952
-                            </Button>
-                        </Stack>
+                                    fontSize: 25,
+                                    my: 2
+                                }}>
+                                Can't find your desired service? Let us know 24/7 in 47952
+                            </Typography>
+                            <Stack spacing={2} direction="row">
+                                <Button
+                                    onClick={handleOpen}
+                                    style={{ backgroundColor: "#FF5E14", }}
+                                    sx={{
+                                        borderRadius: 2,
+                                        p: 2,
+                                        fontWeight: 'bold',
+                                        me: 5
+                                    }}
+                                    variant='contained'>
+                                    Request for Service
+                                </Button>
+                                <Button
+                                    style={{ borderColor: "#FF5E14", }}
+                                    href='tel:+8801308979234'
+                                    sx={{
+                                        borderRadius: 2,
+                                        py: 2,
+                                        px: 5,
+                                        fontWeight: 'bold'
+                                    }}
+                                    variant='outlined'>
+                                    <CallIcon sx={{ pr: 1 }} /> 47952
+                                </Button>
+                            </Stack>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Container>
             </Paper>
 
 
@@ -137,16 +141,18 @@ const RequestService = () => {
                             width: '70%',
                             bgcolor: '#F4F5F8',
                             boxShadow: 24,
-                            p: 4,
+                            pb: 4,
                             borderRadius: 5
                         }}
                     >
-                        <Box
-                            sx={{ borderRadius: 2, border: '1px solid #F4F5F8', boxShadow: 5, py: 1, mb: 4 }}
-                        >
-                            <Typography
-                                sx={{ fontWeight: 'bold', textAlign: 'center' }}>Request for service</Typography>
+
+                        <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
+
+                            <Typography id="modal-modal-title" variant="h6" sx={{ fontSize: 22, fontWeight: 'bold', p: 2 }} component="h2">
+                                Request for service
+                            </Typography>
                         </Box>
+
                         <form onSubmit={handleSubmit(onSubmit)}>
 
                             <Box sx={{ display: 'flex ', justifyContent: 'center' }}>
@@ -217,7 +223,7 @@ const RequestService = () => {
                 </Container>
 
             </Modal>
-        </Container>
+        </>
     );
 };
 

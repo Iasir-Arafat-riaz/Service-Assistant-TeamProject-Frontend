@@ -1,63 +1,34 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  Input,
-  InputLabel,
-  Item,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Input, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
-import useFirebase from "../../../Hooks/useFirebase";
-import Navigation from "../../SharedRoute/Navigation/Navigation";
+import { useLocation, useNavigate } from "react-router-dom";
+import Navigation from "../../../SharedRoute/Navigation/Navigation";
 import SendIcon from "@mui/icons-material/Send";
-import Swal from "sweetalert2";
+import useFirebase from "../../../../Hooks/useFirebase";
 
-const UserLogin = () => {
-  const { googleSignIn, logInWithEmail } = useFirebase();
+const Register = () => {
+    const { googleSignIn, signUpWithEmail } = useFirebase();
 
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, watch, handleSubmit, formState: { errors } } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+
+  const handleSignUp = () => {
+    	
+    		if (watch('signupEmail').length && watch('name').length && watch('signupPass').length >= 6) {
+    			signUpWithEmail({ name: watch('name'), email: watch('signupEmail'), password: watch('signupPass'), location, navigate })
+    		}
+    		else {
+    			alert('Wrong input ')
+    		}
+    	}
+
+  const onSubmit = () => {
+  
   };
-
-  const handleLogin = () => {
-    if (watch("loginEmail").length && watch("loginPass").length >= 6) {
-      logInWithEmail({
-        email: watch("loginEmail"),
-        password: watch("loginPass"),
-        location,
-        navigate,
-      });
-    } else {
-      Swal.fire({
-        imageUrl: "https://i.ibb.co/n8Wp01q/web-logo.png",
-        title: "Oops...",
-        text: "Wrong Password, Try again",
-
-        width: "300px",
-        padding: "20px",
-      });
-    }
-  };
-
+  const location =useLocation()
   const navigate = useNavigate();
-  const location = useLocation();
-  const handleRegister = () => {
-    navigate("/register");
+  const handleLogin = () => {
+    navigate("/login");
   };
   return (
     <Box sx={{ height: "calc(100vh)" }}>
@@ -82,16 +53,25 @@ const UserLogin = () => {
               {" "}
               <Box>
                 <Typography sx={{ color: "#FF5E14", mb: 4 }} variant="h4">
-                  <b>Please Login</b>
+                  <b>Please Register</b>
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Stack direction="column">
+                    <Input
+                      placeholder="Enter Your Name"
+                      required
+                      type="text"
+                      sx={{ mb: 3 }}
+                      {...register("name")}
+                      label="Enter image url"
+                      variant="outlined"
+                    />
                     <Input
                       placeholder="Enter Your Email"
                       required
                       type="email"
                       sx={{ mb: 3 }}
-                      {...register("loginEmail")}
+                      {...register("signupEmail")}
                       label="Enter image url"
                       variant="outlined"
                     />
@@ -101,14 +81,23 @@ const UserLogin = () => {
                       required
                       type="password"
                       sx={{ mb: 3 }}
-                      {...register("loginPass")}
+                      {...register("signupPass")}
                       label="Write Banner text"
                       variant="outlined"
                     />
+                    {/* <Input 
+                      placeholder="Re-Enter Your Password"
+                        required
+                        type="password"
+                        sx={{ mb: 3 }}
+                        {...register("password2")}
+                        label="Write Banner text"
+                        variant="outlined"
+                      /> */}
                     <Button
-                      onClick={handleLogin}
                       variant="outlined"
                       type="submit"
+                      onClick={handleSignUp}
                       sx={{
                         letterSpacing: 2,
                         px: 3,
@@ -117,13 +106,10 @@ const UserLogin = () => {
                         backgroundColor: "#FF5E14",
                       }}
                     >
-                      <b>Login</b>
+                      Register
                     </Button>
-                    {/* <Button sx={{ borderRadius: 0, p: 1, mt: 3 }} type="submit" variant="contained">
-                  Add Banner
-                </Button> */}
                     <Button
-                      onClick={() => googleSignIn(location, navigate)}
+                    onClick={() => googleSignIn(location, navigate)}
                       sx={{
                         borderRadius: 0,
                         p: 1,
@@ -138,13 +124,13 @@ const UserLogin = () => {
                   </Stack>
                 </form>
                 <Typography variant="h6">
-                  New User?{" "}
+                  Already Registered?{" "}
                   <Button
                     endIcon={<SendIcon />}
                     sx={{ p: 2, color: "#FF5E14" }}
-                    onClick={handleRegister}
+                    onClick={handleLogin}
                   >
-                    Register
+                    Login
                   </Button>
                 </Typography>
               </Box>
@@ -157,7 +143,7 @@ const UserLogin = () => {
             md={8}
             sx={{
               backgroundImage:
-                "url(https://i.ibb.co/W6jPsvh/managed-services-1-1.png)",
+                "url(https://i.ibb.co/vXpNbzL/Gray-Desktop-Image-1.png)",
               height: "calc(100vh)",
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
@@ -169,6 +155,4 @@ const UserLogin = () => {
   );
 };
 
-export default UserLogin;
-
-
+export default Register;

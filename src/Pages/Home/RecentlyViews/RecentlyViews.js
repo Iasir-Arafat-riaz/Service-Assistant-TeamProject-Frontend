@@ -14,7 +14,7 @@ const RecentlyViews = () => {
 
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(false);
-  //console.log(recentIds);
+  //
 
   useEffect(() => {
     setServices(initialRecent())

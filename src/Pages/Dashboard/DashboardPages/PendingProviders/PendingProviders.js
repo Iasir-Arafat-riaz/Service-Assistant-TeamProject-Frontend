@@ -32,15 +32,15 @@ const PendingProviders = () => {
             setDataLoad(false);
         })
         dispatch(getAllUser());
-    }, [dispatch, loading]);
+    }, [dispatch,]);
 
 
     // load provider by email
     useEffect(() => {
         axios.get(`https://dry-sea-00611.herokuapp.com/users/${user.email}`).then(res => setProvider(res.data))
-    }, [provider, user])
+    }, [user])
 
-    // console.log(provider._id);
+    // 
 
     // approve provider 
     const ApproveProvider = (email, id, parentId) => {

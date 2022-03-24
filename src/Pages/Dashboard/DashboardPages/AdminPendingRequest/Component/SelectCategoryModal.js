@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -22,23 +22,23 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({handleCloseModal, openModal, category, handleSubmitCategory}) { 
-const [servicesCategory, setServicesCategory] = useState([])
-const [servicesLoading, setServicesLoading] = useState(true);
+export default function TransitionsModal({ handleCloseModal, openModal, category, handleSubmitCategory }) {
+  const [servicesCategory, setServicesCategory] = useState([])
+  const [servicesLoading, setServicesLoading] = useState(true);
 
-useEffect(() => {
-const fetchServices = async () => {
- const services = await  axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => res.data)
- 
- setServicesCategory(services)
- setServicesLoading(false)
-}
-fetchServices()
-  },[])
+  useEffect(() => {
+    const fetchServices = async () => {
+      const services = await axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => res.data)
+
+      setServicesCategory(services)
+      setServicesLoading(false)
+    }
+    fetchServices()
+  }, [])
 
 
   return (
-    <div>      
+    <div>
       <Modal
         open={openModal}
         onClose={handleCloseModal}
@@ -47,16 +47,16 @@ fetchServices()
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-          Select Service Category
+            Select Service Category
           </Typography>
           <Box>
             {
-             servicesCategory.length > 0 && <CategoryOptionsRadio serviceCategory={servicesCategory} category={category}/>
-             
+              servicesCategory.length > 0 && <CategoryOptionsRadio serviceCategory={servicesCategory} category={category} />
+
             }
 
-<Button variant="outlined" onClick={handleSubmitCategory}>Submit Category</Button>
-            
+            <Button variant="outlined" onClick={handleSubmitCategory}>Submit Category</Button>
+
           </Box>
         </Box>
       </Modal>

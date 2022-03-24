@@ -34,7 +34,7 @@ const ProviderOverview = () => {
                     const pendingOrdersData = responses[0].data
                     const approvedOrdersData = responses[1].data
                     const completedOrdersData = responses[2].data
-                    console.log(approvedOrdersData);
+                    
                     setApprove(approvedOrdersData)
                     setAllInfo({
                         last7Days: recentMoment(approvedOrdersData),
@@ -47,7 +47,7 @@ const ProviderOverview = () => {
                 })
             )
     }, [user])
-    console.log(allInfo);
+    
     return (
         <>
             <Grid container spacing={2}>

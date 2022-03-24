@@ -1,25 +1,25 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import Swal from 'sweetalert2'
 import Box from '@mui/material/Box';
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 const AddNewServiceCategory = () => {
-  const [serviceCategoryInfo, setServiceCategoryInfo] = useState({name:'', image: null, Services: []})
+  const [serviceCategoryInfo, setServiceCategoryInfo] = useState({ name: '', image: null, Services: [] })
   const [categoryLoading, setCategoryLoading] = useState(false)
 
   // handle input change
   const handleChange = (e) => {
-    if (e.target.name === "image"){
-      setServiceCategoryInfo({...serviceCategoryInfo, [e.target.name]: e.target.files[0]})
-    }else {
-      setServiceCategoryInfo({...serviceCategoryInfo, [e.target.name]: e.target.value})
+    if (e.target.name === "image") {
+      setServiceCategoryInfo({ ...serviceCategoryInfo, [e.target.name]: e.target.files[0] })
+    } else {
+      setServiceCategoryInfo({ ...serviceCategoryInfo, [e.target.name]: e.target.value })
     }
   }
 
   // handle form submit
   const handleSubmit = () => {
-    console.log(serviceCategoryInfo)
+    
     const formData = new FormData();
     formData.append('Category', serviceCategoryInfo.name)
     formData.append('Img', serviceCategoryInfo.image)
@@ -29,22 +29,22 @@ const AddNewServiceCategory = () => {
     // const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-category';
     const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-category';
 
-    axios.post(url, formData, {headers: {'Content-Type':'multipart/form-data'}}).then(data => {
-      console.log(data);
-      if (data.status === 201){
-        
+    axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(data => {
+      
+      if (data.status === 201) {
+
         Swal.fire(
           {
-          title:'Congratulations',
-          text:'New Service Category Added',
-          icon:'success',
-          timer: 2000
+            title: 'Congratulations',
+            text: 'New Service Category Added',
+            icon: 'success',
+            timer: 2000
           }
         )
       }
     }).catch(err => {
-      console.log(err);
       
+
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -53,19 +53,19 @@ const AddNewServiceCategory = () => {
       })
     }).finally(() => {
       setCategoryLoading(true);
-      setServiceCategoryInfo({name:'', image: null, Services: []})
+      setServiceCategoryInfo({ name: '', image: null, Services: [] })
     })
 
   }
   return (
     <>
-     <Typography variant="h4" component="div" gutterBottom>
+      <Typography variant="h4" component="div" gutterBottom>
         Add Service Category
       </Typography>
       <form encType="multipart/form-data">
-          <Grid container spacing={3}>
-              <Grid item xs={12} sm={12}>
-              <TextField
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={12}>
+            <TextField
               id="serviceCategory"
               label="Service Category"
               variant="standard"
@@ -74,9 +74,9 @@ const AddNewServiceCategory = () => {
               onChange={handleChange}
               value={serviceCategoryInfo.name}
             />
-            </Grid>
-              <Grid item xs={12} sm={12}>
-              <TextField
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
               id="serviceImage"
               label="Service Image"
               variant="standard"
@@ -88,11 +88,11 @@ const AddNewServiceCategory = () => {
               }}
               onChange={handleChange}
             />
-            </Grid>
+          </Grid>
         </Grid>
         <Box>
-            <Button variant="outlined"
-              sx={{ marginTop: "15px" }} onClick={handleSubmit}>Create Service Category</Button>
+          <Button variant="outlined"
+            sx={{ marginTop: "15px" }} onClick={handleSubmit}>Create Service Category</Button>
         </Box>
       </form>
     </>

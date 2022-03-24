@@ -49,7 +49,7 @@ const CustomSlider = props => {
                         grabCursor={true}
                         onSlideChange={(ev) => {
                             set_my_swiper(ev)
-                            console.log(ev);
+                            
                             set_my_swiper_status({
                                 isBeginning: ev.isBeginning,
                                 isEnd: ev.isEnd,
@@ -60,7 +60,7 @@ const CustomSlider = props => {
                         }}
                     >
                         {
-                            data?.map(service => <SwiperSlide key={service._id}><Component service={service} /></SwiperSlide>)
+                            data?.map((service, i) => <SwiperSlide key={i}><Component service={service} /></SwiperSlide>)
                         }
                     </Swiper>
                 </Box>

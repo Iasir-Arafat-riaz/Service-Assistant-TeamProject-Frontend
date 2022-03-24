@@ -40,6 +40,12 @@ const OrderStepper = () => {
         setActiveStep(0);
     };
 
+    // 
+    const buttonStyle = {
+        color: "black",
+        borderColor: "#FAAA85"
+    };
+
     return (
         <Box sx={{ maxWidth: 400 }}>
             <Stepper activeStep={activeStep} orientation="vertical">
@@ -60,6 +66,7 @@ const OrderStepper = () => {
                             <Box sx={{ mb: 2 }}>
                                 <div>
                                     <Button
+                                        style={buttonStyle}
                                         variant="outlined"
                                         onClick={handleNext}
                                         sx={{ mt: 1, mr: 1 }}
@@ -67,6 +74,7 @@ const OrderStepper = () => {
                                         {index === steps.length - 1 ? 'Finish' : 'Next'}
                                     </Button>
                                     <Button
+                                        style={buttonStyle}
                                         disabled={index === 0}
                                         onClick={handleBack}
                                         sx={{ mt: 1, mr: 1 }}
@@ -81,7 +89,7 @@ const OrderStepper = () => {
             </Stepper>
             {activeStep === steps.length && (
                 <Paper square elevation={0} sx={{ p: 3 }}>
-                    <Button onClick={handleReset} sx={{ mt: 0, mr: 1 }}>
+                    <Button style={buttonStyle} onClick={handleReset} sx={{ mt: 0, mr: 1 }}>
                         RESET
                     </Button>
                 </Paper>

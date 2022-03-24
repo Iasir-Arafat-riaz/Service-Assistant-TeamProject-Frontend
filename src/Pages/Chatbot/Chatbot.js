@@ -73,7 +73,7 @@ function Chatbot() {
             if (!user?.email) {
                 const id = initSocket();
                 setUid(id);
-                //console.log('id create', id);
+                //
             }
             else {
                 setUid(user?.uid);
@@ -108,7 +108,7 @@ function Chatbot() {
     function onMessageWasSent(message) {
         const mainMessage = { ...message, ...createUser, uid, time: `${new Date()}` }
         socket.emit('message', mainMessage);
-        //console.log(message);
+        //
         dispatch(postChat(mainMessage))
         setState(state => ({
             ...state,
@@ -164,13 +164,13 @@ function Chatbot() {
         if (state.messageList?.length === 0) {
             sendMessage("Thanks For you question. will reply soon")
         }
-        //console.log(text)
+        //
         for (let element of qna) {
             const question = Object.keys(element)
             const ans = Object.values(element)
-            //console.log(question);
+            //
             if (text.toLowerCase().includes(element.question)) {
-                //console.log('in', element);
+                //
                 sendMessage(element.answer + ' replay.bot ');
                 break;
             }

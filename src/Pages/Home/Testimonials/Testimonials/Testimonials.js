@@ -32,7 +32,7 @@ const Testimonials = () => {
             >
                 {value === index && (
                     <Box sx={{ p: 3 }}>
-                        <Typography>{children}</Typography>
+                        <Box>{children}</Box>
                     </Box>
                 )}
             </div>
@@ -50,12 +50,12 @@ const Testimonials = () => {
             'aria-controls': `vertical-tabpanel-${index}`,
         };
     }
-    console.log(testimonials);
+    
     const handleClick = (i) => {
         setValue(i);
     }
     return (
-        <Container sx={{ mb: 20, mt: 10 }}>
+        <Container sx={{ mb: 3, mt: 10 }}>
 
             {
                 testimonialLoading ?
@@ -65,11 +65,11 @@ const Testimonials = () => {
             }
             <Grid container spacing={2}>
                 <Grid item xs={4} md={4} >
-                    <Box sx={{ flexGrow: 0, height: '75vh', overflowY: 'scroll', px: 2 }} className='testimonials-userWrap'>
+                    <Box sx={{ flexGrow: 0, height: '60vh', overflowY: 'scroll', px: 2 }} className='testimonials-userWrap'>
                         {
                             testimonialLoading ? [...new Array(4)].map((ske, index) =>
-                                <Skeleton variant="rectangular" width={250} sx={{ borderRadius: 2, mb: 2 }} height={80} />
-                            ) : testimonials.map((singleTestimonials, i) => <TestimonialUserCard {...singleTestimonials} value={value} index={i} handleClick={handleClick}></TestimonialUserCard>)
+                                <Skeleton key={index} variant="rectangular" width={250} sx={{ borderRadius: 2, mb: 2 }} height={80} />
+                            ) : testimonials.map((singleTestimonials, i) => <TestimonialUserCard key={i} {...singleTestimonials} value={value} index={i} handleClick={handleClick}></TestimonialUserCard>)
                         }
                     </Box>
                 </Grid>
@@ -81,7 +81,7 @@ const Testimonials = () => {
                             {[...new Array(4)].map((ske, index) =>
                                 <Skeleton variant="rectangular" key={index} width='100%' sx={{ borderRadius: 1, mb: 2 }} height={20} />
                             )}
-                        </Box> : testimonials.map((singleTestimonials, i) => <TabPanel value={value} index={i}><Testimonial {...singleTestimonials} ></Testimonial></TabPanel>)
+                        </Box> : testimonials.map((singleTestimonials, i) => <TabPanel key={i} value={value} index={i}><Testimonial {...singleTestimonials} ></Testimonial></TabPanel>)
                     }
                 </Grid>
 

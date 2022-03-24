@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const ProviderTableRow = ({ row }) => {
     const [status, setStatus] = useState(row.status);
-    console.log(row);
+    
     const handleChange = e => {
         setStatus(e.target.value);
         if (e.target.value === 'completed') {
