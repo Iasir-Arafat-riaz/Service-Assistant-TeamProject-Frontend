@@ -175,6 +175,7 @@ export default function AdminPendingRequest() {
                   row={row}
                   handleOpenModal={handleOpenModal}
                   setServiceInfoId={setServiceInfoId}
+                  data-testid={`pending-service-${index}`}
                 />
               ))}
             </TableBody>

@@ -326,7 +326,11 @@ const AddServiceRequest = () => {
           <React.Fragment>
             {activeStep === 0 && (
               <>
-                <Typography sx={{ mt: 2, mb: 1 }} variant="h4">
+                <Typography
+                  sx={{ mt: 2, mb: 1 }}
+                  variant="h4"
+                  data-testid="service-Title"
+                >
                   Service Title
                 </Typography>
 
