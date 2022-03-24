@@ -21,8 +21,8 @@ import Loading from "../SharedRoute/Loader/Loading";
 import "./Services.css";
 import { Box } from "@mui/system";
 import ServiceCardWrap from "./Component/ServiceCardWrap";
-import Button from '@mui/material/Button';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Button from "@mui/material/Button";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 const useStyles = makeStyles({
   drawerPaper: {
     marginTop: "100px",
@@ -49,17 +49,17 @@ const useStyles = makeStyles({
 });
 
 const Services = (props) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const { allServices, serviceIsLoading } = useSelector(allData);
   const classes = useStyles();
   const location = useLocation();
 
-  const handleNavClick = (id) => {
-    const url = `/SERVICES/#${id}`;
-    
-    navigate(url);
-  };
+  // const handleNavClick = (id) => {
+  //   const url = `/SERVICES/#${id}`;
+
+  //   navigate(url);
+  // };
 
   useEffect(() => {
     dispatch(loadServiceCategory());
@@ -72,10 +72,11 @@ const Services = (props) => {
       <Navigation />
 
       <Container sx={{ mt: 15 }}>
-        <Grid container>
-          <Grid item xs={4} md={3} lg={3} spacing={{ xs: 2, md: 3 }}>
-            <Box className="sidebar-wrap"
-              sx={{ position: { xs: 'fixed', md: 'fixed' }, }}
+        <Grid container spacing={3}>
+          <Grid item xs={4} md={3} lg={3}>
+            <Box
+              className="sidebar-wrap"
+              sx={{ position: { xs: "fixed", md: "fixed" } }}
             >
               <Typography
                 variant="h4"
@@ -84,16 +85,16 @@ const Services = (props) => {
                   color: "#323334",
                   mb: 3,
                   ml: 1.5,
-                  fontSize: '17px',
-                  display: { xs: 'none', md: 'block' }
-
+                  fontSize: "17px",
+                  display: { xs: "none", md: "block" },
                 }}
               >
                 All Services
               </Typography>
 
-              <Box className="sidebar"
-                sx={{ height: { xs: '80vh', md: '75vh' } }}
+              <Box
+                className="sidebar"
+                sx={{ height: { xs: "80vh", md: "75vh" } }}
               >
                 {allServices.map((item) => {
                   const ID = item.Category.split(" ").join("").toLowerCase();
@@ -107,8 +108,26 @@ const Services = (props) => {
                         }
                         to={`/services/#${ID}`}
                       >
-                        <ListItemText sx={{ display: { xs: 'none', md: 'block' }, px: { xs: 0, md: 1 } }}>{item.Category.length >= 25 ? item.Category.slice(0, 16) + '...' : item.Category}</ListItemText>
-                        <ListItemText sx={{ display: { xs: 'block', md: 'none ' }, px: { xs: 0, md: 1 } }} >{item.Category.split(' ')[0].length >= 10 ? item.Category.slice(0, 7) + '...' : item.Category.split(' ')[0]}</ListItemText>
+                        <ListItemText
+                          sx={{
+                            display: { xs: "none", md: "block" },
+                            px: { xs: 0, md: 1 },
+                          }}
+                        >
+                          {item.Category.length >= 25
+                            ? item.Category.slice(0, 16) + "..."
+                            : item.Category}
+                        </ListItemText>
+                        <ListItemText
+                          sx={{
+                            display: { xs: "block", md: "none " },
+                            px: { xs: 0, md: 1 },
+                          }}
+                        >
+                          {item.Category.split(" ")[0].length >= 10
+                            ? item.Category.slice(0, 7) + "..."
+                            : item.Category.split(" ")[0]}
+                        </ListItemText>
                       </ListItemButton>
                     </ListItem>
                   );
@@ -118,13 +137,16 @@ const Services = (props) => {
           </Grid>
 
           <Grid item xs={8} md={9} lg={9}>
-            <Box className="content" >
-              {allServices.map((service) => <ServiceCardWrap service={service} classes={classes}></ServiceCardWrap>)}
-
+            <Box className="content">
+              {allServices.map((service) => (
+                <ServiceCardWrap
+                  service={service}
+                  classes={classes}
+                ></ServiceCardWrap>
+              ))}
             </Box>
           </Grid>
         </Grid>
-
       </Container>
     </>
   );
