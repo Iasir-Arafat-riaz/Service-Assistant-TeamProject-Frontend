@@ -49,7 +49,7 @@ import useFirebase from "../../../Hooks/useFirebase";
 import axios from "axios";
 
 const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
-
+console.log(SpeechRecognition);
 let mic;
 if (SpeechRecognition) {
   mic = new SpeechRecognition()
@@ -102,7 +102,7 @@ const Navigation = () => {
     const filterMessage = notifications.filter(
       (notification) => notification.seen === false
     );
-    
+    console.log(filterMessage);
     setMessageSeen(filterMessage.length);
   }, [notifications, user]);
 
@@ -127,7 +127,7 @@ const Navigation = () => {
   };
 
   const handleCardClick = (id) => {
-    //
+    //console.log("card clicked");
     navigate(`/Home/service-details/${id}`);
   };
 
@@ -292,17 +292,17 @@ const Navigation = () => {
     if (isListening) {
       mic.start();
       mic.onend = () => {
-        
+        console.log("continue..");
         mic.start();
       };
     } else {
       mic.stop();
       mic.onend = () => {
-        
+        console.log("Stopped Mic on Click");
       };
     }
     mic.onstart = () => {
-      
+      console.log("Mics on");
     };
 
     mic.onresult = (event) => {
@@ -310,10 +310,10 @@ const Navigation = () => {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join("");
-      
+      console.log(transcript);
       setNote(transcript);
       mic.onerror = (event) => {
-        
+        console.log(event.error);
       };
     };
   };
