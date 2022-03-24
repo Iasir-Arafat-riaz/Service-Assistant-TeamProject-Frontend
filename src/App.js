@@ -72,6 +72,7 @@ import Career from "./Pages/Career/Career";
 import Register from "./Pages/Login/UserLogin/Register/Register";
 
 import Loading from "./Pages/SharedRoute/Loader/Loading";
+import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
 
 // import AOS from 'aos'
 // import 'aos/dist/aos.css';
@@ -137,7 +138,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<UserLogin />} />
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/dashboard" element={<PrivateUserRoute><Dashboard /></PrivateUserRoute>}>
           {/* <Route path="/dashboard" element={<Overview />} /> */}
           {
             loading ? <Route path="/dashboard" element={<Loading />} /> : user.role === 'admin' ? <Route path="/dashboard" element={<Overview />} /> : user.role === 'provider' ? <Route path="/dashboard" element={<ProviderOverview />} /> : <Route path="/dashboard" element={<MyOrder />} />

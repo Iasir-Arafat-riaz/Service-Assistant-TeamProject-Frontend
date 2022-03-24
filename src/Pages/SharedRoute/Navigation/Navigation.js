@@ -277,8 +277,13 @@ const Navigation = () => {
   );
   // for voice command
   const [isListening, setIsListening] = useState(false);
-  const [note, setNote] = useState(null);
+  const [note, setNote] = useState("");
   const [savedNotes, setSavedNotes] = useState([]);
+  console.log(note)
+  const handleChage=(e)=>{
+    setNote(e.target.value)
+    searchItems(e.target.value)
+  }
 
   useEffect(() => {
     if (mic) {
@@ -433,7 +438,8 @@ const Navigation = () => {
                     <TextField
                       icon="search"
                       placeholder="Search Services..."
-                      onChange={(e) => searchItems(e.target.value)}
+                      // onChange={(e) => searchItems(e.target.value)}
+                      onChange={handleChage}
                       sx={{ width: "100%", mb: 3 }}
                       id="standard-search"
                       type="search"
