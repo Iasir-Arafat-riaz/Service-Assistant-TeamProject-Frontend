@@ -55,8 +55,8 @@ const RequestService = () => {
 
         axios.post('https://dry-sea-00611.herokuapp.com/serviceReqEmail', data)
             .then(function (response) {
-                
-                
+
+
             })
     };
 
@@ -64,7 +64,9 @@ const RequestService = () => {
         < >
             <Paper elevation={2} sx={{
                 borderRadius: 2,
-                px: 3
+                px: 3,
+                mt: 10,
+                pt: 5,
             }} >
                 <Container>
                     <Grid container>
@@ -105,8 +107,8 @@ const RequestService = () => {
                                     Request for Service
                                 </Button>
                                 <Button
-                                    disabled
                                     style={{ borderColor: "#FF5E14", }}
+                                    href='tel:+8801308979234'
                                     sx={{
                                         borderRadius: 2,
                                         py: 2,

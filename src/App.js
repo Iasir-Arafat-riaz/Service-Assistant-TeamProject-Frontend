@@ -18,7 +18,6 @@ import SingleService from "./Pages/SingleService/SingleService/SingleService";
 import AddTestimonial from "./Pages/Dashboard/DashboardPages/AddTestimonial/AddTestimonial";
 import PendingTestimonial from "./Pages/Dashboard/DashboardPages/PendingTestimonial/PendingTestimonial";
 import ManageTestimonials from "./Pages/Dashboard/DashboardPages/ManageTestimonials/ManageTestimonials";
-import ServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceRequest/ServiceRequest";
 import useFirebase from "../src/Hooks/useFirebase";
 
 import AddServiceRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/AddServiceRequest";
@@ -69,6 +68,7 @@ import NotificationCard from "./Pages/SharedRoute/Navigation/Component/Notificat
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 import Career from "./Pages/Career/Career";
+import Register from "./Pages/Login/UserLogin/Register/Register";
 // import AOS from 'aos'
 // import 'aos/dist/aos.css';
 // AOS.init();
@@ -102,7 +102,7 @@ const App = () => {
   useEffect(() => {
     if (user.email) {
       socket.emit('joinAll', user.email);
-      
+
     }
 
 
@@ -161,10 +161,6 @@ const App = () => {
             path="/dashboard/managetestimonials"
             element={<ManageTestimonials />}
           />
-          <Route
-            path="/dashboard/servicerequest"
-            element={<ServiceRequest />}
-          />
           <Route path="/dashboard/addproduct" element={<Addproduct />} />
           <Route path="/dashboard/savedservice" element={<SavedServices />} />
           <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
@@ -220,7 +216,7 @@ const App = () => {
           path="home/service-details/:serviceId"
           element={<SingleService />}
         />
-
+<Route path="/register" element={<Register/>}/>
 
         <Route path="*" element={<Error />} />
       </Routes>

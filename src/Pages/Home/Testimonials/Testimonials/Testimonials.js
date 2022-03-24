@@ -18,7 +18,8 @@ const Testimonials = () => {
     useEffect(() => {
         dispatch(websiteReviews());
     }, [dispatch]);
-
+ 
+    
     function TabPanel(props) {
         const { children, value, index, ...other } = props;
 
@@ -55,7 +56,7 @@ const Testimonials = () => {
         setValue(i);
     }
     return (
-        <Container sx={{mb:2, mt: 10 }}>
+        <Container sx={{ mb: 3, mt: 10 }}>
 
             {
                 testimonialLoading ?
