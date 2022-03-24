@@ -68,7 +68,11 @@ import NotificationCard from "./Pages/SharedRoute/Navigation/Component/Notificat
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
 
 import Career from "./Pages/Career/Career";
+
 import Register from "./Pages/Login/UserLogin/Register/Register";
+
+import Loading from "./Pages/SharedRoute/Loader/Loading";
+
 // import AOS from 'aos'
 // import 'aos/dist/aos.css';
 // AOS.init();
@@ -96,7 +100,7 @@ const App = () => {
   const { } = useFirebase();
 
   const { socket } = useSocket();
-  const { user } = useSelector(allData);
+  const { user, loading } = useSelector(allData);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -134,7 +138,10 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<UserLogin />} />
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="/dashboard" element={<Overview />} />
+          {/* <Route path="/dashboard" element={<Overview />} /> */}
+          {
+            loading ? <Route path="/dashboard" element={<Loading />} /> : user.role === 'admin' ? <Route path="/dashboard" element={<Overview />} /> : user.role === 'provider' ? <Route path="/dashboard" element={<ProviderOverview />} /> : <Route path="/dashboard" element={<MyOrder />} />
+          }
           <Route path="/dashboard/overview" element={<Overview />} />
           <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
           <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
