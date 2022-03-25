@@ -5,6 +5,7 @@ import { Box } from '@mui/system';
 import { useForm } from "react-hook-form";
 import Footer from '../SharedRoute/Footer/Footer';
 import axios from 'axios';
+import './contactUs.css';
 
 const ContactForm = () => {
 
@@ -34,12 +35,14 @@ const ContactForm = () => {
     const firstAvatar = {
         height: 66,
         width: 66,
-        border: '3px solid #ffb600'
+        border: '3px solid #ffb600',
+        visibility: { xs: "hidden", md: "visible" }
     }
     const secondAvatar = {
         height: 51,
         width: 51,
-        border: '3px solid #ffb600'
+        border: '3px solid #ffb600',
+        visibility: { xs: "hidden", md: "visible" }
     }
     const subButton = {
         letterSpacing: 2,
@@ -53,7 +56,7 @@ const ContactForm = () => {
     return (
         <>
 
-            <Container sx={{ mt: 10 }}>
+            <Container sx={{ mt: 10 }} className="contact_form">
 
                 <Typography variant='h4' sx={{ fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: '35px', mb: 5, color: "#113849" }}>Contact Form</Typography>
 
@@ -63,7 +66,7 @@ const ContactForm = () => {
 
                         <Grid item md={1}></Grid>
 
-                        <Grid item md={5}>
+                        <Grid item xs={12} md={5}>
 
                             <input {...register("name", { required: true })} style={inputStyle} type="text" placeholder='Name' />
                             <input style={inputStyle} type="number" placeholder='Number' />
@@ -71,7 +74,7 @@ const ContactForm = () => {
                         </Grid>
 
 
-                        <Grid item md={5}>
+                        <Grid item xs={12} md={5}>
 
                             <input {...register("email", { required: true })} style={inputStyle} type="text" placeholder='Email' />
                             <input style={inputStyle} type="number" placeholder='Subject' />
@@ -81,7 +84,7 @@ const ContactForm = () => {
                         <Grid item md={1}></Grid>
                         <Grid item md={1} ></Grid>
 
-                        <Grid item md={10} >
+                        <Grid item md={10} xs={12}>
 
                             <textarea
                                 {...register("message", { required: true })}
@@ -136,12 +139,12 @@ const ContactForm = () => {
 
                                 <Avatar sx={secondAvatar} alt="user image" src="https://media.istockphoto.com/photos/young-handsome-man-with-beard-wearing-casual-sweater-standing-over-picture-id1212702108?k=20&m=1212702108&s=612x612&w=0&h=ZI4gKJi2d1dfi74yTljf4YhulA1nfhD3dcUFGH-NUkY=" />
 
-                                <Box>
+                                <Box sx={{ display: "flex", flexWrap: 'wrap', justifyContent: "center", columnGap: 5, rowGap: 3 }}>
                                     <Button style={{ background: "#1768D4", color: "#fff", padding: '8px 25px' }}> <FaFacebookF />  Facebook  </Button>
 
-                                    <Button style={{ background: "#1EBCE9", color: "#fff", padding: '8px 25px', margin: '0 20px' }}> <FaFacebookF />  Facebook  </Button>
+                                    <Button style={{ background: "#1EBCE9", color: "#fff", padding: '8px 25px', margin: '0 20px' }}> <FaFacebookF />  Twiter  </Button>
 
-                                    <Button style={{ background: "#D63127", color: "#fff", padding: '8px 25px' }} > <FaFacebookF />  Facebook  </Button>
+                                    <Button style={{ background: "#D63127", color: "#fff", padding: '8px 25px' }} > <FaFacebookF />  Youtube  </Button>
                                 </Box>
 
                                 <Avatar sx={secondAvatar} alt="user image" src="https://i.ibb.co/0CHGDKx/img1.png" />

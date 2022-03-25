@@ -65,7 +65,7 @@ const MyOrdersTable = () => {
                 {
                     savedService?.map((service, index) => <Grid item key={service._id} xs={12} md={6} lg={4}>
 
-                        <MyOrdersCard service={service}></MyOrdersCard>
+                        <MyOrdersCard service={service} index={index}></MyOrdersCard>
                     </Grid>
                     )
                 }

@@ -66,10 +66,6 @@ const SavedServices = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-
 
 
     // const [savedService, setSavedService] = useState([]);
@@ -78,15 +74,10 @@ const SavedServices = () => {
     useEffect(() => {
         dispatch(serviceProviders());
     }, [dispatch])
+
     // input checked
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-
-
-
-    const handleCheckInput = e => {
-        // setCheckInput(e.target.checked);
-    };
 
     // setCheckInput(false);
     useEffect(() => {
@@ -147,171 +138,162 @@ const SavedServices = () => {
 
     return (
         <>
-            <Grid container className="save_service">
+            {
 
-                <Grid item xs={12} md={4} lg={2}>
+                cartItems.length === 0 ? <Box>
+                    <Typography variant='h6'>You don't saved any service</Typography>
+                    <Button variant='outlined' style={{ borderColor: "#", color: "#" }}></Button>
+                </Box>
+                    :
+                    <Grid container className="save_service">
 
-
-                    <Box>
-
-                        <Stepper activeStep={activeStep} className="" orientation="vertical">
-                            {
-                                steps.map(({ step, label }, index) => (
-                                    <Step key={label}>
-                                        <StepLabel className={activeStep === index ? "selected_step" : null}>
-                                            <Typography className='step_text' variant='body2'>{label}</Typography>
-                                            <Typography variant="caption">{step} step</Typography>
-                                        </StepLabel>
-                                        <StepContent TransitionProps={{ unmountOnExit: false }} >
-                                            <Box>
-                                                <>
-                                                    {/* <Button
-                                                        variant="contained"
-                                                        onClick={handleNextStep}
-                                                        sx={{ mt: 1, mr: 1 }}
-                                                    >
-                                                        {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                                                    </Button>
-                                                    <Button
-                                                        disabled={index === 0}
-                                                        onClick={handleBack}
-                                                        sx={{ mt: 1, mr: 1 }}
-                                                    >
-                                                        Back
-                                                    </Button> */}
-                                                </>
-                                            </Box>
-                                        </StepContent>
-                                    </Step>
-                                ))
-                            }
-                        </Stepper>
-
-                        {
-                            selectedService.length > 0 && activeStep !== 4 && <Button variant='outlined' style={stpperButton} sx={{ width: { xs: "50%", lg: "90%" } }} onClick={handleNextStep}> NEXT </Button>
-                        }
-
-                        {
-                            activeStep > 0 && <Button sx={{ width: { xs: "50%", lg: "90%" } }} variant='outlined' style={stpperButton} onClick={handleBack}> BACK </Button>
-                        }
-
-                    </Box>
+                        <Grid item xs={12} md={4} lg={2}>
 
 
-                </Grid>
+                            <Box>
 
-                <Grid item xs={12} md={8} lg={10} sx={{ background: "#F4F5F8", height: "100vh", pl: 5, pt: 2 }}>
+                                <Stepper activeStep={activeStep} className="" orientation="vertical">
+                                    {
+                                        steps.map(({ step, label }, index) => (
+                                            <Step key={label}>
+                                                <StepLabel className={activeStep === index ? "selected_step" : null}>
+                                                    <Typography className='step_text' variant='body2'>{label}</Typography>
+                                                    <Typography variant="caption">{step} step</Typography>
+                                                </StepLabel>
+                                                <StepContent TransitionProps={{ unmountOnExit: false }} >
 
-                    {
-                        activeStep === 0 && <>
-
-                            <Typography variant='h6' sx={{ mb: 2, fontFamily: 'Poppins, sans-serif' }}>Please select service</Typography>
-
-                            <Grid container spacing={3}>
+                                                </StepContent>
+                                            </Step>
+                                        ))
+                                    }
+                                </Stepper>
 
                                 {
-                                    cartItems?.map((service, index) => <Grid item key={service._id} lg={4} xs={12} xl={3}>
-
-
-                                        <Card sx={{ width: "100%", mb: 4 }}>
-
-
-                                            <CardMedia
-                                                component="img"
-                                                height="140"
-                                                image={service?.parentService?.Image}
-                                                alt="serviceImage"
-                                            />
-
-                                            <Checkbox sx={{ mt: '-75%', color: "#F9F9F9" }} onClick={() => handleAddService(service)} {...label} />
-
-                                            <CardContent>
-
-                                                <Typography gutterBottom variant="h6" component="div">
-                                                    {service?.parentService?.Title}
-                                                </Typography>
-
-                                                <Typography sx={{ fontSize: 15, fontWeight: 'bold', mb: 1 }} variant="h6">Category: {service?.Name}</Typography>
-
-                                                <Typography sx={{ fontSize: 15, fontWeight: 'bold' }} variant="h6">Price: {service?.Price} tk</Typography>
-
-                                            </CardContent>
-
-                                        </Card>
-                                    </Grid>
-                                    )
+                                    selectedService.length > 0 && activeStep !== 4 && <Button variant='outlined' style={stpperButton} sx={{ width: { xs: "50%", lg: "90%" } }} onClick={handleNextStep}> NEXT </Button>
                                 }
 
-                            </Grid>
-                        </>
-                    }
+                                {
+                                    activeStep > 0 && <Button sx={{ width: { xs: "50%", lg: "90%" } }} variant='outlined' style={stpperButton} onClick={handleBack}> BACK </Button>
+                                }
+
+                            </Box>
 
 
-                    {
-                        activeStep === 1 && <SelectedServices
-                            selectedServices={selectedService}
-                            handleDeleteSelectService={handleDeleteSelectService}
-                        />
-                    }
+                        </Grid>
 
-                    {
-                        activeStep === 2 && <Box sx={{ width: { lg: '60%', xl: "50%" }, background: "#fff", boxShadow: 1 }}>
-                            <Typography sx={{ ml: 2, pt: 1 }} variant='h6'>Order Information</Typography>
-                            <OrderInfo handleNext={handleNextStep} title="SUBMIT" />
-                        </Box>
-                    }
-
-                    {
-                        activeStep === 3 && <Box sx={{ width: { xs: "100%", md: '50%' }, boxShadow: 1, backgroundColor: "#fff", p: 2 }}>
-
-                            <Typography variant='h6' sx={{ fontSize: 18, mb: 2, letterSpacing: 1, fontWeight: 'bold', ml: 2, borderBottom: '2px solid #F4F5F8', }}>Select a provider </Typography>
+                        <Grid item xs={12} md={8} lg={10} sx={{ background: "#F4F5F8", height: "100vh", pl: 5, pt: 2 }}>
 
                             {
-                                providers.map((provider) => <Box key={provider._id} sx={serviceProvider}>
+                                activeStep === 0 && <>
 
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Avatar sx={{ width: 50, height: 50 }} alt="privder image" src={provider.photoURL} />
-                                        <Box>
-                                            <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{provider?.displayName}</Typography>
+                                    <Typography variant='h6' sx={{ mb: 2, fontFamily: 'Poppins, sans-serif' }}>Please select service</Typography>
 
-                                            <Typography variant='body2' sx={{ fontSize: 15 }}>{provider?.email}</Typography>
-                                        </Box>
+                                    <Grid container spacing={3}>
 
-                                    </Box>
+                                        {
+                                            cartItems?.map((service, index) => <Grid item key={service._id} lg={4} xs={12} xl={3}>
 
-                                    <Button
-                                        onClick={() => handleSelectedProvider(provider)}
-                                        style={{
-                                            borderColor: "#FF5E14",
-                                            color: "#FF5E14"
-                                        }}
-                                        variant='outlined'
-                                    >
-                                        NEXT
-                                    </Button>
 
-                                </Box>
-                                )
+                                                <Card sx={{ width: "100%", mb: 4 }}>
+
+
+                                                    <CardMedia
+                                                        component="img"
+                                                        height="140"
+                                                        image={service?.parentService?.Image}
+                                                        alt="serviceImage"
+                                                    />
+
+                                                    <Checkbox sx={{ mt: '-75%', color: "#F9F9F9" }} onClick={() => handleAddService(service)} {...label} />
+
+                                                    <CardContent>
+
+                                                        <Typography gutterBottom variant="h6" component="div">
+                                                            {service?.parentService?.Title}
+                                                        </Typography>
+
+                                                        <Typography sx={{ fontSize: 15, fontWeight: 'bold', mb: 1 }} variant="h6">Category: {service?.Name}</Typography>
+
+                                                        <Typography sx={{ fontSize: 15, fontWeight: 'bold' }} variant="h6">Price: {service?.Price} tk</Typography>
+
+                                                    </CardContent>
+
+                                                </Card>
+                                            </Grid>
+                                            )
+                                        }
+
+                                    </Grid>
+                                </>
                             }
-                        </Box>
-                    }
 
 
-                    {
-                        activeStep === 4 && <PaymentService
-                            handleNextStep={handleNextStep}
-                            orderService={orderService}
-                        />
-                    }
+                            {
+                                activeStep === 1 && <SelectedServices
+                                    selectedServices={selectedService}
+                                    handleDeleteSelectService={handleDeleteSelectService}
+                                />
+                            }
+
+                            {
+                                activeStep === 2 && <Box sx={{ width: { lg: '60%', xl: "50%" }, background: "#fff", boxShadow: 1 }}>
+                                    <Typography sx={{ ml: 2, pt: 1 }} variant='h6'>Order Information</Typography>
+                                    <OrderInfo handleNext={handleNextStep} title="SUBMIT" />
+                                </Box>
+                            }
+
+                            {
+                                activeStep === 3 && <Box sx={{ width: { xs: "100%", md: '50%' }, boxShadow: 1, backgroundColor: "#fff", p: 2 }}>
+
+                                    <Typography variant='h6' sx={{ fontSize: 18, mb: 2, letterSpacing: 1, fontWeight: 'bold', ml: 2, borderBottom: '2px solid #F4F5F8', }}>Select a provider </Typography>
+
+                                    {
+                                        providers.map((provider) => <Box key={provider._id} sx={serviceProvider}>
+
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                                <Avatar sx={{ width: 50, height: 50 }} alt="privder image" src={provider.photoURL} />
+                                                <Box>
+                                                    <Typography variant='h6' sx={{ fontSize: 16, letterSpacing: 1, fontWeight: 'bold' }}>{provider?.displayName}</Typography>
+
+                                                    <Typography variant='body2' sx={{ fontSize: 15 }}>{provider?.email}</Typography>
+                                                </Box>
+
+                                            </Box>
+
+                                            <Button
+                                                onClick={() => handleSelectedProvider(provider)}
+                                                style={{
+                                                    borderColor: "#FF5E14",
+                                                    color: "#FF5E14"
+                                                }}
+                                                variant='outlined'
+                                            >
+                                                NEXT
+                                            </Button>
+
+                                        </Box>
+                                        )
+                                    }
+                                </Box>
+                            }
+
+
+                            {
+                                activeStep === 4 && <PaymentService
+                                    handleNextStep={handleNextStep}
+                                    orderService={orderService}
+                                />
+                            }
 
 
 
-                </Grid>
+                        </Grid>
 
 
 
 
-            </Grid>
+                    </Grid>
+            }
         </>
     );
 };
