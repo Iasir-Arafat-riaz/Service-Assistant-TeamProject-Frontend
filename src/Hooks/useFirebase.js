@@ -78,7 +78,6 @@ const useFirebase = () => {
         dispatch(setLoading(true))
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // setUser(user);
                 getIdToken(user).then(idToken => localStorage.setItem('idToken', idToken));
                 dispatch(login({
                     displayName: user.displayName,

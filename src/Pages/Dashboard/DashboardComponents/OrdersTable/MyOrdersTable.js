@@ -30,7 +30,7 @@ const MyOrdersTable = () => {
     // data load
     useEffect(() => {
         setLoading(true)
-        fetch(`http://localhost:5000/myorder?email=${user.email}`).then(res => res.json()).then(data => {
+        fetch(`https://dry-sea-00611.herokuapp.com/myorder?email=${user.email}`).then(res => res.json()).then(data => {
             setSavedService(data);
             setLoading(false);
         })
@@ -65,7 +65,7 @@ const MyOrdersTable = () => {
                 {
                     savedService?.map((service, index) => <Grid item key={service._id} xs={12} md={6} lg={4}>
 
-                        <MyOrdersCard service={service}></MyOrdersCard>
+                        <MyOrdersCard service={service} index={index}></MyOrdersCard>
                     </Grid>
                     )
                 }

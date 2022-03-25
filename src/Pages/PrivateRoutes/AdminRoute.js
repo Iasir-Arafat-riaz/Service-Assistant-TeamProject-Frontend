@@ -5,9 +5,14 @@ import { allData } from '../../redux/dataSlice/dataSlice';
 
 
 const AdminRoute = ({ children, ...rest }) => {
-    const { allUser, user } = useSelector(allData);
+    const { allUser, user ,getLoad} = useSelector(allData);
     
     const location = useLocation();
+
+    if(!user.email){
+        return (getLoad)
+      }
+
 
     if (user?.email && allUser.filter((user) => user?.role === "admin")) {
         return children;

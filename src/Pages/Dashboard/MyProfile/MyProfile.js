@@ -18,7 +18,7 @@ const MyProfile = () => {
   const { user } = useSelector(allData);
 
   useEffect(() => {
-    const api = `http://localhost:5000/users/${user.email}`
+    const api = `https://dry-sea-00611.herokuapp.com/users/${user.email}`
     axios.get(api).then(res => {
 
       setProfile(res.data)

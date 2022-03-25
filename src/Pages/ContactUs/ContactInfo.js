@@ -8,7 +8,7 @@ const ContactInfo = () => {
         {
             "icon": 'https://i.ibb.co/6HTPC31/mapicon.png',
             "name": "Mailing Address",
-            "desc": "121 King Street, Melbourne Victoria 3000 Aushtralia",
+            "desc": "Dhaka,Banladesh City Center, Motijheel",
             "id": 1
         },
         {
@@ -20,7 +20,7 @@ const ContactInfo = () => {
         {
             "icon": "https://i.ibb.co/JC6CwVT/phoneicon.png",
             "name": "Phone Number",
-            "desc": "+8801907851900",
+            "desc": "+8801622118833",
             "id": 3
         }
     ]
@@ -33,10 +33,10 @@ const ContactInfo = () => {
 
             <Typography variant='body2' sx={{ textAlign: 'center', display: 'block', mb: 5, mt: 2 }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque, officiis.</Typography>
 
-            <Box container sx={{ columnGap: 5, display: 'flex' }}>
+            <Box container sx={{ columnGap: 5, display: { md: 'flex', xs: 'block' } }} className="contact_us">
 
                 {
-                    contactInfo.map(contact => <Grid item sx={{ boxShadow: 2, mb: 2, p: 2, borderRadius: 5, borderBottom: '2px solid #FF5E14', width: 360 }} >
+                    contactInfo.map(contact => <Grid item sx={{ boxShadow: 2, mb: 2, p: 2, borderRadius: 5, borderBottom: '2px solid #FF5E14', width: { md: 360, xs: "100%" } }} >
 
                         <Box sx={{ p: 2 }}>
 

@@ -25,9 +25,9 @@ const ProviderOverview = () => {
     })
 
     useEffect(() => {
-        const pendingOrders = axios.get(`http://localhost:5000/provider/pending/appointment/${user.email}`);
-        const approvedOrders = axios.get(`http://localhost:5000/provider/approved/appointment/${user.email}`);
-        const completedOrders = axios.get(`http://localhost:5000/provider/completed/appointment/${user.email}`);
+        const pendingOrders = axios.get(`https://dry-sea-00611.herokuapp.com/provider/pending/appointment/${user.email}`);
+        const approvedOrders = axios.get(`https://dry-sea-00611.herokuapp.com/provider/approved/appointment/${user.email}`);
+        const completedOrders = axios.get(`https://dry-sea-00611.herokuapp.com/provider/completed/appointment/${user.email}`);
         axios.all([pendingOrders, approvedOrders, completedOrders])
             .then(
                 axios.spread((...responses) => {

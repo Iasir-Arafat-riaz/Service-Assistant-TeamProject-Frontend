@@ -128,7 +128,6 @@ const App = () => {
       dispatch(getProviderDetailsByEmail({ email: user.email }))
     }
   }, [user])
-
   return (
     <BrowserRouter>
 
@@ -140,74 +139,74 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/services" element={<Services />} />
         <Route path="/login" element={<UserLogin />} />
-        <Route path="/dashboard" element={<PrivateUserRoute><Dashboard /></PrivateUserRoute>}>
+        <Route path="/dashboard" element={<Dashboard />}>
           {/* <Route path="/dashboard" element={<Overview />} /> */}
           {
-            loading ? <Route path="/dashboard" element={<Loading />} /> : user.role === 'admin' ? <Route path="/dashboard" element={<Overview />} /> : user.role === 'provider' ? <Route path="/dashboard" element={<ProviderOverview />} /> : <Route path="/dashboard" element={<MyOrder />} />
+            loading ? <Route path="/dashboard" element={<Loading />} /> : user.role === 'admin' ? <Route path="/dashboard" element={<PrivateUserRoute><Overview /></PrivateUserRoute>} /> : user.role === 'provider' ? <Route path="/dashboard" element={<PrivateUserRoute><ProviderOverview /></PrivateUserRoute>} /> : <Route path="/dashboard" element={<PrivateUserRoute><MyOrder /></PrivateUserRoute>} />
           }
-          <Route path="/dashboard/overview" element={<Overview />} />
-          <Route path="/dashboard/manageAllOrders" element={<ManageAllOrders />} />
-          <Route path="/dashboard/makeAdmin" element={<MakeAdmin />} />
-          <Route path="/dashboard/myorders" element={<MyOrder />} />
-          <Route path="/dashboard/addproduct" element={<Addproduct />} />
-          <Route path="addBanner" element={<AddBanner />} />
-          <Route path="providerOverview" element={<ProviderOverview />} />
-          <Route path="/dashboard/adminChat" element={<AdminChat />} />
+          <Route path="/dashboard/overview" element={<PrivateUserRoute><Overview /></PrivateUserRoute>} />
+          <Route path="/dashboard/manageAllOrders" element={<PrivateUserRoute><ManageAllOrders /></PrivateUserRoute>} />
+          <Route path="/dashboard/makeAdmin" element={<PrivateUserRoute><MakeAdmin /></PrivateUserRoute>} />
+          <Route path="/dashboard/myorders" element={<PrivateUserRoute><MyOrder /> </PrivateUserRoute>} />
+          <Route path="/dashboard/addproduct" element={<PrivateUserRoute><Addproduct /></PrivateUserRoute>} />
+          <Route path="addBanner" element={<PrivateUserRoute><AddBanner /></PrivateUserRoute>} />
+          <Route path="providerOverview" element={<PrivateUserRoute><ProviderOverview /></PrivateUserRoute>} />
+          <Route path="/dashboard/adminChat" element={<PrivateUserRoute><AdminChat /></PrivateUserRoute>} />
           <Route
             path="/dashboard/manageproducts"
-            element={<Manageproducts />}
+            element={<PrivateUserRoute><Manageproducts /></PrivateUserRoute>}
           />
           <Route path="/dashboard/myprofile" element={<MyProfile />} />
-          <Route path="/dashboard/addquestions" element={<AddQuestions />} />
+          <Route path="/dashboard/addquestions" element={<PrivateUserRoute><AddQuestions /></PrivateUserRoute>} />
           <Route
             path="/dashboard/addtestimonial"
-            element={<AddTestimonial />}
+            element={<PrivateUserRoute><AddTestimonial /></PrivateUserRoute>}
           />
           <Route
             path="/dashboard/pendingtestimonial"
-            element={<PendingTestimonial />}
+            element={<PrivateUserRoute><PendingTestimonial /></PrivateUserRoute>}
           />
           <Route
             path="/dashboard/managetestimonials"
-            element={<ManageTestimonials />}
+            element={<PrivateUserRoute><ManageTestimonials /></PrivateUserRoute>}
           />
-          <Route path="/dashboard/addproduct" element={<Addproduct />} />
-          <Route path="/dashboard/savedservice" element={<SavedServices />} />
-          <Route path="/dashboard/becomeaprovider" element={<BecomeaProvider />} />
-          <Route path="/dashboard/review/:id" element={<AddServiceReview />} />
-          <Route path="/dashboard/pendingprovider" element={<PendingProviders />} />
+          <Route path="/dashboard/addproduct" element={<PrivateUserRoute><Addproduct /></PrivateUserRoute>} />
+          <Route path="/dashboard/savedservice" element={<PrivateUserRoute><SavedServices /></PrivateUserRoute>} />
+          <Route path="/dashboard/becomeaprovider" element={<PrivateUserRoute><BecomeaProvider /></PrivateUserRoute>} />
+          <Route path="/dashboard/review/:id" element={<PrivateUserRoute><AddServiceReview /></PrivateUserRoute>} />
+          <Route path="/dashboard/pendingprovider" element={<PrivateUserRoute><PendingProviders /></PrivateUserRoute>} />
           <Route
             path="/dashboard/manageproducts"
-            element={<Manageproducts />}
+            element={<PrivateUserRoute><Manageproducts /></PrivateUserRoute>}
           />
           <Route
             path="/dashboard/provider/appointment"
-            element={<AppointmentRequest />}
+            element={<PrivateUserRoute><AppointmentRequest /></PrivateUserRoute>}
           />
 
           {/* add service request from service provider - by sagar */}
           <Route
             path="/dashboard/make-service-request"
-            element={<AddServiceRequest />}
+            element={<PrivateUserRoute><AddServiceRequest /></PrivateUserRoute>}
           ></Route>
 
 
           <Route
             path="/dashboard/ordersChat"
-            element={<OrdersChat />}
+            element={<PrivateUserRoute><OrdersChat /></PrivateUserRoute>}
           ></Route>
           <Route
             path="/dashboard/ordersChat/:urlId"
-            element={<OrdersChat single />}
+            element={<PrivateUserRoute><OrdersChat single /></PrivateUserRoute>}
           ></Route>
 
 
           {/* all the pending request list route - by sagar */}
-          <Route path="/dashboard/all-pending-services" element={<AdminPendingRequest />}></Route>
+          <Route path="/dashboard/all-pending-services" element={<PrivateUserRoute><AdminPendingRequest /></PrivateUserRoute>}></Route>
 
           {/* add new service category for admin - by sagar */}
 
-          <Route path="/dashboard/add-service-category" element={<AddNewServiceCategory />}></Route>
+          <Route path="/dashboard/add-service-category" element={<PrivateUserRoute><AddNewServiceCategory /> </PrivateUserRoute>}></Route>
 
 
 

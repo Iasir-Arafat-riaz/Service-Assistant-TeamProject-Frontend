@@ -45,7 +45,7 @@ const SingleProviderDetails = () => {
 
     //Provider Data Load by Email
     // useEffect(() => {
-    //     axios.get(`http://localhost:5000/providerdetials/provider?email=samir@gmail.com`)
+    //     axios.get(`https://dry-sea-00611.herokuapp.com/providerdetials/provider?email=samir@gmail.com`)
     //         .then(data => {
     //             setProviderProfiles(data.data);
 
@@ -53,7 +53,7 @@ const SingleProviderDetails = () => {
     // }, []);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/providerdetials/provider/${providerId}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/providerdetials/provider/${providerId}`)
             .then(data => {
                 setProviderProfiles(data?.data);
                 console.log(data);
@@ -61,7 +61,7 @@ const SingleProviderDetails = () => {
     }, []);
     // console.log(providerProfiles.email)
     useEffect(() => {
-        axios.get(`http://localhost:5000/provider/myServices/${providerProfiles.providerId}`)
+        axios.get(`https://dry-sea-00611.herokuapp.com/provider/myServices/${providerProfiles.providerId}`)
             .then(data => {
                 setProviderServiceInfo(data?.data);
 
@@ -82,7 +82,7 @@ const SingleProviderDetails = () => {
     const onSubmit = data => {
         if (data?.ShopName !== '') {
             const ShopName = data.ShopName;
-            axios.put(`http://localhost:5000/providerdetials/updateName/${providerProfiles.email}`, { ShopName }).then(res => {
+            axios.put(`https://dry-sea-00611.herokuapp.com/providerdetials/updateName/${providerProfiles.email}`, { ShopName }).then(res => {
                 toast.info(`Shop name updated successfully`, {
                     position: "bottom-left"
                 })
@@ -90,7 +90,7 @@ const SingleProviderDetails = () => {
         }
         if (data?.bio !== '') {
             const bio = data.bio;
-            axios.put(`http://localhost:5000/providerdetials/updateBio/${providerProfiles.email}`, { bio }).then(res => {
+            axios.put(`https://dry-sea-00611.herokuapp.com/providerdetials/updateBio/${providerProfiles.email}`, { bio }).then(res => {
                 toast.info(`Provider bio updated successfully`, {
                     position: "bottom-left"
                 })
@@ -98,7 +98,7 @@ const SingleProviderDetails = () => {
         }
         if (data?.address !== '') {
             const address = data.address;
-            axios.put(`http://localhost:5000/providerdetials/updateAddress/${providerProfiles.email}`, { address }).then(res => {
+            axios.put(`https://dry-sea-00611.herokuapp.com/providerdetials/updateAddress/${providerProfiles.email}`, { address }).then(res => {
                 toast.info(`Provider address updated successfully`, {
                     position: "bottom-left"
                 })
@@ -106,7 +106,7 @@ const SingleProviderDetails = () => {
         }
         if (data?.about !== '') {
             const about = data.about;
-            axios.put(`http://localhost:5000/providerdetials/updateAboutus/${providerProfiles.email}`, { about }).then(res => {
+            axios.put(`https://dry-sea-00611.herokuapp.com/providerdetials/updateAboutus/${providerProfiles.email}`, { about }).then(res => {
                 toast.info(`Provider about updated successfully`, {
                     position: "bottom-left"
                 })
@@ -131,7 +131,7 @@ const SingleProviderDetails = () => {
             }).then(res => {
                 setValue('providerImg', res.data?.data?.url)
                 const Logo = res.data?.data?.url;
-                axios.put(`http://localhost:5000/providerdetials/updateLogo/${providerProfiles.email}`, { Logo }).then(res => {
+                axios.put(`https://dry-sea-00611.herokuapp.com/providerdetials/updateLogo/${providerProfiles.email}`, { Logo }).then(res => {
                     toast.info(`Logo updated successfully`, {
                         position: "bottom-left"
                     })
@@ -156,7 +156,7 @@ const SingleProviderDetails = () => {
             }).then(res => {
                 setValue('backgroundImg', res.data?.data?.url)
                 const backgroundImage = res.data?.data?.url;
-                axios.put(`http://localhost:5000/providerdetials/updateBackgroundimage/${providerProfiles.email}`, { backgroundImage }).then(res => {
+                axios.put(`https://dry-sea-00611.herokuapp.com/providerdetials/updateBackgroundimage/${providerProfiles.email}`, { backgroundImage }).then(res => {
                     toast.info(`BackgroundImage updated successfully`, {
                         position: "bottom-left"
                     })
@@ -375,8 +375,8 @@ const SingleProviderDetails = () => {
 
                                         <Stack direction="row" spacing={1}>
                                             {
-                                                providerProfiles?.offerService?.map((service) =>
-                                                    <Chip variant="outlined" label={service?.Name} />
+                                                providerProfiles?.offerService?.map((service, index) =>
+                                                    <Chip variant="outlined" key={index} label={service?.Name} />
                                                 )
                                             }
 
@@ -471,10 +471,10 @@ const SingleProviderDetails = () => {
                                         <Box
                                             sx={{ mx: 5, my: 1, }}
                                         >
-                                            <Button
+                                            {/* <Button
                                                 style={{ borderColor: "#FF5E14", color: '#707070' }}
                                                 variant="outlined">Contact Provider
-                                            </Button>
+                                            </Button> */}
                                         </Box>
 
 
@@ -502,7 +502,7 @@ const SingleProviderDetails = () => {
 
                             <Grid container spacing={2} sx={{ my: 3 }}>
                                 <Grid item md={3}>
-                                    <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 3, color: '#363636', textAlign: 'center' }}>FAQ</Typography>
+                                    {/* <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 3, color: '#363636', textAlign: 'center' }}>FAQ</Typography> */}
                                     {providerServiceInfo?.map((service) => {
                                         return (
                                             < >
@@ -541,221 +541,127 @@ const SingleProviderDetails = () => {
 
 
                                 <Grid item md={9}>
+
                                     <Typography variant='h5' sx={{ fontWeight: 'bold', mb: 2, color: '#363636' }}>Offered Services</Typography>
-                                    {providerServiceInfo.map((service) => {
-                                        return (
-                                            < >
-                                                <Grid container spacing={2}>
 
-                                                    {service.allServices?.map((item, index) => (
-                                                        <Grid item md={3} xs={12} key={index}>
-                                                            <Card sx={{ width: '100%', height: '100%' }}>
-                                                                <CardActionArea>
+                                    <Grid container spacing={2}>
+                                        {
+                                            providerProfiles?.offerService?.map((service) => <Grid item md={3} lg={3} sm={3} xs={6} key={service.Id}>
+                                                <Card sx={{ width: '100%', height: '100%' }}>
+                                                    <CardActionArea>
 
-                                                                    <CardMedia
-                                                                        component="img"
-                                                                        height="140"
-                                                                        image={item.Image}
-                                                                        alt="service sub category"
-                                                                    />
+                                                        <CardMedia
+                                                            component="img"
+                                                            height="140"
+                                                            image={service.Img}
+                                                            alt="service sub category"
+                                                        />
 
-                                                                    <CardContent >
-                                                                        <Tooltip title={item.Title}>
+                                                        <CardContent >
+                                                            <Tooltip title={service.Name}>
 
-                                                                            <Typography gutterBottom variant="h6" component="div"
-                                                                                sx={{ color: "#707070" }}
-                                                                            >
-                                                                                {item.Title.substring(0, 12)}...
+                                                                <Typography variant="h6"
+                                                                    sx={{ fontWeight: 'bold' }}
+                                                                >
+                                                                    {service?.Name}
+                                                                </Typography>
+                                                            </Tooltip>
+                                                        </CardContent>
 
-                                                                            </Typography>
-                                                                        </Tooltip>
-                                                                    </CardContent>
+                                                    </CardActionArea>
+                                                </Card>
 
-                                                                </CardActionArea>
-                                                            </Card>
-                                                        </Grid>
-                                                    ))}
 
-                                                </Grid>
-                                            </>
-                                        );
-                                    })}
+                                            </Grid>
+                                            )
+                                        }
+                                    </Grid>
 
                                     <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Experience</Typography>
-                                    {providerServiceInfo.map((service) => {
-                                        return (
-                                            < >
-                                                <Grid container spacing={2}>
-                                                    {service.allServices?.map((item) => {
-                                                        return (
-                                                            <>
-                                                                {item.Key?.slice(1, 2).map((name, index) => {
-                                                                    return (
-                                                                        <>
-                                                                            <Grid item md={6} xs={12}>
-                                                                                <Paper elevation={3}
-                                                                                    key={index}
-                                                                                    sx={{
-                                                                                        p: 1,
-                                                                                        borderBottom: '2px solid #ffb600',
-                                                                                        borderRight: '3px solid #ffb600'
-                                                                                    }}
-                                                                                >
-                                                                                    <Tooltip title={name.Name}>
 
-                                                                                        <Typography gutterBottom variant="h6" component="div"
-                                                                                            sx={{ color: "#707070" }}
-                                                                                        >
-                                                                                            {name.Name.substring(0, 35)}...
+                                    <Grid container spacing={2}>
 
-                                                                                        </Typography>
-                                                                                    </Tooltip>
-                                                                                </Paper>
+                                        {
+                                            providerProfiles.offerService.map(service => <Grid item sm={6} xs={12}>
+                                                <Paper elevation={3}
+                                                    key={service.Id}
+                                                    sx={{
+                                                        p: 1,
+                                                        borderBottom: '2px solid #ffb600',
+                                                        borderRight: '3px solid #ffb600'
+                                                    }}
+                                                >
+                                                    <Tooltip title={service.Name}>
 
-                                                                            </Grid>
-                                                                        </>
-                                                                    )
-                                                                })}
-                                                            </>
-                                                        )
-                                                    })}
-                                                </Grid>
-                                            </>
-                                        );
-                                    })}
+                                                        <Typography gutterBottom variant="h6" component="div"
+                                                            sx={{ color: "#707070" }}
+                                                        >
+                                                            {/* {name.Name.substring(0, 35)}... */}
+                                                            {service.Name}
+                                                        </Typography>
+                                                    </Tooltip>
+                                                </Paper>
 
-                                    <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Customer Reviews</Typography>
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>ID</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > assigned person is technically sound and well mannered. very good service received from him.
-
-                                            </Typography>
-                                        </Grid>
+                                            </Grid>)
+                                        }
                                     </Grid>
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>MR</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > The service man was very well mannared and efficient on his tasks. Thanks</Typography>
-                                        </Grid>
-                                    </Grid>
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>RH</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > Excellent and very professional. very friendly and polite. highly recommended
 
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
+                                    {
+                                        providerProfiles?.reviews.length > 0 && <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Customer Reviews</Typography>
+                                    }
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>MS</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > The mechanics were very good and well behaved. So far I am satisfied
+                                    {
+                                        providerProfiles?.reviews.length > 0 &&
+                                        <Grid container sx={{ my: 2 }}>
 
-                                            </Typography>
+                                            {
+                                                providerProfiles.reviews.map(review => <>
+                                                    <Grid item xs={2.5} md={1.25} >
+                                                        <Box
+                                                            sx={{
+                                                                width: '60px',
+                                                                height: '60px',
+                                                                backgroundImage: `url(${review.userPhoto})`,
+                                                                backgroundSize: "cover",
+                                                                borderRadius: '50%',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                border: '5px solid #f5efef',
+                                                                justifyContent: 'center',
+                                                            }}
+                                                        >
+                                                        </Box>
+                                                    </Grid>
+                                                    <Grid item xs={9} md={10} sx={{ mb: 3 }}>
+                                                        <Rating
+                                                            name="text-feedback"
+                                                            value={review?.rating}
+                                                            readOnly
+                                                            precision={0.5}
+                                                            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                                        />
+                                                        <Typography gutterBottom variant="h6" component="div"
+                                                            sx={{ color: "#707070" }}>
+                                                            {review?.userComment}
+                                                        </Typography>
+                                                    </Grid>
+                                                </>)
+                                            }
+
+
+
+
                                         </Grid>
-                                    </Grid>
+                                    }
+
+
                                 </Grid>
+
                             </Grid>
+
+
                         </Container>
 
                     </>

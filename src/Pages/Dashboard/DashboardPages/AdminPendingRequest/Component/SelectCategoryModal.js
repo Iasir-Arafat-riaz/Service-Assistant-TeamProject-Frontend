@@ -28,7 +28,7 @@ export default function TransitionsModal({ handleCloseModal, openModal, category
 
   useEffect(() => {
     const fetchServices = async () => {
-      const services = await axios.get('http://localhost:5000/services').then(res => res.data)
+      const services = await axios.get('https://dry-sea-00611.herokuapp.com/services').then(res => res.data)
 
       setServicesCategory(services)
       setServicesLoading(false)

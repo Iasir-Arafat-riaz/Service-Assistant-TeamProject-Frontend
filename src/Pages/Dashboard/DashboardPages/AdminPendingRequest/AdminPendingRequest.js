@@ -129,7 +129,7 @@ export default function AdminPendingRequest() {
   const [serviceInfo, setServiceInfoId] = useState(null);
 
   const handleSubmitCategory = async () => {
-    const url = `http://localhost:5000/api/v1/service-category/${categoryId}`;
+    const url = `https://dry-sea-00611.herokuapp.com/api/v1/service-category/${categoryId}`;
     const res = await axios.patch(url, serviceInfo);
 
   };
@@ -137,7 +137,7 @@ export default function AdminPendingRequest() {
   let rows;
 
   useEffect(() => {
-    const url = "http://localhost:5000/api/v1/pending-services";
+    const url = "https://dry-sea-00611.herokuapp.com/api/v1/pending-services";
     const pendingService = async () => {
       const service = await axios.get(url).then((res) => res.data);
       setPendingService(service.data);
