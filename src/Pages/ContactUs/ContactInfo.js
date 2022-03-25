@@ -20,7 +20,7 @@ const ContactInfo = () => {
         {
             "icon": "https://i.ibb.co/JC6CwVT/phoneicon.png",
             "name": "Phone Number",
-            "desc": "+8801907851900",
+            "desc": "+8801622118833",
             "id": 3
         }
     ]

@@ -9,6 +9,10 @@ const PrivateUserRoute = ({ children, ...rest }) => {
   let location = useLocation();
   const { allUser, getLoad, user } = useSelector(allData);
 
+
+if(!user.email){
+  return (getLoad)
+}
   return (
     <div>
       {user.email ? children : <Navigate state={{ from: location }} to="/login"></Navigate>}

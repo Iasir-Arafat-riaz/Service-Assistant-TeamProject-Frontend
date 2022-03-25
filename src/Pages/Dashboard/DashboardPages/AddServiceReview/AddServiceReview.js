@@ -61,7 +61,7 @@ const AddServiceReview = () => {
                 setAlert(true);
                 setLoading(true);
                 const { user, review, rating, date, uid, userPhoto } = data;
-                axios.post(`http://localhost:5000/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
+                axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
             });
         } else {
             UpdateReview(data);
@@ -85,7 +85,7 @@ const AddServiceReview = () => {
         setUpdateing(true);
         // useEffect(() => {
         console.log(user.uid);
-        axios.put(`http://localhost:5000/singleservice/updatereview/${user.uid}`, { ...data, rating: value, serviceId: id }).then(() => {
+        axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview/${user.uid}`, { ...data, rating: value, serviceId: id }).then(() => {
             reset();
             setUpdateing(false);
         });
