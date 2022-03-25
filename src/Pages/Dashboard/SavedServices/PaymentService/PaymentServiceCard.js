@@ -22,13 +22,13 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
     const { user } = useSelector(allData);
     // const price = orderService.Price;
     for (const order of orderService) {
-        price = order.Price + order.Price;
+        price = order?.Price + order?.Price;
     }
 
     // 
 
     useEffect(() => {
-        fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
+        fetch('http://localhost:5000/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -37,7 +37,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
         })
             .then(res => res.json())
             .then(data => {
-                setClientSecret(data.clientSecret);
+                setClientSecret(data?.clientSecret);
             });
     }, [price]);
 
@@ -86,16 +86,17 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
             setError('');
             setSuccess("your payment is done");
             setProcessing(false);
-            for (const order of orderService) {
-                const message = `Your payment for ${order?.parentService?.Title} has been completed`;
-                dispatch(sendNotification({ message, email: user.email, image: order?.parentService?.Image }))
-            }
+            // for (const order of orderService) {
+            const message = `Your payment has been completed for saved service`;
+            dispatch(sendNotification({ message, email: user.email, image: orderService[0]?.parentService?.Image }))
+            // }
             axios.post('https://dry-sea-00611.herokuapp.com/saveservice/addonorderscollection', orderService).then(() => {
                 handleNextStep();
             });
         };
     };
 
+    console.log(orderService)
     const particlesInit = (main) => {
         console.log(main);
 
@@ -204,7 +205,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                     "square",
                     "polygon",
                     "rectangle",
-        
+
                 ],
                 options: {
                     polygon: [
@@ -215,7 +216,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                             sides: 6
                         }
                     ],
-                  
+
                 }
             }
         }
@@ -251,16 +252,16 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                         Pay $ {price}
                     </button>}
 
-                    {success && 
-                    <>
-                    <Alert sx={{ mt: 2, mb: 2 }} severity="success">{success}</Alert>
-                    <Particles
+                    {success &&
+                        <>
+                            <Alert sx={{ mt: 2, mb: 2 }} severity="success">{success}</Alert>
+                            <Particles
                                 id="tsparticles"
                                 init={particlesInit}
                                 loaded={particlesLoaded}
                                 options={options}
                             />
-                    </>
+                        </>
                     }
                     {error && <Alert severity="error">{error}</Alert>
                     }

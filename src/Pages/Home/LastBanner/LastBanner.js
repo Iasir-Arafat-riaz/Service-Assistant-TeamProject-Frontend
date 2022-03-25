@@ -7,9 +7,13 @@ import './LastBanner.css'
 const LastBanner = () => {
     return (
         <Box sx={{ height: '80vh', }}>
+
             <Container sx={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
+
                 <Grid container spacing={4} sx={{ height: '100%' }} alignItems='center'>
+
                     <Grid item md={6} xs={12}>
+
                         <Typography color="#2d3e50" gutterBottom variant='h3' sx={{ fontWeight: '900' }}>Let's grow together.</Typography>
                         <Typography gutterBottom variant='body1' sx={{}}>We're building a culture at service A to Z where amazing people (like you) can do their best work. If you're ready to grow your career and help millions of organizations grow better, you've come to the right place.</Typography>
                         <Button

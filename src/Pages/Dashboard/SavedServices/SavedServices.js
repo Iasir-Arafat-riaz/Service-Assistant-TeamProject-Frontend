@@ -11,6 +11,7 @@ import SelectedServices from './SelectedServices/SelectedServices';
 import OrderInfo from '../../SingleService/ServiceCategory/OrderInfo/OrderInfo';
 import PaymentService from './PaymentService/PaymentService';
 import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -48,6 +49,7 @@ const SavedServices = () => {
     const [orderService, setOrderService] = useState([]);
     const [activeStep, setActiveStep] = React.useState(0);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     // const { providers, serviceProviderLoading, singleServiceDetail, user } = useSelector(allData);
 
@@ -70,10 +72,13 @@ const SavedServices = () => {
 
     // const [savedService, setSavedService] = useState([]);
 
+    // const { providers, serviceProviderLoading, singleServiceDetail, user } = useSelector(allData);
 
-    useEffect(() => {
-        dispatch(serviceProviders());
-    }, [dispatch])
+    // useEffect(() => {
+    //     if (singleServiceDetail._id) {
+    //         dispatch(serviceProviders(singleServiceDetail.serviceProvider));
+    //     }
+    // }, [dispatch, singleServiceDetail])
 
     // input checked
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -139,10 +144,21 @@ const SavedServices = () => {
     return (
         <>
             {
-
                 cartItems.length === 0 ? <Box>
+
                     <Typography variant='h6'>You don't saved any service</Typography>
-                    <Button variant='outlined' style={{ borderColor: "#", color: "#" }}></Button>
+
+                    <Button variant='outlined'
+                        onClick={() => navigate('/services')}
+                        style={{
+                            borderColor: "#FF5E14",
+                            color: "#FF5E14",
+                            marginTop: 15,
+                            letterSpacing: 2
+                        }}>
+                        SERVICES
+                    </Button>
+
                 </Box>
                     :
                     <Grid container className="save_service">
@@ -152,7 +168,7 @@ const SavedServices = () => {
 
                             <Box>
 
-                                <Stepper activeStep={activeStep} className="" orientation="vertical">
+                                <Stepper activeStep={activeStep} orientation="vertical">
                                     {
                                         steps.map(({ step, label }, index) => (
                                             <Step key={label}>

@@ -73,11 +73,7 @@ const SingleProviderDetails = () => {
         setExpanded(isExpanded ? panel : false);
     };
 
-    // const matchProvider = providerProfiles.find(provider => provider._id === providerId);
 
-    // console.log(matchProvider);
-
-    // console.log(providerProfiles?.email);
 
     const onSubmit = data => {
         if (data?.ShopName !== '') {
@@ -167,7 +163,14 @@ const SingleProviderDetails = () => {
         }
     }, [watch('backgroundImage')]);
 
+    // rating calculate
 
+    let totalRating;
+    if (providerProfiles?.reviews) {
+        for (const review of providerProfiles?.reviews) {
+            totalRating = review?.rating * review?.rating / 2;
+        }
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -205,10 +208,6 @@ const SingleProviderDetails = () => {
                                                             </IconButton>
                                                         </label>
 
-                                                        {/* </Button> */}
-
-
-                                                        {/* <Input style={{ marginBottom: 10, width: 105, }} {...register("backgroundImage")} accept="image/*" type="file" /> */}
 
                                                     </Box>
                                                 </Box>
@@ -409,24 +408,27 @@ const SingleProviderDetails = () => {
                                                     <Typography sx={{ fontWeight: 'bold' }}>Location: <em>{providerProfiles?.address}</em></Typography>
                                             }
 
-                                            <Box
-                                                sx={{
+                                            {
+                                                providerProfiles?.reviews?.length > 0 &&
+                                                <Box
+                                                    sx={{
 
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    my: 2
-                                                }}
-                                            >
-                                                {/* <Box sx={{ fontWeight: 'bold', pr: 1 }}>Ratings:  </Box> */}
-                                                <Rating
-                                                    name="text-feedback"
-                                                    value='4'
-                                                    readOnly
-                                                    precision={0.5}
-                                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                                />
-                                                <em style={{ marginLeft: '5px' }}> (125 feedbacks)</em>
-                                            </Box>
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        my: 2
+                                                    }}
+                                                >
+                                                    <Rating
+                                                        name="text-feedback"
+                                                        value={totalRating}
+                                                        readOnly
+                                                        precision={0.5}
+                                                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                                    />
+                                                    <em style={{ marginLeft: '5px' }}> ({providerProfiles?.reviews?.length} feedbacks)</em>
+                                                </Box>
+                                            }
+
                                         </Box>
                                     </Grid>
                                 </Grid>

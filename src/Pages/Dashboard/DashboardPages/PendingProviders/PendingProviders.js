@@ -129,9 +129,9 @@ const PendingProviders = () => {
                                     </TableCell>
                                     <TableCell >{provider?.Name}</TableCell>
                                     <TableCell >
-                                        <Avatar src={provider?.data?.travelImg} alt="providerImage" />
+                                        <Avatar src={provider?.data?.Logo} alt="providerImage" />
                                     </TableCell>
-                                    <TableCell >{provider?.data?.providerName}</TableCell>
+                                    <TableCell >{provider?.data?.ShopName}</TableCell>
                                     <TableCell >{provider?.data?.number}</TableCell>
                                     <TableCell >{provider?.data?.email}</TableCell>
                                     <TableCell >{provider?.data?.address}</TableCell>
