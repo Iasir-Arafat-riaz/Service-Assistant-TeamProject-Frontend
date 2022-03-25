@@ -7,12 +7,16 @@ import { allData } from '../../redux/dataSlice/dataSlice';
 
 const PrivateUserRoute = ({ children, ...rest }) => {
   let location = useLocation();
-  const { allUser, getLoad, user } = useSelector(allData);
+  const { allUser,  user,loading } = useSelector(allData);
 
 
-if(!user.email){
-  return (getLoad)
-}
+// if(loading){
+//   // console.log(loading);
+//   return (<h1>Loading...</h1>)
+  
+// }
+
+
   return (
     <div>
       {user.email ? children : <Navigate state={{ from: location }} to="/login"></Navigate>}
