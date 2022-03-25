@@ -36,7 +36,7 @@ import AddServiceReview from "./Pages/Dashboard/DashboardPages/AddServiceReview/
 import AppointmentRequest from "./Pages/Dashboard/DashboardPages/ServiceProvider/Appointment/AppointmentRequest";
 import LoginPopup from "./Pages/Login/LoginPopup/LoginPopup";
 import { useEffect, useState } from "react";
-import { allData } from "./redux/dataSlice/dataSlice";
+import { allData, getProviderDetailsByEmail } from "./redux/dataSlice/dataSlice";
 import PendingProviders from "./Pages/Dashboard/DashboardPages/PendingProviders/PendingProviders";
 
 import useSocket from "./Hooks/useSocket";
@@ -66,9 +66,6 @@ import OrdersChat from "./Pages/Dashboard/OrdersChat/OrdersChat";
 import NotificationCard from "./Pages/SharedRoute/Navigation/Component/NotificationCard";
 
 import AddQuestions from "./Pages/Dashboard/DashboardPages/AddQuestions/AddQuestions";
-
-import Career from "./Pages/Career/Career";
-
 import Register from "./Pages/Login/UserLogin/Register/Register";
 
 import Loading from "./Pages/SharedRoute/Loader/Loading";
@@ -126,6 +123,11 @@ const App = () => {
       })
     });
   }, [])
+  useEffect(() => {
+    if (user.role === 'provider') {
+      dispatch(getProviderDetailsByEmail({ email: user.email }))
+    }
+  }, [user])
 
   return (
     <BrowserRouter>
@@ -217,7 +219,6 @@ const App = () => {
         </Route>
 
         <Route path="/contact" element={<ContactUs />} />
-        <Route path="/career" element={<Career />} />
         <Route path="/home/providerProfile/:providerId" element={<SingleProviderDetails />} />
         {/* <Route path="/myorderspage" element={<MyOrderPage />} /> */}
         <Route
