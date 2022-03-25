@@ -5,7 +5,6 @@ import { Box } from '@mui/system';
 import { useForm } from "react-hook-form";
 import Footer from '../SharedRoute/Footer/Footer';
 import axios from 'axios';
-import './contactUs.css';
 
 const ContactForm = () => {
 
