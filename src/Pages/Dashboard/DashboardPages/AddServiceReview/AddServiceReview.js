@@ -7,17 +7,17 @@ import { Box } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { allData, parentServiceId } from '../../../../redux/dataSlice/dataSlice';
-import { singleService } from '../../../../redux/dataSlice/dataSlice';
+import { allData } from '../../../../redux/dataSlice/dataSlice';
 
 const AddServiceReview = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { singleServiceDetails, user, reviewIndex, providerEmail } = useSelector(allData);
+    const { user, reviewIndex, providerEmail } = useSelector(allData);
     const [value, setValue] = React.useState(0);
     const [openBox, setOpenBox] = useState(false);
     const [alert, setAlert] = useState(false);
+    const [singleServiceDetails, setSingleServiceDetails] = useState([]);
     const [updating, setUpdateing] = useState(false);
     const [loading, setLoading] = useState(true);
     const { register, handleSubmit, reset } = useForm();
@@ -25,9 +25,12 @@ const AddServiceReview = () => {
 
 
     useEffect(() => {
-        dispatch(singleService());
+        // dispatch(singleService(id));
+        axios.get('https://dry-sea-00611.herokuapp.com/singleservice').then(res => {
+            setSingleServiceDetails(res.data)
+        })
     }, [dispatch, loading, updating, deleting, alert, reviewIndex]);
-
+    //  loading, updating, deleting, alert, reviewIndex
 
     // input style
     const inputStyle = {
@@ -36,14 +39,15 @@ const AddServiceReview = () => {
     };
 
 
-
     // add review to user 
 
     const matchService = singleServiceDetails?.find(service => parseInt(service?.parentService) === parseInt(id));
+    // const matchService = singleServiceDetails?.find(service => service?.parentService === parsI);
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     const matchReviews = matchService?.Reviews?.find(review => review?.id === user.uid);
-
+    // console.log("singleServiceDetailssingleServiceDetails)
+    console.log("singleServiceDetails", matchService)
     // submit form
     const onSubmit = data => {
 
@@ -57,7 +61,7 @@ const AddServiceReview = () => {
                 setAlert(true);
                 setLoading(true);
                 const { user, review, rating, date, uid, userPhoto } = data;
-                axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
+                axios.post(`http://localhost:5000/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
             });
         } else {
             UpdateReview(data);
@@ -80,7 +84,8 @@ const AddServiceReview = () => {
     const UpdateReview = (data) => {
         setUpdateing(true);
         // useEffect(() => {
-        axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview?parentId=${id}&&uid=${user.uid}`, { ...data, rating: value }).then(() => {
+        console.log(user.uid);
+        axios.put(`http://localhost:5000/singleservice/updatereview/${user.uid}`, { ...data, rating: value, serviceId: id }).then(() => {
             reset();
             setUpdateing(false);
         });

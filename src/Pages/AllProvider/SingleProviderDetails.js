@@ -608,138 +608,59 @@ const SingleProviderDetails = () => {
                                         }
                                     </Grid>
 
-                                    <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Customer Reviews</Typography>
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>ID</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > assigned person is technically sound and well mannered. very good service received from him.
 
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
+                                    {
+                                        providerProfiles?.reviews.length > 0 && <Typography variant='h5' sx={{ fontWeight: 'bold', my: 3, color: '#363636' }}>Customer Reviews</Typography>
+                                    }
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>MR</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > The service man was very well mannared and efficient on his tasks. Thanks</Typography>
-                                        </Grid>
-                                    </Grid>
+                                    {
+                                        providerProfiles?.reviews.length > 0 &&
+                                        <Grid container sx={{ my: 2 }}>
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>RH</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > Excellent and very professional. very friendly and polite. highly recommended
+                                            {
+                                                providerProfiles.reviews.map(review => <>
+                                                    <Grid item xs={2.5} md={1.25} >
+                                                        <Box
+                                                            sx={{
+                                                                width: '60px',
+                                                                height: '60px',
+                                                                backgroundImage: `url(${review.userPhoto})`,
+                                                                backgroundSize: "cover",
+                                                                borderRadius: '50%',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                border: '5px solid #f5efef',
+                                                                justifyContent: 'center',
+                                                            }}
+                                                        >
+                                                        </Box>
+                                                    </Grid>
+                                                    <Grid item xs={9} md={10} sx={{ mb: 3 }}>
+                                                        <Rating
+                                                            name="text-feedback"
+                                                            value={review?.rating}
+                                                            readOnly
+                                                            precision={0.5}
+                                                            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                                        />
+                                                        <Typography gutterBottom variant="h6" component="div"
+                                                            sx={{ color: "#707070" }}>
+                                                            {review?.userComment}
+                                                        </Typography>
+                                                    </Grid>
+                                                </>)
+                                            }
 
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
 
-                                    <Grid container sx={{ my: 2 }}>
-                                        <Grid item xs={2.5} md={1.25}>
-                                            <Box
-                                                sx={{
-                                                    width: '60px',
-                                                    height: '60px',
-                                                    background: '#ffca28',
-                                                    borderRadius: '50%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    border: '5px solid #f5efef',
-                                                    justifyContent: 'center',
-                                                }}
-                                            >
-                                                <Typography variant='h6' sx={{ fontWeight: 'bold', }}>MS</Typography>
-                                            </Box>
-                                        </Grid>
-                                        <Grid item xs={9} md={10}>
-                                            <Rating
-                                                name="text-feedback"
-                                                value='4'
-                                                readOnly
-                                                precision={0.5}
-                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                            />
-                                            <Typography gutterBottom variant="h6" component="div"
-                                                sx={{ color: "#707070" }}
-                                            > The mechanics were very good and well behaved. So far I am satisfied
 
-                                            </Typography>
+
                                         </Grid>
-                                    </Grid>
+                                    }
+
+
                                 </Grid>
+
                             </Grid>
 
 

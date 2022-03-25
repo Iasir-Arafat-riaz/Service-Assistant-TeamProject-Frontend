@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Box, CardHeader } from "@mui/material";
+import { Avatar, Box, CardHeader } from "@mui/material";
 import "./AllProvider.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -79,11 +79,8 @@ const AllProviderChild = (props) => {
           backgroundColor: "#fff",
         }}
       >
-        <img
-          src={Logo}
-          style={{ borderRadius: "50%", height: 50, width: 50 }}
-          alt="prvodierImage"
-        />
+        <Avatar alt="providerImage" src={Logo} sx={{ height: 50, width: 50 }} />
+
       </Box>
 
       <CardContent sx={{ pt: 0 }}>

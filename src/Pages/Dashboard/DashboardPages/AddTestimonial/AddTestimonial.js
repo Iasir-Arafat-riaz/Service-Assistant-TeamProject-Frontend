@@ -35,7 +35,7 @@ const AddTestimonial = () => {
 
     return (
         <>
-            <Paper elevation={2} sx={{ px: 3, pt: 3, width: '50%' }}>
+            <Paper elevation={2} sx={{ px: 3, pt: 3, width: { xs: "80%", md: "70%", lg: '70%', xl: '50%' } }}>
 
                 <Typography variant='h6' sx={{ fontWeight: 'bold', mb: 2, fontSize: 21 }}>Your feedback</Typography>
 
