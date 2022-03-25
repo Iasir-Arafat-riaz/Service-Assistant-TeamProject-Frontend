@@ -1,5 +1,4 @@
 import React from 'react';
-import './contactUs.css';
 import { Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -34,10 +33,10 @@ const ContactInfo = () => {
 
             <Typography variant='body2' sx={{ textAlign: 'center', display: 'block', mb: 5, mt: 2 }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque, officiis.</Typography>
 
-            <Box container sx={{ columnGap: 5, display: 'flex' }} className="contact_us">
+            <Box container sx={{ columnGap: 5, display: { md: 'flex', xs: 'block' } }} className="contact_us">
 
                 {
-                    contactInfo.map(contact => <Grid item sx={{ boxShadow: 2, mb: 2, p: 2, borderRadius: 5, borderBottom: '2px solid #FF5E14', width: 360 }} >
+                    contactInfo.map(contact => <Grid item sx={{ boxShadow: 2, mb: 2, p: 2, borderRadius: 5, borderBottom: '2px solid #FF5E14', width: { md: 360, xs: "100%" } }} >
 
                         <Box sx={{ p: 2 }}>
 
