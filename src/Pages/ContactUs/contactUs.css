@@ -1,0 +1,19 @@
+@media only screen and (max-width: 600px) {
+    .contact_us{
+        display: grid !important;
+        justify-content: center !important;
+        grid-template-columns: repeat(1,1fr);
+    }
+  }
+@media only screen and (max-width: 1000px) {
+    .contact_us{
+        display: grid !important;
+        justify-content: center !important;
+        grid-template-columns: repeat(2,1fr);
+    }
+  }
+@media only screen and (max-width: 600px) {
+    /* .contact_form input{
+      width: 100% !important;
+    } */
+  }
