@@ -81,7 +81,7 @@ const SavedServices = () => {
 
     // setCheckInput(false);
     useEffect(() => {
-        setCartItems(JSON.parse(localStorage.getItem('cartItems')));
+        setCartItems(JSON.parse(localStorage?.getItem('cartItems')));
         // const getItems = JSON.parse(localStorage.getItem("selectedService"));
     }, [count])
 
@@ -100,7 +100,7 @@ const SavedServices = () => {
         }).then((willDelete) => {
             if (willDelete) {
                 const matchService = selectedService?.filter(service => service.subId !== id);
-                localStorage.setItem('cartItems', JSON.stringify(matchService))
+                localStorage?.setItem('cartItems', JSON.stringify(matchService))
                 setCount(count + 2);
                 setSelectedService(matchService);
             }
