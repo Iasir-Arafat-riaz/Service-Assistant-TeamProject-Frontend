@@ -8,7 +8,7 @@ const ContactInfo = () => {
         {
             "icon": 'https://i.ibb.co/6HTPC31/mapicon.png',
             "name": "Mailing Address",
-            "desc": "121 King Street, Melbourne Victoria 3000 Aushtralia",
+            "desc": "Dhaka,Banladesh City Center, Motijheel",
             "id": 1
         },
         {

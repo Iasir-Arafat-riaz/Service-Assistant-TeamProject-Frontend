@@ -37,7 +37,7 @@ import { allData } from "../../redux/dataSlice/dataSlice";
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import Skeleton from '@mui/material/Skeleton';
 import useFirebase from "../../Hooks/useFirebase";
-
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 
@@ -262,6 +262,19 @@ const Dashboard = (props) => {
                   </ListItemIcon>
                   <ListItemText primary={"Provider Overview"} />
                 </ListItem>
+                {
+                  user?.providerDetailId && <ListItem
+                    component={NavLink}
+                    to={`/home/providerProfile/${user.providerDetailId}`}
+                    button
+                    style={activeStyle}
+                  >
+                    <ListItemIcon>
+                      <AccountCircleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={"Your Profile"} />
+                  </ListItem>
+                }
 
                 <ListItem
                   component={NavLink}

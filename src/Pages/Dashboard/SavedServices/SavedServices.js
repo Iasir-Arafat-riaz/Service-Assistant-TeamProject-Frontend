@@ -140,7 +140,7 @@ const SavedServices = () => {
         <>
             {
 
-                cartItems.length === 0 ? <Box>
+                cartItems?.length === 0 ? <Box>
                     <Typography variant='h6'>You don't saved any service</Typography>
                     <Button variant='outlined' style={{ borderColor: "#", color: "#" }}></Button>
                 </Box>
@@ -169,7 +169,7 @@ const SavedServices = () => {
                                 </Stepper>
 
                                 {
-                                    selectedService.length > 0 && activeStep !== 4 && <Button variant='outlined' style={stpperButton} sx={{ width: { xs: "50%", lg: "90%" } }} onClick={handleNextStep}> NEXT </Button>
+                                    selectedService?.length > 0 && activeStep !== 4 && <Button variant='outlined' style={stpperButton} sx={{ width: { xs: "50%", lg: "90%" } }} onClick={handleNextStep}> NEXT </Button>
                                 }
 
                                 {

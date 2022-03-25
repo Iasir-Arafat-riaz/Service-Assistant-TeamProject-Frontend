@@ -182,7 +182,7 @@ export const updateMessageStatus = createAsyncThunk("update/notificationstatus",
 export const sendNotification = createAsyncThunk("sendNotification/notification",
     async (info) => {
         const modifyInfo = { ...info, seen: false, time: new Date() }
-        
+
         const response = await axios.post(`https://dry-sea-00611.herokuapp.com/notification`, modifyInfo)
         return response.data;
     }
@@ -211,6 +211,15 @@ export const getSingleOrdersChat = createAsyncThunk(
     async (info) => {
         // 
         const response = await axios.get(`https://dry-sea-00611.herokuapp.com/chat/singleOrder/${info.id}`)
+
+        return response.data;
+    }
+)
+export const getProviderDetailsByEmail = createAsyncThunk(
+    "data/getProviderDetailsByEmail",
+    async (info) => {
+        // 
+        const response = await axios.get(`https://dry-sea-00611.herokuapp.com/providerdetials/provider?email=${info.email}`)
 
         return response.data;
     }
@@ -316,7 +325,7 @@ export const dataSlice = createSlice({
                 state.loading = true;
             })
             .addCase(isAdmin.fulfilled, (state, action) => {
-                
+
                 state.user.role = action.payload.role
                 state.loading = false;
             })
@@ -335,7 +344,7 @@ export const dataSlice = createSlice({
             })
             .addCase(singleService.pending, (state, action) => {
                 state.singleServiceLoading = true;
-                
+
             })
             .addCase(singleService.fulfilled, (state, { payload }) => {
                 state.singleServiceDetail = payload;
@@ -379,17 +388,17 @@ export const dataSlice = createSlice({
                 state.notificationLoading = false;
             })
             .addCase(sendNotification.fulfilled, (state, { payload }) => {
-                
-                
+
+
                 if (state.user.email === payload.email) {
                     state.notifications.push(payload)
                 }
             })
             .addCase(sendNotification.pending, (state, { payload }) => {
-                
+
             })
             .addCase(sendNotification.rejected, (state, { payload }) => {
-                
+
             })
             .addCase(deleteTestimonial.pending, (state, { payload }) => {
                 state.deleteLoading = true;
@@ -413,6 +422,12 @@ export const dataSlice = createSlice({
             .addCase(getSingleOrdersChat.fulfilled, (state, { payload }) => {
                 state.orderChats = payload;
             })
+            .addCase(getProviderDetailsByEmail.fulfilled, (state, { payload }) => {
+                // state.orderChats = payload;
+                console.log(payload, 'getDeatilsadkfjdfkdjfkdjfkjd');
+                state.user.providerDetailId = payload._id;
+            })
+
 
     },
 })

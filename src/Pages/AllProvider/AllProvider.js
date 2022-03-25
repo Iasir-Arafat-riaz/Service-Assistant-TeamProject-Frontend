@@ -10,26 +10,25 @@ import "swiper/css/pagination";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // import required modules  
-import { Stack, Grid, IconButton } from "@mui/material";
+import { Stack, Grid, IconButton, Skeleton } from "@mui/material";
 import { Container, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import AllProviderChild from './AllProviderChild';
 
 const AllProvider = () => {
 
-    const [providers, setProviders] = useState([])
+    const [providers, setProviders] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        setLoading(true)
         const api = `https://dry-sea-00611.herokuapp.com/providerdetials`
         axios.get(api).then(res => {
             setProviders(res.data)
+            setLoading(false);
         })
     }, []);
     const [my_swiper, set_my_swiper] = useState({});
-    const [my_swiper_status, set_my_swiper_status] = useState({
-        isBeginning: true,
-        isEnd: false
-    });
     const btnStyle = {
         background: 'white',
         boxShadow: '0 2px 5px 0 rgb(0 0 0 / 40%)',
@@ -39,6 +38,7 @@ const AllProvider = () => {
         zIndex: '999'
 
     }
+
 
 
 
@@ -72,6 +72,7 @@ const AllProvider = () => {
                     }}
                     slidesPerView={4}
                     spaceBetween={15}
+                    loop={true}
                     speed={1000}
                     modules={[Autoplay]}
 
@@ -80,19 +81,27 @@ const AllProvider = () => {
                         disableOnInteraction: false,
                     }}
                     grabCursor={true}
-                    onSlideChange={(ev) => {
-                        set_my_swiper(ev)
-                        set_my_swiper_status({
-                            isBeginning: ev.isBeginning,
-                            isEnd: ev.isEnd,
-                        })
-                    }}
                     onInit={(ev) => {
                         set_my_swiper(ev)
                     }}
                 >
                     {
-                        providers.map(singleData => <SwiperSlide key={singleData._id}><AllProviderChild provider={singleData}></AllProviderChild></SwiperSlide>)
+                        loading ? <>
+                            {[...new Array(4)].map((ske, index) => <SwiperSlide key={index} spacing={1} >
+                                <Stack >
+                                    <Skeleton animation='wave' variant="rectangular" width={250} sx={{ borderRadius: 2 }} height={150} />
+                                    <Skeleton animation="wave" width={50} />
+                                    <Skeleton animation="wave" width={250} />
+                                    <Skeleton animation="wave" width={80} />
+                                    <Skeleton animation="wave" width={250} height={50} />
+
+
+                                </Stack>
+                            </SwiperSlide>
+                            )}
+
+                        </>
+                            : providers.map(singleData => <SwiperSlide key={singleData._id}><AllProviderChild provider={singleData}></AllProviderChild></SwiperSlide>)
                     }
                 </Swiper>
                 <Stack justifyContent='space-between' direction='row'
@@ -127,16 +136,12 @@ const AllProvider = () => {
                         zIndex: '99'
                     }}
                 >
-                    {
-                        my_swiper_status.isBeginning ? <Box></Box> : <IconButton sx={btnStyle} onClick={() => my_swiper.slidePrev()}>
-                            <ArrowBackIcon sx={{ color: 'rgb(255, 94, 20)' }}></ArrowBackIcon>
-                        </IconButton>
-                    }
-                    {
-                        my_swiper_status.isEnd ? <Box></Box> : <IconButton onClick={() => my_swiper.slideNext()}
-                            sx={btnStyle}
-                        ><ArrowForwardIcon sx={{ color: 'rgb(255, 94, 20)' }}></ArrowForwardIcon></IconButton>
-                    }
+                    <IconButton sx={btnStyle} onClick={() => my_swiper.slidePrev()}>
+                        <ArrowBackIcon sx={{ color: 'rgb(255, 94, 20)' }}></ArrowBackIcon>
+                    </IconButton>
+                    <IconButton onClick={() => my_swiper.slideNext()}
+                        sx={btnStyle}
+                    ><ArrowForwardIcon sx={{ color: 'rgb(255, 94, 20)' }}></ArrowForwardIcon></IconButton>
 
 
                 </Stack>

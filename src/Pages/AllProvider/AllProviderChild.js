@@ -4,28 +4,32 @@ import Card from "@mui/material/Card";
 import Rating from "@mui/material/Rating";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Avatar, Box, CardHeader } from "@mui/material";
+import { Avatar, Box, } from "@mui/material";
 import "./AllProvider.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const AllProviderChild = (props) => {
   const {
-    displayName,
-    email,
-    image,
-    bio,
+    Logo,
+    LogoImg,
+    ShopName,
+    about,
     address,
     backgroundImage,
-    photoURL,
-    role,
-    rating,
-    createdAt,
-    uid,
-    _id,
-    Logo
+    bio,
+    date,
+    email,
+    number,
+    offerService,
+    providerId,
+    reviewUser,
+    reviews,
+    userName,
+    AvgRating,
+    _id
   } = props.provider;
+
+  console.log(props.provider);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -57,7 +61,7 @@ const AllProviderChild = (props) => {
   };
 
   return (
-    <Card sx={{ ml: 2 }} onClick={() => handleSeeDetails(_id)} style={{ border: "none", boxShadow: "none" }}>
+    <Card sx={{ ml: 2 }} onClick={() => handleSeeDetails(_id)} style={{ border: "none", boxShadow: "none", cursor: 'pointer' }}>
       <Box
         sx={{
           backgroundImage: `url(${backgroundImage})`,
@@ -79,8 +83,11 @@ const AllProviderChild = (props) => {
           backgroundColor: "#fff",
         }}
       >
-        <Avatar alt="providerImage" src={Logo} sx={{ height: 50, width: 50 }} />
-
+        <Avatar
+          src={Logo}
+          sx={{ borderRadius: "50%", height: 50, width: 50 }}
+          alt="prvodierImage"
+        />
       </Box>
 
       <CardContent sx={{ pt: 0 }}>
@@ -110,24 +117,25 @@ const AllProviderChild = (props) => {
             Verified
           </span>
         </Typography>
-        <Typography gutterBottom variant="p" component="div">
-          <Rating name="read-only" value={parseFloat(rating)} readOnly />
+        <Typography variant="body2" color="#363636" fontSize={12} >
+          <span style={{ color: '#55acee' }}>{ShopName}</span>
         </Typography>
         <Typography variant="h6" color="#363636" fontSize={16} component="div">
-          {bio}
+          {bio.slice(0, 25)}
         </Typography>
-        <Typography variant="p" color="#363636" fontSize={16} component="div">
-          by <span style={{ color: '#55acee' }}>{displayName}</span>
+        <Typography gutterBottom variant="p" component="div" sx={{ display: 'flex', alignItems: 'center', }}>
+          <Rating name="read-only" value={parseFloat(AvgRating)} readOnly />
+          <span style={{ color: '#767676', fontSize: '11px', marginLeft: '4px' }}>({reviewUser} Feedback)</span>
+        </Typography>
+        <Typography variant="p" color="#363636" fontSize={14} component="div">
+          By <span style={{ color: '#55acee' }}>{userName}</span>
         </Typography>
 
       </CardContent>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2 }}>
-        <div>{address}</div>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2, }}>
+        <p style={{ fontSize: '14px' }}>{address}</p>
       </Box>
-      {/* <IconButton aria-label="settings">
-          <MoreVertIcon ></MoreVertIcon>
-        </IconButton> */}
-    </Card>
+    </Card >
   );
 };
 
