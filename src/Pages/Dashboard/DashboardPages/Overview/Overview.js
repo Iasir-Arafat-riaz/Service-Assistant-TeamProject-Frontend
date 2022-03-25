@@ -30,9 +30,9 @@ const Overview = () => {
     });
     useEffect(() => {
         setLoading(true);
-        let one = "https://dry-sea-00611.herokuapp.com/orders/"
-        let two = "https://dry-sea-00611.herokuapp.com/provider/allProvider"
-        let three = "https://dry-sea-00611.herokuapp.com/singleservice/count"
+        let one = "http://localhost:5000/orders/"
+        let two = "http://localhost:5000/provider/allProvider"
+        let three = "http://localhost:5000/singleservice/count"
         const requestOne = axios.get(one);
         const requestTwo = axios.get(two);
         const requestThree = axios.get(three);
@@ -62,7 +62,7 @@ const Overview = () => {
             })
         }
     }, [loading])
-    
+
     //
     if (loading) {
         return <Stack alignItems='center' >

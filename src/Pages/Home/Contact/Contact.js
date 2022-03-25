@@ -22,7 +22,7 @@ const Contact = () => {
 
   const onSubmit = data => {
     setLoading(true);
-    axios.post('https://dry-sea-00611.herokuapp.com/sendEmail', data)
+    axios.post('http://localhost:5000/sendEmail', data)
       .then(function (response) {
         setLoading(false);
       })

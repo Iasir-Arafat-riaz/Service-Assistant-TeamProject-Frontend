@@ -13,12 +13,12 @@ const HookForm = ({ flag, setFlag }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   let allData;
   const onSubmit = data => {
-    
+
     // allData = [...data];
 
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
+    const api = `http://localhost:5000/addquestions`
     axios.post(api, data).then((res) => {
-      
+
       if (res.data.insertedId) {
         flag ? setFlag(false) : setFlag(true)
         reset();
@@ -28,7 +28,7 @@ const HookForm = ({ flag, setFlag }) => {
     reset()
   };
 
-  
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 
 const ProviderTableRow = ({ row }) => {
     const [status, setStatus] = useState(row.status);
-    
+
     const handleChange = e => {
         setStatus(e.target.value);
         if (e.target.value === 'completed') {
-            axios.put(`https://dry-sea-00611.herokuapp.com/orders/changestatus/${row._id}`, { updateStatus: 'completed' })
+            axios.put(`http://localhost:5000/orders/changestatus/${row._id}`, { updateStatus: 'completed' })
         }
     }
     return (

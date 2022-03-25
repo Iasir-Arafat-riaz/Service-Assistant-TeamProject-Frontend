@@ -35,7 +35,7 @@ const OrdersChat = ({ single }) => {
     useEffect(() => {
         //user chat order card
         if (urlId) {
-            axios.get(`https://dry-sea-00611.herokuapp.com/orders/${urlId}`)
+            axios.get(`http://localhost:5000/orders/${urlId}`)
                 .then(res => {
                     setOrderInfo(res.data);
                     setId(urlId)
@@ -51,7 +51,7 @@ const OrdersChat = ({ single }) => {
 
     // get info of provider
     const getClient = () => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/users/${orderInfo.providerEmail}`)
+        axios.get(`http://localhost:5000/users/${orderInfo.providerEmail}`)
             .then(res => {
                 setClient({
                     photoURL: res.data?.photoURL,

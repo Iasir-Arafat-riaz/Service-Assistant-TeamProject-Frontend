@@ -21,7 +21,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 
 const ShowQuestions = (props) => {
-  
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -31,10 +31,10 @@ const ShowQuestions = (props) => {
 
   useEffect(() => {
 
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
+    const api = `http://localhost:5000/addquestions`
     axios.get(api).then(res => {
       setQuestionsAnswers(res.data)
-      
+
     })
   }, [props.flag, isDelete]);
   // delete questions and answer
@@ -49,7 +49,7 @@ const ShowQuestions = (props) => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          const api = `https://dry-sea-00611.herokuapp.com/addquestions/${id}`
+          const api = `http://localhost:5000/addquestions/${id}`
           axios.delete(api).then(res => {
             setIsDelete(true)
             swal("Questions and answer is deleted!", {
@@ -67,9 +67,9 @@ const ShowQuestions = (props) => {
   const handleEdit = id => {
     setQuestionId(id)
     handleOpen()
-    
+
   }
-  
+
   return (
     <>
       <TableContainer component={Paper}>

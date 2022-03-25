@@ -28,7 +28,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
     // 
 
     useEffect(() => {
-        fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
+        fetch('http://localhost:5000/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -90,7 +90,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                 const message = `Your payment for ${order?.parentService?.Title} has been completed`;
                 dispatch(sendNotification({ message, email: user.email, image: order?.parentService?.Image }))
             }
-            axios.post('https://dry-sea-00611.herokuapp.com/saveservice/addonorderscollection', orderService).then(() => {
+            axios.post('http://localhost:5000/saveservice/addonorderscollection', orderService).then(() => {
                 handleNextStep();
             });
         };
@@ -204,7 +204,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                     "square",
                     "polygon",
                     "rectangle",
-        
+
                 ],
                 options: {
                     polygon: [
@@ -215,7 +215,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                             sides: 6
                         }
                     ],
-                  
+
                 }
             }
         }
@@ -251,16 +251,16 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                         Pay $ {price}
                     </button>}
 
-                    {success && 
-                    <>
-                    <Alert sx={{ mt: 2, mb: 2 }} severity="success">{success}</Alert>
-                    <Particles
+                    {success &&
+                        <>
+                            <Alert sx={{ mt: 2, mb: 2 }} severity="success">{success}</Alert>
+                            <Particles
                                 id="tsparticles"
                                 init={particlesInit}
                                 loaded={particlesLoaded}
                                 options={options}
                             />
-                    </>
+                        </>
                     }
                     {error && <Alert severity="error">{error}</Alert>
                     }

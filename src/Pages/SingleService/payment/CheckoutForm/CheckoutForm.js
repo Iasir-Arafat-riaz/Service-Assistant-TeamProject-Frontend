@@ -217,7 +217,7 @@ const CheckoutForm = () => {
                     "square",
                     "polygon",
                     "rectangle",
-        
+
                 ],
                 options: {
                     polygon: [
@@ -228,7 +228,7 @@ const CheckoutForm = () => {
                             sides: 6
                         }
                     ],
-                  
+
                 }
             }
         }

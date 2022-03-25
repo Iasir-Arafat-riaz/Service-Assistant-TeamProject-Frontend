@@ -21,7 +21,7 @@ const UpdateMyProfile = (props) => {
     formData.append("textArea", textArea);
     formData.append("serviceName", serviceName);
 
-    const api = `https://dry-sea-00611.herokuapp.com/users/updateinfo/${props.email}`;
+    const api = `http://localhost:5000/users/updateinfo/${props.email}`;
 
     fetch(api, {
       method: "PUT",
@@ -30,8 +30,8 @@ const UpdateMyProfile = (props) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          
-          
+
+
           setFlag(!flag);
         }
       })

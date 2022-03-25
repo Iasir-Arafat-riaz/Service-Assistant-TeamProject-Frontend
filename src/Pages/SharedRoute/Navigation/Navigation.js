@@ -86,7 +86,7 @@ const Navigation = () => {
 
   useEffect(() => {
     axios
-      .get(`https://dry-sea-00611.herokuapp.com/singleservice`)
+      .get(`http://localhost:5000/singleservice`)
       .then((response) => {
         setAPIData(response.data);
       });
@@ -280,7 +280,7 @@ const Navigation = () => {
   const [note, setNote] = useState("");
   const [savedNotes, setSavedNotes] = useState([]);
   console.log(note)
-  const handleChage=(e)=>{
+  const handleChage = (e) => {
     setNote(e.target.value)
     searchItems(e.target.value)
   }

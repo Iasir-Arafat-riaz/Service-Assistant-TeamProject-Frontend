@@ -53,7 +53,7 @@ const RequestService = () => {
 
     const onSubmit = data => {
 
-        axios.post('https://dry-sea-00611.herokuapp.com/serviceReqEmail', data)
+        axios.post('http://localhost:5000/serviceReqEmail', data)
             .then(function (response) {
 
 

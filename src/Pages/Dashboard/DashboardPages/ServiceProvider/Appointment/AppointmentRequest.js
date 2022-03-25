@@ -22,10 +22,10 @@ const AppointmentRequest = () => {
     const { user } = useSelector(allData)
 
     useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/provider/appointment/naimurrhman53@gmail.com`)
+        axios.get(`http://localhost:5000/provider/appointment/naimurrhman53@gmail.com`)
             .then(res => {
                 setProviderEmail(res.data)
-                
+
             })
     }, []);
 
@@ -40,9 +40,9 @@ const AppointmentRequest = () => {
                         // >
 
                         // </AppointmentDetails>
-                        
+
                         <Grid item xs={12} md={4} lg={4}>
-                            <Card sx={{mb: 3}}>
+                            <Card sx={{ mb: 3 }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, }}>
 
                                     <Typography variant="h6" sx={{ fontSize: 16, fontWeight: 'bold', p: 1 }}>
@@ -64,7 +64,7 @@ const AppointmentRequest = () => {
                                         <Typography className={classes.root}>Contact:  <Chip label={appointment.orderInfo.number} size="small" variant="outlined" /></Typography>
                                         <Typography className={classes.root}>Address: <span>{appointment.orderInfo.address}</span></Typography>
                                         <Typography className={classes.root}>Order Date: <span>{new Date(appointment?.date).toLocaleDateString()}</span></Typography>
-                                        
+
                                     </CardContent>
                                 </CardActionArea>
                             </Card>

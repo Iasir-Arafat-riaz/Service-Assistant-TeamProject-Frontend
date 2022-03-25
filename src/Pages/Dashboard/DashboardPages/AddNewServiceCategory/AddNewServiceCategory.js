@@ -19,7 +19,7 @@ const AddNewServiceCategory = () => {
 
   // handle form submit
   const handleSubmit = () => {
-    
+
     const formData = new FormData();
     formData.append('Category', serviceCategoryInfo.name)
     formData.append('Img', serviceCategoryInfo.image)
@@ -30,7 +30,7 @@ const AddNewServiceCategory = () => {
     const url = 'https://dry-sea-00611.herokuapp.com/api/v1/add-service-category';
 
     axios.post(url, formData, { headers: { 'Content-Type': 'multipart/form-data' } }).then(data => {
-      
+
       if (data.status === 201) {
 
         Swal.fire(
@@ -43,7 +43,7 @@ const AddNewServiceCategory = () => {
         )
       }
     }).catch(err => {
-      
+
 
       Swal.fire({
         icon: 'error',

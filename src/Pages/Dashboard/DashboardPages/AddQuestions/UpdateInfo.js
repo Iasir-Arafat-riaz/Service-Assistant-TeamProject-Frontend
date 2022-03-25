@@ -24,12 +24,12 @@ const UpdateInfo = (props) => {
 
 
   let allData;
-  
+
   const onSubmit = data => {
-    
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions/${props.questionId}`
+
+    const api = `http://localhost:5000/addquestions/${props.questionId}`
     axios.put(api, data).then((res) => {
-      
+
       if (res.status === 200) {
         props.flag ? props.setFlag(false) : props.setFlag(true)
         reset();
