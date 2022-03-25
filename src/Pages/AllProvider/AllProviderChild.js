@@ -29,7 +29,6 @@ const AllProviderChild = (props) => {
     _id
   } = props.provider;
 
-  console.log(props.provider);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {

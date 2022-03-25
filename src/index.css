@@ -106,3 +106,9 @@ a.select-service{
 .sc-header--close-button{
   background-color: #FF5E14 !important;
 }
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed{
+  color: rgb(255, 94, 20)!important;
+}
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
+  color: rgb(255, 94, 20)!important;
+}

@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { allData } from "../../../../redux/dataSlice/dataSlice";
 import ProviderFromModal from "./ProviderFromModal";
 
@@ -22,11 +23,10 @@ const Service = ({ category }) => {
     setId(id);
   };
   const handleCloseModal = () => setOpen(false);
-
   return (
     <>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <Card>
+        <Card  >
           <CardActionArea>
             <CardMedia
               component="img"
@@ -42,15 +42,18 @@ const Service = ({ category }) => {
             <Button
               onClick={() => handleOpenModal(category.Id)}
               variant="outlined"
+              color='warning'
               sx={{ mb: 2, ml: 2 }}
             >
               {user?.role !== "provider"
                 ? "Become a provider"
                 : "Add this service"}
             </Button>
-            <Button variant="outlined" sx={{ mb: 2, ml: 2 }}>
-              See Details
-            </Button>
+            {
+              category.Id && <Button component={NavLink} color='warning' to={`/Home/service-details/${category.Id}`} variant="outlined" sx={{ mb: 2, ml: 2 }}>
+                See Details
+              </Button>
+            }
           </CardActionArea>
         </Card>
       </Grid>

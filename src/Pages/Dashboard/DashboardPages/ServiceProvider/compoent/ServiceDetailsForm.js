@@ -67,10 +67,10 @@ const ServiceDetailsForm = ({
         />
       ))}
       <Button
-        variant="contained"
+        variant="outlined"
         sx={{ marginTop: "15px", marginLeft: "10px", marginBottom: "20px" }}
         onClick={() => handleAddMoreDetails(pos)}
-        style={subButton}
+        color='warning'
       >
         Add More Service Details
       </Button>

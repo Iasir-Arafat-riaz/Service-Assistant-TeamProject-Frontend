@@ -423,8 +423,7 @@ export const dataSlice = createSlice({
                 state.orderChats = payload;
             })
             .addCase(getProviderDetailsByEmail.fulfilled, (state, { payload }) => {
-                // state.orderChats = payload;
-                console.log(payload, 'getDeatilsadkfjdfkdjfkdjfkjd');
+                // state.orderChats = payload; 
                 state.user.providerDetailId = payload._id;
             })
 
