@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import Swal from 'sweetalert2';
 import firebaseInit from "./../../firebase/firebase.init";
 
 firebaseInit();
