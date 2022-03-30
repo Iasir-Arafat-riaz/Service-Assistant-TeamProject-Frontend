@@ -55,15 +55,11 @@ const Services = (props) => {
   const classes = useStyles();
   const location = useLocation();
 
-
-
-
   // const handleNavClick = (id) => {
   //   const url = `/SERVICES/#${id}`;
 
   //   navigate(url);
   // };
-
 
   useEffect(() => {
     dispatch(loadServiceCategory());
@@ -101,7 +97,7 @@ const Services = (props) => {
                 sx={{ height: { xs: "80vh", md: "75vh" } }}
               >
                 {allServices.map((item) => {
-                  const ID = item.Category.split(" ").join("").toLowerCase();
+                  const ID = item?.Category?.split(" ").join("").toLowerCase();
                   return (
                     <ListItem sx={{ p: 0 }} key={item._id}>
                       <ListItemButton
@@ -118,9 +114,9 @@ const Services = (props) => {
                             px: { xs: 0, md: 1 },
                           }}
                         >
-                          {item.Category.length >= 25
-                            ? item.Category.slice(0, 16) + "..."
-                            : item.Category}
+                          {item?.Category?.length >= 25
+                            ? item?.Category.slice(0, 16) + "..."
+                            : item?.Category}
                         </ListItemText>
                         <ListItemText
                           sx={{
@@ -128,9 +124,9 @@ const Services = (props) => {
                             px: { xs: 0, md: 1 },
                           }}
                         >
-                          {item.Category.split(" ")[0].length >= 10
-                            ? item.Category.slice(0, 7) + "..."
-                            : item.Category.split(" ")[0]}
+                          {item?.Category?.split(" ")[0]?.length >= 10
+                            ? item?.Category.slice(0, 7) + "..."
+                            : item?.Category?.split(" ")[0]}
                         </ListItemText>
                       </ListItemButton>
                     </ListItem>
