@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { allData, loadServiceCategory } from '../../../../redux/dataSlice/dataSlice';
 import Service from './Service';
 
+
+//for added new provider
 const BecomeaProvider = () => {
 
     // data loaded
@@ -24,7 +26,7 @@ const BecomeaProvider = () => {
 
 
             {
-                allServices.map((service) => {
+                allServices?.map((service) => {
 
                     return (
                         <>
@@ -36,7 +38,7 @@ const BecomeaProvider = () => {
                             >
 
                                 {
-                                    service.Services.map((category, index) => (
+                                    service?.Services?.map((category, index) => (
                                         <Service
                                             key={index}
                                             category={category}
