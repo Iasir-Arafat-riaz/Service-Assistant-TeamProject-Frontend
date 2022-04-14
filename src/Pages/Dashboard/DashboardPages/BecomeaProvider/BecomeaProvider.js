@@ -5,7 +5,7 @@ import { allData, loadServiceCategory } from '../../../../redux/dataSlice/dataSl
 import Service from './Service';
 
 
-//for added new provider
+
 const BecomeaProvider = () => {
 
     // data loaded
