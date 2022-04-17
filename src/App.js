@@ -71,14 +71,6 @@ import Register from "./Pages/Login/UserLogin/Register/Register";
 import Loading from "./Pages/SharedRoute/Loader/Loading";
 import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
 
-// import AOS from 'aos'
-// import 'aos/dist/aos.css';
-// AOS.init();
-
-
-// import AdminRoute from "./Pages/PrivateRoutes/AdminRoute";
-// import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
-// import ProviderRoute from "./Pages/PrivateRoutes/ProviderRoute";
 
 
 
