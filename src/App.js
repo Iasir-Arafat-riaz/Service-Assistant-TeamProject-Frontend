@@ -71,12 +71,6 @@ import Register from "./Pages/Login/UserLogin/Register/Register";
 import Loading from "./Pages/SharedRoute/Loader/Loading";
 import PrivateUserRoute from "./Pages/PrivateRoutes/PrivateUserRoute";
 
-
-
-
-
-
-
 const App = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -127,14 +121,14 @@ const App = () => {
 
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/login" element={<UserLogin />} />
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/" element={<Home />}/>
+        <Route path="/home" element={<Home />}/>
+        <Route path="/services" element={<Services />}/>
+        <Route path="/login" element={<UserLogin />}/>
+        <Route path="/dashboard" element={<Dashboard/>}>
           {/* <Route path="/dashboard" element={<Overview />} /> */}
           {
-            loading ? <Route path="/dashboard" element={<Loading />} /> : user.role === 'admin' ? <Route path="/dashboard" element={<PrivateUserRoute><Overview /></PrivateUserRoute>} /> : user.role === 'provider' ? <Route path="/dashboard" element={<PrivateUserRoute><ProviderOverview /></PrivateUserRoute>} /> : <Route path="/dashboard" element={<PrivateUserRoute><MyOrder /></PrivateUserRoute>} />
+            loading ? <Route path="/dashboard" element={<Loading />} /> : user.role === 'admin' ? <Route path="/dashboard" element={<PrivateUserRoute><Overview /></PrivateUserRoute>}/> : user.role === 'provider' ? <Route path="/dashboard" element={<PrivateUserRoute><ProviderOverview /></PrivateUserRoute>} /> : <Route path="/dashboard" element={<PrivateUserRoute><MyOrder /></PrivateUserRoute>} />
           }
           <Route path="/dashboard/overview" element={<PrivateUserRoute><Overview /></PrivateUserRoute>} />
           <Route path="/dashboard/manageAllOrders" element={<PrivateUserRoute><ManageAllOrders /></PrivateUserRoute>} />
