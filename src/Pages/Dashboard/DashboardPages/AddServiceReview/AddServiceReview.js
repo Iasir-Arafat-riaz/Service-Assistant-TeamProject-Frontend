@@ -26,7 +26,7 @@ const AddServiceReview = () => {
 
     useEffect(() => {
         // dispatch(singleService(id));
-        axios.get('https://dry-sea-00611.herokuapp.com/singleservice').then(res => {
+        axios.get('https://service-assistant-a2z-backend-production.up.railway.app/singleservice').then(res => {
             setSingleServiceDetails(res.data)
         })
     }, [dispatch, loading, updating, deleting, alert, reviewIndex]);
@@ -56,12 +56,12 @@ const AddServiceReview = () => {
 
         if (!matchReviews) {
             setLoading(false);
-            axios.post(`https://dry-sea-00611.herokuapp.com/singleservice/addreview/${id}`, { ...data, rating: value, date, id: user.uid, serviceId: id }).then(() => {
+            axios.post(`https://service-assistant-a2z-backend-production.up.railway.app/singleservice/addreview/${id}`, { ...data, rating: value, date, id: user.uid, serviceId: id }).then(() => {
                 reset();
                 setAlert(true);
                 setLoading(true);
                 const { user, review, rating, date, uid, userPhoto } = data;
-                axios.post(`https://dry-sea-00611.herokuapp.com/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
+                axios.post(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/addreview?email=${providerEmail.providerEmail}`, { rating: value, date, uid: uid, serviceId: id, userName: user, userRating: rating, userComment: review, userPhoto, });
             });
         } else {
             UpdateReview(data);
@@ -85,7 +85,7 @@ const AddServiceReview = () => {
         setUpdateing(true);
         // useEffect(() => {
         console.log(user.uid);
-        axios.put(`https://dry-sea-00611.herokuapp.com/singleservice/updatereview/${user.uid}`, { ...data, rating: value, serviceId: id }).then(() => {
+        axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/singleservice/updatereview/${user.uid}`, { ...data, rating: value, serviceId: id }).then(() => {
             reset();
             setUpdateing(false);
         });
@@ -103,7 +103,7 @@ const AddServiceReview = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axios.delete(`https://dry-sea-00611.herokuapp.com/singleservice/deleteReview?parentId=${id}&&uid=${user.uid}`).then(res => {
+                    axios.delete(`https://service-assistant-a2z-backend-production.up.railway.app/singleservice/deleteReview?parentId=${id}&&uid=${user.uid}`).then(res => {
                         setDeleting(false);
                         swal("Your review is deleted!", {
                             icon: "success",

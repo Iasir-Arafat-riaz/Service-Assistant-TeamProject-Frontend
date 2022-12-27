@@ -54,7 +54,7 @@ const RequestService = () => {
 
     const onSubmit = data => {
 
-        axios.post('https://dry-sea-00611.herokuapp.com/serviceReqEmail', data)
+        axios.post('https://service-assistant-a2z-backend-production.up.railway.app/serviceReqEmail', data)
             .then(function (response) {
 
 

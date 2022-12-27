@@ -12,7 +12,7 @@ const stripePromise = loadStripe('pk_test_51K93ltBcGooWtax9JKsV2tP7uqmbQYtdpRXFr
 const Payment = () => {
 
     // const { cartItems, user } = useSelector(allData);
-    // axios.get('https://dry-sea-00611.herokuapp.com/myorder').then(res => //
+    // axios.get('https://service-assistant-a2z-backend-production.up.railway.app/myorder').then(res => //
     // //
     return (
 

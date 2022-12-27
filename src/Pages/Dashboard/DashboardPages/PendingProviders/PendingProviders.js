@@ -13,7 +13,7 @@ import { allData, getAllUser } from '../../../../redux/dataSlice/dataSlice';
 import swal from 'sweetalert';
 
 
-// https://dry-sea-00611.herokuapp.com/
+// https://service-assistant-a2z-backend-production.up.railway.app/
 
 const PendingProviders = () => {
 
@@ -27,7 +27,7 @@ const PendingProviders = () => {
 
     useEffect(() => {
         setDataLoad(true);
-        axios.get(`https://dry-sea-00611.herokuapp.com/addprovider`).then(res => {
+        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/addprovider`).then(res => {
             setPendingProviders(res.data);
             setDataLoad(false);
         })
@@ -37,7 +37,7 @@ const PendingProviders = () => {
 
     // load provider by email
     useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/users/${user.email}`).then(res => setProvider(res.data))
+        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/users/${user.email}`).then(res => setProvider(res.data))
     }, [user])
 
     // 
@@ -54,12 +54,12 @@ const PendingProviders = () => {
                 if (willDelete) {
                     const matchUser = allUser.find(user => user.email === email);
                     setLoading(true);
-                    axios.put(`https://dry-sea-00611.herokuapp.com/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
-                        axios.post(`https://dry-sea-00611.herokuapp.com/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
-                        axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
+                    axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/addprovider/approveprovider?uid=${matchUser?.uid}`).then(res => {
+                        axios.post(`https://service-assistant-a2z-backend-production.up.railway.app/addprovider/addproviderkey/${parentId}`, { key: matchUser._id });
+                        axios.delete(`https://service-assistant-a2z-backend-production.up.railway.app/addprovider/deleteprovider/${id}`).then(res => {
                             const { Id, Img, Name, backgroundImage, data, date, rating, reviewUser } = pendingProviders.find(provider => provider.data.email === email);
                             const offerService = [{ Id, Img, Name }];
-                            axios.post('https://dry-sea-00611.herokuapp.com/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data, providerId: provider._id })
+                            axios.post('https://service-assistant-a2z-backend-production.up.railway.app/providerdetials', { offerService, backgroundImage, date, AvgRating: rating, reviewUser, reviews: [], ...data, providerId: provider._id })
                             swal("Provider has been approved!", {
                                 icon: "success",
                             });
@@ -81,7 +81,7 @@ const PendingProviders = () => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axios.delete(`https://dry-sea-00611.herokuapp.com/addprovider/deleteprovider/${id}`).then(res => {
+                    axios.delete(`https://service-assistant-a2z-backend-production.up.railway.app/addprovider/deleteprovider/${id}`).then(res => {
                         setLoading(false);
                         swal("provider request has been deleted!", {
                             icon: "success",

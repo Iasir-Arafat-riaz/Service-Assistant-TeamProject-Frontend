@@ -35,7 +35,7 @@ const OrdersChat = ({ single }) => {
     useEffect(() => {
         //user chat order card
         if (urlId) {
-            axios.get(`https://dry-sea-00611.herokuapp.com/orders/${urlId}`)
+            axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/orders/${urlId}`)
                 .then(res => {
                     setOrderInfo(res.data);
                     setId(urlId)
@@ -51,7 +51,7 @@ const OrdersChat = ({ single }) => {
 
     // get info of provider
     const getClient = () => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/users/${orderInfo.providerEmail}`)
+        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/users/${orderInfo.providerEmail}`)
             .then(res => {
                 setClient({
                     photoURL: res.data?.photoURL,

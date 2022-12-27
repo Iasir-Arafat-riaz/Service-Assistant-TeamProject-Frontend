@@ -11,7 +11,7 @@ export const loadServiceCategory = createAsyncThunk(
   "serviceCategorySlice/lodaServiceData",
   async () => {
     const response = await fetch(
-      "https://dry-sea-00611.herokuapp.com/services"
+      "https://service-assistant-a2z-backend-production.up.railway.app/services"
     ).then((res) => res.json());
     //
     return response;

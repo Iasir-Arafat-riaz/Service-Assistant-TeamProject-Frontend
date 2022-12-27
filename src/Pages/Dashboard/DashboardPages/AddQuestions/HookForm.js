@@ -16,7 +16,7 @@ const HookForm = ({ flag, setFlag }) => {
 
     // allData = [...data];
 
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
+    const api = `https://service-assistant-a2z-backend-production.up.railway.app/addquestions`
     axios.post(api, data).then((res) => {
 
       if (res.data.insertedId) {

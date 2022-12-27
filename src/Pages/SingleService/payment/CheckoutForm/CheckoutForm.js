@@ -28,7 +28,7 @@ const CheckoutForm = () => {
     // current time
 
     useEffect(() => {
-        fetch('https://dry-sea-00611.herokuapp.com/myorder/createpaymentstatus', {
+        fetch('https://service-assistant-a2z-backend-production.up.railway.app/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -91,7 +91,7 @@ const CheckoutForm = () => {
 
             const message = `Your payment for ${selectedService?.parentService?.Title} has been completed`;
             const image = selectedService?.parentService?.Image;
-            axios.post('https://dry-sea-00611.herokuapp.com/myorder', data).then(() => {
+            axios.post('https://service-assistant-a2z-backend-production.up.railway.app/myorder', data).then(() => {
                 //send to myself
                 dispatch(sendNotification({ message, image, email: user.email, link: '/dashboard/myorders' }))
                 //

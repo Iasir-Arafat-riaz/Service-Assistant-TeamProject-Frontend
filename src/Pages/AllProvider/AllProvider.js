@@ -22,7 +22,7 @@ const AllProvider = () => {
 
     useEffect(() => {
         setLoading(true)
-        const api = `https://dry-sea-00611.herokuapp.com/providerdetials`
+        const api = `https://service-assistant-a2z-backend-production.up.railway.app/providerdetials`
         axios.get(api).then(res => {
             setProviders(res.data)
             setLoading(false);

@@ -13,7 +13,7 @@ import HeaderSlide from "./HeaderSlide";
 const Header = (props) => {
   const [banners, setBanner] = useState([]);
   useEffect(() => {
-    fetch("https://dry-sea-00611.herokuapp.com/headerBanners")
+    fetch("https://service-assistant-a2z-backend-production.up.railway.app/headerBanners")
       .then((res) => res.json())
       .then((data) => setBanner(data));
   }, []);

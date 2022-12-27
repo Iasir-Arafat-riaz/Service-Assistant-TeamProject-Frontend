@@ -27,7 +27,7 @@ const UpdateInfo = (props) => {
 
   const onSubmit = data => {
 
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions/${props.questionId}`
+    const api = `https://service-assistant-a2z-backend-production.up.railway.app/addquestions/${props.questionId}`
     axios.put(api, data).then((res) => {
 
       if (res.status === 200) {

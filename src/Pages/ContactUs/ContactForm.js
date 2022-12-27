@@ -18,7 +18,7 @@ const ContactForm = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        axios.post('https://dry-sea-00611.herokuapp.com//sendEmail', data)
+        axios.post('https://service-assistant-a2z-backend-production.up.railway.app//sendEmail', data)
             .then(function (response) {
                 setLoading(false);
             })
