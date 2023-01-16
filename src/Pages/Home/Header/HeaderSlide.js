@@ -1,4 +1,4 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Skeleton, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 const HeaderSlide = ({ banner }) => {
     const targetRef = useRef();
     const [isVisible, setIsVisible] = useState(false);
+    const [isLoading,setIsLoading] = useState(true)
     const options = useMemo(() => {
         return {
             root: null,
@@ -29,11 +30,28 @@ const HeaderSlide = ({ banner }) => {
             if (currentTarget) observer.unobserve(currentTarget)
         }
     }, [targetRef, options]);
+
+   useEffect(() => {
+    window.addEventListener("load", event => {
+        var image = document.querySelector('img');
+        var isLoaded = image.complete && image.naturalHeight !== 0;
+        setIsLoading(false)
+    });
+   },[])
+    
     return (
-        <Box
+        <>
+
+{
+        isLoading &&   <Skeleton variant="rectangular" width={window.innerWidth} height={window.innerHeight} />
+}
+ <Box
+        className={isLoading ? 'slide_active' : ''}
             ref={targetRef}
+
             sx={{
                 backgroundImage: `url(${banner.imageUrl})`,
+                backgroundColor:'white',
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 height: "calc(100vh)",
@@ -81,6 +99,7 @@ const HeaderSlide = ({ banner }) => {
                 </Box>
             </Container>
         </Box>
+        </>
     );
 };
 

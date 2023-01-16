@@ -112,3 +112,7 @@ a.select-service{
 .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active{
   color: rgb(255, 94, 20)!important;
 }
+.slide_active{
+  position: absolute;
+  visibility: hidden;
+}

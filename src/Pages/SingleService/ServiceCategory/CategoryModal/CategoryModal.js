@@ -28,7 +28,7 @@ const style = {
     overflowY: 'scroll',
     overflowX: 'hidden',
     width: { xs: '100%', lg: '70%', xl: '50%' },
-    height: { xs: '100%', md: '80vh', xl: 'auto' },
+    height: {  xs: 'auto' },
 };
 
 // box style
@@ -106,11 +106,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
 
     const handleSaveService = (service, id) => {
         setIsAdded(id);
-        if (user.email) {
-            dispatch(addToCart({ ...service, email: user.email, parentService: selectService, selectServiceId: selectServiceId }));
-        } else {
-            navigate('/login')
-        }
+        dispatch(addToCart({ ...service, email: user.email, parentService: selectService, selectServiceId: selectServiceId }));
     };
     // handleReset
     const handleCloseModal = () => {
@@ -120,6 +116,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
 
 
     const handleStpperNext = category => {
+        if(user.email == null) return navigate('/login')
         handleNext();
         steCategory(category);
     };

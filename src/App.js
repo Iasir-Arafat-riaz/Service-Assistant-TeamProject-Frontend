@@ -118,7 +118,7 @@ const App = () => {
   return (
     <BrowserRouter>
 
-      {!user?.email && <LoginPopup handleOpen={handleOpen} handleClose={handleClose} open={open} />}
+      {/* {!user?.email && <LoginPopup handleOpen={handleOpen} handleClose={handleClose} open={open} />} */}
 
       <ToastContainer />
       <Routes>

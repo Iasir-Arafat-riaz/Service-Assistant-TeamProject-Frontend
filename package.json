@@ -53,7 +53,8 @@
     "sweetalert2": "^11.4.1",
     "swiper": "^8.0.7",
     "timeline": "^3.4.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.19"
   },
   "scripts": {
     "start": "react-scripts start",
