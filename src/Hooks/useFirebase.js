@@ -77,7 +77,7 @@ setTimeout(() => setError(''),3000)
             .then((userCredential) => {
                 // Signed in  
                 // ...
-        setIsLoading(false)
+                   setIsLoading(false)
                 navigate(location.state?.from.pathname || '/')
             })
             .catch((error) => {

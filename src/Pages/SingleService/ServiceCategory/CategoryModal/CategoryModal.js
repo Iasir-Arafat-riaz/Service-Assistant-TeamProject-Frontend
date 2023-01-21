@@ -28,7 +28,6 @@ const style = {
     overflowY: 'scroll',
     overflowX: 'hidden',
     width: { xs: '100%', lg: '70%', xl: '50%' },
-    height: {  xs: 'auto' },
 };
 
 // box style
@@ -156,7 +155,7 @@ const CategoryModal = ({ open, handleOpen, handleClose, index, service, selectSe
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={style} style={{maxHeight:600,overflowY:'scroll'}}>
 
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', boxShadow: 3, mb: 3, }}>
