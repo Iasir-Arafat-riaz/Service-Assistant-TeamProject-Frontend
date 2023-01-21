@@ -31,7 +31,7 @@ const Register = () => {
     navigate("/login");
   };
   return (
-    <Box sx={{ height: "calc(100vh)" }}>
+    <Box sx={{ height: "calc(100vh)" ,overflow:'hidden'}}>
       <Navigation />
       <Box sx={{ pt: "90px" }}>
         <Grid container spacing={2}>

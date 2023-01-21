@@ -5,7 +5,7 @@ import Services from "./Pages/Services/Services";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ContactUs from "./Pages/ContactUs/ContactUs";
 
-
+import { QueryClient, QueryClientProvider } from "react-query";
 import Overview from "./Pages/Dashboard/DashboardPages/Overview/Overview";
 import MakeAdmin from "./Pages/Dashboard/DashboardPages/MakeAdmin/MakeAdmin";
 import ManageAllOrders from "./Pages/Dashboard/DashboardPages/ManageAllOrders/ManageAllOrders";
@@ -82,7 +82,7 @@ const App = () => {
       handleOpen();
     }, 5000)
   }, [])
-  const { } = useFirebase();
+  const queryClient = new QueryClient();
 
   const { socket } = useSocket();
   const { user, loading } = useSelector(allData);
@@ -116,6 +116,8 @@ const App = () => {
     }
   }, [user])
   return (
+    <QueryClientProvider client={queryClient}>
+
     <BrowserRouter>
 
       {/* {!user?.email && <LoginPopup handleOpen={handleOpen} handleClose={handleClose} open={open} />} */}
@@ -216,6 +218,8 @@ const App = () => {
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
+    </QueryClientProvider>
+
   );
 };
 

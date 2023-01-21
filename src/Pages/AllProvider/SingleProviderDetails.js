@@ -121,7 +121,7 @@ const SingleProviderDetails = () => {
         const file = watch('providerImage');
         if (file?.length) {
             let body = new FormData()
-            body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
+            body.set('key', 'd5a71e73adadfab926cf38ba58802525')
             body.append('image', file[0])
             setLogoLoading(false);
             axios({
@@ -146,7 +146,7 @@ const SingleProviderDetails = () => {
         const file = watch('backgroundImage');
         if (file?.length) {
             let body = new FormData()
-            body.set('key', '752d2bbd9a2e4d6a5910df9c191e1643')
+            body.set('key', 'd5a71e73adadfab926cf38ba58802525')
             body.append('image', file[0])
             setBackgroundImageLoading(false);
             axios({
@@ -373,14 +373,14 @@ const SingleProviderDetails = () => {
 
                                         </Box>
 
-                                        <Stack direction="row" spacing={1}>
+                                        <div style={{display:'flex',flexWrap:'wrap', gap:10}}>
                                             {
                                                 providerProfiles?.offerService?.map((service, index) =>
                                                     <Chip variant="outlined" key={index} label={service?.Name} />
                                                 )
                                             }
 
-                                        </Stack>
+                                        </div>
                                     </Grid>
 
                                     <Grid item md={3.5}>

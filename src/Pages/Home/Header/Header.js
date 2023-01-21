@@ -5,25 +5,27 @@ import ScrollTop from "../../SharedRoute/ScrollTop/ScrollTop";
 import Contact from "../Contact/Contact";
 import { Box, Container, Skeleton, Typography } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { useQuery } from 'react-query';
 import 'swiper/css';
 import "swiper/css/navigation";
 import { Autoplay } from "swiper";
 import HeaderSlide from "./HeaderSlide";
 import axios from "axios";
-const Header = (props) => {
-  const [banners, setBanner] = useState([]);
-  const [isLoading,setIsLoading] = useState(false)
-  useEffect(async() => {
-    setIsLoading(true)
-    const res =await axios.get('https://service-assistant-a2z-backend-production.up.railway.app/headerBanners')
-    setBanner(res.data)
-    setIsLoading(false)
-    // fetch("https://service-assistant-a2z-backend-production.up.railway.app/headerBanners")
-    //   .then((res) => res.json())
-    //   .then((data) => setBanner(data));
-  }, []);
 
+const Header = (props) => {
+
+  const [imageLoading,setImageLoading] = useState(false)
+
+const getBanners = async() => {
+  const {data} =await axios.get('https://service-assistant-a2z-backend-production.up.railway.app/headerBanners')
+  return data
+}
+
+const { data,isLoading } = useQuery('headerBanners', getBanners);
+
+const handleImageLoaded = () => {
+  setImageLoading(false)
+}
 
   return (
     <header>
@@ -41,9 +43,9 @@ isLoading && <Box>
           <Skeleton variant="rectangular" width={window.innerWidth} height={window.innerHeight} />
           </Box>
 }
-        {!isLoading && banners.map((banner) => (
+        {!isLoading && data.map((banner) => (
           <SwiperSlide key={banner._id}>
-            <HeaderSlide banner={banner}></HeaderSlide>
+            <HeaderSlide handleImageLoaded={handleImageLoaded} imageLoading={imageLoading} banner={banner}></HeaderSlide>
           </SwiperSlide>
         ))}
 

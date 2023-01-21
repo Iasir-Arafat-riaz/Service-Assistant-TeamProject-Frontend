@@ -3,10 +3,10 @@ import { Box } from '@mui/system';
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import 'aos/dist/aos.css';
-const HeaderSlide = ({ banner }) => {
+const HeaderSlide = ({ banner,imageLoading,handleImageLoaded }) => {
     const targetRef = useRef();
     const [isVisible, setIsVisible] = useState(false);
-    const [isLoading,setIsLoading] = useState(true)
+    // const [imageLoading,setimageLoading] = useState(true)
     const options = useMemo(() => {
         return {
             root: null,
@@ -33,20 +33,24 @@ const HeaderSlide = ({ banner }) => {
 
    useEffect(() => {
     window.addEventListener("load", event => {
-        var image = document.querySelector('img');
-        var isLoaded = image.complete && image.naturalHeight !== 0;
-        setIsLoading(false)
+        const image = document.querySelector('img');
+        const isLoaded = image.complete && image.naturalHeight !== 0;
+        // setimageLoading(false)
+        handleImageLoaded(false)
     });
    },[])
     
     return (
         <>
 
+{imageLoading && <i style={{marginTop:100,marginLeft:10, position:'absolute', transform:'rotate(-40deg)'}}>Loading...</i>}
+
+
 {
-        isLoading &&   <Skeleton variant="rectangular" width={window.innerWidth} height={window.innerHeight} />
+        imageLoading &&   <Skeleton variant="rectangular" width={window.innerWidth} height={window.innerHeight}/>        
 }
  <Box
-        className={isLoading ? 'slide_active' : ''}
+        className={imageLoading ? 'slide_active' : ''}
             ref={targetRef}
 
             sx={{
@@ -62,7 +66,7 @@ const HeaderSlide = ({ banner }) => {
             {/* <img type="button" src={banner.imageUrl} alt="" /> */}
             <Container
                 maxWidth="md"
-                sx={{ height: "100%", display: "flex", alignItems: "center" }}
+                sx={{ height: "100%",ml:15, display: "flex", alignItems: "center" }}
             >
                 <Box >
                     <Box id="commonBannerText"
@@ -84,7 +88,7 @@ const HeaderSlide = ({ banner }) => {
                         className={isVisible ? 'aos-init aos-animate text1' : 'aos-init text1'}
 
                     >
-                        <Typography variant='h3'>{banner.bannerText}</Typography>
+                        <h4 style={{ fontWeight: 'bolder'}}>{banner.bannerText}</h4>
                     </Box>
                     <Box
                         data-aos="fade-left"
@@ -94,7 +98,7 @@ const HeaderSlide = ({ banner }) => {
                         className={isVisible ? 'aos-init aos-animate text1' : 'aos-init text1'}
 
                     >
-                        <Typography variant='h3'>{banner.bannerTex2}</Typography>
+                        <h4 style={{ fontWeight: 'bolder'}}>{banner.bannerTex2}</h4>
                     </Box>
                 </Box>
             </Container>

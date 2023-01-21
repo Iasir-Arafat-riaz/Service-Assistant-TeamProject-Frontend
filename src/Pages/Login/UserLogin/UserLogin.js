@@ -3,25 +3,31 @@ import {
   Button,
   FormControl,
   Grid,
+  IconButton,
   Input,
+  InputAdornment,
   InputLabel,
   Item,
   MenuItem,
+  OutlinedInput,
   Select,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
 import useFirebase from "../../../Hooks/useFirebase";
 import Navigation from "../../SharedRoute/Navigation/Navigation";
 import SendIcon from "@mui/icons-material/Send";
 import Swal from "sweetalert2";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const UserLogin = () => {
-  const { googleSignIn, logInWithEmail } = useFirebase();
+  const { googleSignIn, logInWithEmail , error, isLoading} = useFirebase();
+  // const [error,setError] = useState('')
+  // const [isLoading,setIsLoading] = useState(false)
 
   const {
     register,
@@ -29,9 +35,23 @@ const UserLogin = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleRegister = () => {
+    navigate("/register");
+  };
+  const onSubmit = async(data) => {
+   try{
+     await logInWithEmail({
+       email: data.loginEmail,
+       password: data.loginPass,
+       location,
+       navigate,
+     });
+    // setIsLoading(false)
+   }catch(err){
+    // setIsLoading(false)
+   }
   };
 
   const handleLogin = () => {
@@ -54,13 +74,18 @@ const UserLogin = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const handleRegister = () => {
-    navigate("/register");
+
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
+
   return (
-    <Box sx={{ height: "calc(100vh)" }}>
+    <Box sx={{ height: "calc(100vh)" ,overflow:'hidden'}}>
       <Navigation />
       <Box sx={{ pt: "90px" }}>
         <Grid container spacing={2}>
@@ -81,72 +106,59 @@ const UserLogin = () => {
             >
               {" "}
               <Box>
-                <Typography sx={{ color: "#FF5E14", mb: 4 }} variant="h4">
-                  <b>Please Login</b>
-                </Typography>
+                 
+                 <h2 style={{fontWeight:'bold',fontSize:30,marginBottom:20}}>Sign In</h2>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Stack direction="column">
-                    <Input
-                      placeholder="Enter Your Email"
-                      required
-                      type="email"
-                      sx={{ mb: 3 }}
-                      {...register("loginEmail")}
-                      label="Enter image url"
-                      variant="outlined"
-                    />
+                    
+                  <TextField
+                   {...register("loginEmail", { required: true })}
+          id="outlined-multiline-flexible"
+          label="Email *"
+          multiline
+          maxRows={4}
+        />
+                    
+                    <FormControl sx={{ my:3, width: '100%' }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password *</InputLabel>
+          <OutlinedInput
+            {...register("loginPass", { required: true })}
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
 
-                    <Input
-                      placeholder="Enter Your Password"
-                      required
-                      type="password"
-                      sx={{ mb: 3 }}
-                      {...register("loginPass")}
-                      label="Write Banner text"
-                      variant="outlined"
-                    />
-                    <Button
-                      onClick={handleLogin}
-                      variant="outlined"
-                      type="submit"
-                      sx={{
-                        letterSpacing: 2,
-                        px: 3,
-                        mb: 3,
-                        color: "black",
-                        backgroundColor: "#FF5E14",
-                      }}
-                    >
-                      <b>Login</b>
-                    </Button>
-                    {/* <Button sx={{ borderRadius: 0, p: 1, mt: 3 }} type="submit" variant="contained">
-                  Add Banner
-                </Button> */}
-                    <Button
-                      onClick={() => googleSignIn(location, navigate)}
-                      sx={{
-                        borderRadius: 0,
-                        p: 1,
-                        mt: 3,
-                        letterSpacing: 2,
-                        backgroundColor: "black",
-                      }}
-                      variant="contained"
-                    >
-                      Google Signin
-                    </Button>
+       {!isLoading  ? <Button  type='submit' sx={{p:1.2 , fontWeight:'bold', letterSpacing:1}} variant="outlined">Login</Button>:<Button  sx={{p:1.2 , fontWeight:'bold', letterSpacing:1}} variant="outlined">Loading...</Button>}
+
+       <Button  onClick={googleSignIn} sx={{p:1.2 , fontWeight:'bold', letterSpacing:1, display:'block',mt:3,width:'100%'}} variant="outlined">Sign in with Google</Button>
+
+      {error && <small style={{marginTop:20 ,color:'red'}}>{error}</small>}
+
+                 
                   </Stack>
                 </form>
-                <Typography variant="h6">
-                  New User?{" "}
-                  <Button
-                    endIcon={<SendIcon />}
-                    sx={{ p: 2, color: "#FF5E14" }}
-                    onClick={handleRegister}
-                  >
-                    Register
-                  </Button>
+                <br />
+                <Typography variant="span">
+                  Don't have an acount ? {" "}
+                  <span onClick={handleRegister} style={{borderBottom:'1px solid black',cursor:'pointer'}}>register</span>
                 </Typography>
+
+               
+
               </Box>
             </Box>
           </Grid>
