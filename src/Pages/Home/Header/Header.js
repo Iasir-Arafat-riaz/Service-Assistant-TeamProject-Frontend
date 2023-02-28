@@ -12,6 +12,7 @@ import { Autoplay } from "swiper";
 import HeaderSlide from "./HeaderSlide";
 import axios from "axios";
 
+//header component
 const Header = (props) => {
 
   const [imageLoading,setImageLoading] = useState(false)
