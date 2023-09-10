@@ -19,7 +19,7 @@ const OrdersTableRow = ({ data }) => {
     };
 
     const UpdateStatus = updateStatus => {
-        axios.put(`https://dry-sea-00611.herokuapp.com/orders/changestatus/${data._id}`, { updateStatus })
+        axios.put(`https://service-assistant.adaptable.app/orders/changestatus/${data._id}`, { updateStatus })
             .then(res => {
                 dispatch(sendNotification({
                     message: `your order for ${data.Name} is now on the way `,

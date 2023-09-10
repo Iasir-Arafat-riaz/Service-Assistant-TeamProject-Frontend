@@ -30,7 +30,7 @@ const MyOrdersTable = () => {
     // data load
     useEffect(() => {
         setLoading(true)
-        fetch(`https://dry-sea-00611.herokuapp.com/myorder?email=${user.email}`).then(res => res.json()).then(data => {
+        fetch(`https://service-assistant.adaptable.app/myorder?email=${user.email}`).then(res => res.json()).then(data => {
             setSavedService(data);
             setLoading(false);
         })

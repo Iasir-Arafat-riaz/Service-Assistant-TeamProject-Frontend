@@ -18,7 +18,7 @@ const AddTestimonial = () => {
         setAlert(false)
         data.status = 'pending';
         data.rating = value;
-        axios.post('https://dry-sea-00611.herokuapp.com/reviews', data).then(() => {
+        axios.post('https://service-assistant.adaptable.app/reviews', data).then(() => {
             // Swal.fire('Thank you for your review');
             setAlert(true);
             reset();

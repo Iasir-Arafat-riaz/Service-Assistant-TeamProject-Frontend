@@ -31,7 +31,7 @@ const ShowQuestions = (props) => {
 
   useEffect(() => {
 
-    const api = `https://dry-sea-00611.herokuapp.com/addquestions`
+    const api = `https://service-assistant.adaptable.app/addquestions`
     axios.get(api).then(res => {
       setQuestionsAnswers(res.data)
 
@@ -49,7 +49,7 @@ const ShowQuestions = (props) => {
     })
       .then((willDelete) => {
         if (willDelete) {
-          const api = `https://dry-sea-00611.herokuapp.com/addquestions/${id}`
+          const api = `https://service-assistant.adaptable.app/addquestions/${id}`
           axios.delete(api).then(res => {
             setIsDelete(true)
             swal("Questions and answer is deleted!", {

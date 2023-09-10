@@ -18,7 +18,7 @@ const ContactForm = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        axios.post('https://dry-sea-00611.herokuapp.com//sendEmail', data)
+        axios.post('https://service-assistant.adaptable.app//sendEmail', data)
             .then(function (response) {
                 setLoading(false);
             })
@@ -55,7 +55,7 @@ const ContactForm = () => {
         marginTop: '15px'
     }
 
-    
+
 
     return (
         <>
@@ -144,11 +144,11 @@ const ContactForm = () => {
                                 <Avatar sx={secondAvatar} alt="user image" src="https://media.istockphoto.com/photos/young-handsome-man-with-beard-wearing-casual-sweater-standing-over-picture-id1212702108?k=20&m=1212702108&s=612x612&w=0&h=ZI4gKJi2d1dfi74yTljf4YhulA1nfhD3dcUFGH-NUkY=" />
 
                                 <Box className="contactFormBox" sx={{ display: "flex", flexWrap: 'wrap', justifyContent: "center", columnGap: 5, rowGap: 3 }}>
-                                    <Button className='socialMedia' style={{ background: "#1768D4", color: "#fff", padding: '8px 25px' }}> <a target="_blank" href="https://www.facebook.com/Service-A2Z-101461739182775" > <FaFacebookF style={{marginRight:"5px"}}/> Facebook </a>  </Button>
+                                    <Button className='socialMedia' style={{ background: "#1768D4", color: "#fff", padding: '8px 25px' }}> <a target="_blank" href="https://www.facebook.com/Service-A2Z-101461739182775" > <FaFacebookF style={{ marginRight: "5px" }} /> Facebook </a>  </Button>
 
-                                    <Button className='socialMedia' style={{ background: "#1EBCE9", color: "#fff", padding: '8px 25px', margin: '0 20px' }}> <a href="https://twitter.com/service_a2z_web"> <FaTwitter style={{marginRight:"5px"}}/>Twitter</a>   </Button>
+                                    <Button className='socialMedia' style={{ background: "#1EBCE9", color: "#fff", padding: '8px 25px', margin: '0 20px' }}> <a href="https://twitter.com/service_a2z_web"> <FaTwitter style={{ marginRight: "5px" }} />Twitter</a>   </Button>
 
-                                    <Button className='socialMedia'   style={{ background: "#D63127", color: "#fff", padding: '8px 25px' }} > <a target="_blank" href="https://www.youtube.com/channel/UCRR0lgDJtkv7Hyikak8q01Q"><BsYoutube style={{marginRight:"5px"}} />Youtube </a> </Button>
+                                    <Button className='socialMedia' style={{ background: "#D63127", color: "#fff", padding: '8px 25px' }} > <a target="_blank" href="https://www.youtube.com/channel/UCRR0lgDJtkv7Hyikak8q01Q"><BsYoutube style={{ marginRight: "5px" }} />Youtube </a> </Button>
                                 </Box>
 
                                 <Avatar sx={secondAvatar} alt="user image" src="https://i.ibb.co/0CHGDKx/img1.png" />

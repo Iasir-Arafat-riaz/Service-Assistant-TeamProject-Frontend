@@ -14,7 +14,7 @@ const TrendingServices = () => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get('https://dry-sea-00611.herokuapp.com/api/v1/trending').then(res => {
+        axios.get('https://service-assistant.adaptable.app/api/v1/trending').then(res => {
             const fullData = res.data;
             let mainData = [];
             fullData.forEach(element => {

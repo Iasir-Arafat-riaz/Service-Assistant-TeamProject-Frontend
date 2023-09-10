@@ -7,7 +7,7 @@ const OrderChatCard = ({ data, handleChangeUser, currentId }) => {
     const [buyerInfo, setBuyerInfo] = useState({});
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get(`https://dry-sea-00611.herokuapp.com/users/${email}`)
+        axios.get(`https://service-assistant.adaptable.app/users/${email}`)
             .then(res => setBuyerInfo(res.data))
             .finally(() => setLoading(false));
     }, []);

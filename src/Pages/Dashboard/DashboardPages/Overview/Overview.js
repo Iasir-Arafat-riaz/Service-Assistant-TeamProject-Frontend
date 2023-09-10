@@ -30,9 +30,9 @@ const Overview = () => {
     });
     useEffect(() => {
         setLoading(true);
-        let one = "https://dry-sea-00611.herokuapp.com/orders/"
-        let two = "https://dry-sea-00611.herokuapp.com/provider/allProvider"
-        let three = "https://dry-sea-00611.herokuapp.com/singleservice/count"
+        let one = "https://service-assistant.adaptable.app/orders/"
+        let two = "https://service-assistant.adaptable.app/provider/allProvider"
+        let three = "https://service-assistant.adaptable.app/singleservice/count"
         const requestOne = axios.get(one);
         const requestTwo = axios.get(two);
         const requestThree = axios.get(three);
