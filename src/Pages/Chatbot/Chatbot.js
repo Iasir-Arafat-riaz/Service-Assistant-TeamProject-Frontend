@@ -26,14 +26,14 @@ function Chatbot() {
         fileUpload: true,
     });
     useEffect(() => {
-        axios.get('https://service-assistant-a2z-backend-production.up.railway.app/addquestions')
+        axios.get('https://service-assistant.adaptable.app/addquestions')
             .then(res => {
                 setQna(res.data);
             })
     }, [])
 
     useEffect(() => {
-        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/chat/${uid}`)
+        axios.get(`https://service-assistant.adaptable.app/chat/${uid}`)
             .then(res => {
                 setState(state => ({
                     ...state,

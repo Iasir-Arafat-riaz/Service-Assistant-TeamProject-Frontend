@@ -22,7 +22,7 @@ const AllProvider = () => {
 
     useEffect(() => {
         setLoading(true)
-        const api = `https://service-assistant-a2z-backend-production.up.railway.app/providerdetials`
+        const api = `https://service-assistant.adaptable.app/providerdetials`
         axios.get(api).then(res => {
             setProviders(res.data)
             setLoading(false);

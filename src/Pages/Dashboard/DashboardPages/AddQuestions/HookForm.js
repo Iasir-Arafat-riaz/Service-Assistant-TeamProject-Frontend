@@ -16,7 +16,7 @@ const HookForm = ({ flag, setFlag }) => {
 
     // allData = [...data];
 
-    const api = `https://service-assistant-a2z-backend-production.up.railway.app/addquestions`
+    const api = `https://service-assistant.adaptable.app/addquestions`
     axios.post(api, data).then((res) => {
 
       if (res.data.insertedId) {

@@ -54,7 +54,7 @@ const RequestService = () => {
 
     const onSubmit = data => {
 
-        axios.post('https://service-assistant-a2z-backend-production.up.railway.app/serviceReqEmail', data)
+        axios.post('https://service-assistant.adaptable.app/serviceReqEmail', data)
             .then(function (response) {
 
 

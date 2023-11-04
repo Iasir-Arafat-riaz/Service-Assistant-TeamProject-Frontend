@@ -45,7 +45,7 @@ const SingleProviderDetails = () => {
 
     //Provider Data Load by Email
     // useEffect(() => {
-    //     axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/provider?email=samir@gmail.com`)
+    //     axios.get(`https://service-assistant.adaptable.app/providerdetials/provider?email=samir@gmail.com`)
     //         .then(data => {
     //             setProviderProfiles(data.data);
 
@@ -53,7 +53,7 @@ const SingleProviderDetails = () => {
     // }, []);
 
     useEffect(() => {
-        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/provider/${providerId}`)
+        axios.get(`https://service-assistant.adaptable.app/providerdetials/provider/${providerId}`)
             .then(data => {
                 setProviderProfiles(data?.data);
                 console.log(data);
@@ -61,7 +61,7 @@ const SingleProviderDetails = () => {
     }, []);
     // console.log(providerProfiles.email)
     useEffect(() => {
-        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/provider/myServices/${providerProfiles.providerId}`)
+        axios.get(`https://service-assistant.adaptable.app/provider/myServices/${providerProfiles.providerId}`)
             .then(data => {
                 setProviderServiceInfo(data?.data);
 
@@ -82,7 +82,7 @@ const SingleProviderDetails = () => {
     const onSubmit = data => {
         if (data?.ShopName !== '') {
             const ShopName = data.ShopName;
-            axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/updateName/${providerProfiles.email}`, { ShopName }).then(res => {
+            axios.put(`https://service-assistant.adaptable.app/providerdetials/updateName/${providerProfiles.email}`, { ShopName }).then(res => {
                 toast.info(`Shop name updated successfully`, {
                     position: "bottom-left"
                 })
@@ -90,7 +90,7 @@ const SingleProviderDetails = () => {
         }
         if (data?.bio !== '') {
             const bio = data.bio;
-            axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/updateBio/${providerProfiles.email}`, { bio }).then(res => {
+            axios.put(`https://service-assistant.adaptable.app/providerdetials/updateBio/${providerProfiles.email}`, { bio }).then(res => {
                 toast.info(`Provider bio updated successfully`, {
                     position: "bottom-left"
                 })
@@ -98,7 +98,7 @@ const SingleProviderDetails = () => {
         }
         if (data?.address !== '') {
             const address = data.address;
-            axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/updateAddress/${providerProfiles.email}`, { address }).then(res => {
+            axios.put(`https://service-assistant.adaptable.app/providerdetials/updateAddress/${providerProfiles.email}`, { address }).then(res => {
                 toast.info(`Provider address updated successfully`, {
                     position: "bottom-left"
                 })
@@ -106,7 +106,7 @@ const SingleProviderDetails = () => {
         }
         if (data?.about !== '') {
             const about = data.about;
-            axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/updateAboutus/${providerProfiles.email}`, { about }).then(res => {
+            axios.put(`https://service-assistant.adaptable.app/providerdetials/updateAboutus/${providerProfiles.email}`, { about }).then(res => {
                 toast.info(`Provider about updated successfully`, {
                     position: "bottom-left"
                 })
@@ -131,7 +131,7 @@ const SingleProviderDetails = () => {
             }).then(res => {
                 setValue('providerImg', res.data?.data?.url)
                 const Logo = res.data?.data?.url;
-                axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/updateLogo/${providerProfiles.email}`, { Logo }).then(res => {
+                axios.put(`https://service-assistant.adaptable.app/providerdetials/updateLogo/${providerProfiles.email}`, { Logo }).then(res => {
                     toast.info(`Logo updated successfully`, {
                         position: "bottom-left"
                     })
@@ -156,7 +156,7 @@ const SingleProviderDetails = () => {
             }).then(res => {
                 setValue('backgroundImg', res.data?.data?.url)
                 const backgroundImage = res.data?.data?.url;
-                axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/providerdetials/updateBackgroundimage/${providerProfiles.email}`, { backgroundImage }).then(res => {
+                axios.put(`https://service-assistant.adaptable.app/providerdetials/updateBackgroundimage/${providerProfiles.email}`, { backgroundImage }).then(res => {
                     toast.info(`BackgroundImage updated successfully`, {
                         position: "bottom-left"
                     })

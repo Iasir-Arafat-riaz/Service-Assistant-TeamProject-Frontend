@@ -8,7 +8,7 @@ const ProviderTableRow = ({ row }) => {
     const handleChange = e => {
         setStatus(e.target.value);
         if (e.target.value === 'completed') {
-            axios.put(`https://service-assistant-a2z-backend-production.up.railway.app/orders/changestatus/${row._id}`, { updateStatus: 'completed' })
+            axios.put(`https://service-assistant.adaptable.app/orders/changestatus/${row._id}`, { updateStatus: 'completed' })
         }
     }
     return (

@@ -30,9 +30,9 @@ const Overview = () => {
     });
     useEffect(() => {
         setLoading(true);
-        let one = "https://service-assistant-a2z-backend-production.up.railway.app/orders/"
-        let two = "https://service-assistant-a2z-backend-production.up.railway.app/provider/allProvider"
-        let three = "https://service-assistant-a2z-backend-production.up.railway.app/singleservice/count"
+        let one = "https://service-assistant.adaptable.app/orders/"
+        let two = "https://service-assistant.adaptable.app/provider/allProvider"
+        let three = "https://service-assistant.adaptable.app/singleservice/count"
         const requestOne = axios.get(one);
         const requestTwo = axios.get(two);
         const requestThree = axios.get(three);

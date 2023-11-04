@@ -26,7 +26,7 @@ const MyOrdersCard = ({ service, notShow, index }) => {
 
     useEffect(() => {
         setLoading(true)
-        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/provider/${service.providerEmail}`)
+        axios.get(`https://service-assistant.adaptable.app/provider/${service.providerEmail}`)
             .then(res => {
                 setGetProvider(res.data);
                 setLoading(false);

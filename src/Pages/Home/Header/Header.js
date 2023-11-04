@@ -18,7 +18,7 @@ const Header = (props) => {
   const [imageLoading,setImageLoading] = useState(false)
 
 const getBanners = async() => {
-  const {data} =await axios.get('https://service-assistant-a2z-backend-production.up.railway.app/headerBanners')
+  const {data} =await axios.get('https://service-assistant.adaptable.app/headerBanners')
   return data
 }
 

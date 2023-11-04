@@ -7,7 +7,7 @@ const OrderChatCard = ({ data, handleChangeUser, currentId }) => {
     const [buyerInfo, setBuyerInfo] = useState({});
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/users/${email}`)
+        axios.get(`https://service-assistant.adaptable.app/users/${email}`)
             .then(res => setBuyerInfo(res.data))
             .finally(() => setLoading(false));
     }, []);

@@ -21,7 +21,7 @@ const UpdateMyProfile = (props) => {
     formData.append("textArea", textArea);
     formData.append("serviceName", serviceName);
 
-    const api = `https://service-assistant-a2z-backend-production.up.railway.app/users/updateinfo/${props.email}`;
+    const api = `https://service-assistant.adaptable.app/users/updateinfo/${props.email}`;
 
     fetch(api, {
       method: "PUT",

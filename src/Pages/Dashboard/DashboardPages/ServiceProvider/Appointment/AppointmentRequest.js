@@ -22,7 +22,7 @@ const AppointmentRequest = () => {
     const { user } = useSelector(allData)
 
     useEffect(() => {
-        axios.get(`https://service-assistant-a2z-backend-production.up.railway.app/provider/appointment/naimurrhman53@gmail.com`)
+        axios.get(`https://service-assistant.adaptable.app/provider/appointment/naimurrhman53@gmail.com`)
             .then(res => {
                 setProviderEmail(res.data)
 

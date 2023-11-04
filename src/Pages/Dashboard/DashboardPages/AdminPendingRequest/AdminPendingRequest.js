@@ -129,7 +129,7 @@ export default function AdminPendingRequest() {
   const [serviceInfo, setServiceInfoId] = useState(null);
 
   const handleSubmitCategory = async () => {
-    const url = `https://service-assistant-a2z-backend-production.up.railway.app/api/v1/service-category/${categoryId}`;
+    const url = `https://service-assistant.adaptable.app/api/v1/service-category/${categoryId}`;
     const res = await axios.patch(url, serviceInfo);
 
   };
@@ -137,7 +137,7 @@ export default function AdminPendingRequest() {
   let rows;
 
   useEffect(() => {
-    const url = "https://service-assistant-a2z-backend-production.up.railway.app/api/v1/pending-services";
+    const url = "https://service-assistant.adaptable.app/api/v1/pending-services";
     const pendingService = async () => {
       const service = await axios.get(url).then((res) => res.data);
       setPendingService(service.data);

@@ -18,7 +18,7 @@ const AddTestimonial = () => {
         setAlert(false)
         data.status = 'pending';
         data.rating = value;
-        axios.post('https://service-assistant-a2z-backend-production.up.railway.app/reviews', data).then(() => {
+        axios.post('https://service-assistant.adaptable.app/reviews', data).then(() => {
             // Swal.fire('Thank you for your review');
             setAlert(true);
             reset();

@@ -18,7 +18,7 @@ const ContactForm = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        axios.post('https://service-assistant-a2z-backend-production.up.railway.app//sendEmail', data)
+        axios.post('https://service-assistant.adaptable.app//sendEmail', data)
             .then(function (response) {
                 setLoading(false);
             })

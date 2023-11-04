@@ -28,7 +28,7 @@ export default function TransitionsModal({ handleCloseModal, openModal, category
 
   useEffect(() => {
     const fetchServices = async () => {
-      const services = await axios.get('https://service-assistant-a2z-backend-production.up.railway.app/services').then(res => res.data)
+      const services = await axios.get('https://service-assistant.adaptable.app/services').then(res => res.data)
 
       setServicesCategory(services)
       setServicesLoading(false)

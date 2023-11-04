@@ -86,7 +86,7 @@ const Navigation = () => {
 
   useEffect(() => {
     axios
-      .get(`https://service-assistant-a2z-backend-production.up.railway.app/singleservice`)
+      .get(`https://service-assistant.adaptable.app/singleservice`)
       .then((response) => {
         setAPIData(response.data);
       });

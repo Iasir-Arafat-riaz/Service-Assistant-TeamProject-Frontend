@@ -1,6 +1,6 @@
 
 import { io } from 'socket.io-client';
-const socket = io("https://service-assistant-a2z-backend-production.up.railway.app/");
+const socket = io("https://service-assistant.adaptable.app/");
 const useSocket = () => {
     // common function 
     const jsParse = data => {

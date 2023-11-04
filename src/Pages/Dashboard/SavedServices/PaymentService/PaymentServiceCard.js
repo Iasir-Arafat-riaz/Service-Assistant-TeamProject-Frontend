@@ -28,7 +28,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
     // 
 
     useEffect(() => {
-        fetch('https://service-assistant-a2z-backend-production.up.railway.app/myorder/createpaymentstatus', {
+        fetch('https://service-assistant.adaptable.app/myorder/createpaymentstatus', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -90,7 +90,7 @@ const PaymentServiceCard = ({ orderService, handleNextStep }) => {
                 const message = `Your payment for ${order?.parentService?.Title} has been completed`;
                 dispatch(sendNotification({ message, email: user.email, image: order?.parentService?.Image }))
             }
-            axios.post('https://service-assistant-a2z-backend-production.up.railway.app/saveservice/addonorderscollection', orderService).then(() => {
+            axios.post('https://service-assistant.adaptable.app/saveservice/addonorderscollection', orderService).then(() => {
                 handleNextStep();
             });
         };

@@ -205,7 +205,7 @@ const AddServiceRequest = () => {
 
     // make service request API endpoint
     const url =
-      "https://service-assistant-a2z-backend-production.up.railway.app/api/v1/add-service-request";
+      "https://service-assistant.adaptable.app/api/v1/add-service-request";
 
     // sending HTTP request to the server
     axios
