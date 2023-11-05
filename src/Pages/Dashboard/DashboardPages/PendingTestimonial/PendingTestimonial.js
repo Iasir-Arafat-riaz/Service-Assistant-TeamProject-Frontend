@@ -16,7 +16,7 @@ import swal from 'sweetalert';
 const PendingTestimonial = () => {
 
     const dispatach = useDispatch();
-    const { testimonials, testimonialLoading, approvdedLoading, deleteLoading } = useSelector(allData);
+    const { testimonials, testimonialLoading, deleteLoading } = useSelector(allData);
 
     React.useEffect(() => {
         dispatach(websiteReviews());
